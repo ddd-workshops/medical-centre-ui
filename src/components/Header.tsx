@@ -8,13 +8,14 @@ import {
   Calendar
 } from 'lucide-react';
 import { useState } from 'react';
+import { NotificationBell } from './NotificationBell';
 
-export default function Header() {
+export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <header className="bg-white shadow-md">
+    <header className="bg-white shadow-md sticky top-0 z-50">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
@@ -31,6 +32,13 @@ export default function Header() {
               <Calendar className="h-4 w-4" />
               <span>Book Appointment</span>
             </Link>
+            <Link 
+              to="/api" 
+              className="text-green-600 hover:text-green-800 transition-colors duration-200"
+            >
+              API
+            </Link>
+            <NotificationBell count={3} to="/notifications" />
             <button
               onClick={() => setIsLoggedIn(!isLoggedIn)}
               className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700"
@@ -59,6 +67,15 @@ export default function Header() {
               <Calendar className="h-4 w-4" />
               <span>Book Appointment</span>
             </Link>
+            <Link 
+              to="/api" 
+              className="text-green-600 hover:text-green-800 transition-colors duration-200"
+            >
+              API
+            </Link>
+            <div className="flex items-center space-x-4">
+              <NotificationBell count={3} to="/notifications" />
+            </div>
             <button
               onClick={() => setIsLoggedIn(!isLoggedIn)}
               className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700"

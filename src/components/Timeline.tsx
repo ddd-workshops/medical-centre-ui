@@ -1,0 +1,73 @@
+import React from 'react';
+import { format } from 'date-fns';
+import { Appointment } from './Appointments/Appointment';
+
+interface TimelineProps {
+  appointments: Appointment[];
+}
+
+export const Timeline: React.FC<TimelineProps> = ({ appointments }) => {
+  const groupedAppointments = appointments.reduce((acc, appointment) => {
+    const dateKey = format(appointment.date, 'yyyy-MM-dd');
+    if (!acc[dateKey]) {
+      acc[dateKey] = [];
+    }
+    acc[dateKey].push(appointment);
+    return acc;
+  }, {} as Record<string, Appointment[]>);
+
+  return (
+    <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-8">Your Upcoming Appointments</h2>
+      
+      {appointments.length > 0 ? (
+        <div className="relative">
+          {/* Timeline vertical line */}
+          <div className="absolute left-0 top-0 h-full w-0.5 bg-emerald-200"></div>
+
+          <div className="space-y-8">
+            {Object.entries(groupedAppointments).map(([dateKey, dayAppointments]) => (
+              <div key={dateKey} className="relative">
+                {/* Date marker */}
+                <div className="absolute -left-3 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                
+                <div className="ml-10">
+                  <h3 className="text-lg font-semibold text-emerald-600 mb-4">
+                    {format(new Date(dateKey), 'MMMM d, yyyy')}
+                  </h3>
+                  
+                  <div className="space-y-4">
+                    {dayAppointments.map(appointment => (
+                      <div 
+                        key={appointment.id} 
+                        className="transform transition-all duration-200 hover:scale-102 hover:shadow-md
+                                 bg-gradient-to-r from-emerald-50 to-white
+                                 border border-emerald-100 rounded-lg p-4"
+                      >
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <p className="font-semibold text-gray-800">{appointment.type}</p>
+                            <p className="text-gray-600">with {appointment.doctor}</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-emerald-600 font-medium">
+                              {format(appointment.date, 'h:mm a')}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <p className="text-gray-600">No upcoming appointments scheduled.</p>
+      )}
+    </div>
+  );
+};

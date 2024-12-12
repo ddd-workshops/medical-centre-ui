@@ -1,13 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Welcome from './pages/Welcome';
-import Pricing from './pages/Pricing';
-import ImplantProcess from './pages/ImplantProcess';
-import AppointmentSearch from './pages/AppointmentSearch';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { Welcome } from './pages/Welcome';
+import { Pricing } from './components/Static/Pricing';
+import { ImplantProcess } from './components/Static/ImplantProcess';
+import { AppointmentSearch } from './components/Appointments/AppointmentSearch';
+import { MedicalHistory } from './components/MedicalHistory/MedicalHistory';
+import { MedicalHistoryDetails } from './components/MedicalHistory/MedicalHistoryDetails';
+import { SwaggerDocs } from './components/SwaggerUI';
 
-function App() {
+export function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
@@ -18,6 +21,9 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/implant-process" element={<ImplantProcess />} />
             <Route path="/book-appointment" element={<AppointmentSearch />} />
+            <Route path="/medical-history" element={<MedicalHistory />} />
+            <Route path="/medical-history/:id" element={<MedicalHistoryDetails />} />
+            <Route path="/api" element={<SwaggerDocs />} />
           </Routes>
         </main>
         <Footer />
@@ -25,5 +31,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

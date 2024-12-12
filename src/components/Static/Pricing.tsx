@@ -32,7 +32,7 @@ const PriceCard = ({ title, price, features, popular = false }) => (
   </div>
 );
 
-export default function Pricing() {
+export function Pricing() {
   const pricingPlans = [
     {
       title: "Basic Checkup",

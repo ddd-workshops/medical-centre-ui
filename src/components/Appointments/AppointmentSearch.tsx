@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
@@ -32,7 +33,7 @@ const timeSlots = [
   '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
 ];
 
-export default function AppointmentSearch() {
+export function AppointmentSearch() {
   const [selectedService, setSelectedService] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState('');

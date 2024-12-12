@@ -23,7 +23,7 @@ const ProcessStep = ({ number, title, description, duration, image }) => (
   </div>
 );
 
-export default function ImplantProcess() {
+export function ImplantProcess() {
   const steps = [
     {
       title: "Initial Consultation",
