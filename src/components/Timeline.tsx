@@ -1,6 +1,8 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { Appointment } from './Appointments/Appointment';
+import { components } from '../contract/types';
+
+type Appointment = components['schemas']['Appointment']
 
 interface TimelineProps {
   appointments: Appointment[];
@@ -48,8 +50,8 @@ export const Timeline: React.FC<TimelineProps> = ({ appointments }) => {
                       >
                         <div className="flex justify-between items-start">
                           <div>
-                            <p className="font-semibold text-gray-800">{appointment.type}</p>
-                            <p className="text-gray-600">with {appointment.doctor}</p>
+                            <p className="font-semibold text-gray-800">{appointment.status}</p>
+                            <p className="text-gray-600">with {appointment.doctorName}</p>
                           </div>
                           <div className="text-right">
                             <p className="text-emerald-600 font-medium">

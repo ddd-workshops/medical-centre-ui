@@ -1,33 +1,28 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { RecentAppointments } from '../components/Appointments/RecentAppointments';
 import { DoctorReferrals } from '../components/DoctorReferrals';
 import { Timeline } from '../components/Timeline';
-import { Appointment } from '../components/Appointments/Appointment';
+import { appointmentService } from '../api/services/appointmentService';
 
 export const Welcome: React.FC = () => {
   const navigate = useNavigate();
   
-  const appointments: Appointment[] = [
-    {
-      id: 1,
-      date: new Date(2024, 2, 25, 14, 30),
-      type: "Regular Checkup",
-      doctor: "Dr. Sarah Johnson"
-    },
-    {
-      id: 2,
-      date: new Date(2024, 3, 2, 10, 0),
-      type: "Dental Cleaning",
-      doctor: "Dr. Michael Chen"
-    },
-    {
-      id: 3,
-      date: new Date(2024, 3, 5, 15, 45),
-      type: "Implant Consultation",
-      doctor: "Dr. Emily Williams"
-    }
-  ];
+  const { data: appointments = [], isLoading, error } = useQuery({
+    queryKey: ['appointments'],
+    queryFn: () => appointmentService.getAllAppointments()
+  });
+
+  if (isLoading) {
+    return <div className="flex justify-center items-center min-h-screen">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+    </div>;
+  }
+
+  if (error) {
+    return <div className="text-red-600">Error loading appointments</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">

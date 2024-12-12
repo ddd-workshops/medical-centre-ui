@@ -14,12 +14,12 @@ const endpoints = {
 
 export const appointmentService = {
   getAllAppointments: async (): Promise<Appointment[]> => {
-    const { data } = await apiClient.get<paths['/api/appointments']['get']['responses']['200']['content']['application/json']>(endpoints.getAll);
+    const { data } = await apiClient.get<paths['/appointments']['get']['responses']['200']['content']['application/json']>(endpoints.getAll);
     return data;
   },
 
   createAppointment: async (appointment: AppointmentCreate): Promise<Appointment> => {
-    const { data } = await apiClient.post<paths['/api/appointments']['post']['responses']['200']['content']['application/json']>(
+    const { data } = await apiClient.post<paths['/appointments']['post']['responses']['201']['content']['application/json']>(
       endpoints.create,
       appointment
     );

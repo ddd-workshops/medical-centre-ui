@@ -6,7 +6,7 @@ import { generateFakeAppointments } from '../utils/fakeData';
 export type Appointment = {
   id: string;
   patientId: string;
-  doctorId: string;
+  doctorName: string;
   date: string;
   status: 'scheduled' | 'completed' | 'cancelled';
 };

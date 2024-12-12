@@ -235,7 +235,7 @@ export interface components {
             /** Format: uuid */
             id: string;
             patientId: string;
-            doctorId: string;
+            doctorName: string;
             /** Format: date-time */
             date: string;
             /** @enum {string} */
