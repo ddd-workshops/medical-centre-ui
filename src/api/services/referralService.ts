@@ -1,14 +1,18 @@
-import { apiClient } from '../client';
-import { components } from '../../contract/types';
+import { apiClient } from './client';
+import type { Referral, ReferralCreate, ReferralUpdate } from '../../contract';
 
-type Referral = components['schemas']['Referral'];
-type ReferralCreate = components['schemas']['ReferralCreate'];
-type ReferralUpdate = components['schemas']['ReferralUpdate'];
+const endpoints = {
+  create: '/referrals',
+  getById: (id: string) => `/referrals/${id}`,
+  update: (id: string) => `/referrals/${id}`,
+  delete: (id: string) => `/referrals/${id}`,
+  getAll: '/referrals'
+};
 
 export const referralService = {
   createReferral: async (referral: ReferralCreate): Promise<Referral> => {
     const { data } = await apiClient.post<Referral>(
-      '/api/referrals',
+      endpoints.create,
       referral
     );
     return data;
@@ -16,7 +20,7 @@ export const referralService = {
 
   updateReferral: async (update: ReferralUpdate): Promise<Referral> => {
     const { data } = await apiClient.put<Referral>(
-      `/api/referrals/${update.referralId}`,
+      endpoints.update(update.referralId),
       update
     );
     return data;
@@ -24,19 +28,19 @@ export const referralService = {
 
   deleteReferral: async (referralId: string): Promise<void> => {
     await apiClient.delete(
-      `/api/referrals/${referralId}`
+      endpoints.delete(referralId)
     );
   },
 
   getReferral: async (referralId: string): Promise<Referral> => {
     const { data } = await apiClient.get<Referral>(
-      `/api/referrals/${referralId}`
+      endpoints.getById(referralId)
     );
     return data;
   },
 
   getAllReferrals: async (): Promise<Referral[]> => {
-    const { data } = await apiClient.get<Referral[]>('/api/referrals');
+    const { data } = await apiClient.get<Referral[]>(endpoints.getAll);
     return data;
   },
 };

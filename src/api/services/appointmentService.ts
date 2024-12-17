@@ -1,25 +1,29 @@
-import { apiClient } from '../client';
-import { components, paths } from '../../contract/types';
-
-type Appointment = components['schemas']['Appointment'];
-type AppointmentCreate = components['schemas']['AppointmentCreate'];
-type AppointmentUpdate = components['schemas']['AppointmentUpdate'];
+import { apiClient } from './client';
+import type { 
+  Appointment, 
+  AppointmentCreate, 
+  AppointmentUpdate,
+  GetAppointmentsResponse,
+  CreateAppointmentResponse,
+  GetAppointmentByIdResponse
+} from '../../contract';
 
 const endpoints = {
-  create: '/api/appointments',
-  update: '/api/appointments/{appointmentId}',
-  delete: '/api/appointments/{appointmentId}',
-  getAll: '/api/appointments'
+  create: '/appointments',
+  getById: (id: string) => `/appointments/${id}`,
+  update: (id: string) => `/appointments/${id}`,
+  delete: (id: string) => `/appointments/${id}`,
+  getAll: '/appointments'
 };
 
 export const appointmentService = {
   getAllAppointments: async (): Promise<Appointment[]> => {
-    const { data } = await apiClient.get<paths['/appointments']['get']['responses']['200']['content']['application/json']>(endpoints.getAll);
+    const { data } = await apiClient.get<GetAppointmentsResponse>(endpoints.getAll);
     return data;
   },
 
   createAppointment: async (appointment: AppointmentCreate): Promise<Appointment> => {
-    const { data } = await apiClient.post<paths['/appointments']['post']['responses']['201']['content']['application/json']>(
+    const { data } = await apiClient.post<CreateAppointmentResponse>(
       endpoints.create,
       appointment
     );
@@ -28,14 +32,21 @@ export const appointmentService = {
 
   updateAppointment: async (update: AppointmentUpdate): Promise<void> => {
     await apiClient.put(
-      endpoints.update.replace('{appointmentId}', update.appointmentId),
+      endpoints.update(update.appointmentId),
       update
     );
   },
 
   deleteAppointment: async (appointmentId: string): Promise<void> => {
     await apiClient.delete(
-      endpoints.delete.replace('{appointmentId}', appointmentId)
+      endpoints.delete(appointmentId)
     );
+  },
+
+  getAppointmentById: async (appointmentId: string): Promise<Appointment> => {
+    const { data } = await apiClient.get<GetAppointmentByIdResponse>(
+      endpoints.getById(appointmentId)
+    );
+    return data;
   },
 };

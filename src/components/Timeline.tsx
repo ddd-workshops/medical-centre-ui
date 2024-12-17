@@ -1,8 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { components } from '../contract/types';
-
-type Appointment = components['schemas']['Appointment']
+import { Link } from 'react-router-dom';
+import type { Appointment } from '../contract';
 
 interface TimelineProps {
   appointments: Appointment[];
@@ -42,24 +41,28 @@ export const Timeline: React.FC<TimelineProps> = ({ appointments }) => {
                   
                   <div className="space-y-4">
                     {dayAppointments.map(appointment => (
-                      <div 
-                        key={appointment.id} 
-                        className="transform transition-all duration-200 hover:scale-102 hover:shadow-md
-                                 bg-gradient-to-r from-emerald-50 to-white
-                                 border border-emerald-100 rounded-lg p-4"
+                      <Link 
+                        key={appointment.id}
+                        to={`/appointments/${appointment.id}`}
+                        className="block transform transition-all duration-200 hover:scale-102 hover:shadow-md"
                       >
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <p className="font-semibold text-gray-800">{appointment.status}</p>
-                            <p className="text-gray-600">with {appointment.doctorName}</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-emerald-600 font-medium">
-                              {format(appointment.date, 'h:mm a')}
-                            </p>
+                        <div 
+                          className="bg-gradient-to-r from-emerald-50 to-white
+                                   border border-emerald-100 rounded-lg p-4"
+                        >
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <p className="font-semibold text-gray-800">{appointment.status}</p>
+                              <p className="text-gray-600">with {appointment.doctorName}</p>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-emerald-600 font-medium">
+                                {format(appointment.date, 'h:mm a')}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>

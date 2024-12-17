@@ -2,15 +2,23 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { Welcome } from './pages/Welcome';
+import { Welcome } from './components/Welcome';
 import { Pricing } from './components/Static/Pricing';
 import { ImplantProcess } from './components/Static/ImplantProcess';
 import { AppointmentSearch } from './components/Appointments/AppointmentSearch';
 import { MedicalHistory } from './components/MedicalHistory/MedicalHistory';
 import { MedicalHistoryDetails } from './components/MedicalHistory/MedicalHistoryDetails';
 import { SwaggerDocs } from './components/SwaggerUI';
+import { LoginForm } from './components/auth/LoginForm';
+import { RegisterForm } from './components/auth/RegisterForm';
+import { ResetForm } from './components/auth/ResetForm';
+import { NotificationsList } from './components/Notifications/NotificationsList';
+import { NotificationDetails } from './components/Notifications/NotificationDetails';
+import { CMSContent } from './components/CMS/CMSContent';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { AppointmentDetails } from './components/Appointments/AppointmentDetails';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,13 +44,25 @@ export function App() {
               <Route path="/book-appointment" element={<AppointmentSearch />} />
               <Route path="/medical-history" element={<MedicalHistory />} />
               <Route path="/medical-history/:id" element={<MedicalHistoryDetails />} />
+              <Route path="/appointments/:id" element={<AppointmentDetails />} />
+              <Route path="/notifications" element={<NotificationsList />} />
+              <Route path="/notifications/:id" element={<NotificationDetails />} />
               <Route path="/api" element={<SwaggerDocs />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/register" element={<RegisterForm />} />
+              <Route path="/reset" element={<ResetForm />} />
+              <Route path="/cms/general-dentistry" element={<CMSContent slug="general-dentistry" />} />
+              <Route path="/cms/cosmetic-dentistry" element={<CMSContent slug="cosmetic-dentistry" />} />
+              <Route path="/cms/orthodontics" element={<CMSContent slug="orthodontics" />} />
+              <Route path="/cms/dental-implants" element={<CMSContent slug="dental-implants" />} />
+              <Route path="/cms/privacy-policy" element={<CMSContent slug="privacy-policy" />} />
+              <Route path="/cms/terms-of-service" element={<CMSContent slug="terms-of-service" />} />
             </Routes>
           </main>
           <Footer />
         </div>
       </Router>
-      {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

@@ -2,6 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { appointmentsRouter } from './routes/appointments';
+import { notificationsRouter } from './routes/notifications';
+import { cmsRouter } from './routes/cms';
+import { authRouter } from './routes/auth';
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -23,7 +26,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.use('/api/auth', authRouter);
 app.use('/api/appointments', appointmentsRouter);
+app.use('/api/notifications', notificationsRouter);
+app.use('/api/cms', cmsRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

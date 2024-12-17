@@ -18,8 +18,12 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">Contact Us</h3>
             <div className="space-y-2">
-              <p className="flex items-center"><Phone className="h-4 w-4 mr-2" /> +44 20 1234 5678</p>
-              <p className="flex items-center"><Mail className="h-4 w-4 mr-2" /> info@brightsmiles.net</p>
+              <a href="tel:+442012345678" className="flex items-center hover:text-emerald-400">
+                <Phone className="h-4 w-4 mr-2" /> +44 20 1234 5678
+              </a>
+              <a href="mailto:info@brightsmiles.net" className="flex items-center hover:text-emerald-400">
+                <Mail className="h-4 w-4 mr-2" /> info@brightsmiles.net
+              </a>
               <p className="flex items-center"><MapPin className="h-4 w-4 mr-2" /> London, UK</p>
             </div>
           </div>
@@ -27,20 +31,20 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><Link to="/services/general" className="hover:text-emerald-400">General Dentistry</Link></li>
-              <li><Link to="/services/cosmetic" className="hover:text-emerald-400">Cosmetic Dentistry</Link></li>
-              <li><Link to="/services/orthodontics" className="hover:text-emerald-400">Orthodontics</Link></li>
-              <li><Link to="/services/implants" className="hover:text-emerald-400">Dental Implants</Link></li>
+              <li><Link to="/cms/general-dentistry" className="hover:text-emerald-400">General Dentistry</Link></li>
+              <li><Link to="/cms/cosmetic-dentistry" className="hover:text-emerald-400">Cosmetic Dentistry</Link></li>
+              <li><Link to="/cms/orthodontics" className="hover:text-emerald-400">Orthodontics</Link></li>
+              <li><Link to="/cms/dental-implants" className="hover:text-emerald-400">Dental Implants</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-lg font-bold mb-4">Information</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="hover:text-emerald-400">About Us</Link></li>
+              <li><Link to="/pricing" className="hover:text-emerald-400">Pricing</Link></li>
               <li><Link to="/careers" className="hover:text-emerald-400">Careers</Link></li>
-              <li><Link to="/privacy" className="hover:text-emerald-400">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="hover:text-emerald-400">Terms of Service</Link></li>
+              <li><Link to="/cms/privacy-policy" className="hover:text-emerald-400">Privacy Policy</Link></li>
+              <li><Link to="/cms/terms-of-service" className="hover:text-emerald-400">Terms of Service</Link></li>
             </ul>
           </div>
 

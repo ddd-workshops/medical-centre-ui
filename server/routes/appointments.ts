@@ -6,9 +6,21 @@ import { generateFakeAppointments } from '../utils/fakeData';
 export type Appointment = {
   id: string;
   patientId: string;
-  doctorName: string;
+  patientName: string;
+  doctor: {
+    id: string;
+    name: string;
+    specialty: string;
+  };
   date: string;
-  status: 'scheduled' | 'completed' | 'cancelled';
+  status: 'SCHEDULED' | 'COMPLETED' | 'CANCELLED';
+  notes?: string;
+  medicalNotes?: string;
+  prescriptions?: string[];
+  billing?: {
+    amount: number;
+    status: 'PENDING' | 'PAID' | 'CANCELLED';
+  };
 };
 
 // In-memory storage with initial fake data

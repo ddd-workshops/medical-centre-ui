@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   Tornado as Tooth, 
   Menu, 
@@ -7,12 +7,22 @@ import {
   X,
   Calendar
 } from 'lucide-react';
-import { useState } from 'react';
 import { NotificationBell } from './NotificationBell';
+import { useAuthStore } from './auth/authStore';
+import { ProfileAvatar } from './Avatar';
 
-export function Header() {
+export const Header = () => {
+  const { user, isAuthenticated, logout } = useAuthStore();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+    setDropdownOpen(false);
+  };
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -25,8 +35,6 @@ export function Header() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-gray-600 hover:text-emerald-600">Home</Link>
-            <Link to="/pricing" className="text-gray-600 hover:text-emerald-600">Pricing</Link>
             <Link to="/implant-process" className="text-gray-600 hover:text-emerald-600">Implant Process</Link>
             <Link to="/book-appointment" className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600">
               <Calendar className="h-4 w-4" />
@@ -39,13 +47,35 @@ export function Header() {
               API
             </Link>
             <NotificationBell count={3} to="/notifications" />
-            <button
-              onClick={() => setIsLoggedIn(!isLoggedIn)}
-              className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700"
-            >
-              <User className="h-4 w-4" />
-              <span>{isLoggedIn ? 'Logout' : 'Login'}</span>
-            </button>
+            <div className="flex items-center space-x-4">
+              {isAuthenticated ? (
+                <div className="relative">
+                  <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center space-x-2">
+                    <ProfileAvatar profile={user} size="SMALL" />
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
+                      <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-green-100">Log Out</button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="text-green-600 hover:text-green-800 font-medium"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -60,8 +90,6 @@ export function Header() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 space-y-4">
-            <Link to="/" className="block text-gray-600 hover:text-emerald-600">Home</Link>
-            <Link to="/pricing" className="block text-gray-600 hover:text-emerald-600">Pricing</Link>
             <Link to="/implant-process" className="block text-gray-600 hover:text-emerald-600">Implant Process</Link>
             <Link to="/book-appointment" className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600">
               <Calendar className="h-4 w-4" />
@@ -75,6 +103,34 @@ export function Header() {
             </Link>
             <div className="flex items-center space-x-4">
               <NotificationBell count={3} to="/notifications" />
+              {isAuthenticated ? (
+                <div className="relative">
+                  <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center space-x-2">
+                    <ProfileAvatar profile={user} size="SMALL" />
+                    <span>{user.firstName}</span>
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
+                      <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-green-100">Log Out</button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="text-green-600 hover:text-green-800 font-medium"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
             </div>
             <button
               onClick={() => setIsLoggedIn(!isLoggedIn)}
@@ -88,4 +144,4 @@ export function Header() {
       </nav>
     </header>
   );
-}
+};

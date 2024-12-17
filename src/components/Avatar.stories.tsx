@@ -1,0 +1,42 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { Avatar } from './Avatar';
+
+const meta = {
+  title: 'BSA/Molecules/Avatar',
+  component: Avatar,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+} satisfies Meta<typeof Avatar>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const WithInitials: Story = {
+  args: {
+    children: 'JD',
+    size: 'MEDIUM',
+  },
+};
+
+export const WithImage: Story = {
+  args: {
+    src: 'https://i.pravatar.cc/300',
+    size: 'MEDIUM',
+  },
+};
+
+export const Small: Story = {
+  args: {
+    children: 'JD',
+    size: 'SMALL',
+  },
+};
+
+export const Large: Story = {
+  args: {
+    children: 'JD',
+    size: 'LARGE',
+  },
+};
