@@ -1,17 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import { Welcome } from './components/Welcome';
+
+import { Header } from './components/Layout/Header';
+import { Footer } from './components/Layout/Footer';
+import { Dashboard } from './components/Dashboard/Dashboard';
 import { Pricing } from './components/Static/Pricing';
 import { ImplantProcess } from './components/Static/ImplantProcess';
 import { AppointmentSearch } from './components/Appointments/AppointmentSearch';
 import { MedicalHistory } from './components/MedicalHistory/MedicalHistory';
 import { MedicalHistoryDetails } from './components/MedicalHistory/MedicalHistoryDetails';
-import { SwaggerDocs } from './components/SwaggerUI';
-import { LoginForm } from './components/auth/LoginForm';
-import { RegisterForm } from './components/auth/RegisterForm';
-import { ResetForm } from './components/auth/ResetForm';
+import { SwaggerDocs } from './components/API/SwaggerUI';
+import { LoginForm } from './components/Auth/LoginForm';
+import { RegisterForm } from './components/Auth/RegisterForm';
+import { ResetForm } from './components/Auth/ResetForm';
 import { NotificationsList } from './components/Notifications/NotificationsList';
 import { NotificationDetails } from './components/Notifications/NotificationDetails';
 import { CMSContent } from './components/CMS/CMSContent';
@@ -38,7 +39,7 @@ export function App() {
           <Header />
           <main className="flex-grow">
             <Routes>
-              <Route path="/" element={<Welcome />} />
+              <Route path="/" element={<Dashboard />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/implant-process" element={<ImplantProcess />} />
               <Route path="/book-appointment" element={<AppointmentSearch />} />

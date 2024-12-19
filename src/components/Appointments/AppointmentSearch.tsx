@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
 import { Calendar, MapPin, User, Clock } from 'lucide-react';
 import 'react-day-picker/dist/style.css';
+import { Stepper } from '../generic/Stepper';
 
 // Mock data
 const services = [
@@ -41,10 +41,28 @@ export function AppointmentSearch() {
   const [selectedTime, setSelectedTime] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [visitedSteps, setVisitedSteps] = useState<Set<number>>(new Set([1]));
+
+  const canProceedToNextStep = () => {
+    switch (currentStep) {
+      case 1:
+        return !!selectedService;
+      case 2:
+        return !!selectedDate && !!selectedTime;
+      case 3:
+        return !!selectedLocation;
+      case 4:
+        return !!selectedDoctor;
+      default:
+        return false;
+    }
+  };
 
   const handleNext = () => {
-    if (currentStep < 4) {
-      setCurrentStep(currentStep + 1);
+    if (currentStep < 4 && canProceedToNextStep()) {
+      const nextStep = currentStep + 1;
+      setCurrentStep(nextStep);
+      setVisitedSteps(prev => new Set([...prev, nextStep]));
     }
   };
 
@@ -56,6 +74,22 @@ export function AppointmentSearch() {
 
   const handleConfirm = () => {
     setShowConfirmation(true);
+  };
+
+  const handleStepClick = (step: number) => {
+    if (isStepClickable(step)) {
+      setCurrentStep(step);
+    }
+  };
+
+  const isStepClickable = (step: number) => {
+    // A step is clickable if:
+    // 1. It's a step we've visited before
+    // 2. It's the current step
+    // 3. It's the next step and we can proceed to it
+    if (visitedSteps.has(step)) return true;
+    if (step === currentStep + 1 && canProceedToNextStep()) return true;
+    return false;
   };
 
   const renderStep = () => {
@@ -177,38 +211,12 @@ export function AppointmentSearch() {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg p-8">
-            {/* Progress Steps */}
-            <div className="mb-8">
-              <div className="flex justify-between">
-                {[1, 2, 3, 4].map((step) => (
-                  <div
-                    key={step}
-                    className={`flex items-center ${
-                      step < 4 ? 'flex-1' : ''
-                    }`}
-                  >
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                        step <= currentStep
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-gray-200'
-                      }`}
-                    >
-                      {step}
-                    </div>
-                    {step < 4 && (
-                      <div
-                        className={`flex-1 h-1 mx-2 ${
-                          step < currentStep
-                            ? 'bg-emerald-600'
-                            : 'bg-gray-200'
-                        }`}
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+            <Stepper 
+              currentStep={currentStep} 
+              totalSteps={4} 
+              onStepClick={handleStepClick}
+              isStepClickable={isStepClickable}
+            />
 
             {/* Step Content */}
             {renderStep()}

@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { Referral, ReferralCreate, ReferralUpdate } from '../../contract';
+import type { Referral, ReferralCreate, ReferralUpdate } from '../../contract/types';
 
 const endpoints = {
   create: '/referrals',

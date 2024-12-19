@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { PatientProfile } from '../../contract';
+import type { PatientProfile } from '../../contract/types';
 
 type AuthState = {
   user: PatientProfile

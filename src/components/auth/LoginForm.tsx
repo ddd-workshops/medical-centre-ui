@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from './authStore';
-import { PasswordInput } from './PasswordInput';
-import { Avatar } from '../Avatar';
+import { PasswordInput } from '../forms/PasswordInput';
 import { authService } from '../../api/services/authService';
+import { Button } from '../generic/Button';
+import { TextInput } from '../forms/TextInput';
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,6 @@ export const LoginForm = () => {
       navigate('/');
     } catch (error) {
       console.error('Login failed:', error);
-      // You might want to show an error message to the user
     }
   };
 
@@ -31,16 +31,13 @@ export const LoginForm = () => {
       <div className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-100">
         <h2 className="text-2xl font-semibold text-green-800 mb-6 text-center">Welcome Back</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-green-700 mb-1">Email</label>
-            <input
-              type="email"
-              className="w-full px-4 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              required
-            />
-          </div>
+          <TextInput
+            label="Email"
+            type="email"
+            value={formData.username}
+            onChange={(value) => setFormData({ ...formData, username: value })}
+            required
+          />
           <PasswordInput
             label="Password"
             value={formData.password}
@@ -51,12 +48,9 @@ export const LoginForm = () => {
               Can't log in?
             </Link>
           </div>
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-200 font-medium"
-          >
+          <Button type="submit" fullWidth>
             Sign In
-          </button>
+          </Button>
         </form>
         <p className="mt-4 text-center text-sm text-green-600">
           Don't have an account?{' '}

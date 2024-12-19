@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { AppointmentPDF } from './AppointmentPDF';
 import { appointmentService } from '../../api/services/appointmentService';
-import { Appointment } from '../../contract';
+import { Appointment } from '../../contract/types';
 
 export const AppointmentDetails = () => {
   const { id } = useParams<{ id: string }>();

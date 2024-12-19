@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { TextInput } from '../forms/TextInput';
+import { RadioGroup } from '../forms/RadioGroup';
 
 type ResetOption = 'remind-login' | 'reset-password';
 
@@ -18,45 +20,23 @@ export const ResetForm = () => {
       <div className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-100">
         <h2 className="text-2xl font-semibold text-green-800 mb-6 text-center">Account Recovery</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <input
-                type="radio"
-                id="remind-login"
-                value="remind-login"
-                checked={resetOption === 'remind-login'}
-                onChange={(e) => setResetOption(e.target.value as ResetOption)}
-                className="text-green-600 focus:ring-green-500 h-4 w-4"
-              />
-              <label htmlFor="remind-login" className="text-sm text-green-700">
-                Remind me my login
-              </label>
-            </div>
-            <div className="flex items-center space-x-3">
-              <input
-                type="radio"
-                id="reset-password"
-                value="reset-password"
-                checked={resetOption === 'reset-password'}
-                onChange={(e) => setResetOption(e.target.value as ResetOption)}
-                className="text-green-600 focus:ring-green-500 h-4 w-4"
-              />
-              <label htmlFor="reset-password" className="text-sm text-green-700">
-                Reset my password
-              </label>
-            </div>
-          </div>
+          <RadioGroup
+            header="Choose recovery option"
+            options={[
+              { id: 'remind-login', label: 'Remind me my login', value: 'remind-login' },
+              { id: 'reset-password', label: 'Reset my password', value: 'reset-password' },
+            ]}
+            value={resetOption}
+            onChange={(value) => setResetOption(value as ResetOption)}
+          />
           
-          <div>
-            <label className="block text-sm font-medium text-green-700 mb-1">Email</label>
-            <input
-              type="email"
-              className="w-full px-4 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+          <TextInput
+            label="Email"
+            type="email"
+            value={email}
+            onChange={setEmail}
+            required
+          />
 
           <button
             type="submit"

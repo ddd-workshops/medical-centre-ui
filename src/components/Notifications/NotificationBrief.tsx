@@ -1,6 +1,6 @@
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import type { NotificationListItem } from '../../contract';
+import type { NotificationListItem } from '../../contract/types';
 
 interface Props {
   notification: NotificationListItem;

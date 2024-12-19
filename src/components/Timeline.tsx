@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
-import type { Appointment } from '../contract';
+import type { Appointment } from '../contract/types';
 
 interface TimelineProps {
   appointments: Appointment[];

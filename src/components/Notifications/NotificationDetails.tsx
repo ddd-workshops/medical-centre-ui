@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
-import type { Notification } from '../../contract';
+import type { Notification } from '../../contract/types';
 import { getNotification, markNotificationAsRead } from '../../api/services/notificationsService';
 
 export const NotificationDetails = () => {

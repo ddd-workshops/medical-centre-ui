@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { LoginRequest, PatientProfile } from '../../contract';
+import type { LoginRequest, PatientProfile } from '../../contract/types';
 
 export const authService = {
   login: async (credentials: LoginRequest): Promise<PatientProfile> => {

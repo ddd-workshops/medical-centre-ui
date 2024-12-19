@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from './authStore';
-import { PasswordInput } from './PasswordInput';
-import { PhoneInput } from './PhoneInput';
+import { PasswordInput } from '../forms/PasswordInput';
+import { PhoneInput } from '../forms/PhoneInput';
+import { Button } from '../generic/Button';
+import { TextInput } from '../forms/TextInput';
 
 export const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -14,8 +16,10 @@ export const RegisterForm = () => {
     phone: '',
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errors, setErrors] = useState({
+    phone: '',
+    password: '',
+  });
   const [isPhoneValid, setIsPhoneValid] = useState(false);
 
   const login = useAuthStore((state) => state.login);
@@ -23,7 +27,17 @@ export const RegisterForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // This is a simplified version. In real app, you'd call an API
+    
+    if (!isPhoneValid) {
+      setErrors(prev => ({ ...prev, phone: 'Please enter a valid phone number' }));
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setErrors(prev => ({ ...prev, password: 'Passwords do not match' }));
+      return;
+    }
+
     login({
       email: formData.email,
       firstName: formData.firstName,
@@ -37,60 +51,67 @@ export const RegisterForm = () => {
       <div className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-100">
         <h2 className="text-2xl font-semibold text-green-800 mb-6 text-center">Create Account</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-green-700 mb-1">First Name</label>
-            <input
-              type="text"
-              className="w-full px-4 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-              value={formData.firstName}
-              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-green-700 mb-1">Last Name</label>
-            <input
-              type="text"
-              className="w-full px-4 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-              value={formData.lastName}
-              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-green-700 mb-1">Email</label>
-            <input
-              type="email"
-              className="w-full px-4 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              required
-            />
-          </div>
+          <TextInput
+            label="First Name"
+            value={formData.firstName}
+            onChange={(value) => setFormData({ ...formData, firstName: value })}
+            required
+          />
+          <TextInput
+            label="Last Name"
+            value={formData.lastName}
+            onChange={(value) => setFormData({ ...formData, lastName: value })}
+            required
+          />
+          <TextInput
+            label="Email"
+            type="email"
+            value={formData.email}
+            onChange={(value) => setFormData({ ...formData, email: value })}
+            required
+          />
           <PhoneInput
             value={formData.phone}
             onChange={(value, isValid) => {
-              setFormData({ ...formData, phone: value });
+              setFormData(prev => ({ ...prev, phone: value }));
               setIsPhoneValid(isValid);
+              if (isValid) {
+                setErrors(prev => ({ ...prev, phone: '' }));
+              }
+            }}
+            required
+          />
+          {errors.phone && (
+            <p className="text-red-500 text-sm">{errors.phone}</p>
+          )}
+          <PasswordInput
+            label="Password"
+            value={formData.password}
+            onChange={(value) => {
+              setFormData(prev => ({ ...prev, password: value }));
+              setErrors(prev => ({ ...prev, password: '' }));
             }}
             required
           />
           <PasswordInput
-            label="Password"
-            value={formData.password}
-            onChange={(value) => setFormData({ ...formData, password: value })}
-          />
-          <PasswordInput
             label="Confirm Password"
             value={formData.confirmPassword}
-            onChange={(value) => setFormData({ ...formData, confirmPassword: value })}
+            onChange={(value) => {
+              setFormData(prev => ({ ...prev, confirmPassword: value }));
+              setErrors(prev => ({ ...prev, password: '' }));
+            }}
+            required
           />
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-200 font-medium"
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password}</p>
+          )}
+          <Button 
+            type="submit" 
+            fullWidth
+            disabled={!isPhoneValid || !formData.password || !formData.confirmPassword}
           >
             Create Account
-          </button>
+          </Button>
         </form>
         <p className="mt-4 text-center text-sm text-green-600">
           Already have an account?{' '}
