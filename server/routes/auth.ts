@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { faker } from '@faker-js/faker';
-import type { LoginRequest, PatientProfile } from '../../src/contract';
+import type { LoginRequest, PatientProfile } from '../contract/types';
 
 export const authRouter = Router();
 

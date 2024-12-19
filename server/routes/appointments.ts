@@ -1,32 +1,11 @@
 import { Router } from 'express';
 import type { Request, Response } from 'express';
-import { generateFakeAppointments } from '../utils/fakeData';
 
-// Types
-export type Appointment = {
-  id: string;
-  patientId: string;
-  patientName: string;
-  doctor: {
-    id: string;
-    name: string;
-    specialty: string;
-  };
-  date: string;
-  status: 'SCHEDULED' | 'COMPLETED' | 'CANCELLED';
-  notes?: string;
-  medicalNotes?: string;
-  prescriptions?: string[];
-  billing?: {
-    amount: number;
-    status: 'PENDING' | 'PAID' | 'CANCELLED';
-  };
-};
+import { generateFakeAppointments } from '../fake/appointments';
+import { Appointment } from '../contract/types';
 
-// In-memory storage with initial fake data
 const appointments: Appointment[] = generateFakeAppointments();
 
-// Router
 export const appointmentsRouter = Router();
 
 appointmentsRouter.get('/', (_req: Request, res: Response) => {
