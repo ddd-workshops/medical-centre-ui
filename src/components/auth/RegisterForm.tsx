@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthStore } from './authStore';
+import { useAuthStore } from './AuthStore';
 import { PasswordInput } from '../forms/PasswordInput';
 import { PhoneInput } from '../forms/PhoneInput';
 import { Button } from '../generic/Button';

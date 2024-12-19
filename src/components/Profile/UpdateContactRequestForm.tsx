@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuthStore } from '../Auth/authStore';
+import { useAuthStore } from '../Auth/AuthStore';
 import { Button } from '../generic/Button';
 import { Card } from '../generic/Card';
 import { TextInput } from '../forms/TextInput';

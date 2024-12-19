@@ -21,7 +21,7 @@ import { CMSContent } from './components/CMS/CMSContent';
 import { PrescribedTreatmentsList } from './components/Treatments/PrescribedTreatmentsList';
 
 import { AppointmentDetailedDescription } from './components/Appointments/AppointmentDetailedDescription';
-import { useAuthStore } from './components/Auth/authStore';
+import { useAuthStore } from './components/Auth/AuthStore';
 import { UpdateContactRequestForm } from './components/Profile/UpdateContactRequestForm';
 
 const queryClient = new QueryClient({

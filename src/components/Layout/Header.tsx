@@ -8,7 +8,7 @@ import {
   Calendar
 } from 'lucide-react';
 import { NotificationBell } from '../generic/NotificationBell';
-import { useAuthStore } from '../Auth/authStore';
+import { useAuthStore } from '../Auth/AuthStore';
 import { ProfileAvatar } from '../generic/Avatar';
 import { Button } from '../generic/Button';
 
