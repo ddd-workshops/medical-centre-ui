@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
-import { Calendar, MapPin, User, Clock } from 'lucide-react';
+import { Calendar, MapPin, User, Clock, Stethoscope } from 'lucide-react';
+import { formatCurrency } from '../../utils/formatCurrency';
 import 'react-day-picker/dist/style.css';
+
 import { Stepper } from '../generic/Stepper';
+import { TimeSlots } from './TimeSlots';
+import { TileChooser } from './TileChooser';
+import { H2, H3 } from '../Typography/Headings';
 
 // Mock data
 const services = [
-  { id: 1, name: 'General Checkup', duration: '30 min', price: '£100' },
-  { id: 2, name: 'Teeth Cleaning', duration: '60 min', price: '£150' },
-  { id: 3, name: 'Root Canal', duration: '90 min', price: '£800' },
-  { id: 4, name: 'Dental Implant Consultation', duration: '45 min', price: '£200' },
+  { id: 1, name: 'General Checkup', duration: '30 min', price: 100 },
+  { id: 2, name: 'Teeth Cleaning', duration: '60 min', price: 150 },
+  { id: 3, name: 'Root Canal', duration: '90 min', price: 800 },
+  { id: 4, name: 'Dental Implant Consultation', duration: '45 min', price: 200 },
 ];
 
 const locations = [
-  'Central London',
-  'North London',
-  'South London',
-  'East London',
-  'West London',
+  { id: 1, name: 'Central London' },
+  { id: 2, name: 'North London' },
+  { id: 3, name: 'South London' },
+  { id: 4, name: 'East London' },
+  { id: 5, name: 'West London' },
 ];
 
 const doctors = [
@@ -29,8 +34,18 @@ const doctors = [
 ];
 
 const timeSlots = [
-  '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
-  '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
+  { id: 1, label: '09:00' },
+  { id: 2, label: '09:30' },
+  { id: 3, label: '10:00' },
+  { id: 4, label: '10:30' },
+  { id: 5, label: '11:00' },
+  { id: 6, label: '11:30' },
+  { id: 7, label: '14:00' },
+  { id: 8, label: '14:30' },
+  { id: 9, label: '15:00' },
+  { id: 10, label: '15:30' },
+  { id: 11, label: '16:00' },
+  { id: 12, label: '16:30' },
 ];
 
 export function AppointmentSearch() {
@@ -38,7 +53,7 @@ export function AppointmentSearch() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedDoctor, setSelectedDoctor] = useState(null);
-  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedTime, setSelectedTime] = useState<{ id: number | string, label: string } | null>(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [visitedSteps, setVisitedSteps] = useState<Set<number>>(new Set([1]));
@@ -96,32 +111,30 @@ export function AppointmentSearch() {
     switch (currentStep) {
       case 1:
         return (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-semibold text-gray-900">Select Service</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {services.map((service) => (
-                <button
-                  key={service.id}
-                  onClick={() => setSelectedService(service)}
-                  className={`p-4 rounded-lg border ${
-                    selectedService?.id === service.id
-                      ? 'border-emerald-500 bg-emerald-50'
-                      : 'border-gray-200 hover:border-emerald-500'
-                  }`}
-                >
-                  <h3 className="font-semibold text-gray-900">{service.name}</h3>
-                  <p className="text-gray-500">Duration: {service.duration}</p>
-                  <p className="text-emerald-600 font-medium">{service.price}</p>
-                </button>
-              ))}
-            </div>
-          </div>
+          <TileChooser
+            items={services}
+            selectedItem={selectedService}
+            onSelect={setSelectedService}
+            title="Select Service"
+            renderItem={(service) => (
+              <>
+                <H3 className="flex items-center gap-2">
+                  <Stethoscope className="h-5 w-5 text-emerald-600" />
+                  {service.name}
+                </H3>
+                <p className="text-gray-500">Duration: {service.duration}</p>
+                <p className="text-emerald-600 font-medium">
+                  {formatCurrency(service.price)}
+                </p>
+              </>
+            )}
+          />
         );
 
       case 2:
         return (
           <div className="space-y-6">
-            <h2 className="text-2xl font-semibold text-gray-900">Select Date & Time</h2>
+            <H2>Select Date & Time</H2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-white p-4 rounded-lg shadow">
                 <DayPicker
@@ -131,74 +144,49 @@ export function AppointmentSearch() {
                   className="border-0"
                 />
               </div>
-              <div className="space-y-4">
-                <h3 className="font-medium text-gray-900">Available Time Slots</h3>
-                <div className="grid grid-cols-3 gap-2">
-                  {timeSlots.map((time) => (
-                    <button
-                      key={time}
-                      onClick={() => setSelectedTime(time)}
-                      className={`p-2 text-sm rounded ${
-                        selectedTime === time
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-gray-100 hover:bg-gray-200'
-                      }`}
-                    >
-                      {time}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <TimeSlots 
+                slots={timeSlots}
+                selectedTimeId={selectedTime?.id}
+                onTimeSelect={setSelectedTime}
+              />
             </div>
           </div>
         );
 
       case 3:
         return (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-semibold text-gray-900">Select Location</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {locations.map((location) => (
-                <button
-                  key={location}
-                  onClick={() => setSelectedLocation(location)}
-                  className={`p-4 rounded-lg border ${
-                    selectedLocation === location
-                      ? 'border-emerald-500 bg-emerald-50'
-                      : 'border-gray-200 hover:border-emerald-500'
-                  }`}
-                >
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="h-5 w-5 text-emerald-600" />
-                    <span>{location}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
+          <TileChooser
+            items={locations}
+            selectedItem={selectedLocation}
+            onSelect={setSelectedLocation}
+            title="Select Location"
+            renderItem={(location) => (
+              <div className="flex items-center space-x-2">
+                <MapPin className="h-5 w-5 text-emerald-600" />
+                <span>{location.name}</span>
+              </div>
+            )}
+          />
         );
 
       case 4:
         return (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-semibold text-gray-900">Select Doctor</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {doctors.map((doctor) => (
-                <button
-                  key={doctor.id}
-                  onClick={() => setSelectedDoctor(doctor)}
-                  className={`p-4 rounded-lg border ${
-                    selectedDoctor?.id === doctor.id
-                      ? 'border-emerald-500 bg-emerald-50'
-                      : 'border-gray-200 hover:border-emerald-500'
-                  }`}
-                >
-                  <h3 className="font-semibold text-gray-900">{doctor.name}</h3>
-                  <p className="text-gray-500">{doctor.specialization}</p>
-                </button>
-              ))}
-            </div>
-          </div>
+          <TileChooser
+            items={doctors}
+            selectedItem={selectedDoctor}
+            onSelect={setSelectedDoctor}
+            title="Select Doctor"
+            idKey="id"
+            renderItem={(doctor) => (
+              <>
+                <H3 className="font-semibold text-gray-900 flex items-center gap-2">
+                  <User className="h-5 w-5 text-emerald-600" />
+                  {doctor.name}
+                </H3>
+                <p className="text-gray-500">{doctor.specialization}</p>
+              </>
+            )}
+          />
         );
 
       default:
@@ -249,14 +237,14 @@ export function AppointmentSearch() {
       {showConfirmation && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl p-8 max-w-md w-full">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Confirm Your Appointment</h2>
+            <H2 className="mb-6">Confirm Your Appointment</H2>
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Calendar className="h-5 w-5 text-emerald-600" />
                 <div>
                   <p className="font-medium">Date & Time</p>
                   <p className="text-gray-600">
-                    {selectedDate && format(selectedDate, 'MMMM d, yyyy')} at {selectedTime}
+                    {selectedDate && format(selectedDate, 'MMMM d, yyyy')} at {selectedTime?.label}
                   </p>
                 </div>
               </div>

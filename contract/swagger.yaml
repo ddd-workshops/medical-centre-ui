@@ -2,7 +2,7 @@ openapi: '3.0.0'
 info:
   title: Bright Smiles Architects API
   version: '1.0.0'
-  description: API for managing medical appointments
+  description: API for managing dental clinics
 
 servers:
   - url: 'http://localhost:3001/api'
@@ -11,6 +11,8 @@ servers:
 paths:
   /auth/login:
     post:
+      tags:
+        - Authentication
       summary: Login user
       requestBody:
         required: true
@@ -28,8 +30,33 @@ paths:
         '401':
           description: Invalid credentials
 
+  /auth/register:
+    post:
+      tags:
+        - Authentication
+      summary: Register new patient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientProfile'
+        '400':
+          description: Invalid registration data
+        '409':
+          description: Username or email already exists
+
   /auth/logout:
     post:
+      tags:
+        - Authentication
       summary: Logout user
       responses:
         '204':
@@ -37,6 +64,8 @@ paths:
 
   /appointments:
     get:
+      tags:
+        - Appointments
       summary: Get all appointments
       description: Retrieve a list of all appointments
       responses:
@@ -47,25 +76,29 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Appointment'
+                  $ref: '#/components/schemas/AppointmentBrief'
     post:
+      tags:
+        - Appointments
       summary: Create a new appointment
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AppointmentCreate'
+              $ref: '#/components/schemas/AppointmentCreateRequest'
       responses:
         '201':
           description: Appointment created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                $ref: '#/components/schemas/AppointmentDetails'
 
   /appointments/{appointmentId}:
     get:
+      tags:
+        - Appointments
       summary: Get appointment details
       parameters:
         - name: appointmentId
@@ -80,10 +113,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                $ref: '#/components/schemas/AppointmentDetails'
         '404':
           description: Appointment not found
     put:
+      tags:
+        - Appointments
       summary: Update an appointment
       parameters:
         - name: appointmentId
@@ -96,31 +131,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AppointmentUpdate'
+              $ref: '#/components/schemas/AppointmentUpdateRequest'
       responses:
         '200':
           description: Appointment updated successfully
-    delete:
-      summary: Delete an appointment
-      parameters:
-        - name: appointmentId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '204':
-          description: Appointment deleted successfully
 
   /referrals:
     post:
+      tags:
+        - Referrals
       summary: Create a new referral
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReferralCreate'
+              $ref: '#/components/schemas/ReferralCreateRequest'
       responses:
         '201':
           description: Referral created successfully
@@ -131,6 +157,8 @@ paths:
 
   /referrals/{referralId}:
     put:
+      tags:
+        - Referrals
       summary: Update a referral
       parameters:
         - name: referralId
@@ -143,24 +171,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReferralUpdate'
+              $ref: '#/components/schemas/ReferralUpdateRequest'
       responses:
         '200':
           description: Referral updated successfully
-    delete:
-      summary: Delete a referral
-      parameters:
-        - name: referralId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '204':
-          description: Referral deleted successfully
 
   /notifications:
     get:
+      tags:
+        - Notifications
       summary: Get all notifications without full content
       responses:
         '200':
@@ -174,6 +193,8 @@ paths:
 
   /notifications/{notificationId}:
     get:
+      tags:
+        - Notifications
       summary: Get a single notification with full content
       parameters:
         - name: notificationId
@@ -192,6 +213,8 @@ paths:
 
   /notifications/{notificationId}/read:
     put:
+      tags:
+        - Notifications
       summary: Mark a notification as read
       parameters:
         - name: notificationId
@@ -206,6 +229,8 @@ paths:
 
   /cms/pages:
     get:
+      tags:
+        - CMS
       summary: List all available CMS pages
       responses:
         '200':
@@ -219,6 +244,8 @@ paths:
 
   /cms/pages/{slug}:
     get:
+      tags:
+        - CMS
       summary: Get CMS page content by slug
       parameters:
         - name: slug
@@ -238,6 +265,8 @@ paths:
 
   /profile:
     get:
+      tags:
+        - Patients
       summary: Get patient profile
       description: Retrieve the profile information of the logged-in patient
       responses:
@@ -248,34 +277,45 @@ paths:
               schema:
                 $ref: '#/components/schemas/PatientProfile'
 
+  /prescribed-treatments:
+    get:
+      tags:
+        - Patients
+      summary: Get prescribed treatments for a patient
+      parameters:
+        - name: patientId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of prescribed treatments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrescribedTreatment'
+
 components:
   schemas:
-    Appointment:
+
+    AppointmentDetails:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        patientId:
-          type: string
-          format: uuid
-        patientName:
-          type: string
+        patient:
+          $ref: '#/components/schemas/PatientBrief'
         doctor:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-            name:
-              type: string
-            specialty:
-              type: string
-          required:
-            - id
-            - name
-            - specialty
-        date:
+          $ref: '#/components/schemas/DoctorBrief'
+        serviceType:
+          $ref: '#/components/schemas/ServiceType'
+        location:
+          $ref: '#/components/schemas/ClinicBrief'
+        datetime:
           type: string
           format: date-time
         status:
@@ -283,49 +323,72 @@ components:
           enum: [SCHEDULED, COMPLETED, CANCELLED]
         notes:
           type: string
-        medicalNotes:
-          type: string
         prescriptions:
           type: array
           items:
             type: string
         billing:
-          type: object
-          properties:
-            amount:
-              type: number
-            status:
-              type: string
-              enum: [PENDING, PAID, CANCELLED]
-          required:
-            - amount
-            - status
+          $ref: '#/components/schemas/Billing'
       required:
         - id
-        - patientId
+        - patient
         - doctor
-        - date
+        - serviceType
+        - location
+        - datetime
         - status
-    AppointmentCreate:
+
+    AppointmentBrief:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        patientName:
+          type: string
+        doctor:
+          type: string
+        serviceType:
+          type: string
+        location:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [SCHEDULED, COMPLETED, CANCELLED]
+      required:
+        - id
+        - patient
+        - doctor
+        - serviceType
+        - location
+        - datetime
+        - status
+
+    AppointmentCreateRequest:
       type: object
       properties:
         patientId:
           type: string
+          format: uuid
         doctorId:
           type: string
-        date:
+          format: uuid
+        serviceTypeId:
           type: string
-        time:
+          format: uuid
+        datetime:
           type: string
-        description:
-          type: string
+          format: date-time
       required:
         - patientId
         - doctorId
-        - date
-        - time
+        - serviceTypeId
+        - datetime
 
-    AppointmentUpdate:
+    AppointmentUpdateRequest:
       type: object
       required:
         - appointmentId
@@ -333,8 +396,9 @@ components:
         appointmentId:
           type: string
           format: uuid
-        date:
+        datetime:
           type: string
+          format: date-time
         time:
           type: string
         description:
@@ -343,16 +407,125 @@ components:
           type: string
           enum: [SCHEDULED, COMPLETED, CANCELLED]
 
+    Treatment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        shortDescription:
+          type: string
+        expectedDuration:
+          type: object
+          properties:
+            min:
+              type: integer
+              description: Minimum expected duration in minutes
+            max:
+              type: integer
+              description: Maximum expected duration in minutes
+          required:
+            - min
+            - max
+        priceRange:
+          type: object
+          properties:
+            min:
+              type: number
+              format: float
+              description: Minimum price in the local currency
+            max:
+              type: number
+              format: float
+              description: Maximum price in the local currency
+          required:
+            - min
+            - max
+        doctorBrief:
+          $ref: '#/components/schemas/DoctorBrief'
+        patientBrief:
+          $ref: '#/components/schemas/PatientBrief'
+      required:
+        - id
+        - name
+        - shortDescription
+        - expectedDuration
+        - priceRange
+        - doctorBrief
+        - patientBrief
+
+    PrescribedTreatment:
+      type: object
+      properties:
+        id: 
+          type: string
+          format: uuid
+        prescribedDate:
+          type: string
+          format: date-time
+        description:
+          type: string
+          format: date-time
+        patient:
+          $ref: '#/components/schemas/PatientBrief'
+        doctor:
+          $ref: '#/components/schemas/DoctorBrief'
+        treatment:
+          $ref: '#/components/schemas/Treatment'
+        appointments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppointmentBrief'
+        status:
+          type: string
+          enum: [SCHEDULED, IN_PROGRESS, COMPLETED, CANCELLED]
+      required:
+        - id
+        - prescribedDate
+        - patient
+        - doctor
+        - treatment
+        - status
+
+    DoctorBrief:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the doctor
+        fullName:
+          type: string
+          description: Full name of the doctor including titles (e.g. "Dr. John Smith")
+        specialties:
+          type: array
+          description: List of doctor's areas of specialization (e.g. ["Orthodontics", "Dental Surgery"])
+          items:
+            type: string
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClinicBrief'
+      required:
+        - id
+        - fullName
+        - specialties
+
     Referral:
       type: object
       properties:
         id:
           type: string
+          format: uuid
         patientId:
           type: string
+          format: uuid
         issuingDoctorId:
           type: string
-        targetSpeciality:
+          format: uuid
+        targetSpecialty:
           type: string
         diagnosis:
           type: string
@@ -360,8 +533,10 @@ components:
           type: string
         issueDate:
           type: string
+          format: date
         expiryDate:
           type: string
+          format: date
         status:
           type: string
           enum: [ACTIVE, USED, EXPIRED]
@@ -369,19 +544,20 @@ components:
         - id
         - patientId
         - issuingDoctorId
-        - targetSpeciality
+        - targetSpecialty
         - diagnosis
         - recommendations
         - issueDate
         - expiryDate
         - status
 
-    ReferralCreate:
+    ReferralCreateRequest:
       type: object
       properties:
         patientId:
           type: string
-        targetSpeciality:
+          format: uuid
+        targetSpecialty:
           type: string
         diagnosis:
           type: string
@@ -389,14 +565,15 @@ components:
           type: string
         expiryDate:
           type: string
+          format: date
       required:
         - patientId
-        - targetSpeciality
+        - targetSpecialty
         - diagnosis
         - recommendations
         - expiryDate
 
-    ReferralUpdate:
+    ReferralUpdateRequest:
       type: object
       required:
         - referralId
@@ -410,6 +587,188 @@ components:
           type: string
           enum: [ACTIVE, USED, EXPIRED]
 
+    PatientBrief:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the patient
+        fullName:
+          type: string
+          description: Full name of the patient
+      required:
+        - id
+        - fullName
+
+    PatientProfile:
+      type: object
+      properties:
+        patientId:
+          type: string
+          format: uuid
+          description: Unique identifier for the patient
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        email:
+          type: string
+          format: email
+          description: Patient's email address
+        username:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+      required:
+        - patientId
+        - firstName
+        - lastName
+        - phoneNumber
+        - email
+        - username
+        - address
+
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+
+    RegisterRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+      required:
+        - email
+        - username
+        - password
+        - firstName
+        - lastName
+        - phoneNumber
+        - address
+
+    Address:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the address
+        country:
+          type: string
+        city:
+          type: string
+        street:
+          type: string
+        postalCode:
+          type: string
+      required:
+        - id
+        - country
+        - city
+        - street
+        - postalCode
+
+    ClinicBrief:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the location
+        name:
+          type: string
+          description: Name of the clinic
+        address:
+          type: string
+          description: Full address including country, city, street and postal code
+      required:
+        - id
+        - name
+        - address
+
+    ClinicDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the location
+        name:
+          type: string
+          description: Name of the clinic
+        address:
+          type: string
+          description: Full address including country, city, street and postal code
+        phone:
+          type: string
+        email:
+          type: string
+          format: email
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+      required:
+        - id
+        - name
+        - address
+
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the document
+        name:
+          type: string
+          description: Name/title of the document
+        description:
+          type: string
+          description: Detailed description or content of the document
+        createdAt:
+          type: string
+          format: date-time
+          description: Date and time when the document was created
+        fileUrl:
+          type: string
+          format: uri
+          description: URL to the document file in cloud storage
+        doctor:
+          $ref: '#/components/schemas/DoctorBrief'
+          description: Brief information about the doctor who created the document
+        patient:
+          $ref: '#/components/schemas/PatientBrief'
+          description: Brief information about the patient the document is about
+      required:
+        - id
+        - name
+        - description
+        - createdAt
+        - fileUrl
+        - doctor
+        - patient
+
     Notification:
       type: object
       properties:
@@ -422,7 +781,7 @@ components:
           type: string
         receivedDate:
           type: string
-          format: date-time
+          format: date
         read:
           type: boolean
           default: false
@@ -447,7 +806,7 @@ components:
           type: string
         receivedDate:
           type: string
-          format: date-time
+          format: date
         read:
           type: boolean
           default: false
@@ -473,50 +832,60 @@ components:
         - lastUpdated
         - content
 
-    Address:
+    ServiceType:
       type: object
       properties:
-        country:
+        id:
           type: string
-        city:
-          type: string
-        street:
-          type: string
-        postalCode:
+          format: uuid
+        name:
           type: string
       required:
-        - country
-        - city
-        - street
-        - postalCode
+        - id
+        - name
 
-    PatientProfile:
+    ServiceOffer:
       type: object
       properties:
-        firstName:
+        id:
           type: string
-        lastName:
+          format: uuid
+        serviceType:
           type: string
-        phoneNumber:
+        duration:
+          type: number
+          description: Duration in minutes
+        price:
+          type: number
+          description: Price in the local currency
+        description:
           type: string
-        username:
-          type: string
-        address:
-          $ref: '#/components/schemas/Address'
       required:
-        - firstName
-        - lastName
-        - phoneNumber
-        - username
-        - address
+        - id
+        - serviceType
+        - duration
+        - price
+        - description
 
-    LoginRequest:
+    Billing:
       type: object
       properties:
-        username:
+        amount:
+          type: number
+        status:
           type: string
-        password:
-          type: string
+          enum: [PENDING, PAID, CANCELLED]
       required:
-        - username
-        - password
+        - amount
+        - status
+
+    Coordinates:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+      required:
+        - latitude
+        - longitude

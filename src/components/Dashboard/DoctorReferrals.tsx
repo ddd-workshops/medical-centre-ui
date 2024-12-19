@@ -1,6 +1,6 @@
-
 import React from 'react';
 import { TileList } from '../TileList';
+import { H2 } from '../Typography/Headings';
 
 export const DoctorReferrals: React.FC = () => {
   const referrals = [
@@ -18,7 +18,7 @@ export const DoctorReferrals: React.FC = () => {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Doctor Referrals</h2>
+      <H2 className="mb-4">Doctor Referrals</H2>
       <TileList items={referrals} />
     </div>
   );

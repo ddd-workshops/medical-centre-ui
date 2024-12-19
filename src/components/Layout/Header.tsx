@@ -36,7 +36,7 @@ export const Header = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/implant-process" className="text-gray-600 hover:text-emerald-600">Implant Process</Link>
+            <Link to="/cms/implant-process" className="text-gray-600 hover:text-emerald-600">Implant Process</Link>
             <Link to="/book-appointment" className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600">
               <Calendar className="h-4 w-4" />
               <span>Book Appointment</span>
@@ -91,7 +91,7 @@ export const Header = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 space-y-4">
-            <Link to="/implant-process" className="block text-gray-600 hover:text-emerald-600">Implant Process</Link>
+            <Link to="/cms/implant-process" className="block text-gray-600 hover:text-emerald-600">Implant Process</Link>
             <Link to="/book-appointment" className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600">
               <Calendar className="h-4 w-4" />
               <span>Book Appointment</span>

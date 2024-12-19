@@ -1,6 +1,7 @@
 import { Button } from '../generic/Button';
 import { Rating } from '../forms/Rating';
 import { useState } from 'react';
+import { H2 } from '../Typography/Headings';
 
 type AppointmentDetails = {
   doctorName: string;
@@ -34,7 +35,7 @@ export const AppointmentFeedback = ({ appointment, onSubmit }: AppointmentFeedba
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <div className="mb-6 text-gray-600">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">How was your appointment?</h2>
+        <H2>How was your appointment?</H2>
         <p className="mb-2">Doctor: {appointment.doctorName}</p>
         <p className="mb-2">Clinic: {appointment.clinicName}</p>
         <p>Date: {appointment.date} at {appointment.time}</p>

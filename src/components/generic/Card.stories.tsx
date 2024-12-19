@@ -19,8 +19,13 @@ export const Default: Story = {
 
 export const WithCustomClass: Story = {
   args: {
-    title: 'Custom Card',
-    className: 'bg-emerald-50',
-    children: <p>This card has a custom background color.</p>,
+    title: 'Featured Service',
+    className: 'bg-gradient-to-br from-green-50 to-emerald-100 border-green-200',
+    children: (
+      <div className="space-y-2">
+        <p className="text-green-800">Professional teeth whitening service now available!</p>
+        <p className="text-green-600 text-sm">Schedule your appointment today.</p>
+      </div>
+    ),
   },
 };

@@ -1,6 +1,8 @@
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { NotificationListItem } from '../../contract/types';
+import { H3 } from '../Typography/Headings';
+import { Paragraph } from '../Typography/Paragraph';
 
 interface Props {
   notification: NotificationListItem;
@@ -16,10 +18,10 @@ export const NotificationBrief = ({ notification }: Props) => (
         <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
       )}
       <div>
-        <h3 className={`${!notification.read ? 'font-bold' : 'font-normal'} text-gray-800`}>
+        <H3 className={!notification.read ? 'font-bold' : 'font-normal'}>
           {notification.title}
-        </h3>
-        <p className="text-gray-600 text-sm">{notification.subtitle}</p>
+        </H3>
+        <Paragraph size="SMALL">{notification.subtitle}</Paragraph>
       </div>
     </div>
     <ChevronRight className="text-gray-400 w-5 h-5" />

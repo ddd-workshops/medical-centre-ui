@@ -1,4 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { H2, H3, H4 } from '../Typography/Headings';
+import { Paragraph } from '../Typography/Paragraph';
 
 interface MedicalHistoryEntry {
   id: string;
@@ -58,34 +60,34 @@ export const MedicalHistoryDetails = () => {
         onClick={() => navigate('/medical-history')}
         className="mb-4 px-4 py-2 text-green-700 hover:text-green-800 flex items-center gap-2"
       >
-        ← Back to Medical History
+        <Paragraph>← Back to Medical History</Paragraph>
       </button>
       
       <div className="bg-green-50 rounded-lg shadow-lg p-6">
-        <h2 className="text-2xl font-bold text-green-800 mb-6">Medical Record Details</h2>
+        <H2 className="mb-6 text-green-800">Medical Record Details</H2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div className="bg-white p-4 rounded-md shadow">
-              <h3 className="text-lg font-semibold text-green-700">Basic Information</h3>
-              <p className="text-gray-600">Date: {entry.date}</p>
-              <p className="text-gray-600">Diagnosis: {entry.diagnosis}</p>
+              <H3 className="text-green-700">Basic Information</H3>
+              <Paragraph>Date: {entry.date}</Paragraph>
+              <Paragraph>Diagnosis: {entry.diagnosis}</Paragraph>
             </div>
 
             <div className="bg-white p-4 rounded-md shadow">
-              <h3 className="text-lg font-semibold text-green-700">Vital Signs</h3>
-              <p className="text-gray-600">Blood Pressure: {entry.vitalSigns.bloodPressure}</p>
-              <p className="text-gray-600">Heart Rate: {entry.vitalSigns.heartRate} bpm</p>
-              <p className="text-gray-600">Temperature: {entry.vitalSigns.temperature}°C</p>
+              <H3 className="text-green-700">Vital Signs</H3>
+              <Paragraph>Blood Pressure: {entry.vitalSigns.bloodPressure}</Paragraph>
+              <Paragraph>Heart Rate: {entry.vitalSigns.heartRate} bpm</Paragraph>
+              <Paragraph>Temperature: {entry.vitalSigns.temperature}°C</Paragraph>
             </div>
           </div>
 
           <div className="space-y-4">
             <div className="bg-white p-4 rounded-md shadow">
-              <h3 className="text-lg font-semibold text-green-700">Treatment & Medications</h3>
-              <p className="text-gray-600">Treatment: {entry.treatment}</p>
+              <H3 className="text-green-700">Treatment & Medications</H3>
+              <Paragraph>Treatment: {entry.treatment}</Paragraph>
               <div className="mt-2">
-                <h4 className="text-green-600">Prescribed Medications:</h4>
+                <H4 className="text-green-600">Prescribed Medications:</H4>
                 <ul className="list-disc list-inside">
                   {entry.medications.map((med, index) => (
                     <li key={index} className="text-gray-600">{med}</li>
@@ -95,12 +97,12 @@ export const MedicalHistoryDetails = () => {
             </div>
 
             <div className="bg-white p-4 rounded-md shadow">
-              <h3 className="text-lg font-semibold text-green-700">Dental Procedures</h3>
+              <H3 className="text-green-700">Dental Procedures</H3>
               {entry.dentalProcedures.map((proc, index) => (
                 <div key={index} className="mb-2">
-                  <p className="text-gray-600">Procedure: {proc.procedure}</p>
-                  <p className="text-gray-600">Tooth: {proc.tooth}</p>
-                  <p className="text-gray-600">Notes: {proc.notes}</p>
+                  <Paragraph>Procedure: {proc.procedure}</Paragraph>
+                  <Paragraph>Tooth: {proc.tooth}</Paragraph>
+                  <Paragraph>Notes: {proc.notes}</Paragraph>
                 </div>
               ))}
             </div>
@@ -108,10 +110,10 @@ export const MedicalHistoryDetails = () => {
         </div>
 
         <div className="mt-6 bg-white p-4 rounded-md shadow">
-          <h3 className="text-lg font-semibold text-green-700">Doctor's Notes</h3>
-          <p className="text-gray-600">{entry.doctorNotes}</p>
+          <H3 className="text-green-700">Doctor's Notes</H3>
+          <Paragraph>{entry.doctorNotes}</Paragraph>
           {entry.followUpDate && (
-            <p className="mt-2 text-green-600">Follow-up appointment: {entry.followUpDate}</p>
+            <Paragraph>Follow-up appointment: {entry.followUpDate}</Paragraph>
           )}
         </div>
       </div>

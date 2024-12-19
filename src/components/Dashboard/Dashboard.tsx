@@ -1,11 +1,13 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { RecentAppointments } from './RecentAppointments';
 import { Timeline } from '../Timeline';
 import { appointmentService } from '../../api/services/appointmentService';
 import { QuickActions } from './QuickActions';
 import { RecentUpdates } from './RecentUpdates';
 import { DoctorReferrals } from './DoctorReferrals';
+import { TreatmentBriefs } from '../Treatments/TreatmentBriefs';
+import { H1 } from '../Typography/Headings';
+import { FailText } from '../Typography/Text';
 
 export const Dashboard: React.FC = () => {
   const { data: appointments = [], isLoading, error } = useQuery({
@@ -20,14 +22,16 @@ export const Dashboard: React.FC = () => {
   }
 
   if (error) {
-    return <div className="text-red-600">Error loading appointments</div>;
+    return <div>
+      <FailText>Error loading appointments</FailText>
+    </div>;
   }
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">Welcome to Bright Smiles Architects™️</h1>
+          <H1>Welcome to Bright Smiles Architects™️</H1>
           
           <Timeline appointments={appointments} />
 
@@ -37,7 +41,7 @@ export const Dashboard: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <RecentAppointments />
+            <TreatmentBriefs />
             <DoctorReferrals />
           </div>
         </div>

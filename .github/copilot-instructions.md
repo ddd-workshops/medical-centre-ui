@@ -27,6 +27,9 @@ Creating a new contract entry or modifying existing one requires the following:
 - updating the client-side service
 - running the `npm run generate:types` command (from package.json) needs to be executed in order to generate up-to-date types
 
+The `./contract/types.ts` file should expose all schemas (and some chosen paths) that are available on the `contract.ts` file. All schema types exported should have exactly the same name as the schema. And should be in the same order as in the swagger contract file. Also, no schemas can be missing in `./contract/types.ts` file.
+
+
 # server code
 
 For each entity in the contract (added, modified etc.) the `./server/routes` need to have its file there (if such route file exists for a given entity, use it). Use existing server routes for reference.
@@ -47,6 +50,8 @@ The client code components should do neither `fetch` nor `axios` calls directly.
 
 For each entity in the contract (added, modified etc.), there should be a service defined in `./src/api/services`. Import `client` from apiClient file which has the base API URL defined already. Use existing services for reference.
 
+When reusing existing react components, import them from `./src/components/generic` or `./src/components/forms`.
+
 ## form widgets
 
 Each form widget should maintain its own local private state. When a value changes:
@@ -58,7 +63,11 @@ This ensures proper state management and prevents potential race conditions.
 
 Use tailwind.css to provide very nice styling. Make the website look really nice and calm. Use green colors mainly.
 
-If icons are needed, use `lucide-react`, it's already there.lucide-react
+If icons are needed, use `lucide-react`, it's already there.
+
+Use existing typography, when possible: `./src/components/Typography`. If an important element of typography is missing, suggest adding it!
+
+Remember that there's no `<Text>` component. Use `<Paragraph>` instead.
 
 ## storybook
 
@@ -68,3 +77,9 @@ Each non-global component (i.e. displaying entity list, entity details, a styled
 Each component story, when requires callbacks, should either receive a meaningful callback from the parent, or provide the `action` from `@storybook/addon-actions`. You can use `PasswordInput.stories.tsx` as example of using actions addon, but you can also provide different APIs. Don't use console.log for this reason.
 
 The stories should include the 'autodocs' feature from Storybook.
+
+Whenever providing or updating storybook stories, always try to use domain-relevant examples (doctors, appointments, treatments, medicine etc) instead of generic words with no meaning.
+
+## currencies
+
+Whenever displaying currencies, use the function from `./src/utils/formatCurrency.ts`

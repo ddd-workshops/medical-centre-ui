@@ -3,6 +3,7 @@ import { format, parseISO } from 'date-fns';
 import type { NotificationListItem } from '../../contract/types';
 import { getNotifications } from '../../api/services/notificationsService';
 import { NotificationBrief } from './NotificationBrief';
+import { H1, H2 } from '../Typography/Headings';
 
 type GroupedNotifications = {
   [key: string]: NotificationListItem[];
@@ -33,11 +34,11 @@ export const NotificationsList = () => {
 
   return (
     <div className="max-w-2xl mx-auto py-8 px-4">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Notifications</h1>
+      <H1 className="mb-6">Notifications</H1>
       <div className="space-y-6">
         {Object.entries(notifications).map(([date, items]) => (
           <div key={date}>
-            <h2 className="text-sm text-gray-500 mb-2">{date}</h2>
+            <H2 className="text-sm text-gray-500 mb-2">{date}</H2>
             <div className="bg-white rounded-lg shadow divide-y">
               {items.map((notification) => (
                 <NotificationBrief 

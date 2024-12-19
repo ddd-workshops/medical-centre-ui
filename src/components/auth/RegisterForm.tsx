@@ -5,6 +5,7 @@ import { PasswordInput } from '../forms/PasswordInput';
 import { PhoneInput } from '../forms/PhoneInput';
 import { Button } from '../generic/Button';
 import { TextInput } from '../forms/TextInput';
+import { H2 } from '../Typography/Headings';
 
 export const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -49,7 +50,7 @@ export const RegisterForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-50">
       <div className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-100">
-        <h2 className="text-2xl font-semibold text-green-800 mb-6 text-center">Create Account</h2>
+        <H2 className="text-green-800 text-center">Create Account</H2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <TextInput
             label="First Name"
@@ -71,6 +72,7 @@ export const RegisterForm = () => {
             required
           />
           <PhoneInput
+            label="Phone"
             value={formData.phone}
             onChange={(value, isValid) => {
               setFormData(prev => ({ ...prev, phone: value }));

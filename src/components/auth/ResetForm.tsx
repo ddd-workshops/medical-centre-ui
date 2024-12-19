@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TextInput } from '../forms/TextInput';
 import { RadioGroup } from '../forms/RadioGroup';
+import { H2 } from '../Typography/Headings';
 
 type ResetOption = 'remind-login' | 'reset-password';
 
@@ -18,7 +19,7 @@ export const ResetForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-50">
       <div className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-100">
-        <h2 className="text-2xl font-semibold text-green-800 mb-6 text-center">Account Recovery</h2>
+        <H2 className="text-green-800 text-center">Account Recovery</H2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <RadioGroup
             header="Choose recovery option"

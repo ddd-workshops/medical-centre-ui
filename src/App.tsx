@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { Header } from './components/Layout/Header';
 import { Footer } from './components/Layout/Footer';
@@ -16,10 +18,11 @@ import { ResetForm } from './components/Auth/ResetForm';
 import { NotificationsList } from './components/Notifications/NotificationsList';
 import { NotificationDetails } from './components/Notifications/NotificationDetails';
 import { CMSContent } from './components/CMS/CMSContent';
+import { PrescribedTreatmentsList } from './components/Treatments/PrescribedTreatmentsList';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { AppointmentDetails } from './components/Appointments/AppointmentDetails';
+import { AppointmentDetailedDescription } from './components/Appointments/AppointmentDetailedDescription';
+import { useAuthStore } from './components/Auth/authStore';
+import { UpdateContactRequestForm } from './components/Profile/UpdateContactRequestForm';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,26 +35,36 @@ const queryClient = new QueryClient({
 });
 
 export function App() {
+  const { showContactVerification, setShowContactVerification } = useAuthStore();
+  
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-grow">
+            {showContactVerification && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <UpdateContactRequestForm 
+                  onClose={() => setShowContactVerification(false)} 
+                />
+              </div>
+            )}
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/implant-process" element={<ImplantProcess />} />
               <Route path="/book-appointment" element={<AppointmentSearch />} />
               <Route path="/medical-history" element={<MedicalHistory />} />
               <Route path="/medical-history/:id" element={<MedicalHistoryDetails />} />
-              <Route path="/appointments/:id" element={<AppointmentDetails />} />
+              <Route path="/appointments/:id" element={<AppointmentDetailedDescription />} />
+              <Route path="/prescribed-treatments" element={<PrescribedTreatmentsList />} />
               <Route path="/notifications" element={<NotificationsList />} />
               <Route path="/notifications/:id" element={<NotificationDetails />} />
               <Route path="/api" element={<SwaggerDocs />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegisterForm />} />
               <Route path="/reset" element={<ResetForm />} />
+              <Route path="/cms/pricing" element={<Pricing />} />
+              <Route path="/cms/implant-process" element={<ImplantProcess />} />
               <Route path="/cms/general-dentistry" element={<CMSContent slug="general-dentistry" />} />
               <Route path="/cms/cosmetic-dentistry" element={<CMSContent slug="cosmetic-dentistry" />} />
               <Route path="/cms/orthodontics" element={<CMSContent slug="orthodontics" />} />

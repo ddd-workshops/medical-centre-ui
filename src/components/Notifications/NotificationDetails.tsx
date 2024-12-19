@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import type { Notification } from '../../contract/types';
 import { getNotification, markNotificationAsRead } from '../../api/services/notificationsService';
+import { H1, H2 } from '../Typography/Headings';
 
 export const NotificationDetails = () => {
   const { id } = useParams();
@@ -35,9 +36,7 @@ export const NotificationDetails = () => {
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <h1 className="text-lg font-medium text-gray-800 flex-1 text-center">
-            Notifications
-          </h1>
+          <H1 className="flex-1 text-center">Notifications</H1>
           <div className="w-5" /> {/* Spacer for alignment */}
         </div>
       </div>
@@ -46,9 +45,7 @@ export const NotificationDetails = () => {
         <div className="text-sm text-gray-500">
           {format(parseISO(notification.receivedDate), 'MMMM d, yyyy')}
         </div>
-        <h2 className="text-xl font-medium text-emerald-600">
-          {notification.title}
-        </h2>
+        <H2 className="text-emerald-600">{notification.title}</H2>
         <div className="text-gray-800 prose max-w-none">
           {notification.content}
         </div>

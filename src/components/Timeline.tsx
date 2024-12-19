@@ -1,25 +1,26 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
-import type { Appointment } from '../contract/types';
+import type { AppointmentDetails } from '../contract/types';
+import { H2, H3 } from './Typography/Headings';
 
 interface TimelineProps {
-  appointments: Appointment[];
+  appointments: AppointmentDetails[];
 }
 
 export const Timeline: React.FC<TimelineProps> = ({ appointments }) => {
   const groupedAppointments = appointments.reduce((acc, appointment) => {
-    const dateKey = format(appointment.date, 'yyyy-MM-dd');
+    const dateKey = format(appointment.datetime, 'yyyy-MM-dd');
     if (!acc[dateKey]) {
       acc[dateKey] = [];
     }
     acc[dateKey].push(appointment);
     return acc;
-  }, {} as Record<string, Appointment[]>);
+  }, {} as Record<string, AppointmentDetails[]>);
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-8">Your Upcoming Appointments</h2>
+      <H2 className="mb-8">Your Upcoming Appointments</H2>
       
       {appointments.length > 0 ? (
         <div className="relative">
@@ -35,9 +36,9 @@ export const Timeline: React.FC<TimelineProps> = ({ appointments }) => {
                 </div>
                 
                 <div className="ml-10">
-                  <h3 className="text-lg font-semibold text-emerald-600 mb-4">
+                  <H3 className="text-emerald-600 mb-4">
                     {format(new Date(dateKey), 'MMMM d, yyyy')}
-                  </h3>
+                  </H3>
                   
                   <div className="space-y-4">
                     {dayAppointments.map(appointment => (
@@ -53,11 +54,11 @@ export const Timeline: React.FC<TimelineProps> = ({ appointments }) => {
                           <div className="flex justify-between items-start">
                             <div>
                               <p className="font-semibold text-gray-800">{appointment.status}</p>
-                              <p className="text-gray-600">with {appointment.doctorName}</p>
+                              <p className="text-gray-600">with {appointment.doctor.fullName}</p>
                             </div>
                             <div className="text-right">
                               <p className="text-emerald-600 font-medium">
-                                {format(appointment.date, 'h:mm a')}
+                                {format(appointment.datetime, 'h:mm a')}
                               </p>
                             </div>
                           </div>

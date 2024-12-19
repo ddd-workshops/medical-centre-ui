@@ -51,6 +51,60 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/auth/register": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Register new patient */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RegisterRequest"];
+                };
+            };
+            responses: {
+                /** @description Registration successful */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PatientProfile"];
+                    };
+                };
+                /** @description Invalid registration data */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Username or email already exists */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/auth/logout": {
         parameters: {
             query?: never;
@@ -111,7 +165,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Appointment"][];
+                        "application/json": components["schemas"]["AppointmentBrief"][];
                     };
                 };
             };
@@ -127,7 +181,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["AppointmentCreate"];
+                    "application/json": components["schemas"]["AppointmentCreateRequest"];
                 };
             };
             responses: {
@@ -137,7 +191,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Appointment"];
+                        "application/json": components["schemas"]["AppointmentDetails"];
                     };
                 };
             };
@@ -173,7 +227,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["Appointment"];
+                        "application/json": components["schemas"]["AppointmentDetails"];
                     };
                 };
                 /** @description Appointment not found */
@@ -197,7 +251,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["AppointmentUpdate"];
+                    "application/json": components["schemas"]["AppointmentUpdateRequest"];
                 };
             };
             responses: {
@@ -211,27 +265,7 @@ export interface paths {
             };
         };
         post?: never;
-        /** Delete an appointment */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    appointmentId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Appointment deleted successfully */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -256,7 +290,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["ReferralCreate"];
+                    "application/json": components["schemas"]["ReferralCreateRequest"];
                 };
             };
             responses: {
@@ -297,7 +331,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": components["schemas"]["ReferralUpdate"];
+                    "application/json": components["schemas"]["ReferralUpdateRequest"];
                 };
             };
             responses: {
@@ -311,27 +345,7 @@ export interface paths {
             };
         };
         post?: never;
-        /** Delete a referral */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    referralId: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Referral deleted successfully */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -567,71 +581,174 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/prescribed-treatments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get prescribed treatments for a patient */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    patientId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description List of prescribed treatments */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PrescribedTreatment"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        Appointment: {
+        AppointmentDetails: {
             /** Format: uuid */
             id: string;
-            /** Format: uuid */
-            patientId: string;
-            patientName?: string;
-            doctor: {
-                /** Format: uuid */
-                id: string;
-                name: string;
-                specialty: string;
-            };
+            patient: components["schemas"]["PatientBrief"];
+            doctor: components["schemas"]["DoctorBrief"];
+            serviceType: components["schemas"]["ServiceType"];
+            location: components["schemas"]["ClinicBrief"];
             /** Format: date-time */
-            date: string;
+            datetime: string;
             /** @enum {string} */
             status: "SCHEDULED" | "COMPLETED" | "CANCELLED";
             notes?: string;
-            medicalNotes?: string;
             prescriptions?: string[];
-            billing?: {
-                amount: number;
-                /** @enum {string} */
-                status: "PENDING" | "PAID" | "CANCELLED";
-            };
+            billing?: components["schemas"]["Billing"];
         };
-        AppointmentCreate: {
+        AppointmentBrief: {
+            /** Format: uuid */
+            id: string;
+            patientName?: string;
+            doctor: string;
+            serviceType: string;
+            location: string;
+            /** Format: date-time */
+            datetime: string;
+            /** @enum {string} */
+            status: "SCHEDULED" | "COMPLETED" | "CANCELLED";
+        };
+        AppointmentCreateRequest: {
+            /** Format: uuid */
             patientId: string;
+            /** Format: uuid */
             doctorId: string;
-            date: string;
-            time: string;
-            description?: string;
+            /** Format: uuid */
+            serviceTypeId: string;
+            /** Format: date-time */
+            datetime: string;
         };
-        AppointmentUpdate: {
+        AppointmentUpdateRequest: {
             /** Format: uuid */
             appointmentId: string;
-            date?: string;
+            /** Format: date-time */
+            datetime?: string;
             time?: string;
             description?: string;
             /** @enum {string} */
             status?: "SCHEDULED" | "COMPLETED" | "CANCELLED";
         };
-        Referral: {
+        Treatment: {
+            /** Format: uuid */
             id: string;
+            name: string;
+            shortDescription: string;
+            expectedDuration: {
+                /** @description Minimum expected duration in minutes */
+                min: number;
+                /** @description Maximum expected duration in minutes */
+                max: number;
+            };
+            priceRange: {
+                /**
+                 * Format: float
+                 * @description Minimum price in the local currency
+                 */
+                min: number;
+                /**
+                 * Format: float
+                 * @description Maximum price in the local currency
+                 */
+                max: number;
+            };
+            doctorBrief: components["schemas"]["DoctorBrief"];
+            patientBrief: components["schemas"]["PatientBrief"];
+        };
+        PrescribedTreatment: {
+            /** Format: uuid */
+            id: string;
+            /** Format: date-time */
+            prescribedDate: string;
+            /** Format: date-time */
+            description?: string;
+            patient: components["schemas"]["PatientBrief"];
+            doctor: components["schemas"]["DoctorBrief"];
+            treatment: components["schemas"]["Treatment"];
+            appointments?: components["schemas"]["AppointmentBrief"][];
+            /** @enum {string} */
+            status: "SCHEDULED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
+        };
+        DoctorBrief: {
+            /**
+             * Format: uuid
+             * @description Unique identifier for the doctor
+             */
+            id: string;
+            /** @description Full name of the doctor including titles (e.g. "Dr. John Smith") */
+            fullName: string;
+            /** @description List of doctor's areas of specialization (e.g. ["Orthodontics", "Dental Surgery"]) */
+            specialties: string[];
+            locations?: components["schemas"]["ClinicBrief"][];
+        };
+        Referral: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
             patientId: string;
+            /** Format: uuid */
             issuingDoctorId: string;
-            targetSpeciality: string;
+            targetSpecialty: string;
             diagnosis: string;
             recommendations: string;
+            /** Format: date */
             issueDate: string;
+            /** Format: date */
             expiryDate: string;
             /** @enum {string} */
             status: "ACTIVE" | "USED" | "EXPIRED";
         };
-        ReferralCreate: {
+        ReferralCreateRequest: {
+            /** Format: uuid */
             patientId: string;
-            targetSpeciality: string;
+            targetSpecialty: string;
             diagnosis: string;
             recommendations: string;
+            /** Format: date */
             expiryDate: string;
         };
-        ReferralUpdate: {
+        ReferralUpdateRequest: {
             /**
              * Format: uuid
              * @description The ID of the referral to update
@@ -640,12 +757,113 @@ export interface components {
             /** @enum {string} */
             status: "ACTIVE" | "USED" | "EXPIRED";
         };
+        PatientBrief: {
+            /**
+             * Format: uuid
+             * @description Unique identifier for the patient
+             */
+            id: string;
+            /** @description Full name of the patient */
+            fullName: string;
+        };
+        PatientProfile: {
+            /**
+             * Format: uuid
+             * @description Unique identifier for the patient
+             */
+            patientId: string;
+            firstName: string;
+            lastName: string;
+            phoneNumber: string;
+            /**
+             * Format: email
+             * @description Patient's email address
+             */
+            email: string;
+            username: string;
+            address: components["schemas"]["Address"];
+        };
+        LoginRequest: {
+            username: string;
+            password: string;
+        };
+        RegisterRequest: {
+            /** Format: email */
+            email: string;
+            password: string;
+            firstName: string;
+            lastName: string;
+            phoneNumber: string;
+            address: components["schemas"]["Address"];
+        };
+        Address: {
+            /**
+             * Format: uuid
+             * @description Unique identifier for the address
+             */
+            id: string;
+            country: string;
+            city: string;
+            street: string;
+            postalCode: string;
+        };
+        ClinicBrief: {
+            /**
+             * Format: uuid
+             * @description Unique identifier for the location
+             */
+            id: string;
+            /** @description Name of the clinic */
+            name: string;
+            /** @description Full address including country, city, street and postal code */
+            address: string;
+        };
+        ClinicDetails: {
+            /**
+             * Format: uuid
+             * @description Unique identifier for the location
+             */
+            id: string;
+            /** @description Name of the clinic */
+            name: string;
+            /** @description Full address including country, city, street and postal code */
+            address: string;
+            phone?: string;
+            /** Format: email */
+            email?: string;
+            coordinates?: components["schemas"]["Coordinates"];
+        };
+        Document: {
+            /**
+             * Format: uuid
+             * @description Unique identifier for the document
+             */
+            id: string;
+            /** @description Name/title of the document */
+            name: string;
+            /** @description Detailed description or content of the document */
+            description: string;
+            /**
+             * Format: date-time
+             * @description Date and time when the document was created
+             */
+            createdAt: string;
+            /**
+             * Format: uri
+             * @description URL to the document file in cloud storage
+             */
+            fileUrl: string;
+            /** @description Brief information about the doctor who created the document */
+            doctor: components["schemas"]["DoctorBrief"];
+            /** @description Brief information about the patient the document is about */
+            patient: components["schemas"]["PatientBrief"];
+        };
         Notification: {
             /** Format: uuid */
             id: string;
             title: string;
             subtitle: string;
-            /** Format: date-time */
+            /** Format: date */
             receivedDate: string;
             /** @default false */
             read: boolean;
@@ -656,7 +874,7 @@ export interface components {
             id: string;
             title: string;
             subtitle: string;
-            /** Format: date-time */
+            /** Format: date */
             receivedDate: string;
             /** @default false */
             read: boolean;
@@ -668,22 +886,29 @@ export interface components {
             /** @description Markdown content */
             content: string;
         };
-        Address: {
-            country: string;
-            city: string;
-            street: string;
-            postalCode: string;
+        ServiceType: {
+            /** Format: uuid */
+            id: string;
+            name: string;
         };
-        PatientProfile: {
-            firstName: string;
-            lastName: string;
-            phoneNumber: string;
-            username: string;
-            address: components["schemas"]["Address"];
+        ServiceOffer: {
+            /** Format: uuid */
+            id: string;
+            serviceType: string;
+            /** @description Duration in minutes */
+            duration: number;
+            /** @description Price in the local currency */
+            price: number;
+            description: string;
         };
-        LoginRequest: {
-            username: string;
-            password: string;
+        Billing: {
+            amount: number;
+            /** @enum {string} */
+            status: "PENDING" | "PAID" | "CANCELLED";
+        };
+        Coordinates: {
+            latitude: number;
+            longitude: number;
         };
     };
     responses: never;

@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { AppointmentPDF } from './AppointmentPDF';
 import { appointmentService } from '../../api/services/appointmentService';
-import { Appointment } from '../../contract/types';
+import { AppointmentDetails } from '../../contract/types';
+import { H2, H3 } from '../Typography/Headings';
+import { Paragraph } from '../Typography/Paragraph';
 
-export const AppointmentDetails = () => {
+export const AppointmentDetailedDescription = () => {
   const { id } = useParams<{ id: string }>();
-  const [appointment, setAppointment] = useState<Appointment | null>(null);
+  const [appointment, setAppointment] = useState<AppointmentDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -37,26 +39,26 @@ export const AppointmentDetails = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-3xl font-semibold text-green-800 mb-6">Appointment Details</h2>
+      <H2 className="text-green-800 mb-6">Appointment Details</H2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-green-50 p-4 rounded-lg">
-          <h3 className="text-xl font-medium text-green-700 mb-3">Basic Information</h3>
+          <H3 className="text-green-700 mb-3">Basic Information</H3>
           <div className="space-y-2">
-            <p><span className="font-medium">Date:</span> {new Date(appointment.date).toLocaleDateString()}</p>
-            <p><span className="font-medium">Time:</span> {new Date(appointment.date).toLocaleTimeString()}</p>
-            <p><span className="font-medium">Doctor:</span> {appointment.doctorName}</p>
-            <p><span className="font-medium">Specialty:</span> {appointment.doctor.specialty}</p>
+            <Paragraph>Date: {new Date(appointment.datetime).toLocaleDateString()}</Paragraph>
+            <Paragraph>Time: {new Date(appointment.datetime).toLocaleTimeString()}</Paragraph>
+            <Paragraph>Doctor: {appointment.doctor.fullName}</Paragraph>
+            <Paragraph>Specialty: {appointment.doctor.specialties.join(', ')}</Paragraph>
           </div>
         </div>
 
         <div className="bg-green-50 p-4 rounded-lg">
-          <h3 className="text-xl font-medium text-green-700 mb-3">Medical Notes</h3>
-          <p className="text-gray-700">{appointment.medicalNotes || 'No medical notes available'}</p>
+          <H3 className="text-green-700 mb-3">Medical Notes</H3>
+          <Paragraph>{appointment.notes || 'No notes available'}</Paragraph>
         </div>
 
         <div className="bg-green-50 p-4 rounded-lg">
-          <h3 className="text-xl font-medium text-green-700 mb-3">Prescriptions</h3>
+          <H3 className="text-green-700 mb-3">Prescriptions</H3>
           {appointment.prescriptions && appointment.prescriptions.length > 0 ? (
             <ul className="list-disc list-inside space-y-2">
               {appointment.prescriptions.map((prescription, index) => (
@@ -64,15 +66,15 @@ export const AppointmentDetails = () => {
               ))}
             </ul>
           ) : (
-            <p className="text-gray-700">No prescriptions issued</p>
+            <Paragraph>No prescriptions issued</Paragraph>
           )}
         </div>
 
         <div className="bg-green-50 p-4 rounded-lg">
-          <h3 className="text-xl font-medium text-green-700 mb-3">Billing</h3>
+          <H3 className="text-green-700 mb-3">Billing</H3>
           <div className="space-y-2">
-            <p><span className="font-medium">Amount:</span> ${appointment.billing?.amount || 0}</p>
-            <p><span className="font-medium">Status:</span> {appointment.billing?.status || 'Pending'}</p>
+            <Paragraph>Amount: ${appointment.billing?.amount || 0}</Paragraph>
+            <Paragraph>Status: {appointment.billing?.status || 'Pending'}</Paragraph>
           </div>
         </div>
       </div>
@@ -83,9 +85,9 @@ export const AppointmentDetails = () => {
           fileName={`appointment-${appointment.id}.pdf`}
           className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
         >
-          {({ loading }) =>
+          {({ loading }) => (
             loading ? 'Generating PDF...' : 'Download PDF'
-          }
+          ) as React.ReactNode}
         </PDFDownloadLink>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { Referral, ReferralCreate, ReferralUpdate } from '../../contract/types';
+import type { Referral, ReferralCreateRequest, ReferralUpdateRequest } from '../../contract/types';
 
 const endpoints = {
   create: '/referrals',
@@ -10,7 +10,7 @@ const endpoints = {
 };
 
 export const referralService = {
-  createReferral: async (referral: ReferralCreate): Promise<Referral> => {
+  createReferral: async (referral: ReferralCreateRequest): Promise<Referral> => {
     const { data } = await apiClient.post<Referral>(
       endpoints.create,
       referral
@@ -18,7 +18,7 @@ export const referralService = {
     return data;
   },
 
-  updateReferral: async (update: ReferralUpdate): Promise<Referral> => {
+  updateReferral: async (update: ReferralUpdateRequest): Promise<Referral> => {
     const { data } = await apiClient.put<Referral>(
       endpoints.update(update.referralId),
       update

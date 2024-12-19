@@ -2,9 +2,9 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 
 import { generateFakeAppointments } from '../fake/appointments';
-import { Appointment } from '../contract/types';
+import { AppointmentDetails } from '../contract/types';
 
-const appointments: Appointment[] = generateFakeAppointments();
+const appointments: AppointmentDetails[] = generateFakeAppointments();
 
 export const appointmentsRouter = Router();
 
@@ -21,7 +21,7 @@ appointmentsRouter.get('/:id', (req: Request, res: Response) => {
 });
 
 appointmentsRouter.post('/', (req: Request, res: Response) => {
-  const appointment: Appointment = {
+  const appointment: AppointmentDetails = {
     id: Date.now().toString(),
     ...req.body,
     status: 'scheduled'

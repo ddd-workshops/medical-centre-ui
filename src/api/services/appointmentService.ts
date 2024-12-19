@@ -1,8 +1,8 @@
 import { apiClient } from './client';
 import type { 
-  Appointment, 
-  AppointmentCreate, 
-  AppointmentUpdate,
+  AppointmentDetails, 
+  AppointmentCreateRequest, 
+  AppointmentUpdateRequest,
   GetAppointmentsResponse,
   CreateAppointmentResponse,
   GetAppointmentByIdResponse
@@ -17,12 +17,12 @@ const endpoints = {
 };
 
 export const appointmentService = {
-  getAllAppointments: async (): Promise<Appointment[]> => {
+  getAllAppointments: async (): Promise<AppointmentDetails[]> => {
     const { data } = await apiClient.get<GetAppointmentsResponse>(endpoints.getAll);
     return data;
   },
 
-  createAppointment: async (appointment: AppointmentCreate): Promise<Appointment> => {
+  createAppointment: async (appointment: AppointmentCreateRequest): Promise<AppointmentDetails> => {
     const { data } = await apiClient.post<CreateAppointmentResponse>(
       endpoints.create,
       appointment
@@ -30,7 +30,7 @@ export const appointmentService = {
     return data;
   },
 
-  updateAppointment: async (update: AppointmentUpdate): Promise<void> => {
+  updateAppointment: async (update: AppointmentUpdateRequest): Promise<void> => {
     await apiClient.put(
       endpoints.update(update.appointmentId),
       update
@@ -43,7 +43,7 @@ export const appointmentService = {
     );
   },
 
-  getAppointmentById: async (appointmentId: string): Promise<Appointment> => {
+  getAppointmentById: async (appointmentId: string): Promise<AppointmentDetails> => {
     const { data } = await apiClient.get<GetAppointmentByIdResponse>(
       endpoints.getById(appointmentId)
     );

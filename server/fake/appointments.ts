@@ -1,28 +1,33 @@
 import { faker } from '@faker-js/faker';
 
-import { Appointment } from '../contract/types';
+import { AppointmentDetails } from '../contract/types';
 import { randomFromArray } from './utils';
+import { generateClinicBriefs } from './clinics';
+import { generateServiceTypes } from './services';
 
-export const generateFakeAppointments = (): Appointment[] => {
-  const appointments: Appointment[] = [];
+export const generateFakeAppointments = (): AppointmentDetails[] => {
+  const appointments: AppointmentDetails[] = [];
   const count = faker.number.int({ min: 5, max: 10 });
-  const statuses: Appointment['status'][] = ['SCHEDULED', 'COMPLETED', 'CANCELLED'];
+  const statuses: AppointmentDetails['status'][] = ['SCHEDULED', 'COMPLETED', 'CANCELLED'];
   const specialties = ['Dentist', 'Orthodontist', 'Oral Surgeon'];
 
   for (let i = 0; i < count; i++) {
     appointments.push({
       id: faker.string.uuid(),
-      patientId: faker.string.uuid(),
-      patientName: faker.person.fullName(),
+      patient: {
+        id: faker.string.uuid(),
+        fullName: faker.person.fullName(),
+      },
       doctor: {
         id: faker.string.uuid(),
-        name: `Dr. ${faker.person.fullName()}`,
-        specialty: randomFromArray(specialties)
+        fullName: `Dr. ${faker.person.fullName()}`,
+        specialties: Array.from({ length: faker.number.int({ min: 1, max: 3 }) }, () => randomFromArray(specialties))
       },
-      date: faker.date.future().toISOString(),
+      location: randomFromArray(generateClinicBriefs()),
+      serviceType: randomFromArray(generateServiceTypes()),
+      datetime: faker.date.future().toISOString(),
       status: randomFromArray(statuses),
       notes: Math.random() > 0.5 ? faker.lorem.sentence() : undefined,
-      medicalNotes: Math.random() > 0.5 ? faker.lorem.paragraph() : undefined,
       prescriptions: Math.random() > 0.5 ? Array.from(
         { length: faker.number.int({ min: 1, max: 3 }) },
         () => faker.commerce.productName()
@@ -34,6 +39,6 @@ export const generateFakeAppointments = (): Appointment[] => {
     });
   }
 
-  return appointments.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  return appointments.sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime());
 };
 

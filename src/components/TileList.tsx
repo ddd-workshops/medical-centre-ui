@@ -1,6 +1,7 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { H3 } from './Typography/Headings';
+import { Paragraph } from './Typography/Paragraph';
 
 interface TileItem {
   title: string;
@@ -23,13 +24,13 @@ export const TileList: React.FC<TileListProps> = ({ items, className = '' }) => 
         >
           {item.link ? (
             <Link to={item.link} className="block">
-              <h3 className="text-lg font-medium text-gray-900 hover:text-emerald-600">{item.title}</h3>
-              <p className="mt-1 text-gray-600">{item.description}</p>
+              <H3 className="hover:text-emerald-600">{item.title}</H3>
+              <Paragraph>{item.description}</Paragraph>
             </Link>
           ) : (
             <>
-              <h3 className="text-lg font-medium text-gray-900">{item.title}</h3>
-              <p className="mt-1 text-gray-600">{item.description}</p>
+              <H3>{item.title}</H3>
+              <Paragraph>{item.description}</Paragraph>
             </>
           )}
         </div>

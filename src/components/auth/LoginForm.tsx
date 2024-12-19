@@ -5,6 +5,7 @@ import { PasswordInput } from '../forms/PasswordInput';
 import { authService } from '../../api/services/authService';
 import { Button } from '../generic/Button';
 import { TextInput } from '../forms/TextInput';
+import { H2 } from '../Typography/Headings';
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ export const LoginForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-50">
       <div className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-100">
-        <h2 className="text-2xl font-semibold text-green-800 mb-6 text-center">Welcome Back</h2>
+        <H2 className="text-green-800 text-center">Welcome Back</H2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <TextInput
             label="Email"

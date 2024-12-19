@@ -5,11 +5,14 @@ import type { LoginRequest, PatientProfile } from '../contract/types';
 export const authRouter = Router();
 
 const generateMockProfile = (): PatientProfile => ({
+  patientId: faker.string.uuid(),
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
   phoneNumber: faker.phone.number(),
   username: faker.internet.username(),
+  email: faker.internet.email(),
   address: {
+    id: faker.string.uuid(),
     country: faker.location.country(),
     city: faker.location.city(),
     street: faker.location.streetAddress(),
@@ -20,7 +23,6 @@ const generateMockProfile = (): PatientProfile => ({
 authRouter.post('/login', (req, res) => {
   const body = req.body as LoginRequest;
 
-  // In a real application, you would validate credentials here
   if (body.username && body.password) {
     const profile = generateMockProfile();
     res.json(profile);
