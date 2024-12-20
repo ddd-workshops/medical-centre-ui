@@ -44,10 +44,6 @@ paths:
       responses:
         '201':
           description: Registration successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PatientProfile'
         '400':
           description: Invalid registration data
         '409':
@@ -607,7 +603,6 @@ components:
         patientId:
           type: string
           format: uuid
-          description: Unique identifier for the patient
         firstName:
           type: string
         lastName:
@@ -617,19 +612,14 @@ components:
         email:
           type: string
           format: email
-          description: Patient's email address
-        username:
-          type: string
         address:
           $ref: '#/components/schemas/Address'
       required:
         - patientId
+        - email
         - firstName
         - lastName
         - phoneNumber
-        - email
-        - username
-        - address
 
     LoginRequest:
       type: object
@@ -657,8 +647,6 @@ components:
           type: string
         phoneNumber:
           type: string
-        address:
-          $ref: '#/components/schemas/Address'
       required:
         - email
         - username
@@ -666,7 +654,6 @@ components:
         - firstName
         - lastName
         - phoneNumber
-        - address
 
     Address:
       type: object
@@ -678,6 +665,8 @@ components:
         country:
           type: string
         city:
+          type: string
+        district:
           type: string
         street:
           type: string

@@ -1,4 +1,6 @@
+import { Address } from '../contract/types';
 import { DentalService } from './services';
+import { Specialization } from './specialties';
 
 export enum DaysOfWeek {
   MONDAY = 'MONDAY',
@@ -6,17 +8,6 @@ export enum DaysOfWeek {
   WEDNESDAY = 'WEDNESDAY',
   THURSDAY = 'THURSDAY',
   FRIDAY = 'FRIDAY'
-}
-
-export enum Specialization {
-  GENERAL_DENTIST = 'GENERAL_DENTIST',
-  ORAL_SURGEON = 'ORAL_SURGEON',
-  PERIODONTIST = 'PERIODONTIST',
-  PROSTHODONTIST = 'PROSTHODONTIST',
-  ENDODONTIST = 'ENDODONTIST',
-  ORTHODONTIST = 'ORTHODONTIST',
-  DENTAL_HYGIENIST = 'DENTAL_HYGIENIST',
-  DENTAL_ASSISTANT = 'DENTAL_ASSISTANT'
 }
 
 export enum EquipmentType {
@@ -34,14 +25,6 @@ export enum EquipmentCategory {
   ADVANCED = 'ADVANCED'
 }
 
-export interface Address {
-  street: string;
-  city: string;
-  area?: string;
-  postcode: string;
-  country: string;
-}
-
 export interface Availability {
   day: DaysOfWeek;
   startTime: string;
@@ -52,8 +35,8 @@ export interface Doctor {
   id: string;
   firstName: string;
   lastName: string;
-  specialization: Specialization;
-  secondarySpecializations: Specialization[];
+  specialization: string
+  secondarySpecializations: string[];
   email: string;
   phone: string;
   address: Address;

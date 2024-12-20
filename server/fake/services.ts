@@ -49,7 +49,7 @@ export enum DentalService {
   WISDOM_TEETH_REMOVAL = 'WISDOM_TEETH_REMOVAL'
 }
 
-export const generateServiceOffers = (): ServiceOffer[] => [
+export const generateFakeServiceOffers = (): ServiceOffer[] => [
   // Basic Services
   {
     id: 'service-1',
@@ -164,8 +164,8 @@ export const generateServiceOffers = (): ServiceOffer[] => [
   }
 ];
 
-export const generateServiceTypes = (): ServiceType[] => {
-  const serviceOffers = generateServiceOffers();
+export const generateFakeServiceTypes = (): ServiceType[] => {
+  const serviceOffers = generateFakeServiceOffers();
   const serviceTypes = serviceOffers.map(({ id, serviceType }) => ({ id, name: serviceType }));
   return serviceTypes
 }

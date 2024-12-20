@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthStore } from './AuthStore';
+
 import { PasswordInput } from '../forms/PasswordInput';
 import { PhoneInput } from '../forms/PhoneInput';
 import { Button } from '../generic/Button';
 import { TextInput } from '../forms/TextInput';
 import { H2 } from '../Typography/Headings';
+import { authService } from '../../api/services/authService';
 
 export const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -23,10 +24,9 @@ export const RegisterForm = () => {
   });
   const [isPhoneValid, setIsPhoneValid] = useState(false);
 
-  const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!isPhoneValid) {
@@ -39,12 +39,19 @@ export const RegisterForm = () => {
       return;
     }
 
-    login({
-      email: formData.email,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-    });
-    navigate('/');
+    try {
+      await authService.register({
+        email: formData.email,
+        password: formData.password,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        phoneNumber: formData.phone,
+      });
+      navigate('/');
+    } catch (error) {
+      // TODO:
+      console.error('Registration failed:', error);
+    }
   };
 
   return (

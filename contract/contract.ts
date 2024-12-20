@@ -79,9 +79,7 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content: {
-                        "application/json": components["schemas"]["PatientProfile"];
-                    };
+                    content?: never;
                 };
                 /** @description Invalid registration data */
                 400: {
@@ -767,21 +765,14 @@ export interface components {
             fullName: string;
         };
         PatientProfile: {
-            /**
-             * Format: uuid
-             * @description Unique identifier for the patient
-             */
+            /** Format: uuid */
             patientId: string;
             firstName: string;
             lastName: string;
             phoneNumber: string;
-            /**
-             * Format: email
-             * @description Patient's email address
-             */
+            /** Format: email */
             email: string;
-            username: string;
-            address: components["schemas"]["Address"];
+            address?: components["schemas"]["Address"];
         };
         LoginRequest: {
             username: string;
@@ -794,7 +785,6 @@ export interface components {
             firstName: string;
             lastName: string;
             phoneNumber: string;
-            address: components["schemas"]["Address"];
         };
         Address: {
             /**
@@ -804,6 +794,7 @@ export interface components {
             id: string;
             country: string;
             city: string;
+            district?: string;
             street: string;
             postalCode: string;
         };

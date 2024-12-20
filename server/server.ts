@@ -1,10 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import { appointmentsRouter } from './routes/appointments';
-import { notificationsRouter } from './routes/notifications';
-import { cmsRouter } from './routes/cms';
-import { authRouter } from './routes/auth';
+import { appointmentsRouter } from './controllers/appointmentsController';
+import { notificationsRouter } from './controllers/notificationsController';
+import { cmsRouter } from './controllers/cmsController';
+import { authRouter } from './controllers/authController';
 
 const app = express();
 const port = process.env.PORT || 3001;

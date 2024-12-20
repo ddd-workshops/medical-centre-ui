@@ -2,12 +2,12 @@ import { writeFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import { generateDentalCentre } from './centres';
 import { generateDoctor } from './staff';
-import { availableServices } from './services';
+import { generateFakeServiceOffers } from './services';
 import { allEquipment, basicEquipment, advancedEquipment } from './equipment';
 import { generateFakeAppointments } from './appointments';
 import { generateFakeNotifications } from './notifications';
-import type { Doctor, Service, Equipment, DentalCentre } from './types';
-import { Appointment, Notification } from '../contract/types';
+import type { Doctor, Equipment, DentalCentre } from './types';
+import { AppointmentDetails, Notification, ServiceOffer } from '../contract/types';
 
 interface GeneratedData {
   metadata: {
@@ -15,7 +15,7 @@ interface GeneratedData {
     version: string;
   };
   references: {
-    services: Service[];
+    services: ServiceOffer[];
     equipment: {
       all: Equipment[];
       basic: Equipment[];
@@ -25,7 +25,7 @@ interface GeneratedData {
   entities: {
     centres: DentalCentre[];
     doctors: Doctor[];
-    appointments: Appointment[];
+    appointments: AppointmentDetails[];
     notifications: Notification[];
   };
   statistics: {
@@ -71,7 +71,7 @@ const generateData = (): GeneratedData => {
       advanced: advancedEquipment.length
     },
     services: {
-      total: availableServices.length
+      total: generateFakeServiceOffers().length
     },
     appointments: {
       total: appointments.length
@@ -87,7 +87,7 @@ const generateData = (): GeneratedData => {
       version: '1.0.0'
     },
     references: {
-      services: availableServices,
+      services: generateFakeServiceOffers(),
       equipment: {
         all: allEquipment,
         basic: basicEquipment,

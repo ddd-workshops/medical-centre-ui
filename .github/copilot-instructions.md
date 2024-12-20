@@ -29,10 +29,9 @@ Creating a new contract entry or modifying existing one requires the following:
 
 The `./contract/types.ts` file should expose all schemas (and some chosen paths) that are available on the `contract.ts` file. All schema types exported should have exactly the same name as the schema. And should be in the same order as in the swagger contract file. Also, no schemas can be missing in `./contract/types.ts` file.
 
-
 # server code
 
-For each entity in the contract (added, modified etc.) the `./server/routes` need to have its file there (if such route file exists for a given entity, use it). Use existing server routes for reference.
+For each entity in the contract (added, modified etc.) the `./server/controllers` need to have its file there (if such controller file exists for a given entity, use it). Use existing server controllers for reference.
 
 Within `server` directory, when importing types from contract, don't use the `contract/contract.ts` file, use the `contract/types.ts` file instead.
 

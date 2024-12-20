@@ -5,6 +5,7 @@ import path from 'path';
 
 export const cmsRouter = Router();
 
+// TODO: move to swagger contract
 interface CMSPageContent {
   slug: string;
   lastUpdated: string;
@@ -14,30 +15,22 @@ interface CMSPageContent {
 const CMS_DIR = path.join(__dirname, 'cms');
 
 async function getPageContent(slug: string): Promise<CMSPageContent | null> {
-  try {
-    const filePath = path.join(CMS_DIR, `${slug}.md`);
-    const stats = await fs.stat(filePath);
-    const content = await fs.readFile(filePath, 'utf-8');
+  const filePath = path.join(CMS_DIR, `${slug}.md`);
+  const stats = await fs.stat(filePath);
+  const content = await fs.readFile(filePath, 'utf-8');
 
-    return {
-      slug,
-      lastUpdated: stats.mtime.toISOString(),
-      content
-    };
-  } catch (error) {
-    return null;
-  }
+  return {
+    slug,
+    lastUpdated: stats.mtime.toISOString(),
+    content
+  };
 }
 
 async function getAllSlugs(): Promise<string[]> {
-  try {
-    const files = await fs.readdir(CMS_DIR);
-    return files
-      .filter(file => file.endsWith('.md'))
-      .map(file => file.replace('.md', ''));
-  } catch (error) {
-    return [];
-  }
+  const files = await fs.readdir(CMS_DIR);
+  return files
+    .filter(file => file.endsWith('.md'))
+    .map(file => file.replace('.md', ''));
 }
 
 cmsRouter.get('/pages/:slug', async (req: Request, res: Response) => {
@@ -51,7 +44,6 @@ cmsRouter.get('/pages/:slug', async (req: Request, res: Response) => {
   return res.json(page);
 });
 
-// New endpoint to list all available pages
 cmsRouter.get('/pages', async (req: Request, res: Response) => {
   const slugs = await getAllSlugs();
   const pages = await Promise.all(

@@ -1,6 +1,6 @@
 import type { ClinicDetails, ClinicBrief } from '../contract/types';
 
-export const generateClinicDetails = (): ClinicDetails[] => [
+export const generateFakeClinicDetails = (): ClinicDetails[] => [
   {
     id: '1',
     name: 'Bright Smiles Central London',
@@ -123,7 +123,7 @@ export const generateClinicDetails = (): ClinicDetails[] => [
   }
 ];
 
-export const generateClinicBriefs = (): ClinicBrief[] => {
-    const details = generateClinicDetails();
+export const generateFakeClinicBriefs = (): ClinicBrief[] => {
+    const details = generateFakeClinicDetails();
     return details.map(({ id, name, address }) => ({ id, name, address }));
 }
