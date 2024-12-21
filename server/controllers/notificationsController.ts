@@ -1,9 +1,8 @@
 import express from 'express';
-import { generateFakeNotifications } from '../fake/notifications';
+import { notifications } from '../fake/db';
+
 
 export const notificationsRouter = express.Router();
-
-const notifications = generateFakeNotifications();
 
 // Get all notifications (without content)
 notificationsRouter.get('/', (req, res) => {

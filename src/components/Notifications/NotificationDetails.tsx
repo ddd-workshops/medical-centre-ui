@@ -2,13 +2,17 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
+
 import type { Notification } from '../../contract/types';
 import { getNotification, markNotificationAsRead } from '../../api/services/notificationsService';
 import { H1, H2 } from '../Typography/Headings';
+import { useQueryClient } from '@tanstack/react-query';
+import { Spinner } from '../generic/Spinner';
 
 export const NotificationDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [notification, setNotification] = useState<Notification | null>(null);
 
   useEffect(() => {
@@ -18,13 +22,14 @@ export const NotificationDetails = () => {
       setNotification(data);
       if (!data.read) {
         await markNotificationAsRead(id);
+        queryClient.refetchQueries({ queryKey: ['appStatus'] });
       }
     };
 
     fetchNotification();
-  }, [id]);
+  }, [id, queryClient]);
 
-  if (!notification) return null;
+  if (!notification) return <Spinner />;
 
   return (
     <div className="max-w-2xl mx-auto">

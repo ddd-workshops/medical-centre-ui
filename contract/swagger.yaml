@@ -294,6 +294,20 @@ paths:
                 items:
                   $ref: '#/components/schemas/PrescribedTreatment'
 
+  /app-status:
+    get:
+      tags:
+        - Application
+      summary: Get application status information
+      description: Retrieve the current status information for the application
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppStatus'
+
 components:
   schemas:
 
@@ -878,3 +892,13 @@ components:
       required:
         - latitude
         - longitude
+
+    AppStatus:
+      type: object
+      properties:
+        unreadNotificationsCount:
+          type: integer
+          description: Number of unread notifications
+          minimum: 0
+      required:
+        - unreadNotificationsCount

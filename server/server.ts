@@ -1,25 +1,28 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import chalk from 'chalk';
+
 import { appointmentsRouter } from './controllers/appointmentsController';
 import { notificationsRouter } from './controllers/notificationsController';
 import { cmsRouter } from './controllers/cmsController';
 import { authRouter } from './controllers/authController';
+import { applicationRouter } from './controllers/applicationController';
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Configure morgan with colors
+// Configure morgan with chalk colors
 morgan.token('statusColor', (req, res: express.Response) => {
   const status = res.statusCode;
-  if (status >= 500) return '\x1b[31m'; // red
-  if (status >= 400) return '\x1b[33m'; // yellow
-  if (status >= 300) return '\x1b[36m'; // cyan
-  if (status >= 200) return '\x1b[32m'; // green
-  return '\x1b[0m'; // reset
+  if (status >= 500) return chalk.red(status);
+  if (status >= 400) return chalk.yellow(status);
+  if (status >= 300) return chalk.cyan(status);
+  if (status >= 200) return chalk.green(status);
+  return chalk.grey(status);
 });
 
-app.use(morgan(':statusColor:status \x1b[0m:method :url :response-time ms'));
+app.use(morgan(':statusColor :method :url :response-time ms'));
 
 // Middleware
 app.use(cors());
@@ -30,7 +33,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/appointments', appointmentsRouter);
 app.use('/api/notifications', notificationsRouter);
 app.use('/api/cms', cmsRouter);
+app.use('/api/app', applicationRouter);
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(chalk.green(`Server is running on port ${port}`));
 });
