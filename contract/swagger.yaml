@@ -58,12 +58,36 @@ paths:
         '204':
           description: Logout successful
 
+
   /appointments:
     get:
       tags:
         - Appointments
-      summary: Get all appointments
-      description: Retrieve a list of all appointments
+      summary: Get appointments with search and filtering
+      parameters:
+        - name: query
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Full text search across appointment fields
+        - name: status
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/AppointmentStatus'
+        - name: dateFrom
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: dateTo
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
       responses:
         '200':
           description: Successful response
@@ -369,6 +393,32 @@ paths:
 
 components:
   schemas:
+    BillingStatus:
+      type: string
+      enum: [PENDING, PAID, CANCELLED]
+
+    AppointmentStatus:
+      type: string
+      enum: [SCHEDULED, COMPLETED, CANCELLED]
+
+    PrescribedTreatmentStatus:
+      type: string
+      enum: [SCHEDULED, IN_PROGRESS, COMPLETED, CANCELLED]
+
+    ReferralStatus:
+      type: string
+      enum: [ACTIVE, USED, EXPIRED]
+
+    Billing:
+      type: object
+      properties:
+        amount:
+          type: number
+        status:
+          $ref: '#/components/schemas/BillingStatus'
+      required:
+        - amount
+        - status
 
     AppointmentDetails:
       type: object
@@ -388,8 +438,7 @@ components:
           type: string
           format: date-time
         status:
-          type: string
-          enum: [SCHEDULED, COMPLETED, CANCELLED]
+          $ref: '#/components/schemas/AppointmentStatus'
         notes:
           type: string
         prescriptions:
@@ -415,7 +464,7 @@ components:
           format: uuid
         patientName:
           type: string
-        doctor:
+        doctorName:
           type: string
         serviceType:
           type: string
@@ -425,12 +474,11 @@ components:
           type: string
           format: date-time
         status:
-          type: string
-          enum: [SCHEDULED, COMPLETED, CANCELLED]
+          $ref: '#/components/schemas/AppointmentStatus'
       required:
         - id
         - patient
-        - doctor
+        - doctorName
         - serviceType
         - location
         - datetime
@@ -473,8 +521,7 @@ components:
         description:
           type: string
         status:
-          type: string
-          enum: [SCHEDULED, COMPLETED, CANCELLED]
+          $ref: '#/components/schemas/AppointmentStatus'
 
     MedicalTreatment:
       type: object
@@ -548,8 +595,7 @@ components:
           items:
             $ref: '#/components/schemas/AppointmentBrief'
         status:
-          type: string
-          enum: [SCHEDULED, IN_PROGRESS, COMPLETED, CANCELLED]
+          $ref: '#/components/schemas/PrescribedTreatmentStatus'
       required:
         - id
         - prescribedDate
@@ -658,18 +704,9 @@ components:
           type: string
         issueDate:
           type: string
-          format: date
-        expiryDate:
-          type: string
-          format: date
         status:
-          type: string
-          enum: [ACTIVE, USED, EXPIRED]
+          $ref: '#/components/schemas/ReferralStatus'
       required:
-        - id
-        - patientId
-        - issuingDoctorId
-        - targetSpecialty
         - diagnosis
         - recommendations
         - issueDate
@@ -709,8 +746,7 @@ components:
           format: uuid
           description: The ID of the referral to update
         status:
-          type: string
-          enum: [ACTIVE, USED, EXPIRED]
+          $ref: '#/components/schemas/ReferralStatus'
 
     PatientBrief:
       type: object
@@ -1017,18 +1053,6 @@ components:
         - duration
         - price
         - description
-
-    Billing:
-      type: object
-      properties:
-        amount:
-          type: number
-        status:
-          type: string
-          enum: [PENDING, PAID, CANCELLED]
-      required:
-        - amount
-        - status
 
     Coordinates:
       type: object

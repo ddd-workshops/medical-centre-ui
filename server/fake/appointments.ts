@@ -40,7 +40,7 @@ export const generateFakeAppointmentsBrief = (appointments: AppointmentDetails[]
   return appointments.map(appointment => ({
     id: appointment.id,
     patientName: appointment.patient.fullName,
-    doctor: appointment.doctor.fullName,
+    doctorName: appointment.doctor.fullName,
     serviceType: appointment.serviceType.name,
     location: appointment.location.name,
     datetime: appointment.datetime,

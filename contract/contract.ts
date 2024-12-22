@@ -144,13 +144,16 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * Get all appointments
-         * @description Retrieve a list of all appointments
-         */
+        /** Get appointments with search and filtering */
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    /** @description Full text search across appointment fields */
+                    query?: string;
+                    status?: components["schemas"]["AppointmentStatus"];
+                    dateFrom?: string;
+                    dateTo?: string;
+                };
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -798,6 +801,18 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** @enum {string} */
+        BillingStatus: "PENDING" | "PAID" | "CANCELLED";
+        /** @enum {string} */
+        AppointmentStatus: "SCHEDULED" | "COMPLETED" | "CANCELLED";
+        /** @enum {string} */
+        PrescribedTreatmentStatus: "SCHEDULED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
+        /** @enum {string} */
+        ReferralStatus: "ACTIVE" | "USED" | "EXPIRED";
+        Billing: {
+            amount: number;
+            status: components["schemas"]["BillingStatus"];
+        };
         AppointmentDetails: {
             /** Format: uuid */
             id: string;
@@ -807,8 +822,7 @@ export interface components {
             location: components["schemas"]["ClinicBrief"];
             /** Format: date-time */
             datetime: string;
-            /** @enum {string} */
-            status: "SCHEDULED" | "COMPLETED" | "CANCELLED";
+            status: components["schemas"]["AppointmentStatus"];
             notes?: string;
             prescriptions?: string[];
             billing?: components["schemas"]["Billing"];
@@ -817,13 +831,12 @@ export interface components {
             /** Format: uuid */
             id: string;
             patientName?: string;
-            doctor: string;
+            doctorName: string;
             serviceType: string;
             location: string;
             /** Format: date-time */
             datetime: string;
-            /** @enum {string} */
-            status: "SCHEDULED" | "COMPLETED" | "CANCELLED";
+            status: components["schemas"]["AppointmentStatus"];
         };
         AppointmentCreateRequest: {
             /** Format: uuid */
@@ -842,8 +855,7 @@ export interface components {
             datetime?: string;
             time?: string;
             description?: string;
-            /** @enum {string} */
-            status?: "SCHEDULED" | "COMPLETED" | "CANCELLED";
+            status?: components["schemas"]["AppointmentStatus"];
         };
         MedicalTreatment: {
             /** Format: uuid */
@@ -882,8 +894,7 @@ export interface components {
             doctor: components["schemas"]["DoctorBrief"];
             treatment: components["schemas"]["MedicalTreatment"];
             appointments?: components["schemas"]["AppointmentBrief"][];
-            /** @enum {string} */
-            status: "SCHEDULED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
+            status: components["schemas"]["PrescribedTreatmentStatus"];
         };
         DoctorBrief: {
             /**
@@ -929,20 +940,16 @@ export interface components {
         };
         Referral: {
             /** Format: uuid */
-            id: string;
+            id?: string;
             /** Format: uuid */
-            patientId: string;
+            patientId?: string;
             /** Format: uuid */
-            issuingDoctorId: string;
-            targetSpecialty: string;
+            issuingDoctorId?: string;
+            targetSpecialty?: string;
             diagnosis: string;
             recommendations: string;
-            /** Format: date */
             issueDate: string;
-            /** Format: date */
-            expiryDate: string;
-            /** @enum {string} */
-            status: "ACTIVE" | "USED" | "EXPIRED";
+            status: components["schemas"]["ReferralStatus"];
         };
         ReferralCreateRequest: {
             /** Format: uuid */
@@ -959,8 +966,7 @@ export interface components {
              * @description The ID of the referral to update
              */
             referralId: string;
-            /** @enum {string} */
-            status: "ACTIVE" | "USED" | "EXPIRED";
+            status: components["schemas"]["ReferralStatus"];
         };
         PatientBrief: {
             /**
@@ -1110,11 +1116,6 @@ export interface components {
             /** @description Price in the local currency */
             price: number;
             description: string;
-        };
-        Billing: {
-            amount: number;
-            /** @enum {string} */
-            status: "PENDING" | "PAID" | "CANCELLED";
         };
         Coordinates: {
             latitude: number;

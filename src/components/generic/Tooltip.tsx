@@ -42,19 +42,21 @@ export const Tooltip = ({
     : [direction, 'center'];
 
   return (
-    <RadixTooltip.Root delayDuration={0}>
-      <RadixTooltip.Trigger asChild>{children}</RadixTooltip.Trigger>
-      <RadixTooltip.Portal>
-        <RadixTooltip.Content
-          side={side as 'top' | 'right' | 'bottom' | 'left'}
-          align={align as 'start' | 'center' | 'end'}
-          className={`z-50 rounded-md bg-gray-800 px-3 py-2 text-sm text-white shadow-md animate-in fade-in-0 zoom-in-95 ${sizeClasses[size]}`}
-          sideOffset={5}
-        >
-          {content}
-          <RadixTooltip.Arrow className="fill-gray-800" />
-        </RadixTooltip.Content>
-      </RadixTooltip.Portal>
-    </RadixTooltip.Root>
+    <RadixTooltip.Provider>
+      <RadixTooltip.Root>
+        <RadixTooltip.Trigger asChild>{children}</RadixTooltip.Trigger>
+        <RadixTooltip.Portal>
+          <RadixTooltip.Content
+            side={side as 'top' | 'right' | 'bottom' | 'left'}
+            align={align as 'start' | 'center' | 'end'}
+            className={`select-none rounded bg-white px-[15px] py-2.5 text-[15px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity] data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade ${sizeClasses[size]}`}
+            sideOffset={5}
+          >
+            {content}
+            <RadixTooltip.Arrow className="fill-white" />
+          </RadixTooltip.Content>
+        </RadixTooltip.Portal>
+      </RadixTooltip.Root>
+    </RadixTooltip.Provider>
   );
 };
