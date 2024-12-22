@@ -1,11 +1,12 @@
 import { apiClient } from './client';
 import type { 
   AppointmentDetails, 
+  AppointmentBrief,
   AppointmentCreateRequest, 
   AppointmentUpdateRequest,
   GetAppointmentsResponse,
   CreateAppointmentResponse,
-  GetAppointmentByIdResponse
+  GetAppointmentByIdResponse,
 } from '../../contract/types';
 
 const endpoints = {
@@ -17,7 +18,7 @@ const endpoints = {
 };
 
 export const appointmentService = {
-  getAllAppointments: async (): Promise<AppointmentDetails[]> => {
+  getAllAppointments: async (): Promise<AppointmentBrief[]> => {
     const { data } = await apiClient.get<GetAppointmentsResponse>(endpoints.getAll);
     return data;
   },
