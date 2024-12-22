@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TextInput } from './TextInput';
-import { useState } from 'react';
+import { ComponentProps, useState } from 'react';
 
 const meta: Meta<typeof TextInput> = {
   title: 'BSA/Forms/TextInput',
@@ -11,7 +11,8 @@ const meta: Meta<typeof TextInput> = {
 export default meta;
 type Story = StoryObj<typeof TextInput>;
 
-const TextInputWrapper = (props: any) => {
+type TextInputWrapperProps = Omit<ComponentProps<typeof TextInput>, 'value' | 'onChange'>
+const TextInputWrapper = (props: TextInputWrapperProps) => {
   const [value, setValue] = useState('');
   return <TextInput {...props} value={value} onChange={setValue} />;
 };

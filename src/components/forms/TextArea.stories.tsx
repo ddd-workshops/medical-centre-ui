@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TextArea } from './TextArea';
-import { useState } from 'react';
+import { ComponentProps, useState } from 'react';
 
 const meta: Meta<typeof TextArea> = {
   title: 'BSA/Forms/TextArea',
@@ -11,7 +11,8 @@ const meta: Meta<typeof TextArea> = {
 export default meta;
 type Story = StoryObj<typeof TextArea>;
 
-const TextAreaWrapper = (props: any) => {
+type TextAreaWrapperProps = Omit<ComponentProps<typeof TextArea>, 'value' | 'onChange'>
+const TextAreaWrapper = (props: TextAreaWrapperProps) => {
   const [value, setValue] = useState('');
   return <TextArea {...props} value={value} onChange={setValue} />;
 };

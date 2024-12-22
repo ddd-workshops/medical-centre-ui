@@ -51,6 +51,10 @@ For each entity in the contract (added, modified etc.), there should be a servic
 
 When reusing existing react components, import them from `./src/components/generic` or `./src/components/forms`.
 
+## component check
+
+1. Make sure each component has props type defined, if any props are used. Check whether the component compiles.
+
 ## form widgets
 
 Each form widget should maintain its own local private state. When a value changes:

@@ -1,5 +1,6 @@
 import { cn } from '../../utils/cn';
 import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
 
 export type DropdownSize = 'SMALL' | 'MEDIUM' | 'LARGE';
 export type DropdownVariant = 'PRIMARY' | 'SECONDARY' | 'OUTLINE';
@@ -39,15 +40,22 @@ export function Dropdown({
   variant = 'OUTLINE',
   className
 }: DropdownProps) {
+  const [localState, setLocalState] = useState(value);
+
+  const handleChange = (key: string) => {
+    setLocalState(key);
+    onChanged(key);
+  };
+
   return (
     <div className="relative">
       <div className="relative">
         <select
-          value={value}
-          onChange={(e) => onChanged(e.target.value)}
+          value={localState}
+          onChange={(e) => handleChange(e.target.value)}
           disabled={disabled}
           className={cn(
-            'w-full rounded-lg border px-3 appearance-none cursor-pointer',
+            'w-full rounded-lg border px-3 pr-10 appearance-none cursor-pointer',
             'focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent',
             'disabled:opacity-50 disabled:cursor-not-allowed',
             sizeClasses[size],
