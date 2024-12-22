@@ -4,7 +4,7 @@ import { Tag, type TagVariant, type TagSize } from './Tag';
 import { cn } from '../../utils/cn';
 
 interface TagListProps {
-  items: string[];
+  tags: string[];
   variant?: TagVariant;
   size?: TagSize;
   icon?: LucideIcon;
@@ -14,7 +14,7 @@ interface TagListProps {
 }
 
 export function TagList({ 
-  items, 
+  tags, 
   variant = 'PRIMARY', 
   size = 'MEDIUM',
   icon, 
@@ -22,20 +22,20 @@ export function TagList({
   onTagClick,
   className 
 }: TagListProps) {
-  if (!items?.length) return null;
+  if (!tags?.length) return null;
 
   return (
     <div className={cn("flex flex-wrap gap-2", className)}>
-      {items.map((item) => (
+      {tags.map((tag) => (
         <Tag 
-          key={item} 
+          key={tag} 
           variant={variant}
           size={size}
           icon={icon}
-          onIconClick={() => onIconClick?.(item)}
-          onClick={onTagClick ? () => onTagClick(item) : undefined}
+          onIconClick={() => onIconClick?.(tag)}
+          onClick={onTagClick ? () => onTagClick(tag) : undefined}
         >
-          {item}
+          {tag}
         </Tag>
       ))}
     </div>

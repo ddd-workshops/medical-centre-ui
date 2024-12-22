@@ -8,7 +8,7 @@ export const H1 = ({ children, className = '' }: HeadingProps) => (
 );
 
 export const H2 = ({ children, className = '' }: HeadingProps) => (
-  <h2 className={`text-1xl font-bold text-gray-800 mb-3 ${className}`}>{children}</h2>
+  <h2 className={`text-xl font-bold text-gray-800 mb-3 ${className}`}>{children}</h2>
 );
 
 export const H3 = ({ children, className = '' }: HeadingProps) => (

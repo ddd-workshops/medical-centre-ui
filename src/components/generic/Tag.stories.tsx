@@ -11,6 +11,10 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  args: {
+    children: 'Tag Text',
+    variant: 'PRIMARY'
+  },
 } satisfies Meta<typeof Tag>;
 
 export default meta;
@@ -56,7 +60,7 @@ export const WithIcon: Story = {
 export const TagListExample: Story = {
   render: () => (
     <TagList
-      items={[
+      tags={[
         'General Dentistry',
         'Orthodontics',
         'Implants',

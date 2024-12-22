@@ -11,6 +11,8 @@ const meta = {
   },
   tags: ['autodocs'],
   args: {
+    value: '',
+    label: 'Phone Number',
     onChange: action('onChange'),
   },
 } satisfies Meta<typeof PhoneInput>;
@@ -18,24 +20,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    value: '',
-    label: 'Phone Number',
-  },
-};
+export const Default: Story = {};
 
 export const WithValue: Story = {
   args: {
     value: '123456789',
-    label: 'Phone Number',
   },
 };
 
 export const Required: Story = {
   args: {
-    value: '',
-    label: 'Phone Number',
     required: true,
   },
 };

@@ -37,14 +37,16 @@ type Story = StoryObj<typeof Switch>;
 export const Default: Story = {
   args: {
     checked: false,
-    onChange: action('switch toggled')
+    onChange: action('switch toggled'),
+    label: 'Notify me about appointments'
   }
 };
 
 export const Checked: Story = {
   args: {
     checked: true,
-    onChange: action('switch toggled')
+    onChange: action('switch toggled'),
+    label: 'Send email notifications'
   }
 };
 
@@ -52,6 +54,14 @@ export const Disabled: Story = {
   args: {
     checked: false,
     disabled: true,
+    onChange: action('switch toggled'),
+    label: 'Advanced features'
+  }
+};
+
+export const WithoutLabel: Story = {
+  args: {
+    checked: false,
     onChange: action('switch toggled')
   }
 };

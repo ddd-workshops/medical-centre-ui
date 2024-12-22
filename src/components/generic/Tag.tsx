@@ -45,7 +45,7 @@ export function Tag({
         'focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1',
         variantStyles[variant],
         sizeStyles[size],
-        onClick && 'cursor-pointer',
+        onClick && 'cursor-pointer underline hover:text-green-700',
         className
       )}
       onClick={onClick}

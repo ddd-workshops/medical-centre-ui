@@ -1,14 +1,23 @@
 import type { FC } from 'react';
 
-export type SPINNER_SIZE = 'SMALL' | 'LARGE';
+export type SPINNER_SIZE = 'SMALL' | 'MEDIUM' | 'LARGE';
 
 interface SpinnerProps {
   size?: SPINNER_SIZE;
 }
 
-export const Spinner: FC<SpinnerProps> = ({ size = 'LARGE' }) => {
-  const dimensions = size === 'SMALL' ? 'w-8 h-8' : 'w-16 h-16';
-  const borderWidth = size === 'SMALL' ? 'border-2' : 'border-4';
+export const Spinner: FC<SpinnerProps> = ({ size = 'MEDIUM' }) => {
+  const dimensions = {
+    SMALL: 'w-8 h-8',
+    MEDIUM: 'w-12 h-12',
+    LARGE: 'w-16 h-16'
+  }[size];
+
+  const borderWidth = {
+    SMALL: 'border',
+    MEDIUM: 'border-2',
+    LARGE: 'border-4'
+  }[size];
 
   return (
     <div className="flex justify-center items-center">

@@ -69,13 +69,14 @@ export const PhoneInput = ({
   };
 
   return (
-    <div className={`space-y-1 ${className}`}>
-      {label && (
-        <label className="block text-sm font-medium text-green-700">{label}</label>
-      )}
+    <label className={`block space-y-1 ${className}`}>
+      <span className="block text-sm font-medium text-green-700">
+        {label}
+      </span>
       <div className="relative flex">
         <button
           type="button"
+          aria-label="Select country code"
           className="flex items-center space-x-1 px-3 py-2 border border-r-0 border-green-200 rounded-l-lg bg-green-50 hover:bg-green-100 transition-colors"
           onClick={() => setShowDropdown(!showDropdown)}
         >
@@ -92,6 +93,7 @@ export const PhoneInput = ({
           className="flex-1 px-4 py-2 border border-green-200 rounded-r-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition font-mono"
           placeholder={formatForDisplay('')}
           required={required}
+          aria-required={required}
         />
         
         {showDropdown && (
@@ -111,6 +113,6 @@ export const PhoneInput = ({
           </div>
         )}
       </div>
-    </div>
+    </label>
   );
 };

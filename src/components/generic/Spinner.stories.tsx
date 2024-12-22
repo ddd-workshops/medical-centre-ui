@@ -7,18 +7,22 @@ const meta: Meta<typeof Spinner> = {
   parameters: {
     layout: 'centered',
   },
+  tags: ['autodocs'],
+  args: {
+    size: 'MEDIUM',
+  }
 };
 
 export default meta;
 type Story = StoryObj<typeof Spinner>;
-
-export const Default: Story = {};
 
 export const Small: Story = {
   args: {
     size: 'SMALL',
   },
 };
+
+export const Medium: Story = {};
 
 export const Large: Story = {
   args: {

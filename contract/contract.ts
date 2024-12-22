@@ -813,6 +813,36 @@ export interface components {
             specialties: string[];
             locations?: components["schemas"]["ClinicBrief"][];
         };
+        DoctorProfile: {
+            /**
+             * Format: uuid
+             * @description Unique identifier for the doctor
+             */
+            id: string;
+            firstName: string;
+            lastName: string;
+            /** @description Professional title of the doctor ("Doctor", "Professor", "Assistant Professor", "Associate Professor", "Senior Consultant") */
+            title: string;
+            /** @description List of doctor's areas of specialization (e.g. ["Orthodontics", "Dental Surgery"]) */
+            specialties: string[];
+            locations: components["schemas"]["ClinicBrief"][];
+            /** @description List of languages the doctor can speak (e.g. ["English", "Spanish"]) */
+            languagesSpoken: string[];
+            /** @description A brief biography of the doctor */
+            bio?: string;
+            /**
+             * Format: uri
+             * @description URL to the doctor's profile picture
+             */
+            profilePictureUrl?: string;
+            /** @description Custom descriptions such as certifications, education, etc. whatever doc wants to put there */
+            additionalInformation?: {
+                /** @description Heading of the additional information */
+                heading?: string;
+                /** @description Text of the additional information */
+                text?: string;
+            }[];
+        };
         Referral: {
             /** Format: uuid */
             id: string;
@@ -910,12 +940,24 @@ export interface components {
             id: string;
             /** @description Name of the clinic */
             name: string;
-            /** @description Full address including country, city, street and postal code */
-            address: string;
-            phone?: string;
+            address: components["schemas"]["Address"];
+            phone: string;
             /** Format: email */
-            email?: string;
+            email: string;
+            /** @description URL to the clinic's photo */
+            clinicPhotoURL: string;
+            /** @description List of specialties available at the clinic */
+            availableSpecialties?: string[];
+            description: string;
             coordinates?: components["schemas"]["Coordinates"];
+            openingHours: components["schemas"]["OpeningHours"];
+            /** @description Customized list of facilities of the clinic */
+            facilities: {
+                /** @description Name of the facility */
+                name: string;
+                availability: boolean;
+                description?: string;
+            }[];
         };
         Document: {
             /**
@@ -997,6 +1039,16 @@ export interface components {
         AppStatus: {
             /** @description Number of unread notifications */
             unreadNotificationsCount: number;
+        };
+        /** @description Opening hours for each day of the week */
+        OpeningHours: {
+            MONDAY: string;
+            TUESDAY: string;
+            WEDNESDAY: string;
+            THURSDAY: string;
+            FRIDAY: string;
+            SATURDAY: string;
+            SUNDAY: string;
         };
     };
     responses: never;

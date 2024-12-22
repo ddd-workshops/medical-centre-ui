@@ -544,6 +544,62 @@ components:
         - fullName
         - specialties
 
+    DoctorProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the doctor
+        firstName:
+          type: string
+        lastName:
+          type: string
+        title:
+          type: string
+          description: Professional title of the doctor ("Doctor", "Professor", "Assistant Professor", "Associate Professor", "Senior Consultant")
+        specialties:
+          type: array
+          description: List of doctor's areas of specialization (e.g. ["Orthodontics", "Dental Surgery"])
+          items:
+            type: string
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClinicBrief'
+        languagesSpoken:
+          type: array
+          description: List of languages the doctor can speak (e.g. ["English", "Spanish"])
+          items:
+            type: string
+        bio:
+          type: string
+          description: A brief biography of the doctor
+        profilePictureUrl:
+          type: string
+          format: uri
+          description: URL to the doctor's profile picture
+        additionalInformation:
+          type: array
+          description: Custom descriptions such as certifications, education, etc. whatever doc wants to put there
+          items:
+            type: object
+            properties:
+              heading:
+                type: string
+                description: Heading of the additional information
+              text:
+                type: string
+                description: Text of the additional information
+      required:
+        - id
+        - firstName
+        - lastName
+        - title
+        - specialties
+        - locations
+        - languagesSpoken
+
     Referral:
       type: object
       properties:
@@ -743,19 +799,52 @@ components:
           type: string
           description: Name of the clinic
         address:
-          type: string
-          description: Full address including country, city, street and postal code
+          $ref: '#/components/schemas/Address'
         phone:
           type: string
         email:
           type: string
           format: email
+        clinicPhotoURL:
+          type: string
+          description: URL to the clinic's photo
+        availableSpecialties:
+          type: array
+          description: List of specialties available at the clinic
+          items:
+            type: string
+        description:
+          type: string
         coordinates:
           $ref: '#/components/schemas/Coordinates'
+        openingHours:
+          $ref: '#/components/schemas/OpeningHours'
+        facilities:
+          type: array
+          description: Customized list of facilities of the clinic
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of the facility
+              availability:
+                type: boolean
+              description:
+                type: string
+            required:
+              - name
+              - availability
       required:
         - id
         - name
         - address
+        - phone
+        - email
+        - clinicPhotoURL
+        - description
+        - facilities
+        - openingHours
 
     Document:
       type: object
@@ -923,3 +1012,30 @@ components:
           minimum: 0
       required:
         - unreadNotificationsCount
+
+    OpeningHours:
+      type: object
+      description: Opening hours for each day of the week
+      properties:
+        MONDAY:
+          type: string
+        TUESDAY:
+          type: string
+        WEDNESDAY:
+          type: string
+        THURSDAY:
+          type: string
+        FRIDAY:
+          type: string
+        SATURDAY:
+          type: string
+        SUNDAY:
+          type: string
+      required:
+        - MONDAY
+        - TUESDAY
+        - WEDNESDAY
+        - THURSDAY
+        - FRIDAY
+        - SATURDAY
+        - SUNDAY
