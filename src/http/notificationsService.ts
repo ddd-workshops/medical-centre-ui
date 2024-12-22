@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { NotificationListItem, Notification } from '../../contract/types';
+import type { NotificationListItem, Notification } from '../contract/types';
 
 const endpoints = {
   getAll: '/notifications',

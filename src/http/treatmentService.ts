@@ -1,4 +1,4 @@
-import type { GetMedicalTreatmentsResponse } from '../../contract/types';
+import type { GetMedicalTreatmentsResponse } from '../contract/types';
 import { apiClient } from './client';
 
 const endpoints = {

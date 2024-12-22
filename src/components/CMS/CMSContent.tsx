@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import type { CMSPageContent } from '../../api/services/cmsService';
-import { cmsService } from '../../api/services/cmsService';
+import type { CMSPageContent } from '../../http/cmsService';
+import { cmsService } from '../../http/cmsService';
 
 interface CMSContentProps {
   slug: string;

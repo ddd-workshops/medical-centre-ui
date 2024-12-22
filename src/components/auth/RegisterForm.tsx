@@ -6,7 +6,7 @@ import { PhoneInput } from '../forms/PhoneInput';
 import { Button } from '../generic/Button';
 import { TextInput } from '../forms/TextInput';
 import { H2 } from '../Typography/Headings';
-import { authService } from '../../api/services/authService';
+import { authService } from '../../http/authService';
 
 export const RegisterForm = () => {
   const [formData, setFormData] = useState({

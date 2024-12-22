@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Timeline } from '../Timeline';
-import { appointmentService } from '../../api/services/appointmentService';
+import { appointmentService } from '../../http/appointmentService';
 import { QuickActions } from './QuickActions';
 import { RecentUpdates } from './RecentUpdates';
 import { DoctorReferrals } from './DoctorReferrals';

@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { LoginRequest, PatientProfile, RegisterRequest } from '../../contract/types';
+import type { LoginRequest, PatientProfile, RegisterRequest } from '../contract/types';
 
 const endpoints = {
   login: '/auth/login',

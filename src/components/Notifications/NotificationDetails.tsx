@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 
 import type { Notification } from '../../contract/types';
-import { getNotification, markNotificationAsRead } from '../../api/services/notificationsService';
+import { getNotification, markNotificationAsRead } from '../../http/notificationsService';
 import { H1, H2 } from '../Typography/Headings';
 import { useQueryClient } from '@tanstack/react-query';
 import { Spinner } from '../generic/Spinner';

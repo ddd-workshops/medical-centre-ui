@@ -4,7 +4,7 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { Chip } from '../generic/Chip';
 import { H3 } from '../Typography/Headings';
 import { Paragraph } from '../Typography/Paragraph';
-import { patientService } from '../../api/services/patientService';
+import { patientService } from '../../http/patientService';
 import { Loader2 } from 'lucide-react';
 
 const STATUS_VARIANT_MAP: { [ key in PrescribedTreatment['status'] ]: 'OUTLINED' | 'FILLED' } = {

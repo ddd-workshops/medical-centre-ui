@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from './AuthStore';
 import { PasswordInput } from '../forms/PasswordInput';
-// import { authService } from '../../api/services/authService';
 import { Button } from '../generic/Button';
 import { TextInput } from '../forms/TextInput';
 import { H2 } from '../Typography/Headings';
@@ -19,7 +18,6 @@ export const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // const profile = await authService.login(formData);
       login(formData);
       navigate('/');
     } catch (error) {

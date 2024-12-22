@@ -9,7 +9,7 @@ import { Paragraph } from '../Typography/Paragraph';
 
 export const AppointmentDetailedDescription = () => {
   const { id } = useParams<{ id: string }>();
-  const [appointment, setAppointment] = useState<AppointmentDetails | null>(null);
+  const [appointment, setAppointment] = useState<Appointment | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,16 +45,16 @@ export const AppointmentDetailedDescription = () => {
         <div className="bg-green-50 p-4 rounded-lg">
           <H3 className="text-green-700 mb-3">Basic Information</H3>
           <div className="space-y-2">
-            <Paragraph>Date: {new Date(appointment.datetime).toLocaleDateString()}</Paragraph>
-            <Paragraph>Time: {new Date(appointment.datetime).toLocaleTimeString()}</Paragraph>
-            <Paragraph>Doctor: {appointment.doctor.fullName}</Paragraph>
-            <Paragraph>Specialty: {appointment.doctor.specialties.join(', ')}</Paragraph>
+            <Paragraph>Date: {new Date(appointment.date).toLocaleDateString()}</Paragraph>
+            <Paragraph>Time: {new Date(appointment.date).toLocaleTimeString()}</Paragraph>
+            <Paragraph>Doctor: {appointment.doctorName}</Paragraph>
+            <Paragraph>Specialty: {appointment.doctor.specialty}</Paragraph>
           </div>
         </div>
 
         <div className="bg-green-50 p-4 rounded-lg">
           <H3 className="text-green-700 mb-3">Medical Notes</H3>
-          <Paragraph>{appointment.notes || 'No notes available'}</Paragraph>
+          <Paragraph>{appointment.medicalNotes || 'No medical notes available'}</Paragraph>
         </div>
 
         <div className="bg-green-50 p-4 rounded-lg">
@@ -85,9 +85,9 @@ export const AppointmentDetailedDescription = () => {
           fileName={`appointment-${appointment.id}.pdf`}
           className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
         >
-          {({ loading }) => (
+          {({ loading }) =>
             loading ? 'Generating PDF...' : 'Download PDF'
-          ) as React.ReactNode}
+          }
         </PDFDownloadLink>
       </div>
     </div>

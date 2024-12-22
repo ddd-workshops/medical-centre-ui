@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { LoginRequest, PatientProfile } from '../../contract/types';
-import { authService } from '../../api/services/authService';
+import { authService } from '../../http/authService';
 
 type AuthLoading =
   | { status: 'IDLE', isAuthenticated: false, profile?: undefined, error?: undefined }

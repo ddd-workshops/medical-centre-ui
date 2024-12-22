@@ -1,4 +1,4 @@
-import type { PatientProfile, PrescribedTreatment } from '../../contract/types';
+import type { PatientProfile, PrescribedTreatment } from '../contract/types';
 import { apiClient } from './client';
 
 const endpoints = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { patientService } from '../../api/services/patientService';
+import { patientService } from '../../http/patientService';
 import { Card } from '../generic/Card';
 import { Paragraph } from '../Typography/Paragraph';
 import { ArrowRight } from 'lucide-react';

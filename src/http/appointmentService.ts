@@ -7,7 +7,7 @@ import type {
   GetAppointmentsResponse,
   CreateAppointmentResponse,
   GetAppointmentByIdResponse,
-} from '../../contract/types';
+} from '../contract/types';
 
 const endpoints = {
   create: '/appointments',

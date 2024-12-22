@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Tornado as Tooth, Menu as MenuIcon, X, Calendar } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import { applicationService } from '../../api/services/applicationService';
+import { applicationService } from '../../http/applicationService';
 
 import { NotificationBell } from '../generic/NotificationBell';
 import { useAuthStore } from '../Auth/AuthStore';

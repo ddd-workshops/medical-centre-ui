@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import type { NotificationListItem } from '../../contract/types';
-import { getNotifications } from '../../api/services/notificationsService';
+import { getNotifications } from '../../http/notificationsService';
 import { NotificationBrief } from './NotificationBrief';
 import { H1, H2 } from '../Typography/Headings';
 

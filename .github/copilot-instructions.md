@@ -47,7 +47,7 @@ When importing types on the client side, don't use the `./src/contract/contract.
 
 The client code components should do neither `fetch` nor `axios` calls directly. They should always use an appropriate fetching service from the services directory.
 
-For each entity in the contract (added, modified etc.), there should be a service defined in `./src/api/services`. Import `client` from apiClient file which has the base API URL defined already. Use existing services for reference.
+For each entity in the contract (added, modified etc.), there should be a service defined in `./src/http`. Import `client` from apiClient file which has the base API URL defined already. Use existing services for reference.
 
 When reusing existing react components, import them from `./src/components/generic` or `./src/components/forms`.
 

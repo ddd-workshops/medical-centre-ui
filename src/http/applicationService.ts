@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { AppStatus } from '../../contract/types';
+import type { AppStatus } from '../contract/types';
 
 const endpoints = {
   status: '/app/status'
