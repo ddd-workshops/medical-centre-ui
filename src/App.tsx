@@ -20,6 +20,8 @@ import { NotificationDetails } from './components/Notifications/NotificationDeta
 import { CMSContent } from './components/CMS/CMSContent';
 import { PrescribedTreatmentsList } from './components/Treatments/PrescribedTreatmentsList';
 import { ClinicDetails } from './components/Clinics/ClinicDetails';
+import { ClinicsList } from './components/Clinics/ClinicsList';
+import { RoutedClinicDetails } from './components/Clinics/RoutedClinicDetails';
 
 import { AppointmentDetailedDescription } from './components/Appointments/AppointmentDetailedDescription';
 import { useAuthStore } from './components/Auth/AuthStore';
@@ -72,7 +74,8 @@ export function App() {
               <Route path="/cms/dental-implants" element={<CMSContent slug="dental-implants" />} />
               <Route path="/cms/privacy-policy" element={<CMSContent slug="privacy-policy" />} />
               <Route path="/cms/terms-of-service" element={<CMSContent slug="terms-of-service" />} />
-              <Route path="/clinics/:id" element={<ClinicDetails />} />
+              <Route path="/clinics" element={<ClinicsList />} />
+              <Route path="/clinics/:id" element={<RoutedClinicDetails />} />
             </Routes>
           </main>
           <Footer />

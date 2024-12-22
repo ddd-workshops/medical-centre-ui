@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Tornado as Tooth, Menu as MenuIcon, X, Calendar } from 'lucide-react';
+import { Tornado as Tooth, Menu as MenuIcon, X, Calendar, Building2 } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { applicationService } from '../../http/applicationService';
 
@@ -22,6 +22,10 @@ export const Header = () => {
 
   const menuContent = (
     <>
+      <Link to="/clinics" className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600">
+        <Building2 className="h-4 w-4" />
+        <span>Our Clinics</span>
+      </Link>
       <Link to="/cms/implant-process" className="text-gray-600 hover:text-emerald-600">
         Implant Process
       </Link>

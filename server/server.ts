@@ -10,6 +10,7 @@ import { authRouter } from './controllers/authController';
 import { applicationRouter } from './controllers/applicationController';
 import { patientRouter } from './controllers/patientController';
 import { treatmentsRouter } from './controllers/treatmentsController';
+import { clinicsRouter } from './controllers/clinicController';
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -38,6 +39,7 @@ app.use('/api/cms', cmsRouter);
 app.use('/api/app', applicationRouter);
 app.use('/api/patient', patientRouter);
 app.use('/api/treatments', treatmentsRouter);
+app.use('/api/clinics', clinicsRouter);
 
 app.listen(port, () => {
   console.log(chalk.green(`Server is running on port ${port}`));

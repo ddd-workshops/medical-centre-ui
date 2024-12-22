@@ -329,6 +329,44 @@ paths:
               schema:
                 $ref: '#/components/schemas/AppStatus'
 
+  /clinics:
+    get:
+      tags:
+        - Clinics
+      summary: Get all clinics
+      description: Retrieve a list of all clinics (brief information)
+      responses:
+        '200':
+          description: List of clinics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClinicBrief'
+
+  /clinics/{clinicId}:
+    get:
+      tags:
+        - Clinics
+      summary: Get clinic details
+      parameters:
+        - name: clinicId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Detailed clinic information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClinicDetails'
+        '404':
+          description: Clinic not found
+
 components:
   schemas:
 

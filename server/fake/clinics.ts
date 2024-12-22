@@ -1,129 +1,368 @@
+import { faker } from '@faker-js/faker';
+import { randomFromArray, shuffleArray } from './utils';
 import type { ClinicDetails, ClinicBrief } from '../contract/types';
+
+const generateOpeningHours = () => {
+  const weekdayOpenings = [
+    '08:00-18:00',
+    '08:30-18:30',
+    '09:00-19:00',
+    '09:00-20:00',
+    '08:00-19:00',
+  ];
+  const weekendOpenings = [
+    '09:00-17:00',
+    '10:00-16:00',
+    '09:00-14:00',
+    'CLOSED',
+  ];
+
+  return {
+    MONDAY: randomFromArray(weekdayOpenings),
+    TUESDAY: randomFromArray(weekdayOpenings),
+    WEDNESDAY: randomFromArray(weekdayOpenings),
+    THURSDAY: randomFromArray(weekdayOpenings),
+    FRIDAY: randomFromArray(weekdayOpenings),
+    SATURDAY: randomFromArray(weekendOpenings),
+    SUNDAY: randomFromArray(['CLOSED', ...weekendOpenings.filter(h => h !== 'CLOSED')]),
+  };
+};
+
+const facilityOptions = [
+  { name: 'Parking', availability: true, description: 'Underground parking available' },
+  { name: 'Wheelchair Access', availability: true, description: 'Full accessibility' },
+  { name: 'Emergency Service', availability: true, description: '24/7 emergency dental care' },
+  { name: 'Children\'s Play Area', availability: true, description: 'Family-friendly waiting area' },
+  { name: 'Digital X-Ray', availability: true, description: 'Latest diagnostic equipment' },
+  { name: 'Sterilization Room', availability: true, description: 'State-of-the-art sterilization facilities' },
+  { name: 'Coffee Station', availability: true, description: 'Complimentary beverages' },
+  { name: 'WiFi', availability: true, description: 'Free high-speed internet' },
+  { name: 'TV in Treatment Rooms', availability: true, description: 'Entertainment during procedures' },
+  { name: 'Multilingual Staff', availability: true, description: 'Staff speaking multiple languages' },
+];
+
+const generateFacilities = () => {
+  // Always include Wheelchair Access and Emergency Service
+  const essentialFacilities = facilityOptions.filter(f => 
+    f.name === 'Wheelchair Access' || f.name === 'Emergency Service'
+  );
+  
+  // Randomly select 2-4 additional facilities
+  const additionalFacilities = shuffleArray(
+    facilityOptions.filter(f => !essentialFacilities.includes(f))
+  ).slice(0, faker.number.int({ min: 2, max: 4 }));
+
+  return [...essentialFacilities, ...additionalFacilities];
+};
 
 export const generateFakeClinicDetails = (): ClinicDetails[] => [
   {
     id: '1',
     name: 'Bright Smiles Central London',
-    address: '123 Oxford Street, London, W1D 2JD',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Oxford Street',
+      street: '123 Oxford Street',
+      postalCode: 'W1D 2JD'
+    },
     phone: '+44 20 7123 4567',
     email: 'central@brightsmiles.com',
-    coordinates: { latitude: 51.5157, longitude: -0.1378 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our flagship clinic in the heart of London, offering comprehensive dental care with state-of-the-art equipment.',
+    coordinates: { latitude: 51.5157, longitude: -0.1378 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '2',
     name: 'Bright Smiles Canary Wharf',
-    address: '45 Bank Street, London, E14 5JP',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Bank Street',
+      street: '45 Bank Street',
+      postalCode: 'E14 5JP'
+    },
     phone: '+44 20 7234 5678',
     email: 'canarywharf@brightsmiles.com',
-    coordinates: { latitude: 51.5049, longitude: -0.0197 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Located in the bustling Canary Wharf, our clinic offers a wide range of dental services for busy professionals.',
+    coordinates: { latitude: 51.5049, longitude: -0.0197 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '3',
     name: 'Bright Smiles Kensington',
-    address: '88 Kensington High Street, London, W8 5SE',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Kensington High Street',
+      street: '88 Kensington High Street',
+      postalCode: 'W8 5SE'
+    },
     phone: '+44 20 7345 6789',
     email: 'kensington@brightsmiles.com',
-    coordinates: { latitude: 51.5007, longitude: -0.1925 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Kensington clinic provides top-notch dental care in a luxurious setting.',
+    coordinates: { latitude: 51.5007, longitude: -0.1925 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '4',
     name: 'Bright Smiles Chelsea',
-    address: '157 King\'s Road, London, SW3 5EQ',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'King\'s Road',
+      street: '157 King\'s Road',
+      postalCode: 'SW3 5EQ'
+    },
     phone: '+44 20 7456 7890',
     email: 'chelsea@brightsmiles.com',
-    coordinates: { latitude: 51.4875, longitude: -0.1687 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Chelsea clinic offers personalized dental care in a stylish and comfortable environment.',
+    coordinates: { latitude: 51.4875, longitude: -0.1687 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '5',
     name: 'Bright Smiles Mayfair',
-    address: '25 Brook Street, London, W1K 4HB',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Brook Street',
+      street: '25 Brook Street',
+      postalCode: 'W1K 4HB'
+    },
     phone: '+44 20 7567 8901',
     email: 'mayfair@brightsmiles.com',
-    coordinates: { latitude: 51.5141, longitude: -0.1463 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Mayfair clinic provides high-quality dental services in an exclusive location.',
+    coordinates: { latitude: 51.5141, longitude: -0.1463 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '6',
     name: 'Bright Smiles Camden',
-    address: '42 Camden High Street, London, NW1 0JH',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Camden High Street',
+      street: '42 Camden High Street',
+      postalCode: 'NW1 0JH'
+    },
     phone: '+44 20 7678 9012',
     email: 'camden@brightsmiles.com',
-    coordinates: { latitude: 51.5290, longitude: -0.1425 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Camden clinic offers a relaxed and friendly atmosphere for all your dental needs.',
+    coordinates: { latitude: 51.5290, longitude: -0.1425 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '7',
     name: 'Bright Smiles Islington',
-    address: '335 Upper Street, London, N1 0PB',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Upper Street',
+      street: '335 Upper Street',
+      postalCode: 'N1 0PB'
+    },
     phone: '+44 20 7789 0123',
     email: 'islington@brightsmiles.com',
-    coordinates: { latitude: 51.5362, longitude: -0.1033 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Islington clinic provides comprehensive dental care in a modern and welcoming environment.',
+    coordinates: { latitude: 51.5362, longitude: -0.1033 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '8',
     name: 'Bright Smiles Greenwich',
-    address: '12 Nelson Road, London, SE10 9JB',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Nelson Road',
+      street: '12 Nelson Road',
+      postalCode: 'SE10 9JB'
+    },
     phone: '+44 20 7890 1234',
     email: 'greenwich@brightsmiles.com',
-    coordinates: { latitude: 51.4810, longitude: -0.0090 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Greenwich clinic offers high-quality dental care in a historic and vibrant area.',
+    coordinates: { latitude: 51.4810, longitude: -0.0090 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '9',
     name: 'Bright Smiles Hampstead',
-    address: '64 Hampstead High Street, London, NW3 1QE',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Hampstead High Street',
+      street: '64 Hampstead High Street',
+      postalCode: 'NW3 1QE'
+    },
     phone: '+44 20 7901 2345',
     email: 'hampstead@brightsmiles.com',
-    coordinates: { latitude: 51.5559, longitude: -0.1780 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Hampstead clinic offers a serene and professional environment for all your dental needs.',
+    coordinates: { latitude: 51.5559, longitude: -0.1780 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '10',
     name: 'Bright Smiles Richmond',
-    address: '28 The Quadrant, Richmond, London, TW9 1DN',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'The Quadrant',
+      street: '28 The Quadrant',
+      postalCode: 'TW9 1DN'
+    },
     phone: '+44 20 7012 3456',
     email: 'richmond@brightsmiles.com',
-    coordinates: { latitude: 51.4613, longitude: -0.3037 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Richmond clinic offers top-quality dental care in a picturesque setting.',
+    coordinates: { latitude: 51.4613, longitude: -0.3037 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '11',
     name: 'Bright Smiles Wimbledon',
-    address: '15 The Broadway, Wimbledon, London, SW19 1PS',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'The Broadway',
+      street: '15 The Broadway',
+      postalCode: 'SW19 1PS'
+    },
     phone: '+44 20 7123 4567',
     email: 'wimbledon@brightsmiles.com',
-    coordinates: { latitude: 51.4214, longitude: -0.2067 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Wimbledon clinic offers comprehensive dental care in a friendly and welcoming environment.',
+    coordinates: { latitude: 51.4214, longitude: -0.2067 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '12',
     name: 'Bright Smiles Notting Hill',
-    address: '223 Portobello Road, London, W11 1LT',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Portobello Road',
+      street: '223 Portobello Road',
+      postalCode: 'W11 1LT'
+    },
     phone: '+44 20 7234 5678',
     email: 'nottinghill@brightsmiles.com',
-    coordinates: { latitude: 51.5173, longitude: -0.2067 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Notting Hill clinic offers high-quality dental care in a vibrant and trendy area.',
+    coordinates: { latitude: 51.5173, longitude: -0.2067 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '13',
     name: 'Bright Smiles Shoreditch',
-    address: '145 Shoreditch High Street, London, E1 6JE',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Shoreditch High Street',
+      street: '145 Shoreditch High Street',
+      postalCode: 'E1 6JE'
+    },
     phone: '+44 20 7345 6789',
     email: 'shoreditch@brightsmiles.com',
-    coordinates: { latitude: 51.5245, longitude: -0.0789 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Shoreditch clinic offers modern dental care in a trendy and artistic neighborhood.',
+    coordinates: { latitude: 51.5245, longitude: -0.0789 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '14',
     name: 'Bright Smiles Clapham',
-    address: '56 Clapham High Street, London, SW4 7UL',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Clapham High Street',
+      street: '56 Clapham High Street',
+      postalCode: 'SW4 7UL'
+    },
     phone: '+44 20 7456 7890',
     email: 'clapham@brightsmiles.com',
-    coordinates: { latitude: 51.4620, longitude: -0.1380 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Clapham clinic offers a wide range of dental services in a friendly and relaxed environment.',
+    coordinates: { latitude: 51.4620, longitude: -0.1380 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   },
   {
     id: '15',
     name: 'Bright Smiles Baker Street',
-    address: '222 Baker Street, London, NW1 5RT',
+    address: {
+      id: faker.string.uuid(),
+      country: 'United Kingdom',
+      city: 'London',
+      district: 'Baker Street',
+      street: '222 Baker Street',
+      postalCode: 'NW1 5RT'
+    },
     phone: '+44 20 7567 8901',
     email: 'bakerst@brightsmiles.com',
-    coordinates: { latitude: 51.5237, longitude: -0.1583 }
+    clinicPhotoURL: 'https://source.unsplash.com/800x600/?dental,clinic',
+    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    description: 'Our Baker Street clinic offers high-quality dental care in a historic and well-known location.',
+    coordinates: { latitude: 51.5237, longitude: -0.1583 },
+    openingHours: generateOpeningHours(),
+    facilities: generateFacilities()
   }
 ];
 
 export const generateFakeClinicBriefs = (): ClinicBrief[] => {
-    const details = generateFakeClinicDetails();
-    return details.map(({ id, name, address }) => ({ id, name, address }));
+  const details = generateFakeClinicDetails();
+  return details.map(({ id, name, address: { street, city, postalCode, country } }) => ({ 
+    id, 
+    name, 
+    address: `${street}, ${city}, ${postalCode}, ${country}`
+  }));
 }
