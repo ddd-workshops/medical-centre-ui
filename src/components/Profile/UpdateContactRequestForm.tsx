@@ -16,13 +16,13 @@ type ContactVerificationFormData = {
 export const UpdateContactRequestForm: React.FC<{
   onClose: () => void;
 }> = ({ onClose }) => {
-  const { user } = useAuthStore();
+  const { profile } = useAuthStore();
   const [formData, setFormData] = useState<ContactVerificationFormData>({
-    email: user?.email ?? '',
-    phoneNumber: user?.phoneNumber ?? '',
-    streetAddress: user?.address?.street ?? '',
-    city: user?.address?.city ?? '',
-    postalCode: user?.address?.postalCode ?? '',
+    email: profile?.email ?? '',
+    phoneNumber: profile?.phoneNumber ?? '',
+    streetAddress: profile?.address?.street ?? '',
+    city: profile?.address?.city ?? '',
+    postalCode: profile?.address?.postalCode ?? '',
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
