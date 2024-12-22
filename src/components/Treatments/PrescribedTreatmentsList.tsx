@@ -4,7 +4,7 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { Chip } from '../generic/Chip';
 import { H3 } from '../Typography/Headings';
 import { Paragraph } from '../Typography/Paragraph';
-import { treatmentsService } from '../../api/services/treatmentsService';
+import { patientService } from '../../api/services/patientService';
 import { Loader2 } from 'lucide-react';
 
 const STATUS_VARIANT_MAP: { [ key in PrescribedTreatment['status'] ]: 'OUTLINED' | 'FILLED' } = {
@@ -22,7 +22,7 @@ export function PrescribedTreatmentsList() {
   useEffect(() => {
     const loadTreatments = async () => {
       try {
-        const data = await treatmentsService.getPrescribedTreatments();
+        const data = await patientService.getPrescribedTreatments();
         setPrescribedTreatments(data);
       } catch (err) {
         setError(`Failed to load prescribed treatments: ${err}`);

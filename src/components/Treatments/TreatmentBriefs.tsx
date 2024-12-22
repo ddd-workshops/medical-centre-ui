@@ -1,21 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { treatmentsService } from '../../api/services/treatmentsService';
+import { patientService } from '../../api/services/patientService';
 import { Card } from '../generic/Card';
 import { Paragraph } from '../Typography/Paragraph';
 import { ArrowRight } from 'lucide-react';
+import { Spinner } from '../generic/Spinner';
 
 export const TreatmentBriefs: React.FC = () => {
-  const { data: treatments = [], isLoading } = useQuery({
-    queryKey: ['treatments'],
-    queryFn: () => treatmentsService.getPrescribedTreatments(),
-    select: (data) => data.slice(0, 2) // Only take the two most recent treatments
+  const { data, isLoading } = useQuery({
+    queryKey: ['patient', 'treatments'],
+    queryFn: () => patientService.getPrescribedTreatments()
   });
 
   if (isLoading) {
-    return <Paragraph>Loading treatments...</Paragraph>;
+    return <Spinner size='SMALL' />;
   }
+
+  const treatments = data?.slice(0, 2) || [];
 
   return (
     <Card title='Recent Treatments'>

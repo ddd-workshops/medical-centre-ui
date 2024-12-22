@@ -133,6 +133,18 @@ paths:
           description: Appointment updated successfully
 
   /referrals:
+    get:
+      tags:
+        - Referrals
+      summary: Get all referrals
+      responses:
+        '201':
+          description: Referral created successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: '#/components/schemas/Referral'
     post:
       tags:
         - Referrals
@@ -259,7 +271,7 @@ paths:
         '404':
           description: Page not found
 
-  /profile:
+  /patient/profile:
     get:
       tags:
         - Patients
@@ -273,17 +285,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/PatientProfile'
 
-  /prescribed-treatments:
+  /patient/treatments:
     get:
       tags:
         - Patients
       summary: Get prescribed treatments for a patient
-      parameters:
-        - name: patientId
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: List of prescribed treatments
@@ -294,7 +300,22 @@ paths:
                 items:
                   $ref: '#/components/schemas/PrescribedTreatment'
 
-  /app-status:
+  /treatments:
+    get:
+      tags:
+        - Patients
+      summary: Get all available treatments
+      responses:
+        '200':
+          description: List of treatments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedicalTreatment'
+
+  /app/status:
     get:
       tags:
         - Application
@@ -417,7 +438,7 @@ components:
           type: string
           enum: [SCHEDULED, COMPLETED, CANCELLED]
 
-    Treatment:
+    MedicalTreatment:
       type: object
       properties:
         id:
@@ -483,7 +504,7 @@ components:
         doctor:
           $ref: '#/components/schemas/DoctorBrief'
         treatment:
-          $ref: '#/components/schemas/Treatment'
+          $ref: '#/components/schemas/MedicalTreatment'
         appointments:
           type: array
           items:

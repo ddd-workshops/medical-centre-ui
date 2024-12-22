@@ -276,7 +276,27 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        /** Get all referrals */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Referral created successfully */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Referral"];
+                    };
+                };
+            };
+        };
         put?: never;
         /** Create a new referral */
         post: {
@@ -540,7 +560,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/profile": {
+    "/patient/profile": {
         parameters: {
             query?: never;
             header?: never;
@@ -579,7 +599,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/prescribed-treatments": {
+    "/patient/treatments": {
         parameters: {
             query?: never;
             header?: never;
@@ -591,9 +611,7 @@ export interface paths {
             parameters: {
                 query?: never;
                 header?: never;
-                path: {
-                    patientId: string;
-                };
+                path?: never;
                 cookie?: never;
             };
             requestBody?: never;
@@ -617,7 +635,43 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/app-status": {
+    "/treatments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all available treatments */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description List of treatments */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["MedicalTreatment"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/app/status": {
         parameters: {
             query?: never;
             header?: never;
@@ -707,7 +761,7 @@ export interface components {
             /** @enum {string} */
             status?: "SCHEDULED" | "COMPLETED" | "CANCELLED";
         };
-        Treatment: {
+        MedicalTreatment: {
             /** Format: uuid */
             id: string;
             name: string;
@@ -742,7 +796,7 @@ export interface components {
             description?: string;
             patient: components["schemas"]["PatientBrief"];
             doctor: components["schemas"]["DoctorBrief"];
-            treatment: components["schemas"]["Treatment"];
+            treatment: components["schemas"]["MedicalTreatment"];
             appointments?: components["schemas"]["AppointmentBrief"][];
             /** @enum {string} */
             status: "SCHEDULED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";

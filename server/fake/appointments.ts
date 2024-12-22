@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { AppointmentDetails } from '../contract/types';
+import { AppointmentDetails, AppointmentBrief } from '../contract/types';
 import { randomFromArray } from './utils';
 import { generateFakeClinicBriefs } from './clinics';
 import { generateFakeServiceTypes } from './services';
@@ -10,9 +10,9 @@ import { generateFakePatientBrief } from './patient';
 
 const clinicBriefs = generateFakeClinicBriefs();
 
-export const generateFakeAppointments = (): AppointmentDetails[] => {
+export const generateFakeAppointments = (count = 0): AppointmentDetails[] => {
+  count ??= faker.number.int({ min: 5, max: 10 });
   const appointments: AppointmentDetails[] = [];
-  const count = faker.number.int({ min: 5, max: 10 });
   const statuses: AppointmentDetails['status'][] = ['SCHEDULED', 'COMPLETED', 'CANCELLED'];
 
   for (let i = 0; i < count; i++) {
@@ -36,3 +36,14 @@ export const generateFakeAppointments = (): AppointmentDetails[] => {
   return appointments.sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime());
 };
 
+export const generateFakeAppointmentsBrief = (appointments: AppointmentDetails[]): AppointmentBrief[] => {
+  return appointments.map(appointment => ({
+    id: appointment.id,
+    patientName: appointment.patient.fullName,
+    doctor: appointment.doctor.fullName,
+    serviceType: appointment.serviceType.name,
+    location: appointment.location.name,
+    datetime: appointment.datetime,
+    status: appointment.status,
+  }));
+};

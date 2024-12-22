@@ -8,6 +8,8 @@ import { notificationsRouter } from './controllers/notificationsController';
 import { cmsRouter } from './controllers/cmsController';
 import { authRouter } from './controllers/authController';
 import { applicationRouter } from './controllers/applicationController';
+import { patientRouter } from './controllers/patientController';
+import { treatmentsRouter } from './controllers/treatmentsController';
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -34,6 +36,8 @@ app.use('/api/appointments', appointmentsRouter);
 app.use('/api/notifications', notificationsRouter);
 app.use('/api/cms', cmsRouter);
 app.use('/api/app', applicationRouter);
+app.use('/api/patient', patientRouter);
+app.use('/api/treatments', treatmentsRouter);
 
 app.listen(port, () => {
   console.log(chalk.green(`Server is running on port ${port}`));
