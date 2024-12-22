@@ -37,7 +37,7 @@ export const RadioGroup = ({ header, options, value, onChange, className = '' }:
             value={option.value}
             checked={localValue === option.value}
             onChange={(e) => handleChange(e.target.value)}
-            className="h-4 w-4 border-gray-300 text-green-500 focus:ring-green-500 checked:bg-green-500 checked:hover:bg-green-600"
+            className="accent-emerald-600 h-4 w-4 border-gray-300 text-green-500 focus:ring-green-500 checked:bg-green-500 checked:hover:bg-green-600"
           />
           <label htmlFor={option.id} className="text-sm text-green-700">
             {option.label}

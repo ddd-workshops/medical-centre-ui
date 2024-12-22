@@ -47,7 +47,7 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
             value={option.value}
             checked={localValues.includes(option.value)}
             onChange={() => handleChange(option.value)}
-            className="text-green-600 focus:ring-green-500 h-4 w-4 rounded"
+            className="accent-emerald-600 text-green-600 focus:ring-green-500 h-4 w-4 rounded"
           />
           <label htmlFor={option.id} className="text-sm text-green-700">
             {option.label}

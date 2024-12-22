@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+
 import { PhoneInput } from './PhoneInput';
-import { countriesDialCodes } from './dialCodes';
 
 const meta = {
   title: 'BSA/Forms/PhoneInput',
@@ -12,8 +12,6 @@ const meta = {
   tags: ['autodocs'],
   args: {
     onChange: action('onChange'),
-    onCountryChange: action('onCountryChange'),
-    selectedCountry: countriesDialCodes[6], // Poland
   },
 } satisfies Meta<typeof PhoneInput>;
 

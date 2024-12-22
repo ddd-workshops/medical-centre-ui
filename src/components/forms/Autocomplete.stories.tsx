@@ -12,12 +12,12 @@ export default meta;
 type Story = StoryObj<typeof Autocomplete>;
 
 const options = [
-  { id: '1', label: 'JavaScript' },
-  { id: '2', label: 'TypeScript' },
-  { id: '3', label: 'Python' },
-  { id: '4', label: 'Java' },
-  { id: '5', label: 'C++' },
-  { id: '6', label: 'Ruby' }
+  { id: '1', label: 'Dr. John Doe' },
+  { id: '2', label: 'Dr. Jane Smith' },
+  { id: '3', label: 'Dr. Emily Johnson' },
+  { id: '4', label: 'Dr. Michael Brown' },
+  { id: '5', label: 'Dr. Sarah Davis' },
+  { id: '6', label: 'Dr. David Wilson' }
 ];
 
 export const Default: Story = {
@@ -27,7 +27,7 @@ export const Default: Story = {
       <TextInput
         value={value}
         onChange={onChange}
-        placeholder="Search..."
+        placeholder="Search for a doctor..."
       />
     ),
     onSelect: action('Option selected'),

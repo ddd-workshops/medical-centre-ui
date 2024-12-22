@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { TextInput } from './TextInput';
 
 type Option = {
   id: string;
@@ -7,7 +8,7 @@ type Option = {
 
 type AutocompleteProps = {
   options: Option[];
-  renderInput: (params: { 
+  renderInput?: (params: { 
     value: string; 
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onFocus?: () => void;
@@ -16,7 +17,10 @@ type AutocompleteProps = {
   maxItems?: number;
 };
 
-export const Autocomplete = ({ options, renderInput, onSelect, maxItems = 5 }: AutocompleteProps) => {
+export const Autocomplete = ({
+  options, onSelect, maxItems = 5,
+  renderInput = ({ value, onChange }) => ( <TextInput value={value} onChange={onChange} placeholder="Search..." /> ),
+}: AutocompleteProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [filteredOptions, setFilteredOptions] = useState<Option[]>([]);
