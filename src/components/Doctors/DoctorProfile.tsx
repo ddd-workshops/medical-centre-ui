@@ -1,10 +1,10 @@
+import { MapPin } from 'lucide-react';
+
 import type { DoctorProfile } from '../../contract/types';
+import { ChipList } from '../generic/ChipList';
 import { H2, H3 } from '../Typography/Headings';
 import { Paragraph } from '../Typography/Paragraph';
-import { MapPin } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { A } from '../Typography/A';
-import { TagList } from '../generic/TagList';
 
 type DoctorProfileProps = {
   doctor: DoctorProfile;
@@ -26,7 +26,7 @@ export function DoctorProfile({ doctor }: DoctorProfileProps) {
               <Paragraph size="MEDIUM" className="font-semibold mb-2">
                 Specialties
               </Paragraph>
-              <TagList tags={doctor.specialties} />
+              <ChipList items={doctor.specialties} />
             </div>
           )}
 

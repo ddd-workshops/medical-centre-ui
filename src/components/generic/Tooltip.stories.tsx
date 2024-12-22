@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
 import { Tooltip, TooltipDirection, TooltipSize } from './Tooltip';
+import * as RUITooltip from "@radix-ui/react-tooltip";
+import { PlusIcon } from 'lucide-react';
 
 const meta = {
   title: 'BSA/Atoms/Tooltip',
@@ -80,4 +82,27 @@ export const WithLongContent: Story = {
     content: 'This is a very long tooltip content that will wrap to multiple lines when necessary.',
     children: <Button>Hover for long content</Button>,
   },
+};
+
+export const TooltipDemo = () => {
+	return (
+		<RUITooltip.Provider>
+			<RUITooltip.Root>
+				<RUITooltip.Trigger asChild>
+					<button className="inline-flex size-[35px] items-center justify-center rounded-full bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA4 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black">
+						<PlusIcon />
+					</button>
+				</RUITooltip.Trigger>
+				<RUITooltip.Portal>
+					<RUITooltip.Content
+						className="select-none rounded bg-white px-[15px] py-2.5 text-[15px] leading-none text-violet11 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity] data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade"
+						sideOffset={5}
+					>
+						Add to library
+						<RUITooltip.Arrow className="fill-white" />
+					</RUITooltip.Content>
+				</RUITooltip.Portal>
+			</RUITooltip.Root>
+		</RUITooltip.Provider>
+	);
 };

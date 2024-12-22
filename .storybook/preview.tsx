@@ -1,6 +1,7 @@
-import '../src/index.css'; // Adjust the path to your main CSS file
-
+import '../src/index.css';
+import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
 import type { Preview } from "@storybook/react";
+import React from 'react';
 
 const preview: Preview = {
   parameters: {
@@ -16,6 +17,13 @@ const preview: Preview = {
       },
     }
   },
+  decorators: [
+    (Story) => (
+      <TooltipProvider delayDuration={0}>
+        {Story()}
+      </TooltipProvider>
+    ),
+  ],
 };
 
 export default preview;

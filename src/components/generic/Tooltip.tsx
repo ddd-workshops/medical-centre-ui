@@ -42,21 +42,19 @@ export const Tooltip = ({
     : [direction, 'center'];
 
   return (
-    <RadixTooltip.Provider>
-      <RadixTooltip.Root>
-        <RadixTooltip.Trigger asChild>{children}</RadixTooltip.Trigger>
-        <RadixTooltip.Portal>
-          <RadixTooltip.Content
-            side={side as 'top' | 'right' | 'bottom' | 'left'}
-            align={align as 'start' | 'center' | 'end'}
-            className={`z-50 rounded-md bg-gray-800 px-3 py-2 text-sm text-white shadow-md animate-in fade-in-0 zoom-in-95 ${sizeClasses[size]}`}
-            sideOffset={5}
-          >
-            {content}
-            <RadixTooltip.Arrow className="fill-gray-800" />
-          </RadixTooltip.Content>
-        </RadixTooltip.Portal>
-      </RadixTooltip.Root>
-    </RadixTooltip.Provider>
+    <RadixTooltip.Root delayDuration={0}>
+      <RadixTooltip.Trigger asChild>{children}</RadixTooltip.Trigger>
+      <RadixTooltip.Portal>
+        <RadixTooltip.Content
+          side={side as 'top' | 'right' | 'bottom' | 'left'}
+          align={align as 'start' | 'center' | 'end'}
+          className={`z-50 rounded-md bg-gray-800 px-3 py-2 text-sm text-white shadow-md animate-in fade-in-0 zoom-in-95 ${sizeClasses[size]}`}
+          sideOffset={5}
+        >
+          {content}
+          <RadixTooltip.Arrow className="fill-gray-800" />
+        </RadixTooltip.Content>
+      </RadixTooltip.Portal>
+    </RadixTooltip.Root>
   );
 };

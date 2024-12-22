@@ -1,13 +1,14 @@
 import type { ClinicDetails } from '../../contract/types';
-import { H2, H3 } from '../Typography/Headings';
-import { Paragraph } from '../Typography/Paragraph';
 import { MapPin, Phone, Mail, CheckCircle2, XCircle, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 import { googleMapsLink } from '../../utils/google-maps';
 import { A } from '../Typography/A';
-import { TagList } from '../generic/TagList';
+import { H2, H3 } from '../Typography/Headings';
+import { Paragraph } from '../Typography/Paragraph';
 import { OpeningHours } from '../generic/OpeningHours';
-import { Link } from 'react-router-dom';
 import { Divider } from '../generic/Divider';
+import { ChipList } from '../generic/ChipList';
 
 type ClinicDetailsProps = {
   clinic: ClinicDetails;
@@ -75,7 +76,7 @@ export function ClinicDetails({ clinic }: ClinicDetailsProps) {
             {clinic.availableSpecialties && clinic.availableSpecialties.length > 0 && (
               <div className="mb-6">
                 <H3 className="mb-3">Available Specialties</H3>
-                <TagList tags={clinic.availableSpecialties} />
+                <ChipList items={clinic.availableSpecialties} />
               </div>
             )}
 
