@@ -1,12 +1,30 @@
 import { faker } from '@faker-js/faker';
-
+import { randomFromArray } from './utils';
 import { MedicalTreatment } from '../contract/types';
 import { generateDoctorBrief } from './staff';
 import { generateFakePatientBrief } from './patient';
 
+const DENTAL_TREATMENTS = [
+  'Dental Cleaning & Check-up',
+  'Root Canal Treatment',
+  'Dental Crown Installation',
+  'Tooth Extraction',
+  'Dental Implant Surgery',
+  'Teeth Whitening',
+  'Dental Filling',
+  'Dental Bridge Installation',
+  'Wisdom Tooth Removal',
+  'Periodontal Treatment',
+  'Dental Veneer Application',
+  'Orthodontic Consultation',
+  'Dental Sealant Application',
+  'Gum Disease Treatment',
+  'Emergency Dental Care'
+];
+
 export const generateFakeMedicalTreatment = (): MedicalTreatment => ({
   id: faker.string.uuid(),
-  name: faker.lorem.words(),
+  name: randomFromArray(DENTAL_TREATMENTS),
   shortDescription: faker.lorem.sentence(),
   expectedDuration: {
       min: faker.number.int({ min: 1, max: 3 }),

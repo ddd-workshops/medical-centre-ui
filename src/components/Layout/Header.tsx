@@ -26,9 +26,6 @@ export const Header = () => {
         <Building2 className="h-4 w-4" />
         <span>Our Clinics</span>
       </Link>
-      <Link to="/cms/implant-process" className="text-gray-600 hover:text-emerald-600">
-        Implant Process
-      </Link>
       <Link to="/book-appointment" className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600">
         <Calendar className="h-4 w-4" />
         <span>Book Appointment</span>

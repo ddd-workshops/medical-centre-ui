@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import { H3 } from './Typography/Headings';
 import { Paragraph } from './Typography/Paragraph';
+import { MessageVariant, messageStyles, messageHoverBackgrounds } from './MessageVariant/MessageVariant';
 
 interface TileItem {
   title: string;
   description: string;
   link?: string;
+  variant?: MessageVariant;
 }
 
 interface TileListProps {
@@ -17,24 +20,31 @@ interface TileListProps {
 export const TileList: React.FC<TileListProps> = ({ items, className = '' }) => {
   return (
     <div className={`grid grid-cols-1 gap-4 ${className}`}>
-      {items.map((item, index) => (
-        <div 
-          key={index} 
-          className="bg-slate-50 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow border-l-4 border-emerald-500"
-        >
-          {item.link ? (
-            <Link to={item.link} className="block">
-              <H3 className="hover:text-emerald-600">{item.title}</H3>
-              <Paragraph>{item.description}</Paragraph>
-            </Link>
-          ) : (
-            <>
-              <H3>{item.title}</H3>
-              <Paragraph>{item.description}</Paragraph>
-            </>
-          )}
-        </div>
-      ))}
+      {items.map((item, index) => {
+        const variant = item.variant ?? MessageVariant.INFO;
+        return (
+          <div 
+            key={index} 
+            className={`rounded-lg p-4 shadow-sm hover:shadow-md transition-all border-l-4 
+              ${messageStyles[variant]} ${messageHoverBackgrounds[variant]}`}
+          >
+            {item.link ? (
+              <Link to={item.link} className="block group">
+                <div className="flex items-start gap-2">
+                  <H3 className="hover:text-emerald-600 underline decoration-emerald-600/30 underline-offset-4">{item.title}</H3>
+                  <ArrowRight className="h-5 w-5 text-emerald-600 transition-transform group-hover:scale-120 -mt-0.5" />
+                </div>
+                <Paragraph>{item.description}</Paragraph>
+              </Link>
+            ) : (
+              <>
+                <H3>{item.title}</H3>
+                <Paragraph>{item.description}</Paragraph>
+              </>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };

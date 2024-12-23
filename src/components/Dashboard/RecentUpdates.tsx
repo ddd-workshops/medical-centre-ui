@@ -1,5 +1,5 @@
 import { Card } from '../generic/Card';
-import { MessageKind } from '../MessageKind/MessageKind';
+import { MessageVariant } from '../MessageVariant/MessageVariant';
 import { Entry } from './Entry';
 
 export const RecentUpdates = () => {
@@ -7,14 +7,14 @@ export const RecentUpdates = () => {
     <Card title="Recent Updates">
       <div className="space-y-4">
         <Entry
-          variant={MessageKind.SUCCESS}
+          variant={MessageVariant.SUCCESS}
           label="New Service Available"
           to="/services/teeth-whitening"
         >
           Introducing advanced teeth whitening treatment
         </Entry>
         <Entry
-          variant={MessageKind.WARNING}
+          variant={MessageVariant.WARNING}
           label="Holiday Schedule"
           to="/schedule/holiday"
         >

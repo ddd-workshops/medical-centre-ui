@@ -31,6 +31,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">Services</h3>
             <ul className="space-y-2">
+              <li><Link to="/cms/implant-process" className="hover:text-emerald-400">Implant Process</Link></li>
               <li><Link to="/cms/general-dentistry" className="hover:text-emerald-400">General Dentistry</Link></li>
               <li><Link to="/cms/cosmetic-dentistry" className="hover:text-emerald-400">Cosmetic Dentistry</Link></li>
               <li><Link to="/cms/orthodontics" className="hover:text-emerald-400">Orthodontics</Link></li>

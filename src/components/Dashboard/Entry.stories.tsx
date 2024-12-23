@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Entry } from './Entry';
 import { BrowserRouter } from 'react-router-dom';
-import { MessageKind } from '../MessageKind/MessageKind';
+import { MessageVariant } from '../MessageVariant/MessageVariant';
 
 const meta: Meta<typeof Entry> = {
   title: 'BSA/Molecules/Entry',
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof Entry>;
 
 export const Info: Story = {
   args: {
-    variant: MessageKind.INFO,
+    variant: MessageVariant.INFO,
     label: 'Information',
     children: 'This is an informational message',
   },
@@ -27,7 +27,7 @@ export const Info: Story = {
 
 export const Success: Story = {
   args: {
-    variant: MessageKind.SUCCESS,
+    variant: MessageVariant.SUCCESS,
     label: 'Success',
     children: 'Operation completed successfully',
   },
@@ -35,7 +35,7 @@ export const Success: Story = {
 
 export const Warning: Story = {
   args: {
-    variant: MessageKind.WARNING,
+    variant: MessageVariant.WARNING,
     label: 'Warning',
     children: 'Please review this important notice',
   },
@@ -43,7 +43,7 @@ export const Warning: Story = {
 
 export const Alert: Story = {
   args: {
-    variant: MessageKind.ALERT,
+    variant: MessageVariant.ALERT,
     label: 'Alert',
     children: 'Immediate attention required',
   },
@@ -51,7 +51,7 @@ export const Alert: Story = {
 
 export const Update: Story = {
   args: {
-    variant: MessageKind.UPDATE,
+    variant: MessageVariant.UPDATE,
     label: 'Update',
     children: 'System has been updated',
   },
@@ -59,7 +59,7 @@ export const Update: Story = {
 
 export const WithLink: Story = {
   args: {
-    variant: MessageKind.SUCCESS,
+    variant: MessageVariant.SUCCESS,
     label: 'Clickable Entry',
     children: 'Click me to navigate',
     to: '/some-path',

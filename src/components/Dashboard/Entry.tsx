@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { MessageKind, messageStyles, variantIcons } from '../MessageKind/MessageKind';
+import { MessageVariant, messageStyles, variantIcons } from '../MessageVariant/MessageVariant';
 
 export interface EntryProps {
-  variant: MessageKind;
+  variant: MessageVariant;
   label: string;
   children: ReactNode;
   to?: string;
