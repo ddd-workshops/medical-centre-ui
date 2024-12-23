@@ -63,9 +63,9 @@ export function AppointmentBooking() {
       case 1:
         return !!selectedService;
       case 2:
-        return !!selectedDate && !!selectedTime;
-      case 3:
         return !!selectedLocation;
+      case 3:
+        return !!selectedDate && !!selectedTime;
       case 4:
         return !!selectedDoctor;
       default:
@@ -133,6 +133,22 @@ export function AppointmentBooking() {
 
       case 2:
         return (
+          <TileChooser
+            items={locations}
+            selectedItem={selectedLocation}
+            onSelect={setSelectedLocation}
+            title="Select Location"
+            renderItem={(location) => (
+              <div className="flex items-center space-x-2">
+                <MapPin className="h-5 w-5 text-emerald-600" />
+                <span>{location.name}</span>
+              </div>
+            )}
+          />
+        );
+
+      case 3:
+        return (
           <div className="space-y-6">
             <H2>Select Date & Time</H2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -151,22 +167,6 @@ export function AppointmentBooking() {
               />
             </div>
           </div>
-        );
-
-      case 3:
-        return (
-          <TileChooser
-            items={locations}
-            selectedItem={selectedLocation}
-            onSelect={setSelectedLocation}
-            title="Select Location"
-            renderItem={(location) => (
-              <div className="flex items-center space-x-2">
-                <MapPin className="h-5 w-5 text-emerald-600" />
-                <span>{location.name}</span>
-              </div>
-            )}
-          />
         );
 
       case 4:
@@ -210,25 +210,30 @@ export function AppointmentBooking() {
             {renderStep()}
 
             {/* Navigation Buttons */}
-            <div className="mt-8 flex justify-between">
-              <button
-                onClick={handleBack}
-                className={`px-6 py-2 rounded-lg ${
-                  currentStep === 1
-                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-                disabled={currentStep === 1}
-              >
-                Back
-              </button>
-              <button
-                onClick={currentStep === 4 ? handleConfirm : handleNext}
-                className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
-              >
-                {currentStep === 4 ? 'Confirm Appointment' : 'Next'}
-              </button>
+            <div className="mt-8 flex justify-end">
+              <div className="flex gap-4">
+                {currentStep > 1 && (
+                  <button
+                    onClick={handleBack}
+                    className="px-6 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  >
+                    Back
+                  </button>
+                )}
+                <button
+                  onClick={currentStep === 4 ? handleConfirm : handleNext}
+                  className={`px-6 py-2 rounded-lg ${
+                    canProceedToNextStep()
+                      ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  }`}
+                  disabled={!canProceedToNextStep()}
+                >
+                  {currentStep === 4 ? 'Confirm Appointment' : 'Next'}
+                </button>
+              </div>
             </div>
+
           </div>
         </div>
       </div>
