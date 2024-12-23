@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { SearchX, Loader2 } from 'lucide-react';
 
 import { appointmentService } from '../../http/appointmentService';
 import { AppointmentSearchBar } from './AppointmentSearchBar';
 import { AppointmentCard } from './AppointmentCard';
-import { AppointmentSearchCriteria } from './AppointmentSearchCriteria.ts';
+import { AppointmentSearchCriteria } from './AppointmentSearchCriteria';
+import { H2 } from '../Typography/Headings';
+import { Paragraph } from '../Typography/Paragraph';
 
 export const AppointmentSearch = () => {
   const [searchParams, setSearchParams] = useState<AppointmentSearchCriteria>({
@@ -20,21 +23,33 @@ export const AppointmentSearch = () => {
   });
 
   return (
-    <div className="space-y-4">
+    <div className="max-w-5xl mx-auto px-4 py-8">
+      <H2 className="text-green-800 mb-6">Appointments</H2>
       <AppointmentSearchBar onSearch={setSearchParams} />
       
-      {isLoading ? (
-        <div className="text-center py-4">Loading...</div>
-      ) : (
-        <div className="space-y-4">
-          {appointments?.map((appointment) => (
-            <AppointmentCard 
-              key={appointment.id} 
-              appointment={appointment} 
-            />
-          ))}
-        </div>
-      )}
+      <div className="mt-6">
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center py-12">
+            <Loader2 className="w-8 h-8 text-green-600 animate-spin mb-4" />
+            <Paragraph className="text-gray-600">Loading appointments...</Paragraph>
+          </div>
+        ) : appointments?.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-12 bg-white rounded-lg shadow-sm">
+            <SearchX className="w-12 h-12 text-gray-400 mb-4" />
+            <Paragraph className="text-gray-600">No appointments found</Paragraph>
+            <Paragraph className="text-gray-500 text-sm">Try adjusting your search criteria</Paragraph>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {appointments?.map((appointment) => (
+              <AppointmentCard 
+                key={appointment.id} 
+                appointment={appointment} 
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

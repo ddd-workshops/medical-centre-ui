@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { Clock, MapPin, User, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
@@ -21,36 +21,70 @@ export const AppointmentCard = ({ appointment }: Props) => {
     enabled: isExpanded,
   });
 
-  const statusColor = {
-    SCHEDULED: 'border-blue-500',
-    COMPLETED: 'border-green-500',
-    CANCELLED: 'border-gray-500',
+  const statusConfig = {
+    SCHEDULED: {
+      border: 'border-blue-500',
+      bg: 'bg-blue-50',
+      text: 'text-blue-700'
+    },
+    COMPLETED: {
+      border: 'border-green-500',
+      bg: 'bg-green-50',
+      text: 'text-green-700'
+    },
+    CANCELLED: {
+      border: 'border-gray-500',
+      bg: 'bg-gray-50',
+      text: 'text-gray-700'
+    },
   }[appointment.status];
 
   return (
-    <div className={`border-l-4 ${statusColor} bg-white p-4 shadow-sm`}>
+    <div className={`border-l-4 ${statusConfig.border} bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200`}>
       <div 
-        className="flex items-center justify-between cursor-pointer"
+        className="p-6 cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div className="flex-1">
-          <Paragraph className="font-semibold">{appointment.serviceType}</Paragraph>
-          <Paragraph className="text-gray-600">
-            {appointment.datetime} at {appointment.location}
-          </Paragraph>
-          <Link 
-            to={`/doctor/${appointment.doctorName}`}
-            className="text-green-600 hover:underline"
-            >Dr. {appointment.doctorName}
-            </Link>
+        <div className="flex items-start justify-between">
+          <div className="space-y-3 flex-1">
+            <div className="flex items-center gap-2">
+              <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusConfig.bg} ${statusConfig.text}`}>
+                {appointment.status}
+              </span>
+              <h3 className="font-semibold text-lg text-gray-900">
+                {appointment.serviceType}
+              </h3>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center gap-2 text-gray-600">
+                <Clock className="h-4 w-4" />
+                <span>{new Date(appointment.datetime).toLocaleString()}</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-600">
+                <MapPin className="h-4 w-4" />
+                <span>{appointment.location}</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-600">
+                <User className="h-4 w-4" />
+                <Link 
+                  to={`/doctor/${appointment.doctorName}`}
+                  className="text-green-600 hover:text-green-700 hover:underline"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Dr. {appointment.doctorName}
+                </Link>
+              </div>
+            </div>
+          </div>
+          <ChevronDown 
+            className={`h-5 w-5 text-gray-400 transform transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+          />
         </div>
-        <ChevronDown 
-          className={`transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-        />
       </div>
 
       {isExpanded && details && (
-        <div className="mt-4 pt-4 border-t">
+        <div className="px-6 pb-6 pt-2 border-t border-gray-100">
           <Paragraph>{details.notes}</Paragraph>
           
           {details.prescriptions?.length && (
