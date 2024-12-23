@@ -1,4 +1,6 @@
 import '../src/index.css';
+import "react-day-picker/src/style.css";
+
 import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
 import type { Preview } from "@storybook/react";
 import React from 'react';

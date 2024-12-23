@@ -17,7 +17,7 @@ export const AppointmentDetailedDescription = () => {
     const fetchAppointment = async () => {
       try {
         if (!id) throw new Error('Appointment ID is required');
-        const data = await appointmentService.getAppointmentById(id);
+        const data = await appointmentService.getAppointmentDetails(id);
         setAppointment(data);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');

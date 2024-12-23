@@ -9,7 +9,7 @@ import { Footer } from './components/Layout/Footer';
 import { Dashboard } from './components/Dashboard/Dashboard';
 import { Pricing } from './components/Static/Pricing';
 import { ImplantProcess } from './components/Static/ImplantProcess';
-import { AppointmentSearch } from './components/Appointments/AppointmentSearch';
+import { AppointmentBooking } from './components/Appointments/AppointmentBooking';
 import { MedicalHistory } from './components/MedicalHistory/MedicalHistory';
 import { MedicalHistoryDetails } from './components/MedicalHistory/MedicalHistoryDetails';
 import { SwaggerDocs } from './components/API/SwaggerUI';
@@ -26,6 +26,7 @@ import { RoutedClinicDetails } from './components/Clinics/RoutedClinicDetails';
 import { AppointmentDetailedDescription } from './components/Appointments/AppointmentDetailedDescription';
 import { useAuthStore } from './components/Auth/AuthStore';
 import { UpdateContactRequestForm } from './components/Profile/UpdateContactRequestForm';
+import { AppointmentSearch } from './components/Appointments/AppointmentSearch';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -56,7 +57,8 @@ export function App() {
               )}
               <Routes>
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/book-appointment" element={<AppointmentSearch />} />
+                <Route path="/book-appointment" element={<AppointmentBooking />} />
+                <Route path="/appointments/search" element={<AppointmentSearch />} />
                 <Route path="/medical-history" element={<MedicalHistory />} />
                 <Route path="/medical-history/:id" element={<MedicalHistoryDetails />} />
                 <Route path="/appointments/:id" element={<AppointmentDetailedDescription />} />

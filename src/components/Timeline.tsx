@@ -74,6 +74,16 @@ export const Timeline: React.FC<TimelineProps> = ({ appointments }) => {
       ) : (
         <p className="text-gray-600">No upcoming appointments scheduled.</p>
       )}
+
+      <div className="mt-6 text-center">
+        <Link
+          to="/appointments/search"
+          className="text-emerald-600 hover:text-emerald-700 font-medium inline-flex gap-1"
+        >
+          Show all appointments
+          <span className="inline-block transform translate-y-px">→</span>
+        </Link>
+      </div>
     </div>
   );
 };

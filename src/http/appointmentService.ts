@@ -9,12 +9,20 @@ import type {
   GetAppointmentByIdResponse,
 } from '../contract/types';
 
+export type AppointmentSearchParams = {
+  query?: string;
+  status?: string;
+  dateFrom?: Date;
+  dateTo?: Date;
+};
+
 const endpoints = {
   create: '/appointments',
   getById: (id: string) => `/appointments/${id}`,
   update: (id: string) => `/appointments/${id}`,
   delete: (id: string) => `/appointments/${id}`,
-  getAll: '/appointments'
+  getAll: '/appointments',
+  search: '/appointments'
 };
 
 export const appointmentService = {
@@ -44,10 +52,15 @@ export const appointmentService = {
     );
   },
 
-  getAppointmentById: async (appointmentId: string): Promise<AppointmentDetails> => {
+  getAppointmentDetails: async (appointmentId: string): Promise<AppointmentDetails> => {
     const { data } = await apiClient.get<GetAppointmentByIdResponse>(
       endpoints.getById(appointmentId)
     );
+    return data;
+  },
+
+  searchAppointments: async (params: AppointmentSearchParams): Promise<AppointmentBrief[]> => {
+    const { data } = await apiClient.get<GetAppointmentsResponse>(endpoints.search, { params });
     return data;
   },
 };
