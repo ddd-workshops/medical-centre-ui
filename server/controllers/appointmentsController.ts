@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import type { Request, Response } from 'express';
 
-import { generateFakeAppointments } from '../fake/appointments';
+import { generateFakeAppointments, generateFakeAppointmentsBrief } from '../fake/appointments';
 import { AppointmentDetails } from '../contract/types';
 
 const appointments: AppointmentDetails[] = generateFakeAppointments();
@@ -44,7 +44,7 @@ appointmentsRouter.get('/', (req: Request, res: Response) => {
     );
   }
 
-  res.json(filtered);
+  res.json(generateFakeAppointmentsBrief(filtered));
 });
 
 appointmentsRouter.get('/:id', (req: Request, res: Response) => {
