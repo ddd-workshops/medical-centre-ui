@@ -8,8 +8,43 @@ const appointments: AppointmentDetails[] = generateFakeAppointments();
 
 export const appointmentsRouter = Router();
 
-appointmentsRouter.get('/', (_req: Request, res: Response) => {
-  res.json(appointments);
+appointmentsRouter.get('/', (req: Request, res: Response) => {
+  let filtered = [...appointments];
+
+  // Filter by search query
+  if (req.query.query) {
+    const query = (req.query.query as string).toLowerCase();
+    filtered = filtered.filter(appointment => 
+      appointment.patient.fullName.toLowerCase().includes(query) ||
+      appointment.doctor.fullName.toLowerCase().includes(query) ||
+      appointment.serviceType.name.toLowerCase().includes(query) ||
+      appointment.prescriptions?.some(p => p.toLowerCase().includes(query))
+    );
+  }
+
+  // Filter by status
+  if (req.query.status) {
+    filtered = filtered.filter(appointment => 
+      appointment.status === req.query.status
+    );
+  }
+
+  // Filter by date range
+  if (req.query.dateFrom) {
+    const dateFrom = new Date(req.query.dateFrom as string);
+    filtered = filtered.filter(appointment => 
+      new Date(appointment.datetime) >= dateFrom
+    );
+  }
+
+  if (req.query.dateTo) {
+    const dateTo = new Date(req.query.dateTo as string);
+    filtered = filtered.filter(appointment => 
+      new Date(appointment.datetime) <= dateTo
+    );
+  }
+
+  res.json(filtered);
 });
 
 appointmentsRouter.get('/:id', (req: Request, res: Response) => {

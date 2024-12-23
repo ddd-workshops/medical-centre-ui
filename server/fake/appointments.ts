@@ -10,7 +10,7 @@ import { generateFakePatientBrief } from './patient';
 
 const clinicBriefs = generateFakeClinicBriefs();
 
-export const generateFakeAppointments = (count = 0): AppointmentDetails[] => {
+export const generateFakeAppointments = (count = 3): AppointmentDetails[] => {
   count ??= faker.number.int({ min: 5, max: 10 });
   const appointments: AppointmentDetails[] = [];
   const statuses: AppointmentDetails['status'][] = ['SCHEDULED', 'COMPLETED', 'CANCELLED'];

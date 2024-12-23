@@ -21,11 +21,11 @@ export const AppointmentSearchBar = ({ onSearch }: Props) => {
   return (
     <div className="flex gap-4 p-4 bg-white shadow-sm">
       <TextInput
-        label='appointment'
+        label='Appointment'
         placeholder="Search appointments..."
         value={params.query}
         onChange={(query) => handleChange({ query })}
-        className="flex-1"
+        
       />
       <Dropdown
         label="Status"

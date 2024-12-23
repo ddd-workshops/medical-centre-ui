@@ -9,7 +9,7 @@ import { Paragraph } from '../Typography/Paragraph';
 
 export const AppointmentDetailedDescription = () => {
   const { id } = useParams<{ id: string }>();
-  const [appointment, setAppointment] = useState<Appointment | null>(null);
+  const [appointment, setAppointment] = useState<AppointmentDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,16 +45,16 @@ export const AppointmentDetailedDescription = () => {
         <div className="bg-green-50 p-4 rounded-lg">
           <H3 className="text-green-700 mb-3">Basic Information</H3>
           <div className="space-y-2">
-            <Paragraph>Date: {new Date(appointment.date).toLocaleDateString()}</Paragraph>
-            <Paragraph>Time: {new Date(appointment.date).toLocaleTimeString()}</Paragraph>
-            <Paragraph>Doctor: {appointment.doctorName}</Paragraph>
-            <Paragraph>Specialty: {appointment.doctor.specialty}</Paragraph>
+            <Paragraph>Date: {new Date(appointment.datetime).toLocaleDateString()}</Paragraph>
+            <Paragraph>Time: {new Date(appointment.datetime).toLocaleTimeString()}</Paragraph>
+            <Paragraph>Doctor: {appointment.doctor.fullName}</Paragraph>
+            <Paragraph>Specialty: {appointment.doctor.specialties.join(', ')}</Paragraph>
           </div>
         </div>
 
         <div className="bg-green-50 p-4 rounded-lg">
-          <H3 className="text-green-700 mb-3">Medical Notes</H3>
-          <Paragraph>{appointment.medicalNotes || 'No medical notes available'}</Paragraph>
+          <H3 className="text-green-700 mb-3">Notes</H3>
+          <Paragraph>{appointment.notes || 'No notes available'}</Paragraph>
         </div>
 
         <div className="bg-green-50 p-4 rounded-lg">

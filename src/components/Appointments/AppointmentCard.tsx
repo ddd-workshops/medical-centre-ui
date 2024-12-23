@@ -39,9 +39,9 @@ export const AppointmentCard = ({ appointment }: Props) => {
             {appointment.datetime} at {appointment.location}
           </Paragraph>
           <Link 
-            to={`/doctor/${appointment.doctor}`}
+            to={`/doctor/${appointment.doctorName}`}
             className="text-green-600 hover:underline"
-            >Dr. {appointment.doctor}
+            >Dr. {appointment.doctorName}
             </Link>
         </div>
         <ChevronDown 
