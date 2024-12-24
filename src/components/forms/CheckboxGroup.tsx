@@ -1,4 +1,7 @@
 import { FC, useState, useEffect } from 'react';
+import { Checkbox } from './Checkbox';
+
+type Orientation = 'VERTICAL' | 'HORIZONTAL';
 
 type Option = {
   id: string;
@@ -12,21 +15,23 @@ type CheckboxGroupProps = {
   values: string[];
   onChange: (values: string[]) => void;
   className?: string;
+  orientation?: Orientation;
 };
 
 export const CheckboxGroup: FC<CheckboxGroupProps> = ({ 
   header,
   options, 
   values, 
-  onChange, 
+  onChange,
+  orientation = 'VERTICAL', 
   className = '' 
 }) => {
   const [localValues, setLocalValues] = useState<string[]>(values);
 
-  const handleChange = (value: string) => {
-    const newValues = localValues.includes(value)
-      ? localValues.filter((v) => v !== value)
-      : [...localValues, value];
+  const handleChange = (value: string, checked: boolean) => {
+    const newValues = checked
+      ? [...localValues, value]
+      : localValues.filter((v) => v !== value);
     
     setLocalValues(newValues);
     onChange(newValues);
@@ -36,23 +41,21 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
     setLocalValues(values);
   }, [values]);
 
+  const containerClasses = orientation === 'VERTICAL' 
+    ? 'space-y-4' 
+    : 'flex flex-row flex-wrap gap-4';
+
   return (
-    <div className={`space-y-4 ${className}`}>
-      {header && <div className="text-sm font-medium text-green-800 mb-2">{header}</div>}
+    <div className={`${containerClasses} ${className}`}>
+      {header && <div className="text-sm font-medium text-green-800 mb-2 w-full">{header}</div>}
       {options.map((option) => (
-        <div key={option.id} className="flex items-center space-x-3">
-          <input
-            type="checkbox"
-            id={option.id}
-            value={option.value}
-            checked={localValues.includes(option.value)}
-            onChange={() => handleChange(option.value)}
-            className="accent-emerald-600 text-green-600 focus:ring-green-500 h-4 w-4 rounded"
-          />
-          <label htmlFor={option.id} className="text-sm text-green-700">
-            {option.label}
-          </label>
-        </div>
+        <Checkbox
+          key={option.id}
+          id={option.id}
+          label={option.label}
+          checked={localValues.includes(option.value)}
+          onChange={(checked) => handleChange(option.value, checked)}
+        />
       ))}
     </div>
   );

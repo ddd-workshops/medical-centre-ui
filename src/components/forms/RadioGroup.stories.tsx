@@ -6,32 +6,43 @@ const meta: Meta<typeof RadioGroup> = {
   title: 'BSA/Forms/RadioGroup',
   component: RadioGroup,
   tags: ['autodocs'],
-  args: {
-    onChange: action('option changed'),
-  },
 };
 
 export default meta;
 type Story = StoryObj<typeof RadioGroup>;
 
-const sampleOptions = [
-  { id: 'option1', label: 'Option 1', value: 'option1' },
-  { id: 'option2', label: 'Option 2', value: 'option2' },
-  { id: 'option3', label: 'Option 3', value: 'option3' },
+const options = [
+  { id: 'cleaning', label: 'Regular Cleaning', value: 'CLEANING' },
+  { id: 'whitening', label: 'Teeth Whitening', value: 'WHITENING' },
+  { id: 'root-canal', label: 'Root Canal Treatment', value: 'ROOT_CANAL' },
 ];
 
-export const Default: Story = {
+export const Vertical: Story = {
   args: {
-    header: 'Select an option',
-    options: sampleOptions,
+    header: 'Select Treatment Type',
+    options,
     value: '',
+    onChange: action('onChange'),
   },
 };
 
-export const WithPreselected: Story = {
+export const VerticalWithSelection: Story = {
   args: {
-    header: 'Select an option',
-    options: sampleOptions,
-    value: 'option2',
+    ...Vertical.args,
+    value: 'WHITENING',
+  },
+};
+
+export const Horizontal: Story = {
+  args: {
+    ...Vertical.args,
+    orientation: 'HORIZONTAL',
+  },
+};
+
+export const HorizontalWithSelection: Story = {
+  args: {
+    ...VerticalWithSelection.args,
+    orientation: 'HORIZONTAL',
   },
 };
