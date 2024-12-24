@@ -10,16 +10,17 @@ type AutocompleteProps = {
   options: Option[];
   renderInput?: (params: { 
     value: string; 
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (phrase: string) => void;
     onFocus?: () => void;
   }) => React.ReactNode;
   onSelect: (option: Option) => void;
   maxItems?: number;
+  label?: string;
 };
 
 export const Autocomplete = ({
-  options, onSelect, maxItems = 5,
-  renderInput = ({ value, onChange }) => ( <TextInput value={value} onChange={onChange} placeholder="Search..." /> ),
+  options, onSelect, maxItems = 5, label = 'Search',
+  renderInput = ({ value, onChange }) => ( <TextInput value={value} onChange={onChange} placeholder="Search..." label={label} /> ),
 }: AutocompleteProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -54,9 +55,8 @@ export const Autocomplete = ({
     );
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
+  const handleInputChange = (phrase: string) => {
+    setInputValue(phrase);
     setIsOpen(true);
   };
 

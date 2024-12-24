@@ -25,6 +25,7 @@ export const Default: Story = {
     options,
     renderInput: ({ value, onChange }) => (
       <TextInput
+        label="Doctor"
         value={value}
         onChange={onChange}
         placeholder="Search for a doctor..."
