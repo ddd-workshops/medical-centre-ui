@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { H3 } from './Typography/Headings';
 import { Paragraph } from './Typography/Paragraph';
-import { MessageVariant, messageStyles, messageHoverBackgrounds } from './MessageVariant/MessageVariant';
+import { MessageType, messageStyles, messageHoverBackgrounds } from './MessageType/MessageType';
 
 interface TileItem {
   title: string;
   description: string;
   link?: string;
-  variant?: MessageVariant;
+  messageType?: MessageType;
 }
 
 interface TileListProps {
@@ -21,12 +21,12 @@ export const TileList: React.FC<TileListProps> = ({ items, className = '' }) => 
   return (
     <div className={`grid grid-cols-1 gap-4 ${className}`}>
       {items.map((item, index) => {
-        const variant = item.variant ?? MessageVariant.INFO;
+        const type = item.messageType ?? MessageType.INFO;
         return (
           <div 
             key={index} 
             className={`rounded-lg p-4 shadow-sm hover:shadow-md transition-all border-l-4 
-              ${messageStyles[variant]} ${messageHoverBackgrounds[variant]}`}
+              ${messageStyles[type]} ${messageHoverBackgrounds[type]}`}
           >
             {item.link ? (
               <Link to={item.link} className="block group">
