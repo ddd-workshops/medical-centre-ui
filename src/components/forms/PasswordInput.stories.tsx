@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { PasswordInput } from './PasswordInput';
 
 const meta = {
-  title: 'BSA/Forms/PasswordInput',
+  title: 'UI/Forms/PasswordInput',
   component: PasswordInput,
   parameters: {
     layout: 'centered',

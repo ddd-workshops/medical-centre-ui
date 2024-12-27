@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { PhoneInput } from './PhoneInput';
 
 const meta = {
-  title: 'BSA/Forms/PhoneInput',
+  title: 'UI/Forms/PhoneInput',
   component: PhoneInput,
   parameters: {
     layout: 'centered',

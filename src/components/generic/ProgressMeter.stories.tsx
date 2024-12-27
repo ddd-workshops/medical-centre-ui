@@ -4,23 +4,22 @@ import { Button } from './Button';
 import { useState } from 'react';
 
 const meta = {
-  title: 'BSA/Atoms/ProgressMeter',
+  title: 'UI/Atoms/ProgressMeter',
   component: ProgressMeter,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  args: {
+    value: 75,
+    label: 'Progress'
+  },
 } satisfies Meta<typeof ProgressMeter>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    value: 75,
-    label: 'Progress'
-  }
-};
+export const Default: Story = {};
 
 export const Sizes: Story = {
   render: () => (
@@ -35,8 +34,8 @@ export const Sizes: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="space-y-4 w-64">
-      <ProgressMeter variant="PRIMARY" value={75} label="Primary" />
-      <ProgressMeter variant="GRADIENT" value={75} label="Gradient" />
+      <ProgressMeter fill="SOLID" value={75} label="Primary" />
+      <ProgressMeter fill="GRADIENT" value={75} label="Gradient" />
     </div>
   )
 };

@@ -1,9 +1,8 @@
 import type { FC } from 'react';
-
-export type SPINNER_SIZE = 'SMALL' | 'MEDIUM' | 'LARGE';
+import { Size } from '../DesignEnums/Sizes';
 
 interface SpinnerProps {
-  size?: SPINNER_SIZE;
+  size?: Size;
 }
 
 export const Spinner: FC<SpinnerProps> = ({ size = 'MEDIUM' }) => {

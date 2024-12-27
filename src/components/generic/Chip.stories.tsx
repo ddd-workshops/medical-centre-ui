@@ -5,7 +5,7 @@ import { Chip } from './Chip';
 import { ChipList } from './ChipList';
 
 const meta = {
-  title: 'BSA/Atoms/Chip',
+  title: 'UI/Atoms/Chip',
   component: Chip,
   parameters: {
     layout: 'centered',
@@ -31,7 +31,7 @@ export const Variants: Story = {
     <div className="flex gap-2">
       <Chip variant="PRIMARY">General</Chip>
       <Chip variant="SECONDARY">Orthodontics</Chip>
-      <Chip variant="OUTLINE">Implants</Chip>
+      <Chip variant="OUTLINED">Implants</Chip>
       <Chip variant="WARNING">Urgent</Chip>
       <Chip variant="ERROR">Cancelled</Chip>
     </div>

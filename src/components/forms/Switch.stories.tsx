@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Switch } from './Switch';
 
 const meta: Meta<typeof Switch> = {
-  title: 'BSA/Forms/Switch',
+  title: 'UI/Forms/Switch',
   component: Switch,
   tags: ['autodocs'],
   parameters: {

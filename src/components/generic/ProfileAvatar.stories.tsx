@@ -4,7 +4,7 @@ import type { PatientProfile } from '../../contract/types';
 import { ProfileAvatar } from './Avatar';
 
 const meta = {
-  title: 'BSA/Molecules/ProfileAvatar',
+  title: 'UI/Molecules/ProfileAvatar',
   component: ProfileAvatar,
   parameters: {
     layout: 'centered',

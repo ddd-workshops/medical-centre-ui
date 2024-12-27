@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TileList } from './TileList';
 import { BrowserRouter } from 'react-router-dom';
-import { MessageType } from './MessageType/MessageType';
+import { MessageType } from './DesignEnums/MessageType';
 
 const meta = {
-  title: 'BSA/Molecules/TileList',
+  title: 'UI/Molecules/TileList',
   component: TileList,
   decorators: [(Story) => (
     <BrowserRouter>

@@ -1,10 +1,11 @@
 import type { ButtonVariant } from './Button';
 import { Button } from './Button';
 import { cn } from '../../utils/cn';
+import { ReactNode } from 'react';
 
 type ButtonGroupItem = {
   id: string;
-  label: string;
+  label: ReactNode;
   onClick: () => void;
   disabled?: boolean;
 };

@@ -6,7 +6,7 @@ import { Paragraph } from './Paragraph';
 import { A } from './A';
 
 const meta: Meta = {
-  title: 'BSA/Typography',
+  title: 'UI/Typography',
   parameters: {
     layout: 'centered',
   },

@@ -1,14 +1,13 @@
 import { cn } from '../../utils/cn';
-
-export type ParagraphSize = 'SMALL' | 'MEDIUM' | 'LARGE';
+import { Size } from '../DesignEnums/Sizes';
 
 interface ParagraphProps {
   children: React.ReactNode;
-  size?: ParagraphSize;
+  size?: Size;
   className?: string;
 }
 
-const sizeClasses: Record<ParagraphSize, string> = {
+const sizeClasses: Record<Size, string> = {
   SMALL: 'text-sm',
   MEDIUM: 'text-base',
   LARGE: 'text-lg',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Spinner } from './Spinner';
 
 const meta: Meta<typeof Spinner> = {
-  title: 'BSA/Atoms/Spinner',
+  title: 'UI/Atoms/Spinner',
   component: Spinner,
   parameters: {
     layout: 'centered',

@@ -1,29 +1,30 @@
 import type { ReactNode } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import { Size } from '../DesignEnums/Sizes';
+import { Variant } from '../DesignEnums/Variants';
 
-export type ChipVariant = 'PRIMARY' | 'SECONDARY' | 'OUTLINE' | 'WARNING' | 'ERROR';
-export type ChipSize = 'SMALL' | 'MEDIUM' | 'LARGE';
+export type ChipVariant = Variant | 'WARNING' | 'ERROR';
 
 interface ChipProps {
   children: ReactNode;
   variant?: ChipVariant;
-  size?: ChipSize;
+  size?: Size;
   icon?: LucideIcon;
   onClick?: () => void;
   onRemove?: () => void;
   className?: string;
 }
 
-const variantStyles = {
+const variantStyles: Record<ChipVariant, string> = {
   PRIMARY: 'bg-green-100 text-green-800 hover:bg-green-200',
   SECONDARY: 'bg-gray-100 text-gray-800 hover:bg-gray-200',
-  OUTLINE: 'border border-green-300 text-green-700 hover:bg-green-50',
+  OUTLINED: 'border border-green-300 text-green-700 hover:bg-green-50',
   WARNING: 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200',
   ERROR: 'bg-red-100 text-red-800 hover:bg-red-200'
 };
 
-const sizeStyles = {
+const sizeStyles: Record<Size, string> = {
   SMALL: 'text-xs px-2 py-0.5',
   MEDIUM: 'text-sm px-2.5 py-1',
   LARGE: 'text-base px-3 py-1.5'

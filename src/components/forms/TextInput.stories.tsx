@@ -3,7 +3,7 @@ import { TextInput } from './TextInput';
 import { ComponentProps, useState } from 'react';
 
 const meta: Meta<typeof TextInput> = {
-  title: 'BSA/Forms/TextInput',
+  title: 'UI/Forms/TextInput',
   component: TextInput,
   tags: ['autodocs'],
 };

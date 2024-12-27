@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { DateRangePicker } from './DateRangePicker';
 
 const meta = {
-  title: 'BSA/Forms/DateRangePicker',
+  title: 'UI/Forms/DateRangePicker',
   component: DateRangePicker,
   parameters: {
     layout: 'centered',

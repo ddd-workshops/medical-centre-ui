@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Stepper } from './Stepper';
 
 const meta: Meta<typeof Stepper> = {
-  title: 'BSA/Atoms/Stepper',
+  title: 'UI/Atoms/Stepper',
   component: Stepper,
   tags: ['autodocs'],
   parameters: {

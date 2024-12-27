@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Avatar } from './Avatar';
 
 const meta = {
-  title: 'BSA/Molecules/Avatar',
+  title: 'UI/Molecules/Avatar',
   component: Avatar,
   parameters: {
     layout: 'centered',

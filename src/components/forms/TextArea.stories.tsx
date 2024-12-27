@@ -3,7 +3,7 @@ import { TextArea } from './TextArea';
 import { ComponentProps, useState } from 'react';
 
 const meta: Meta<typeof TextArea> = {
-  title: 'BSA/Forms/TextArea',
+  title: 'UI/Forms/TextArea',
   component: TextArea,
   tags: ['autodocs'],
 };

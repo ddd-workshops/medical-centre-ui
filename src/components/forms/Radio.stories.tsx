@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Radio } from './Radio';
 
 const meta: Meta<typeof Radio> = {
-  title: 'BSA/Forms/Radio',
+  title: 'UI/Forms/Radio',
   component: Radio,
   tags: ['autodocs'],
 };

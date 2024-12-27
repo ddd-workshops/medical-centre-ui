@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { DatePicker } from './DatePicker';
 
 const meta = {
-  title: 'BSA/Forms/DatePicker',
+  title: 'UI/Forms/DatePicker',
   component: DatePicker,
   parameters: {
     layout: 'centered',

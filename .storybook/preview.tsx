@@ -15,7 +15,11 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Atoms', 'Molecules', 'Forms', 'Notifications'],
+        order: [
+          'UI',
+          ['Typography', 'Forms', 'Atoms', 'Molecules'], 
+          'BSA'
+        ],
       },
     }
   },

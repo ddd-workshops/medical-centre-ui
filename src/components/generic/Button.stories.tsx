@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Button } from './Button';
 
 const meta: Meta<typeof Button> = {
-  title: 'BSA/Atoms/Button',
+  title: 'UI/Atoms/Button',
   component: Button,
   tags: ['autodocs'],
   args: {
@@ -40,7 +40,7 @@ export const Small: Story = {
 export const Big: Story = {
   args: {
     children: 'Big Button',
-    size: 'BIG',
+    size: 'LARGE',
   },
 };
 

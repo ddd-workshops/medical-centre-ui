@@ -1,9 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { BrowserRouter } from 'react-router-dom';
 import { ClinicDetails } from './ClinicDetails';
 
 const meta: Meta<typeof ClinicDetails> = {
   title: 'BSA/Clinics/ClinicDetails',
   component: ClinicDetails,
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
   tags: ['autodocs'],
 };
 
@@ -68,7 +76,16 @@ export const Default: Story = {
           availability: false,
           description: 'Currently under renovation'
         }
-      ]
+      ],
+      openingHours: {
+        MONDAY: '09:00-18:00',
+        TUESDAY: '09:00-18:00',
+        WEDNESDAY: '09:00-18:00',
+        THURSDAY: '09:00-18:00',
+        FRIDAY: '09:00-17:00',
+        SATURDAY: '10:00-14:00',
+        SUNDAY: 'closed'
+      }
     }
   }
 };

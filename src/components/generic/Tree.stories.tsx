@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Tree, type TreeNode } from './Tree';
 
 const meta: Meta<typeof Tree> = {
-  title: 'BSA/Atoms/Tree',
+  title: 'UI/Atoms/Tree',
   component: Tree,
   parameters: {
     layout: 'centered',

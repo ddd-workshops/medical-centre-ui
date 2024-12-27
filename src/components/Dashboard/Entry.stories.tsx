@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Entry } from './Entry';
 import { BrowserRouter } from 'react-router-dom';
-import { MessageType } from '../MessageType/MessageType';
+import { MessageType } from '../DesignEnums/MessageType';
 
 const meta: Meta<typeof Entry> = {
-  title: 'BSA/Molecules/Entry',
+  title: 'UI/Molecules/Entry',
   component: Entry,
   decorators: [(Story) => (
     <BrowserRouter>

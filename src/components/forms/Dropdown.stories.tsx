@@ -9,7 +9,7 @@ const sampleItems = {
 };
 
 const meta = {
-  title: 'BSA/Forms/Dropdown',
+  title: 'UI/Forms/Dropdown',
   component: Dropdown,
   parameters: {
     layout: 'centered',
@@ -49,7 +49,7 @@ export const Variants: Story = {
     <div className="space-y-4 w-64">
       <Dropdown label="Primary Style" items={sampleItems} variant="PRIMARY" onChanged={action('changed')} />
       <Dropdown label="Secondary Style" items={sampleItems} variant="SECONDARY" onChanged={action('changed')} />
-      <Dropdown label="Outline Style" items={sampleItems} variant="OUTLINE" onChanged={action('changed')} />
+      <Dropdown label="Outline Style" items={sampleItems} variant="OUTLINED" onChanged={action('changed')} />
     </div>
   ),
 };

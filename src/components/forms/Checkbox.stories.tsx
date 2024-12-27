@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Checkbox } from './Checkbox';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'BSA/Forms/Checkbox',
+  title: 'UI/Forms/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
 };

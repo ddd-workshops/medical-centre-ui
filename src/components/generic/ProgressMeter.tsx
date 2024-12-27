@@ -1,30 +1,25 @@
 import { cn } from '../../utils/cn';
+import { Size } from '../DesignEnums/Sizes';
 
-export type ProgressMeterSize = 'SMALL' | 'MEDIUM' | 'LARGE';
-export type ProgressMeterVariant = 'PRIMARY' | 'GRADIENT';
+export type ProgressMeterFill = 'SOLID' | 'GRADIENT';
 
 interface ProgressMeterProps {
   value: number;
   label?: string;
   className?: string;
-  size?: ProgressMeterSize;
-  variant?: ProgressMeterVariant;
+  size?: Size;
+  fill?: ProgressMeterFill;
   showValue?: boolean;
 }
 
-const sizeClasses = {
+const sizeClasses: Record<Size, string> = {
   SMALL: 'h-1.5',
   MEDIUM: 'h-2.5',
   LARGE: 'h-4'
 };
 
-const variantClasses = {
-  PRIMARY: 'bg-green-600',
-  GRADIENT: 'bg-gradient-to-r from-green-500 to-green-600'
-};
-
-const getProgressColor = (value: number, variant: ProgressMeterVariant) => {
-  if (variant === 'PRIMARY') {
+const getProgressColor = (value: number, fill: ProgressMeterFill) => {
+  if (fill === 'SOLID') {
     if (value <= 33) return 'bg-green-300';
     if (value <= 66) return 'bg-green-500';
     return 'bg-green-600';
@@ -40,11 +35,11 @@ export function ProgressMeter({
   className, 
   label, 
   size = 'MEDIUM',
-  variant = 'GRADIENT',
+  fill = 'GRADIENT',
   showValue = true 
 }: ProgressMeterProps) {
   const clampedValue = Math.min(100, Math.max(0, value));
-  const progressColor = getProgressColor(clampedValue, variant);
+  const progressColor = getProgressColor(clampedValue, fill);
 
   return (
     <div className={cn('w-full', className)} role="progressbar" aria-valuenow={clampedValue} aria-valuemin={0} aria-valuemax={100}>

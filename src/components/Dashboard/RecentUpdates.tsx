@@ -1,5 +1,5 @@
 import { Card } from '../generic/Card';
-import { MessageType } from '../MessageType/MessageType';
+import { MessageType } from '../DesignEnums/MessageType';
 import { Entry } from './Entry';
 
 export const RecentUpdates = () => {

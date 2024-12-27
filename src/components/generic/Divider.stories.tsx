@@ -3,7 +3,7 @@ import { Divider } from './Divider';
 import { Paragraph } from '../Typography/Paragraph';
 
 const meta = {
-  title: 'BSA/Atoms/Divider',
+  title: 'UI/Atoms/Divider',
   component: Divider,
   parameters: {
     layout: 'centered',

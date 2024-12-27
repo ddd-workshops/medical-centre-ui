@@ -1,33 +1,32 @@
 import { cn } from '../../utils/cn';
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
-
-export type DropdownSize = 'SMALL' | 'MEDIUM' | 'LARGE';
-export type DropdownVariant = 'PRIMARY' | 'SECONDARY' | 'OUTLINE';
+import { Variant } from '../DesignEnums/Variants';
+import { Size } from '../DesignEnums/Sizes';
 
 interface DropdownProps {
-  label: string;  // new required prop
+  label: string;
   items: Record<string, string>;
   onChanged: (key: string) => void;
   placeholder?: string;
   disabled?: boolean;
   error?: string;
   value?: string;
-  size?: DropdownSize;
-  variant?: DropdownVariant;
+  size?: Size;
+  variant?: Variant;
   className?: string;
 }
 
-const sizeClasses = {
+const sizeClasses: Record<Size, string> = {
   SMALL: 'h-8 text-sm',
   MEDIUM: 'h-10 text-base',
   LARGE: 'h-12 text-lg'
 };
 
-const variantClasses = {
+const variantClasses: Record<Variant, string> = {
   PRIMARY: 'bg-green-600 text-white border-green-600 hover:bg-green-700',
   SECONDARY: 'bg-green-100 text-green-800 border-green-200 hover:bg-green-200',
-  OUTLINE: 'bg-white text-green-800 border-green-300 hover:border-green-400'
+  OUTLINED: 'bg-white text-green-800 border-green-300 hover:border-green-400'
 };
 
 export function Dropdown({
@@ -39,7 +38,7 @@ export function Dropdown({
   error,
   value = '',
   size = 'MEDIUM',
-  variant = 'OUTLINE',
+  variant = 'OUTLINED',
   className
 }: DropdownProps) {
   const [localState, setLocalState] = useState(value);

@@ -5,7 +5,7 @@ import * as RUITooltip from "@radix-ui/react-tooltip";
 import { PlusIcon } from 'lucide-react';
 
 const meta = {
-  title: 'BSA/Atoms/Tooltip',
+  title: 'UI/Atoms/Tooltip',
   component: Tooltip,
   parameters: {
     layout: 'centered',

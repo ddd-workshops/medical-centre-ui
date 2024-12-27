@@ -1,14 +1,15 @@
 import React from 'react';
 import type { PatientProfile } from '../../contract/types';
+import { Size } from '../DesignEnums/Sizes';
 
 type AvatarProps =
   | { src: string }
   | { children: string; }
   & {
-    size?: 'SMALL' | 'MEDIUM' | 'LARGE';
+    size?: Size
   };
 
-const sizeClasses = {
+const sizeClasses: Record<Size, string> = {
   SMALL: 'w-8 h-8 text-sm',
   MEDIUM: 'w-12 h-12 text-lg',
   LARGE: 'w-16 h-16 text-xl',
@@ -31,7 +32,7 @@ export const Avatar: React.FC<AvatarProps> = ({ size = 'MEDIUM', ...props }) => 
 
 type ProfileAvatarProps = {
   profile: PatientProfile;
-  size?: 'SMALL' | 'MEDIUM' | 'LARGE';
+  size?: Size;
 };
 
 export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({ profile, size }) => {

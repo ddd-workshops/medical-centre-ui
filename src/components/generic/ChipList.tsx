@@ -1,11 +1,12 @@
 import type { LucideIcon } from 'lucide-react';
-import { Chip, type ChipVariant, type ChipSize } from './Chip';
+import { Chip, type ChipVariant } from './Chip';
 import { cn } from '../../utils/cn';
+import { Size } from '../DesignEnums/Sizes';
 
 interface ChipListProps {
   items: string[];
   variant?: ChipVariant;
-  size?: ChipSize;
+  size?: Size;
   icon?: LucideIcon;
   onRemove?: (item: string) => void;
   onClick?: (item: string) => void;

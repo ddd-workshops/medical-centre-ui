@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { ButtonGroup } from './ButtonGroup';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const meta = {
-  title: 'BSA/Atoms/ButtonGroup',
+  title: 'UI/Atoms/ButtonGroup',
   component: ButtonGroup,
   tags: ['autodocs'],
 } satisfies Meta<typeof ButtonGroup>;
@@ -26,5 +27,23 @@ export const Secondary: Story = {
   args: {
     ...Primary.args,
     variant: 'SECONDARY'
+  }
+};
+
+export const IconOnly: Story = {
+  args: {
+    variant: 'SECONDARY',
+    items: [
+      { 
+        id: 'prev', 
+        label: <ArrowLeft className="w-4 h-4" />, 
+        onClick: action('previous-clicked') 
+      },
+      { 
+        id: 'next', 
+        label: <ArrowRight className="w-4 h-4" />, 
+        onClick: action('next-clicked') 
+      }
+    ]
   }
 };

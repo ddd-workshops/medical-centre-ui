@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { OpeningHours } from './OpeningHours';
 
 const meta = {
-  title: 'BSA/Molecules/OpeningHours',
+  title: 'UI/Molecules/OpeningHours',
   component: OpeningHours,
   parameters: {
     layout: 'padded',
