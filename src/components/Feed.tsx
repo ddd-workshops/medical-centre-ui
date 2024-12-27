@@ -1,5 +1,5 @@
 import { Activity, CalendarClock, FileText, MessageSquare, Stethoscope, User } from 'lucide-react';
-import { Paragraph } from './Typography/Paragraph';
+import { Paragraph } from '../ui-library/Typography/Paragraph';
 
 export type FeedItemType = 'APPOINTMENT' | 'DIAGNOSIS' | 'PRESCRIPTION' | 'CHECKUP' | 'REGISTRATION' | 'COMMENT';
 

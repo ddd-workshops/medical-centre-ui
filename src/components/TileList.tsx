@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { H3 } from './Typography/Headings';
-import { Paragraph } from './Typography/Paragraph';
-import { MessageType, messageStyles, messageHoverBackgrounds } from './DesignEnums/MessageType';
+import { H3 } from '../ui-library/Typography/Headings';
+import { Paragraph } from '../ui-library/Typography/Paragraph';
+import { MessageType, messageStyles, messageHoverBackgrounds } from '../ui-library/DesignEnums/MessageType';
 
 interface TileItem {
   title: string;

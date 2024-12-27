@@ -5,10 +5,10 @@ import { Calendar, MapPin, User, Clock, Stethoscope } from 'lucide-react';
 import { formatCurrency } from '../../utils/formatCurrency';
 import 'react-day-picker/dist/style.css';
 
-import { Stepper } from '../generic/Stepper';
+import { Stepper } from '../../ui-library/Generic/Stepper';
 import { TimeSlots } from './TimeSlots';
 import { TileChooser } from './TileChooser';
-import { H2, H3 } from '../Typography/Headings';
+import { H2, H3 } from '../../ui-library/Typography/Headings';
 
 // Mock data
 const services = [

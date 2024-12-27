@@ -1,6 +1,6 @@
 import type { DoctorBrief } from '../../contract/types';
 import { Link } from 'react-router-dom';
-import { H3 } from '../Typography/Headings';
+import { H3 } from '../../ui-library/Typography/Headings';
 import { User } from 'lucide-react';
 
 interface DoctorsListProps {

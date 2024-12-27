@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from './AuthStore';
-import { PasswordInput } from '../forms/PasswordInput';
-import { Button } from '../generic/Button';
-import { TextInput } from '../forms/TextInput';
-import { H2 } from '../Typography/Headings';
+import { PasswordInput } from '../../ui-library/Forms/PasswordInput';
+import { Button } from '../../ui-library/Generic/Button';
+import { TextInput } from '../../ui-library/Forms/TextInput';
+import { H2 } from '../../ui-library/Typography/Headings';
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState({

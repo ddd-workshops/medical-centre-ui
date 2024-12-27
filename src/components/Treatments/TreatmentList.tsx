@@ -1,7 +1,7 @@
 import type { Treatment } from '../../contract/types';
 import { formatCurrency } from '../../utils/formatCurrency';
-import { H3 } from '../Typography/Headings';
-import { Paragraph } from '../Typography/Paragraph';
+import { H3 } from '../../ui-library/Typography/Headings';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
 
 interface TreatmentListProps {
   treatments: Treatment[];

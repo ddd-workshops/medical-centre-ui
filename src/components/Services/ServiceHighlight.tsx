@@ -1,4 +1,4 @@
-import { Paragraph } from '../Typography/Paragraph';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
 
 export function ServiceHighlight({ service }: ServiceHighlightProps) {
   return (

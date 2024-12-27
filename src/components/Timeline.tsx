@@ -2,7 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import type { AppointmentBrief } from '../contract/types';
-import { H2, H3 } from './Typography/Headings';
+import { H2, H3 } from '../ui-library/Typography/Headings';
 
 interface TimelineProps {
   appointments: AppointmentBrief[];

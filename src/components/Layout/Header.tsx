@@ -4,11 +4,11 @@ import { Tornado as Tooth, Menu as MenuIcon, X, Calendar, Building2 } from 'luci
 import { useQuery } from '@tanstack/react-query';
 import { applicationService } from '../../http/applicationService';
 
-import { NotificationBell } from '../generic/NotificationBell';
+import { NotificationBell } from '../../ui-library/Generic/NotificationBell';
 import { useAuthStore } from '../Auth/AuthStore';
-import { Button } from '../generic/Button';
+import { Button } from '../../ui-library/Generic/Button';
 import { ProfileDropdown } from './ProfileDropdown';
-import { ProfileAvatar } from '../generic/Avatar';
+import { ProfileAvatar } from '../../ui-library/Generic/Avatar';
 
 export const Header = () => {
   const { profile, isAuthenticated } = useAuthStore();

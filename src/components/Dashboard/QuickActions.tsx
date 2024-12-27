@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { Card } from '../generic/Card';
-import { Button } from '../generic/Button';
+import { Card } from '../../ui-library/Generic/Card';
+import { Button } from '../../ui-library/Generic/Button';
 
 export const QuickActions = () => {
   const navigate = useNavigate();

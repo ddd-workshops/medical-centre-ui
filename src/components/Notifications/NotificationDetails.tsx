@@ -5,9 +5,9 @@ import { format, parseISO } from 'date-fns';
 
 import type { Notification } from '../../contract/types';
 import { getNotification, markNotificationAsRead } from '../../http/notificationsService';
-import { H1, H2 } from '../Typography/Headings';
+import { H1, H2 } from '../../ui-library/Typography/Headings';
 import { useQueryClient } from '@tanstack/react-query';
-import { Spinner } from '../generic/Spinner';
+import { Spinner } from '../../ui-library/Generic/Spinner';
 
 export const NotificationDetails = () => {
   const { id } = useParams();

@@ -1,6 +1,6 @@
 import React from 'react';
-import { H1, H2, H3 } from '../Typography/Headings';
-import { Paragraph } from '../Typography/Paragraph';
+import { H1, H2, H3 } from '../../ui-library/Typography/Headings';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
 import { ProcessStep, ProcessStepProps } from './ProcessStep';
 
 type Step = Omit<ProcessStepProps, 'number'>;

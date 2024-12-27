@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useAuthStore } from '../Auth/AuthStore';
-import { Button } from '../generic/Button';
-import { Card } from '../generic/Card';
-import { TextInput } from '../forms/TextInput';
-import { PhoneInput } from '../forms/PhoneInput';
+import { Button } from '../../ui-library/Generic/Button';
+import { Card } from '../../ui-library/Generic/Card';
+import { TextInput } from '../../ui-library/Forms/TextInput';
+import { PhoneInput } from '../../ui-library/Forms/PhoneInput';
 
 type ContactVerificationFormData = {
   email: string;

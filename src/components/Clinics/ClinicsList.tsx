@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Building2, MapPin } from 'lucide-react';
 import { clinicService } from '../../http/clinicsService';
-import { Spinner } from '../generic/Spinner';
-import { H1, H3 } from '../Typography/Headings';
-import { FailText } from '../Typography/Text';
-import { Paragraph } from '../Typography/Paragraph';
+import { Spinner } from '../../ui-library/Generic/Spinner';
+import { H1, H3 } from '../../ui-library/Typography/Headings';
+import { FailText } from '../../ui-library/Typography/Text';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
 
 export const ClinicsList = () => {
   const { data: clinics, isLoading, error } = useQuery({

@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { H2, H3, H4 } from '../Typography/Headings';
-import { Paragraph } from '../Typography/Paragraph';
+import { H2, H3, H4 } from '../../ui-library/Typography/Headings';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
 
 interface MedicalHistoryEntry {
   id: string;

@@ -1,7 +1,7 @@
-import { Button } from '../generic/Button';
-import { Rating } from '../forms/Rating';
+import { Button } from '../../ui-library/Generic/Button';
+import { Rating } from '../../ui-library/Forms/Rating';
 import { useState } from 'react';
-import { H2 } from '../Typography/Headings';
+import { H2 } from '../../ui-library/Typography/Headings';
 
 type AppointmentDetails = {
   doctorName: string;

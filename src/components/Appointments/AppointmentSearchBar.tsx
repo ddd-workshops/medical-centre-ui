@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { DateRangePicker } from '../forms/DateRangePicker';
-import { TextInput } from '../forms/TextInput';
-import { Dropdown } from '../forms/Dropdown';
+import { DateRangePicker } from '../../ui-library/Forms/DateRangePicker.tsx';
+import { TextInput } from '../../ui-library/Forms/TextInput.tsx';
+import { Dropdown } from '../../ui-library/Forms/Dropdown.tsx';
 import type { AppointmentStatus } from '../../contract/types';
 import { AppointmentSearchCriteria } from './AppointmentSearchCriteria.ts';
 

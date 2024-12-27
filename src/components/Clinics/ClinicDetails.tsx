@@ -3,12 +3,12 @@ import { MapPin, Phone, Mail, CheckCircle2, XCircle, ArrowLeft } from 'lucide-re
 import { Link } from 'react-router-dom';
 
 import { googleMapsLink } from '../../utils/google-maps';
-import { A } from '../Typography/A';
-import { H2, H3 } from '../Typography/Headings';
-import { Paragraph } from '../Typography/Paragraph';
-import { OpeningHours } from '../generic/OpeningHours';
-import { Divider } from '../generic/Divider';
-import { ChipList } from '../generic/ChipList';
+import { A } from '../../ui-library/Typography/A';
+import { H2, H3 } from '../../ui-library/Typography/Headings';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
+import { OpeningHours } from '../../ui-library/Generic/OpeningHours';
+import { Divider } from '../../ui-library/Generic/Divider';
+import { ChipList } from '../../ui-library/Generic/ChipList';
 
 type ClinicDetailsProps = {
   clinic: ClinicDetails;

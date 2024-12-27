@@ -1,6 +1,6 @@
 import React from 'react';
 import { TileList } from '../TileList';
-import { H2 } from '../Typography/Headings';
+import { H2 } from '../../ui-library/Typography/Headings';
 
 export const DoctorReferrals: React.FC = () => {
   const referrals = [

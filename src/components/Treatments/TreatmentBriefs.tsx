@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { patientService } from '../../http/patientService';
-import { Card } from '../generic/Card';
-import { Paragraph } from '../Typography/Paragraph';
+import { Card } from '../../ui-library/Generic/Card';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
 import { ArrowRight } from 'lucide-react';
-import { Spinner } from '../generic/Spinner';
+import { Spinner } from '../../ui-library/Generic/Spinner';
 
 export const TreatmentBriefs: React.FC = () => {
   const { data, isLoading } = useQuery({

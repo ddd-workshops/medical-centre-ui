@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { clinicService } from '../../http/clinicsService';
 import { ClinicDetails } from './ClinicDetails';
-import { Spinner } from '../generic/Spinner';
-import { FailText } from '../Typography/Text';
+import { Spinner } from '../../ui-library/Generic/Spinner';
+import { FailText } from '../../ui-library/Typography/Text';
 
 export function RoutedClinicDetails() {
   const { id } = useParams();

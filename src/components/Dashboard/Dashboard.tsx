@@ -6,8 +6,8 @@ import { QuickActions } from './QuickActions';
 import { RecentUpdates } from './RecentUpdates';
 import { DoctorReferrals } from './DoctorReferrals';
 import { TreatmentBriefs } from '../Treatments/TreatmentBriefs';
-import { H1 } from '../Typography/Headings';
-import { FailText } from '../Typography/Text';
+import { H1 } from '../../ui-library/Typography/Headings';
+import { FailText } from '../../ui-library/Typography/Text';
 
 export const Dashboard: React.FC = () => {
   const { data: appointments = [], isLoading, error } = useQuery({

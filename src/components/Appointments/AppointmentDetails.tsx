@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { AppointmentPDF } from './AppointmentPDF';
 import { appointmentService } from '../../http/appointmentService';
 import { AppointmentDetails } from '../../contract/types';
-import { H2, H3 } from '../Typography/Headings';
-import { Paragraph } from '../Typography/Paragraph';
+import { H2, H3 } from '../../ui-library/Typography/Headings';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
 
 export const AppointmentDetailedDescription = () => {
   const { id } = useParams<{ id: string }>();

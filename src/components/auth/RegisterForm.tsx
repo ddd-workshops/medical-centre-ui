@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { PasswordInput } from '../forms/PasswordInput';
-import { PhoneInput } from '../forms/PhoneInput';
-import { Button } from '../generic/Button';
-import { TextInput } from '../forms/TextInput';
-import { H2 } from '../Typography/Headings';
+import { PasswordInput } from '../../ui-library/Forms/PasswordInput';
+import { PhoneInput } from '../../ui-library/Forms/PhoneInput';
+import { Button } from '../../ui-library/Generic/Button';
+import { TextInput } from '../../ui-library/Forms/TextInput';
+import { H2 } from '../../ui-library/Typography/Headings';
 import { authService } from '../../http/authService';
 
 export const RegisterForm = () => {

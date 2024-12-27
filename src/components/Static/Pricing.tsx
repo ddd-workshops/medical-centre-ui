@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import { H1, H2, H3 } from '../Typography/Headings';
-import { Paragraph } from '../Typography/Paragraph';
+import { H1, H2, H3 } from '../../ui-library/Typography/Headings';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
 
 interface PriceCardProps {
   title: string;

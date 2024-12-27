@@ -1,10 +1,10 @@
 import { MapPin } from 'lucide-react';
 
 import type { DoctorProfile } from '../../contract/types';
-import { ChipList } from '../generic/ChipList';
-import { H2, H3 } from '../Typography/Headings';
-import { Paragraph } from '../Typography/Paragraph';
-import { A } from '../Typography/A';
+import { ChipList } from '../../ui-library/Generic/ChipList';
+import { H2, H3 } from '../../ui-library/Typography/Headings';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
+import { A } from '../../ui-library/Typography/A';
 
 type DoctorProfileProps = {
   doctor: DoctorProfile;

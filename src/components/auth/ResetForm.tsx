@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { TextInput } from '../forms/TextInput';
-import { RadioGroup } from '../forms/RadioGroup';
-import { H2 } from '../Typography/Headings';
+import { TextInput } from '../../ui-library/Forms/TextInput';
+import { RadioGroup } from '../../ui-library/Forms/RadioGroup';
+import { H2 } from '../../ui-library/Typography/Headings';
 
 type ResetOption = 'remind-login' | 'reset-password';
 

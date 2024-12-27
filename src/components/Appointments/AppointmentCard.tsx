@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { AppointmentBrief } from '../../contract/types';
 import { appointmentService } from '../../http/appointmentService';
 import { formatCurrency } from '../../utils/formatCurrency';
-import { Paragraph } from '../Typography/Paragraph';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
 
 type Props = {
   appointment: AppointmentBrief;

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TileList } from './TileList';
 import { BrowserRouter } from 'react-router-dom';
-import { MessageType } from './DesignEnums/MessageType';
+import { MessageType } from '../ui-library/DesignEnums/MessageType';
 
 const meta = {
   title: 'UI/Molecules/TileList',

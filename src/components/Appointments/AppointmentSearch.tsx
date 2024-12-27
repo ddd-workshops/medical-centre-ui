@@ -6,8 +6,8 @@ import { appointmentService } from '../../http/appointmentService';
 import { AppointmentSearchBar } from './AppointmentSearchBar';
 import { AppointmentCard } from './AppointmentCard';
 import { AppointmentSearchCriteria } from './AppointmentSearchCriteria';
-import { H2 } from '../Typography/Headings';
-import { Paragraph } from '../Typography/Paragraph';
+import { H2 } from '../../ui-library/Typography/Headings';
+import { Paragraph } from '../../ui-library/Typography/Paragraph';
 
 export const AppointmentSearch = () => {
   const [searchParams, setSearchParams] = useState<AppointmentSearchCriteria>({

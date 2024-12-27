@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Entry } from './Entry';
 import { BrowserRouter } from 'react-router-dom';
-import { MessageType } from '../DesignEnums/MessageType';
+import { MessageType } from '../../ui-library/DesignEnums/MessageType';
 
 const meta: Meta<typeof Entry> = {
   title: 'UI/Molecules/Entry',
