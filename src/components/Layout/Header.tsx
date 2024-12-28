@@ -22,17 +22,11 @@ export const Header = () => {
 
   const menuContent = (
     <>
-      <Link to="/clinics" className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600">
-        <Building2 className="h-4 w-4" />
-        <span>Our Clinics</span>
-      </Link>
       <Link to="/book-appointment" className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600">
         <Calendar className="h-4 w-4" />
         <span>Book Appointment</span>
       </Link>
-      <Link to="/api" className="text-green-600 hover:text-green-800 transition-colors duration-200">
-        API
-      </Link>
+
       <NotificationBell {...{ count: appStatus?.unreadNotificationsCount }} to="/notifications" />
       
       <div className="flex items-center space-x-4">

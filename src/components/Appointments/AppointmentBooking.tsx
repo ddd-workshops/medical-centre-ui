@@ -7,7 +7,7 @@ import 'react-day-picker/dist/style.css';
 
 import { Stepper } from '../../ui-library/Generic/Stepper';
 import { TimeSlots } from './TimeSlots';
-import { TileChooser } from './TileChooser';
+import { TileChooser } from '../../ui-library/Generic/TileChooser';
 import { H2, H3 } from '../../ui-library/Typography/Headings';
 
 // Mock data

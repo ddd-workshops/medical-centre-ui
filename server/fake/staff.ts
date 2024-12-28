@@ -60,7 +60,7 @@ export const generateFakeDoctor = (): DoctorCanonicalModel => {
 
     // Profile details
     bio,
-    profilePictureUrl: faker.image.avatar(),
+    profilePictureUrl: `https://i.pravatar.cc/400?u=${id}`,
     registrationNumber: `GDC${faker.number.int({ min: 100000, max: 999999 })}`,
     additionalInformation,
 

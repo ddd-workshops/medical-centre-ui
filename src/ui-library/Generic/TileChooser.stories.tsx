@@ -4,7 +4,7 @@ import { User } from 'lucide-react';
 import { TileChooser } from './TileChooser';
 
 const meta: Meta<typeof TileChooser> = {
-  title: 'BSA/Appointments/TileChooser',
+  title: 'UI/Molecules/TileChooser',
   component: TileChooser,
   tags: ['autodocs'],
   parameters: {

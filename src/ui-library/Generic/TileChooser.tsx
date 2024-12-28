@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '../../ui-library/Generic/Button';
-import { H2 } from '../../ui-library/Typography/Headings';
+import { Button } from './Button';
+import { H2 } from '../Typography/Headings';
 
 interface WithId {
   id: string | number;

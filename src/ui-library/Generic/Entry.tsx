@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { MessageType, borderStyle, typeIcons } from '../../ui-library/DesignEnums/MessageType';
+import { MessageType, borderStyle, typeIcons } from '../DesignEnums/MessageType';
 
 export interface EntryProps {
   messageType: MessageType;

@@ -1,16 +1,17 @@
-import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+
 import { clinicService } from '../../http/clinicsService';
 import { ClinicDetails } from './ClinicDetails';
 import { Spinner } from '../../ui-library/Generic/Spinner';
 import { Text } from '../../ui-library/Typography/Text';
+import { useSlugRoute } from '../Routing/useSlugRoute';
 
 export function RoutedClinicDetails() {
-  const { id } = useParams();
+  const id = useSlugRoute()
 
   const { data: clinic, isLoading, error } = useQuery({
     queryKey: ['clinic', id],
-    queryFn: () => clinicService.getClinicDetails(id!),
+    queryFn: () => clinicService.getClinicDetails(id),
     enabled: !!id
   });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TileList } from '../TileList';
+import { TileList } from '../../ui-library/Generic/TileList';
 import { H2 } from '../../ui-library/Typography/Headings';
 
 export const DoctorReferrals: React.FC = () => {

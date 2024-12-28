@@ -10,6 +10,7 @@ import {
   Linkedin 
 } from 'lucide-react';
 import { useClinics } from './hooks/useClinics';
+import { clinicLink } from '../Routing/routes';
 
 export function Footer() {
   const { data: clinics } = useClinics();
@@ -62,6 +63,11 @@ export function Footer() {
               <li><Link to="/cms/privacy-policy" className="hover:text-emerald-400">Privacy Policy</Link></li>
               <li><Link to="/cms/terms-of-service" className="hover:text-emerald-400">Terms of Service</Link></li>
             </ul>
+
+            <h3 className="text-base font-bold mt-4 mb-2">Technology</h3>
+            <ul className="space-y-1 text-sm">
+              <li><Link to="/api" className="hover:text-emerald-400">API Integration</Link></li>
+            </ul>
           </div>
 
           <div className="md:col-span-3">
@@ -69,7 +75,7 @@ export function Footer() {
             <ul className="space-y-1 text-sm">
               {clinics?.map(clinic => (
                 <li key={clinic.id}>
-                  <Link to={`/clinics/${clinic.id}`} className="hover:text-emerald-400">
+                  <Link to={clinicLink(clinic)} className="hover:text-emerald-400">
                     {clinic.name}
                   </Link>
                 </li>

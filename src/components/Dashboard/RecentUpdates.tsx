@@ -1,5 +1,5 @@
 import { Card } from '../../ui-library/Generic/Card';
-import { Entry } from './Entry';
+import { Entry } from '../../ui-library/Generic/Entry';
 
 export const RecentUpdates = () => {
   return (

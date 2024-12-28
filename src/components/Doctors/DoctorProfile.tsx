@@ -1,4 +1,4 @@
-import { MapPin } from 'lucide-react';
+import { ArrowLeft, MapPin } from 'lucide-react';
 
 import type { DoctorProfile } from '../../contract/types';
 import { ChipList } from '../../ui-library/Generic/ChipList';
@@ -7,6 +7,8 @@ import { Paragraph } from '../../ui-library/Typography/Paragraph';
 import { A } from '../../ui-library/Typography/A';
 import { Divider } from '../../ui-library/Generic/Divider';
 import { List } from '../../ui-library/Generic/List';
+import { Link } from 'react-router-dom';
+import { clinicLink } from '../Routing/routes';
 
 type DoctorProfileProps = {
   doctor: DoctorProfile;
@@ -49,7 +51,7 @@ export function DoctorProfile({ doctor }: DoctorProfileProps) {
                 bulletIcon={MapPin}
                 renderItem={(location) => (
                   <A 
-                    href={`/clinics/${location.id}`}
+                    href={clinicLink(location)}
                     size="SMALL"
                   >
                     {location.name}
@@ -59,6 +61,13 @@ export function DoctorProfile({ doctor }: DoctorProfileProps) {
               />
             </div>
           )}
+
+          <div className="flex items-start gap-2">
+            <ArrowLeft className="w-5 h-5 text-green-600 mt-1" />
+            <Link to="/staff" className="text-green-600 hover:text-green-700 font-medium">
+              Show all doctors
+            </Link>
+          </div>
 
           <Divider />
 

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Timeline } from './Timeline';
-import { Appointment } from '../contract/types';
+import type { AppointmentBrief, ClinicBrief } from '../contract/types';
 
 const meta: Meta<typeof Timeline> = {
   title: 'BSA/Appointments/Timeline',
@@ -23,44 +23,36 @@ export default meta;
 
 type Story = StoryObj<typeof Timeline>;
 
-const sampleAppointments: Appointment[] = [
+const sampleAppointments: AppointmentBrief[] = [
   {
     id: '1',
-    patientId: '1',
-    date: '2024-02-10T09:00:00',
-    doctor: {
-      id: '1',
-      name: 'Dr. Sarah Johnson',
-      specialty: 'General Dentist'
-    },
+    patientName: 'John Smith',
+    datetime: '2024-02-10T09:00:00Z',
+    doctorId: 1,
+    doctorName: 'Dr. Sarah Johnson',
     status: 'SCHEDULED',
-    medicalNotes: 'Regular check-up',
-    prescriptions: ['Toothpaste', 'Mouthwash'],
+    serviceType: 'CLEANING',
+    location: 'Bright Smiles Central (123 Dental Street, Medical District, London)'
   },
   {
     id: '2',
-    patientId: '2',
-    date: '2024-02-10T14:00:00',
-    doctor: {
-      id: '2',
-      name: 'Dr. Michael Chen',
-      specialty: 'Orthodontist'
-    },
+    patientName: 'Emma Davis',
+    datetime: '2024-02-10T14:00:00Z',
+    doctorId: 2,
+    doctorName: 'Dr. Michael Chen',
     status: 'CANCELLED',
-    medicalNotes: 'Braces adjustment',
-    prescriptions: ['Painkillers'],
+    serviceType: 'ORTHODONTICS',
+    location: 'Bright Smiles Central (123 Dental Street, Medical District, London)'
   },
   {
     id: '3',
-    patientId: '3',
-    date: '2024-02-15T11:00:00',
-    doctor: {
-      id: '3',
-      name: 'Dr. Emily Williams',
-      specialty: 'Implant Specialist'
-    },
+    patientName: 'Alice Brown',
+    datetime: '2024-02-15T11:00:00Z',
+    doctorId: 3,
+    doctorName: 'Dr. Emily Williams',
     status: 'COMPLETED',
-    medicalNotes: 'Implant consultation',
+    serviceType: 'IMPLANT',
+    location: 'Bright Smiles Central (123 Dental Street, Medical District, London)'
   }
 ];
 

@@ -7,6 +7,7 @@ import { Spinner } from '../../ui-library/Generic/Spinner';
 import { H1, H3 } from '../../ui-library/Typography/Headings';
 import { Text } from '../../ui-library/Typography/Text';
 import { Paragraph } from '../../ui-library/Typography/Paragraph';
+import { clinicLink } from '../Routing/routes';
 
 export const ClinicsList = () => {
   const { data: clinics, isLoading, error } = useQuery({
@@ -24,7 +25,7 @@ export const ClinicsList = () => {
         {clinics?.map((clinic) => (
           <Link
             key={clinic.id}
-            to={`/clinics/${clinic.id}`}
+            to={clinicLink(clinic)}
             className="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-100 hover:border-emerald-100"
           >
             <div className="flex items-start space-x-4">

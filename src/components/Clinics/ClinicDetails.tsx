@@ -67,7 +67,7 @@ export function ClinicDetails({ clinic }: ClinicDetailsProps) {
               <div className="flex items-start gap-2">
                 <ArrowLeft className="w-5 h-5 text-green-600 mt-1" />
                 <Link to="/clinics" className="text-green-600 hover:text-green-700 font-medium">
-                  Back to offices list
+                  Show all offices
                 </Link>
               </div>
             </div>
@@ -88,6 +88,8 @@ export function ClinicDetails({ clinic }: ClinicDetailsProps) {
               </div>
             )}
 
+            <Divider />
+            
             {/* Opening Hours */}
             <OpeningHours openingHours={clinic.openingHours} />
 
