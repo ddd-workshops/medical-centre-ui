@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { messageStyles, messageBackgrounds, messageHoverBackgrounds } from './MessageType';
+import { borderStyle, backgroundStyle, backgroundHoverStyle } from './MessageType';
 
 const isColorDark = (hex: string): boolean => {
   // Remove the hash if it exists
@@ -17,7 +17,7 @@ const ColorPalette = () => {
   const colorGroups = [
     {
       title: 'Border Colors',
-      colors: Object.entries(messageStyles).map(([type, className]) => ({
+      colors: Object.entries(borderStyle).map(([type, className]) => ({
         name: type,
         className,
         hex: {
@@ -31,7 +31,7 @@ const ColorPalette = () => {
     },
     {
       title: 'Background Colors',
-      colors: Object.entries(messageBackgrounds).map(([type, className]) => ({
+      colors: Object.entries(backgroundStyle).map(([type, className]) => ({
         name: type,
         className,
         hex: {
@@ -45,7 +45,7 @@ const ColorPalette = () => {
     },
     {
       title: 'Hover Background Colors',
-      colors: Object.entries(messageHoverBackgrounds).map(([type, className]) => ({
+      colors: Object.entries(backgroundHoverStyle).map(([type, className]) => ({
         name: type,
         className,
         hex: {

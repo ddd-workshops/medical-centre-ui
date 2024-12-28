@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { randomFromArray, shuffleArray } from './utils';
+import { createRandomUniqueIntegerIDGenerator, randomFromArray, shuffleArray } from './utils';
 import type { ClinicDetails, ClinicBrief } from '../contract/types';
 
 const clinicImageURLs = [
@@ -64,9 +64,11 @@ const generateFacilities = () => {
   return [...essentialFacilities, ...additionalFacilities];
 };
 
-export const generateFakeClinicDetails = (): ClinicDetails[] => [
+const generateID = createRandomUniqueIntegerIDGenerator({ from: 100, to: 1000 });
+
+export const fakeClinicDetails: ClinicDetails[] = [
   {
-    id: '1',
+    id: generateID(),
     name: 'Bright Smiles Central London',
     address: {
       id: faker.string.uuid(),
@@ -86,7 +88,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '2',
+    id: generateID(),
     name: 'Bright Smiles Canary Wharf',
     address: {
       id: faker.string.uuid(),
@@ -106,7 +108,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '3',
+    id: generateID(),
     name: 'Bright Smiles Kensington',
     address: {
       id: faker.string.uuid(),
@@ -126,7 +128,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '4',
+    id: generateID(),
     name: 'Bright Smiles Chelsea',
     address: {
       id: faker.string.uuid(),
@@ -146,7 +148,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '5',
+    id: generateID(),
     name: 'Bright Smiles Mayfair',
     address: {
       id: faker.string.uuid(),
@@ -166,7 +168,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '6',
+    id: generateID(),
     name: 'Bright Smiles Camden',
     address: {
       id: faker.string.uuid(),
@@ -186,7 +188,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '7',
+    id: generateID(),
     name: 'Bright Smiles Islington',
     address: {
       id: faker.string.uuid(),
@@ -206,7 +208,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '8',
+    id: generateID(),
     name: 'Bright Smiles Greenwich',
     address: {
       id: faker.string.uuid(),
@@ -226,7 +228,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '9',
+    id: generateID(),
     name: 'Bright Smiles Hampstead',
     address: {
       id: faker.string.uuid(),
@@ -246,7 +248,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '10',
+    id: generateID(),
     name: 'Bright Smiles Richmond',
     address: {
       id: faker.string.uuid(),
@@ -266,7 +268,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '11',
+    id: generateID(),
     name: 'Bright Smiles Wimbledon',
     address: {
       id: faker.string.uuid(),
@@ -286,7 +288,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '12',
+    id: generateID(),
     name: 'Bright Smiles Notting Hill',
     address: {
       id: faker.string.uuid(),
@@ -306,7 +308,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '13',
+    id: generateID(),
     name: 'Bright Smiles Shoreditch',
     address: {
       id: faker.string.uuid(),
@@ -326,7 +328,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '14',
+    id: generateID(),
     name: 'Bright Smiles Clapham',
     address: {
       id: faker.string.uuid(),
@@ -346,7 +348,7 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
     facilities: generateFacilities()
   },
   {
-    id: '15',
+    id: generateID(),
     name: 'Bright Smiles Baker Street',
     address: {
       id: faker.string.uuid(),
@@ -367,11 +369,13 @@ export const generateFakeClinicDetails = (): ClinicDetails[] => [
   }
 ];
 
-export const generateFakeClinicBriefs = (): ClinicBrief[] => {
-  const details = generateFakeClinicDetails();
-  return details.map(({ id, name, address: { street, city, postalCode, country } }) => ({ 
+export const generateFakeClinicBrief = (clinic: ClinicDetails = randomFromArray(fakeClinicDetails)): ClinicBrief => {
+  const { id, name, address: { street, city, postalCode, country } } = clinic
+  return {
     id, 
     name, 
     address: `${street}, ${city}, ${postalCode}, ${country}`
-  }));
+  };
 }
+
+export const fakeClinicBriefs = fakeClinicDetails.map(generateFakeClinicBrief);

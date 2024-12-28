@@ -23,7 +23,7 @@ export const AppointmentSearch = () => {
   });
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-4 py-8">
       <H2 className="text-green-800 mb-6">Appointments</H2>
       <AppointmentSearchBar onSearch={setSearchParams} />
       

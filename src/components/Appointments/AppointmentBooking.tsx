@@ -27,10 +27,10 @@ const locations = [
 ];
 
 const doctors = [
-  { id: 1, name: 'Dr. Sarah Johnson', specialization: 'General Dentist' },
-  { id: 2, name: 'Dr. Michael Chen', specialization: 'Orthodontist' },
-  { id: 3, name: 'Dr. Emily Williams', specialization: 'Implant Specialist' },
-  { id: 4, name: 'Dr. James Wilson', specialization: 'Periodontist' },
+  { id: 1, name: 'Dr. Sarah Johnson', specialties: 'General Dentist' },
+  { id: 2, name: 'Dr. Michael Chen', specialties: 'Orthodontist' },
+  { id: 3, name: 'Dr. Emily Williams', specialties: 'Implant Specialist' },
+  { id: 4, name: 'Dr. James Wilson', specialties: 'Periodontist' },
 ];
 
 const timeSlots = [
@@ -183,7 +183,7 @@ export function AppointmentBooking() {
                   <User className="h-5 w-5 text-emerald-600" />
                   {doctor.name}
                 </H3>
-                <p className="text-gray-500">{doctor.specialization}</p>
+                <p className="text-gray-500">{doctor.specialties}</p>
               </>
             )}
           />

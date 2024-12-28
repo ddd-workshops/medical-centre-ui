@@ -1,10 +1,11 @@
 import { Router } from 'express';
-import { patientProfile, prescribedTreatments } from '../fake/db';
+import { session } from '../fake/session';
+import { prescribedTreatments } from '../fake/db';
 
 export const patientRouter = Router();
 
 patientRouter.get('/profile', (req, res) => {
-  res.json(patientProfile);
+  res.json(session.patientProfile);
 });
 
 patientRouter.get('/treatments', (req, res) => {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { H3 } from '../ui-library/Typography/Headings';
 import { Paragraph } from '../ui-library/Typography/Paragraph';
-import { MessageType, messageStyles, messageHoverBackgrounds } from '../ui-library/DesignEnums/MessageType';
+import { borderStyle, backgroundHoverStyle, type MessageType } from '../ui-library/DesignEnums/MessageType';
 
 interface TileItem {
   title: string;
@@ -21,12 +21,12 @@ export const TileList: React.FC<TileListProps> = ({ items, className = '' }) => 
   return (
     <div className={`grid grid-cols-1 gap-4 ${className}`}>
       {items.map((item, index) => {
-        const type = item.messageType ?? MessageType.INFO;
+        const type = item.messageType ?? 'DEFAULT';
         return (
           <div 
             key={index} 
             className={`rounded-lg p-4 shadow-sm hover:shadow-md transition-all border-l-4 
-              ${messageStyles[type]} ${messageHoverBackgrounds[type]}`}
+              ${borderStyle[type]} ${backgroundHoverStyle[type]}`}
           >
             {item.link ? (
               <Link to={item.link} className="block group">

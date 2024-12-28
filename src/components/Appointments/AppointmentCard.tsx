@@ -7,6 +7,7 @@ import type { AppointmentBrief } from '../../contract/types';
 import { appointmentService } from '../../http/appointmentService';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { Paragraph } from '../../ui-library/Typography/Paragraph';
+import { slugify } from '../../utils/slugify';
 
 type Props = {
   appointment: AppointmentBrief;
@@ -68,7 +69,7 @@ export const AppointmentCard = ({ appointment }: Props) => {
               <div className="flex items-center gap-2 text-gray-600">
                 <User className="h-4 w-4" />
                 <Link 
-                  to={`/doctor/${appointment.doctorName}`}
+                  to={`/staff/${slugify(`${appointment.doctorId}-${appointment.doctorName}`)}`}
                   className="text-green-600 hover:text-green-700 hover:underline"
                   onClick={(e) => e.stopPropagation()}
                 >

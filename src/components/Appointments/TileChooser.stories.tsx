@@ -17,9 +17,9 @@ export default meta;
 type Story = StoryObj<typeof TileChooser>;
 
 const sampleItems = [
-  { id: 1, name: 'Dr. Sarah Johnson', specialization: 'General Dentist' },
-  { id: 2, name: 'Dr. Michael Chen', specialization: 'Orthodontist' },
-  { id: 3, name: 'Dr. Emily Williams', specialization: 'Implant Specialist' },
+  { id: 1, name: 'Dr. Sarah Johnson', specialties: 'General Dentist' },
+  { id: 2, name: 'Dr. Michael Chen', specialties: 'Orthodontist' },
+  { id: 3, name: 'Dr. Emily Williams', specialties: 'Implant Specialist' },
 ];
 
 export const Default: Story = {
@@ -34,7 +34,7 @@ export const Default: Story = {
           <User className="h-5 w-5 text-emerald-600" />
           <span className="font-semibold">{item.name}</span>
         </div>
-        <p className="text-gray-500">{item.specialization}</p>
+        <p className="text-gray-500">{item.specialties}</p>
       </>
     ),
   },

@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import type { AppointmentBrief } from '../contract/types';
 import { H2, H3 } from '../ui-library/Typography/Headings';
+import { Text } from '../ui-library/Typography/Text';
 
 interface TimelineProps {
   appointments: AppointmentBrief[];
@@ -54,7 +55,7 @@ export const Timeline: React.FC<TimelineProps> = ({ appointments }) => {
                           <div className="flex justify-between items-start">
                             <div>
                               <p className="font-semibold text-gray-800">{appointment.status}</p>
-                              <p className="text-gray-600">with {appointment.doctorName}</p>
+                              <Text>with {appointment.doctorName}</Text>
                             </div>
                             <div className="text-right">
                               <p className="text-emerald-600 font-medium">

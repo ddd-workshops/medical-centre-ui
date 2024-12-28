@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "generate:fake:test": "cd server && npx ts-node fake/test.ts",
     "generate:types": "openapi-typescript contract/swagger.yaml --output contract/contract.ts",
     "watch:swagger": "nodemon --watch contract/swagger.yaml --ext yaml,yml --exec 'npm run generate:types'",
     "storybook": "storybook dev -p 6006",
@@ -38,6 +39,7 @@
     "remark-gfm": "^3.0.1",
     "swagger-ui-react": "^5.18.2",
     "tailwind-merge": "^2.2.1",
+    "vite-plugin-svgr": "^4.3.0",
     "zustand": "^5.0.2"
   },
   "devDependencies": {

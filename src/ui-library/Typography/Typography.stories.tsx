@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
+
 import { H1, H2, H3, H4 } from './Headings';
-import { SuccessText, FailText } from './Text';
+import { Text } from './Text';
 import { Blockquote } from './Blockquote';
 import { Paragraph } from './Paragraph';
 import { A } from './A';
@@ -26,19 +27,36 @@ export const Typography: StoryObj = {
 
       <div className="space-y-4">
         <Paragraph size="LARGE">
-          Large text: Bright Smiles Architects provides comprehensive dental care with state-of-the-art technology and experienced professionals.
+          Large Paragraph: Bright Smiles Architects provides comprehensive dental care with state-of-the-art technology and experienced professionals.
         </Paragraph>
         <Paragraph>
-          Medium text (default): Our network of dental clinics offers a wide range of services from routine check-ups to advanced dental procedures.
+          Medium Large Paragraph (default): Our network of dental clinics offers a wide range of services from routine check-ups to advanced dental procedures.
         </Paragraph>
         <Paragraph size="SMALL">
-          Small text: <A href="#">Schedule your appointment</A> today and experience our patient-centered approach to dental care.
+          Small Large Paragraph: <A href="#">Schedule your appointment</A> today and experience our patient-centered approach to dental care.
         </Paragraph>
       </div>
 
       <div className="space-y-2">
-        <div>Status: <SuccessText>Operation successful</SuccessText></div>
-        <div>Status: <FailText>Operation failed</FailText></div>
+        <div>Status DEFAULT: <Text size="SMALL">Operation pending</Text></div>
+        <div>Status SUCCESS: <Text size="SMALL" messageType="SUCCESS">Operation successful</Text></div>
+        <div>Status ALERT: <Text size="SMALL" messageType="ALERT">Operation failed</Text></div>
+        <div>Status WARNING: <Text size="SMALL" messageType="WARNING">Operation warning</Text></div>
+        <div>Status UPDATE: <Text size="SMALL" messageType="UPDATE">Operation update</Text></div>
+      </div>
+      <div className="space-y-2">
+        <div>Status DEFAULT: <Text size="MEDIUM">Operation pending</Text></div>
+        <div>Status SUCCESS: <Text size="MEDIUM" messageType="SUCCESS">Operation successful</Text></div>
+        <div>Status ALERT: <Text size="MEDIUM" messageType="ALERT">Operation failed</Text></div>
+        <div>Status WARNING: <Text size="MEDIUM" messageType="WARNING">Operation warning</Text></div>
+        <div>Status UPDATE: <Text size="MEDIUM" messageType="UPDATE">Operation update</Text></div>
+      </div>
+      <div className="space-y-2">
+        <div>Status DEFAULT: <Text size="LARGE">Operation pending</Text></div>
+        <div>Status SUCCESS: <Text size="LARGE" messageType="SUCCESS">Operation successful</Text></div>
+        <div>Status ALERT: <Text size="LARGE" messageType="ALERT">Operation failed</Text></div>
+        <div>Status WARNING: <Text size="LARGE" messageType="WARNING">Operation warning</Text></div>
+        <div>Status UPDATE: <Text size="LARGE" messageType="UPDATE">Operation update</Text></div>
       </div>
 
       <Blockquote>

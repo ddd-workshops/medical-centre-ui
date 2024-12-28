@@ -1,16 +1,16 @@
 import { faker } from '@faker-js/faker';
 
-import { randomFromArray } from './utils';
-import { generateDoctorBrief } from './staff';
-import { generateFakePatientBrief } from './patient';
-import { generateFakeMedicalTreatment } from './medical-treatments';
-import { generateFakeAppointments, generateFakeAppointmentsBrief } from './appointments';
 import type { PrescribedTreatment } from '../contract/types';
+import { randomFromArray, repeat } from './utils';
+import { fakeDoctorBriefs } from './staff';
+import { fakePatientBriefs } from './patient';
+import { generateFakeMedicalTreatment } from './medical-treatments';
+import { generateFakeAppointmentDetails, generateFakeAppointmentsBrief } from './appointments';
 
 export const generateFakePrescribedTreatment = (): PrescribedTreatment => {
   const treatment = generateFakeMedicalTreatment();
-  const doctor = generateDoctorBrief();
-  const patient = generateFakePatientBrief();
+  const doctor = randomFromArray(fakeDoctorBriefs);
+  const patient = randomFromArray(fakePatientBriefs);
 
   return {
     id: faker.string.uuid(),
@@ -19,7 +19,9 @@ export const generateFakePrescribedTreatment = (): PrescribedTreatment => {
     patient,
     doctor,
     treatment,
-    appointments: generateFakeAppointmentsBrief(generateFakeAppointments(3)),
+    appointments: repeat(generateFakeAppointmentDetails, {
+      count: 3
+    }).map(generateFakeAppointmentsBrief),
     status: randomFromArray(['SCHEDULED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'] as const),
   };
 };

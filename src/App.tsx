@@ -21,6 +21,10 @@ import { CMSContent } from './components/CMS/CMSContent';
 import { PrescribedTreatmentsList } from './components/Treatments/PrescribedTreatmentsList';
 import { ClinicsList } from './components/Clinics/ClinicsList';
 import { RoutedClinicDetails } from './components/Clinics/RoutedClinicDetails';
+import { DoctorsList } from './components/Doctors/DoctorsList';
+import { DoctorProfile } from './components/Doctors/DoctorProfile';
+import { RoutedDoctorsList } from './components/Doctors/RoutedDoctorsList';
+import { RoutedDoctorProfile } from './components/Doctors/RoutedDoctorProfile';
 
 import { AppointmentDetailedDescription } from './components/Appointments/AppointmentDetailedDescription';
 import { useAuthStore } from './components/Auth/AuthStore';
@@ -44,6 +48,7 @@ export function App() {
           )}
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            
             <Route path="/book-appointment" element={<AppointmentBooking />} />
             <Route path="/appointments/search" element={<AppointmentSearch />} />
             <Route path="/medical-history" element={<MedicalHistory />} />
@@ -52,10 +57,16 @@ export function App() {
             <Route path="/prescribed-treatments" element={<PrescribedTreatmentsList />} />
             <Route path="/notifications" element={<NotificationsList />} />
             <Route path="/notifications/:id" element={<NotificationDetails />} />
+            <Route path="/clinics" element={<ClinicsList />} />
+            <Route path="/clinics/:id" element={<RoutedClinicDetails />} />
+            <Route path="/staff" element={<RoutedDoctorsList />} />
+            <Route path="/staff/:slug" element={<RoutedDoctorProfile />} />
+
             <Route path="/api" element={<SwaggerDocs />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/reset" element={<ResetForm />} />
+            
             <Route path="/cms/pricing" element={<Pricing />} />
             <Route path="/cms/implant-process" element={<ImplantProcess />} />
             <Route path="/cms/general-dentistry" element={<CMSContent slug="general-dentistry" />} />
@@ -64,8 +75,6 @@ export function App() {
             <Route path="/cms/dental-implants" element={<CMSContent slug="dental-implants" />} />
             <Route path="/cms/privacy-policy" element={<CMSContent slug="privacy-policy" />} />
             <Route path="/cms/terms-of-service" element={<CMSContent slug="terms-of-service" />} />
-            <Route path="/clinics" element={<ClinicsList />} />
-            <Route path="/clinics/:id" element={<RoutedClinicDetails />} />
           </Routes>
         </main>
         <Footer />

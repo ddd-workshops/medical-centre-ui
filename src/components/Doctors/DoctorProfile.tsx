@@ -5,6 +5,8 @@ import { ChipList } from '../../ui-library/Generic/ChipList';
 import { H2, H3 } from '../../ui-library/Typography/Headings';
 import { Paragraph } from '../../ui-library/Typography/Paragraph';
 import { A } from '../../ui-library/Typography/A';
+import { Divider } from '../../ui-library/Generic/Divider';
+import { List } from '../../ui-library/Generic/List';
 
 type DoctorProfileProps = {
   doctor: DoctorProfile;
@@ -12,7 +14,7 @@ type DoctorProfileProps = {
 
 export function DoctorProfile({ doctor }: DoctorProfileProps) {
   return (
-    <div className="bg-white rounded-lg shadow-sm">
+    <div className="bg-white rounded-lg shadow-sm max-w-4xl mx-auto px-4 py-8">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
         {/* Main content column */}
         <div className="md:col-span-2">
@@ -23,9 +25,7 @@ export function DoctorProfile({ doctor }: DoctorProfileProps) {
           {/* Specialties */}
           {doctor.specialties.length > 0 && (
             <div className="mb-6">
-              <Paragraph size="MEDIUM" className="font-semibold mb-2">
-                Specialties
-              </Paragraph>
+              <H3>Specialties</H3>
               <ChipList items={doctor.specialties} />
             </div>
           )}
@@ -33,9 +33,7 @@ export function DoctorProfile({ doctor }: DoctorProfileProps) {
           {/* Languages */}
           {doctor.languagesSpoken.length > 0 && (
             <div className="mb-6">
-              <Paragraph size="MEDIUM" className="font-semibold mb-2">
-                Languages
-              </Paragraph>
+              <H3>Languages</H3>
               <Paragraph size="SMALL">
                 {doctor.languagesSpoken.join(', ')}
               </Paragraph>
@@ -45,39 +43,41 @@ export function DoctorProfile({ doctor }: DoctorProfileProps) {
           {/* Locations */}
           {doctor.locations.length > 0 && (
             <div className="mb-6">
-              <Paragraph size="MEDIUM" className="font-semibold mb-2">
-                Available at
-              </Paragraph>
-              <div className="space-y-2">
-                {doctor.locations.map((location) => (
-                  <div key={location.id} className="flex items-start gap-2">
-                    <MapPin className="w-4 h-4 text-green-600 mt-1" />
-                    <A 
-                      href={`/clinics/${location.id}`}
-                      size="SMALL"
-                    >
-                      {location.address}
-                    </A>
-                  </div>
-                ))}
-              </div>
+              <H3>Available at</H3>
+              <List
+                items={doctor.locations}
+                bulletIcon={MapPin}
+                renderItem={(location) => (
+                  <A 
+                    href={`/clinics/${location.id}`}
+                    size="SMALL"
+                  >
+                    {location.name}
+                    <div>({location.address})</div>
+                  </A>
+                )}
+              />
             </div>
           )}
 
+          <Divider />
+
           {/* Bio section */}
           {doctor.bio && (
-            <div className="border-t border-gray-100 pt-6 mb-6">
-              <H3 className="mb-3">Biography</H3>
+            <div className="mb-6">
+              <H3>Biography</H3>
               <Paragraph size="MEDIUM">{doctor.bio}</Paragraph>
             </div>
           )}
 
+          <Divider />
+
           {/* Additional Information */}
           {doctor.additionalInformation && doctor.additionalInformation.length > 0 && (
-            <div className="border-t border-gray-100 pt-6">
+            <div className="mb-6">
               {doctor.additionalInformation.map((info, index) => (
                 <div key={index} className="mb-4 last:mb-0">
-                  <H3 className="mb-2">{info.heading}</H3>
+                  <H3>{info.heading}</H3>
                   <Paragraph size="MEDIUM">{info.text}</Paragraph>
                 </div>
               ))}

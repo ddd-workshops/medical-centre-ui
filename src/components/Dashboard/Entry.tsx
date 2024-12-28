@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { MessageType, messageStyles, typeIcons } from '../../ui-library/DesignEnums/MessageType';
+import { MessageType, borderStyle, typeIcons } from '../../ui-library/DesignEnums/MessageType';
 
 export interface EntryProps {
   messageType: MessageType;
@@ -31,7 +31,7 @@ export const Entry = ({ messageType, label, children, to }: EntryProps) => {
     return (
       <Link 
         to={to} 
-        className={`block border-l-4 pl-4 ${messageStyles[messageType]} hover:bg-gray-50 transition-colors cursor-pointer`}
+        className={`block border-l-4 pl-4 ${borderStyle[messageType]} hover:bg-gray-50 transition-colors cursor-pointer`}
       >
         {content}
       </Link>
@@ -39,7 +39,7 @@ export const Entry = ({ messageType, label, children, to }: EntryProps) => {
   }
 
   return (
-    <div className={`block border-l-4 pl-4 ${messageStyles[messageType]}`}>
+    <div className={`block border-l-4 pl-4 ${borderStyle[messageType]}`}>
       {content}
     </div>
   );

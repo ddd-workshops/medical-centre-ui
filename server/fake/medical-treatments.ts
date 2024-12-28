@@ -1,8 +1,9 @@
 import { faker } from '@faker-js/faker';
+
 import { randomFromArray } from './utils';
 import { MedicalTreatment } from '../contract/types';
-import { generateDoctorBrief } from './staff';
-import { generateFakePatientBrief } from './patient';
+import { fakeDoctorBriefs } from './staff';
+import { fakePatientBriefs } from './patient';
 
 const DENTAL_TREATMENTS = [
   'Dental Cleaning & Check-up',
@@ -34,6 +35,6 @@ export const generateFakeMedicalTreatment = (): MedicalTreatment => ({
       min: faker.number.int({ min: 100, max: 500 }),
       max: faker.number.int({ min: 500, max: 2500 }),
   },
-  doctorBrief:  generateDoctorBrief(),
-  patientBrief: generateFakePatientBrief()
+  doctorBrief: randomFromArray(fakeDoctorBriefs),
+  patientBrief: randomFromArray(fakePatientBriefs),
 });

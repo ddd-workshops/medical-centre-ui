@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker"
+
 import { randomFromArray } from "./utils"
 import { Billing } from "../contract/types"
 

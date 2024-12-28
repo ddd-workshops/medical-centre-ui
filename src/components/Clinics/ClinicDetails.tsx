@@ -16,7 +16,7 @@ type ClinicDetailsProps = {
 
 export function ClinicDetails({ clinic }: ClinicDetailsProps) {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-5xl">
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="bg-white rounded-lg shadow-sm">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
           {/* Main content column */}

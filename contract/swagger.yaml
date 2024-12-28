@@ -58,7 +58,6 @@ paths:
         '204':
           description: Logout successful
 
-
   /appointments:
     get:
       tags:
@@ -391,6 +390,44 @@ paths:
         '404':
           description: Clinic not found
 
+  /staff:
+    get:
+      tags:
+        - Staff
+      summary: Get all doctors
+      description: Retrieve a list of all doctors (brief information)
+      responses:
+        '200':
+          description: List of doctors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DoctorBrief'
+
+  /staff/{doctorId}:
+    get:
+      tags:
+        - Staff
+      summary: Get doctor details
+      parameters:
+        - name: doctorId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Detailed doctor information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorProfile'
+        '404':
+          description: Doctor not found
+
 components:
   schemas:
     BillingStatus:
@@ -464,6 +501,8 @@ components:
           format: uuid
         patientName:
           type: string
+        doctorId:
+          type: integer
         doctorName:
           type: string
         serviceType:
@@ -478,6 +517,7 @@ components:
       required:
         - id
         - patient
+        - doctorId
         - doctorName
         - serviceType
         - location
@@ -608,8 +648,7 @@ components:
       type: object
       properties:
         id:
-          type: string
-          format: uuid
+          type: integer
           description: Unique identifier for the doctor
         fullName:
           type: string
@@ -632,8 +671,7 @@ components:
       type: object
       properties:
         id:
-          type: string
-          format: uuid
+          type: integer
           description: Unique identifier for the doctor
         firstName:
           type: string
@@ -663,6 +701,9 @@ components:
           type: string
           format: uri
           description: URL to the doctor's profile picture
+        registrationNumber:
+          type: string
+          description: Registration number of the doctor
         additionalInformation:
           type: array
           description: Custom descriptions such as certifications, education, etc. whatever doc wants to put there
@@ -683,6 +724,29 @@ components:
         - specialties
         - locations
         - languagesSpoken
+        - registrationNumber
+
+    DoctorPersonalContact:
+      type: object
+      properties:
+        doctorId:
+          type: integer
+          description: Unique identifier for the doctor
+        fullName:
+          type: string
+          description: Full name of the doctor
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+      required:
+        - doctorId
+        - email
+        - phoneNumber
+        - address
 
     Referral:
       type: object
@@ -848,8 +912,7 @@ components:
       type: object
       properties:
         id:
-          type: string
-          format: uuid
+          type: integer
           description: Unique identifier for the location
         name:
           type: string
@@ -866,8 +929,7 @@ components:
       type: object
       properties:
         id:
-          type: string
-          format: uuid
+          type: integer
           description: Unique identifier for the location
         name:
           type: string

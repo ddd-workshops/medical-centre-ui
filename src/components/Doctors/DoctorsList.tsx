@@ -29,7 +29,7 @@ export const DoctorsList = ({ doctors }: DoctorsListProps) => {
             </div>
             <div className="min-w-0 flex-1">
               <Link
-                to={`/doctors/${doctor.id}`}
+                to={`/staff/${doctor.id}`}
                 className="text-base font-semibold text-green-700 hover:text-green-800 block"
               >
                 {doctor.fullName}

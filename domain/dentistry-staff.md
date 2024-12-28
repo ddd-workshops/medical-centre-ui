@@ -1,19 +1,30 @@
 # Staffing Distribution for 15 Dental Cabinets in London, UK
 
-## Dental Specialists
-- **General Dentists**: 15 (1 per cabinet)
-- **Oral Surgeons**: 5 (to handle surgical procedures across multiple cabinets)
-- **Periodontists**: 5 (to manage gum health and treatments)
-- **Prosthodontists**: 5 (for restorations and prosthetic work)
-- **Endodontists**: 3 (specializing in root canal treatments)
-- **Orthodontists**: 3 (for braces and alignment issues)
-- **Dental Hygienists**: 15 (1 per cabinet for preventive care)
-- **Dental Assistants**: 15 (1 per cabinet to support dentists)
+## Available Doctor Titles
+- **Dr.** (Doctor) (e.g., Dr. John Smith)
+- **Assistant** (Dental Assistant) (e.g., Assistant Jane Doe)
+- **Prof.** (Professor) (e.g., Prof. Michael Brown)
+- **DDS** (Doctor of Dental Surgery) (e.g., DDS Emily White)
+- **DMD** (Doctor of Medicine in Dentistry) (e.g., DMD Robert Johnson)
+- **RDH** (Registered Dental Hygienist) (e.g., RDH Sarah Davis)
+- **BDS** (Bachelor of Dental Surgery) (e.g., BDS William Wilson)
+- **MD** (Medical Doctor) (e.g., MD Linda Martinez)
+- **PhD** (Doctor of Philosophy in a relevant field) (e.g., PhD James Anderson)
 
-## Administrative and Support Staff
-- **Receptionists**: 15 (1 per cabinet to manage patient scheduling and inquiries)
-- **Office Managers**: 3 (to oversee operations across multiple cabinets)
-- **Billing Specialists**: 3 (to handle insurance claims and patient billing)
+## Staff Titles
+- **General Dentist** (e.g., Dr. John Smith)
+- **Oral Surgeon** (e.g., Dr. Emily White)
+- **Periodontist** (e.g., Dr. Robert Johnson)
+- **Prosthodontist** (e.g., Dr. Sarah Davis)
+- **Endodontist** (e.g., Dr. William Wilson)
+- **Orthodontist** (e.g., Dr. Linda Martinez)
+- **Dental Hygienist** (e.g., RDH Sarah Davis)
+- **Dental Assistant** (e.g., Assistant Jane Doe)
+- **Receptionist** (e.g., Jane Doe)
+- **Office Manager** (e.g., Michael Brown)
+- **Billing Specialist** (e.g., Emily White)
+- **Patient Coordinator** (e.g., Robert Johnson)
+- **Site Manager** (e.g., William Wilson)
 - **Patient Coordinators**: 3 (to assist patients with treatment plans and follow-ups)
 
 ## Clinic Managers

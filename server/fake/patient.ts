@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker';
+
 import type { PatientBrief, PatientProfile } from '../contract/types';
 import { generateFakeAddress } from './address';
+import { repeat } from './utils';
 
 export const generateFakePatientProfile = (): PatientProfile => ({
   patientId: faker.string.uuid(),
@@ -11,7 +13,14 @@ export const generateFakePatientProfile = (): PatientProfile => ({
   address: generateFakeAddress(),
 });
 
-export const generateFakePatientBrief = (): PatientBrief => ({
-  id: faker.string.uuid(),
-  fullName: faker.person.fullName(),
+export const generateFakePatientBrief = (patient: PatientProfile = generateFakePatientProfile()): PatientBrief => ({
+  id: patient.patientId,
+  fullName: `${patient.firstName} ${patient.lastName}`,
 });
+
+////////////////////////////////////////////////
+
+export const fakePatientProfiles = repeat(generateFakePatientProfile, {
+  count: { min: 100, max: 500 },
+});
+export const fakePatientBriefs = fakePatientProfiles.map(generateFakePatientBrief);

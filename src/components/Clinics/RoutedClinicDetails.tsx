@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { clinicService } from '../../http/clinicsService';
 import { ClinicDetails } from './ClinicDetails';
 import { Spinner } from '../../ui-library/Generic/Spinner';
-import { FailText } from '../../ui-library/Typography/Text';
+import { Text } from '../../ui-library/Typography/Text';
 
 export function RoutedClinicDetails() {
   const { id } = useParams();
@@ -15,7 +15,7 @@ export function RoutedClinicDetails() {
   });
 
   if (isLoading) return <Spinner />;
-  if (error) return <FailText>Failed to load clinic details</FailText>;
+  if (error) return <Text messageType="ALERT" size='LARGE'>Failed to load clinic details</Text>;
   if (!clinic) return null;
 
   return <ClinicDetails clinic={clinic} />;

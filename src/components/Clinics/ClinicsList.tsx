@@ -5,7 +5,7 @@ import { Building2, MapPin } from 'lucide-react';
 import { clinicService } from '../../http/clinicsService';
 import { Spinner } from '../../ui-library/Generic/Spinner';
 import { H1, H3 } from '../../ui-library/Typography/Headings';
-import { FailText } from '../../ui-library/Typography/Text';
+import { Text } from '../../ui-library/Typography/Text';
 import { Paragraph } from '../../ui-library/Typography/Paragraph';
 
 export const ClinicsList = () => {
@@ -15,10 +15,10 @@ export const ClinicsList = () => {
   });
 
   if (isLoading) return <Spinner />;
-  if (error) return <FailText>Failed to load clinics</FailText>;
+  if (error) return <Text messageType="ALERT" size='LARGE'>Failed to load clinics</Text>;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container max-w-4xl mx-auto px-4 py-8">
       <H1>Our Clinics</H1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {clinics?.map((clinic) => (

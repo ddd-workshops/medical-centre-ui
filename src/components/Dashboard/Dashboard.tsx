@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+
 import { Timeline } from '../Timeline';
 import { appointmentService } from '../../http/appointmentService';
 import { QuickActions } from './QuickActions';
@@ -7,7 +8,7 @@ import { RecentUpdates } from './RecentUpdates';
 import { DoctorReferrals } from './DoctorReferrals';
 import { TreatmentBriefs } from '../Treatments/TreatmentBriefs';
 import { H1 } from '../../ui-library/Typography/Headings';
-import { FailText } from '../../ui-library/Typography/Text';
+import { Text } from '../../ui-library/Typography/Text';
 
 export const Dashboard: React.FC = () => {
   const { data: appointments = [], isLoading, error } = useQuery({
@@ -23,7 +24,7 @@ export const Dashboard: React.FC = () => {
 
   if (error) {
     return <div>
-      <FailText>Error loading appointments</FailText>
+      <Text messageType="ALERT" size='LARGE'>Error loading appointments</Text>
     </div>;
   }
 

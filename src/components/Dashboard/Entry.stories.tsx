@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Entry } from './Entry';
 import { BrowserRouter } from 'react-router-dom';
-import { MessageType } from '../../ui-library/DesignEnums/MessageType';
 
 const meta: Meta<typeof Entry> = {
   title: 'UI/Molecules/Entry',
@@ -19,7 +18,7 @@ type Story = StoryObj<typeof Entry>;
 
 export const Info: Story = {
   args: {
-    messageType: MessageType.INFO,
+    messageType: 'DEFAULT',
     label: 'Information',
     children: 'This is an informational message',
   },
@@ -27,7 +26,7 @@ export const Info: Story = {
 
 export const Success: Story = {
   args: {
-    messageType: MessageType.SUCCESS,
+    messageType: 'SUCCESS',
     label: 'Success',
     children: 'Operation completed successfully',
   },
@@ -35,7 +34,7 @@ export const Success: Story = {
 
 export const Warning: Story = {
   args: {
-    messageType: MessageType.WARNING,
+    messageType: 'WARNING',
     label: 'Warning',
     children: 'Please review this important notice',
   },
@@ -43,7 +42,7 @@ export const Warning: Story = {
 
 export const Alert: Story = {
   args: {
-    messageType: MessageType.ALERT,
+    messageType: 'ALERT',
     label: 'Alert',
     children: 'Immediate attention required',
   },
@@ -51,7 +50,7 @@ export const Alert: Story = {
 
 export const Update: Story = {
   args: {
-    messageType: MessageType.UPDATE,
+    messageType: 'UPDATE',
     label: 'Update',
     children: 'System has been updated',
   },
@@ -59,7 +58,7 @@ export const Update: Story = {
 
 export const WithLink: Story = {
   args: {
-    messageType: MessageType.SUCCESS,
+    messageType: 'SUCCESS',
     label: 'Clickable Entry',
     children: 'Click me to navigate',
     to: '/some-path',

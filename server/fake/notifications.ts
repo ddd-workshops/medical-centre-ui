@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { Notification } from '../contract/types';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { randomFromArray } from './utils';
 
 const predefinedNotifications: Omit<Notification, 'id' | 'receivedDate'>[] = [
@@ -24,7 +24,7 @@ const predefinedNotifications: Omit<Notification, 'id' | 'receivedDate'>[] = [
   }
 ];
 
-const medicalTitles = [
+const medicalNotificationTitles = [
   'Lab Results Available',
   'Appointment Reminder',
   'Prescription Refill',
@@ -44,7 +44,7 @@ export const generateFakeNotifications = (): Notification[] => {
   predefinedNotifications.forEach(notification => {
     notifications.push({
       ...notification,
-      id: uuidv4(),
+      id: uuid(),
       receivedDate: faker.date.recent({ days: 30 }).toISOString()
     });
   });
@@ -54,8 +54,8 @@ export const generateFakeNotifications = (): Notification[] => {
   
   for (let i = 0; i < additionalCount; i++) {
     notifications.push({
-      id: uuidv4(),
-      title: randomFromArray(medicalTitles),
+      id: uuid(),
+      title: randomFromArray(medicalNotificationTitles),
       subtitle: faker.word.words({ count: { min: 3, max: 6 } }),
       receivedDate: faker.date.recent({ days: 90 }).toISOString(),
       read: faker.datatype.boolean(),
