@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { DoctorListSearch } from './DoctorSearchBar';
+import { DoctorSearchBar } from './DoctorSearchBar';
 
 const meta = {
-  title: 'BSA/Doctors/DoctorListSearch',
-  component: DoctorListSearch,
+  title: 'BSA/Doctors/DoctorSearchBar',
+  component: DoctorSearchBar,
   parameters: {
     layout: 'padded',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof DoctorListSearch>;
+} satisfies Meta<typeof DoctorSearchBar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

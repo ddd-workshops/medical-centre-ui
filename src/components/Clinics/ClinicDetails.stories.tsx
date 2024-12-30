@@ -14,7 +14,7 @@ type Story = StoryObj<typeof ClinicDetails>;
 export const Default: Story = {
   args: {
     clinic: {
-      id: '123e4567-e89b-12d3-a456-426614174000',
+      id: 1000,
       name: 'Westminster Dental Centre',
       address: {
         id: '123e4567-e89b-12d3-a456-426614174001',
@@ -28,11 +28,11 @@ export const Default: Story = {
       email: 'westminster@brightsmiles.com',
       clinicPhotoURL: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3',
       availableSpecialties: [
-        'General Dentistry',
-        'Orthodontics',
-        'Dental Implants',
-        'Cosmetic Dentistry',
-        'Pediatric Dentistry'
+        { code: 'GENERAL_DENTISTRY', name: 'General Dentistry' },
+        { code: 'ORTHODONTICS', name: 'Orthodontics' },
+        { code: 'DENTAL_IMPLANTS', name: 'Dental Implants' },
+        { code: 'COSMETIC_DENTISTRY', name: 'Cosmetic Dentistry' },
+        { code: 'PEDIATRIC_DENTISTRY', name: 'Pediatric Dentistry' }
       ],
       description: 'Located in the heart of Westminster, our state-of-the-art dental centre combines traditional values with modern technology. Our team of specialists provides comprehensive dental care in a comfortable and welcoming environment.',
       coordinates: {

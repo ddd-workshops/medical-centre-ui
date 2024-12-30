@@ -28,7 +28,7 @@ export function DoctorProfile({ doctor }: DoctorProfileProps) {
           {doctor.specialties.length > 0 && (
             <div className="mb-6">
               <H3>Specialties</H3>
-              <ChipList items={doctor.specialties} />
+              <ChipList items={doctor.specialties.map(s => s.name)} />
             </div>
           )}
 

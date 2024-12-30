@@ -13,19 +13,23 @@ type Story = StoryObj<typeof DoctorProfile>;
 export const Default: Story = {
   args: {
     doctor: {
-      id: '123e4567-e89b-12d3-a456-426614174000',
+      id: 12345,
+      registrationNumber: 'GDC-123456',
       firstName: 'Sarah',
       lastName: 'Williams',
       title: 'Doctor',
-      specialties: ['Orthodontics', 'Pediatric Dentistry'],
+      specialties: [
+        { code: 'ORTHODONTICS', name: 'Orthodontics' },
+        { code: 'PEDIATRIC_DENTISTRY', name: 'Pediatric Dentistry' }
+      ],
       locations: [
         {
-          id: '123e4567-e89b-12d3-a456-426614174001',
+          id: 1001,
           name: 'Westminster Dental Centre',
           address: '123 Marylebone Road, Westminster, London W1H 5PL',
         },
         {
-          id: '123e4567-e89b-12d3-a456-426614174002',
+          id: 1002,
           name: 'Kensington Smile Clinic',
           address: '45 High Street Kensington, London W8 5ED',
         },
@@ -58,14 +62,17 @@ export const Default: Story = {
 export const MinimalInfo: Story = {
   args: {
     doctor: {
-      id: '123e4567-e89b-12d3-a456-426614174003',
+      id: 12346,
+      registrationNumber: 'GDC-234567',
       firstName: 'John',
       lastName: 'Smith',
       title: 'Doctor',
-      specialties: ['General Dentistry'],
+      specialties: [
+        { code: 'GENERAL_DENTISTRY', name: 'General Dentistry' }
+      ],
       locations: [
         {
-          id: '123e4567-e89b-12d3-a456-426614174004',
+          id: 1003,
           name: 'Camden Dental Practice',
           address: '78 Camden High Street, London NW1 0LT',
         },

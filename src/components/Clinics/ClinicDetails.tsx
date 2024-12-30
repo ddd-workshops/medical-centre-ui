@@ -76,7 +76,7 @@ export function ClinicDetails({ clinic }: ClinicDetailsProps) {
             {clinic.availableSpecialties && clinic.availableSpecialties.length > 0 && (
               <div className="mb-6">
                 <H3 className="mb-3">Available Specialties</H3>
-                <ChipList items={clinic.availableSpecialties} />
+                <ChipList items={clinic.availableSpecialties.map(s => s.name)} />
               </div>
             )}
 
