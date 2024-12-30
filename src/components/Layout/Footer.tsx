@@ -71,7 +71,11 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-3">
-            <h3 className="text-base font-bold mb-2">Our Clinics</h3>
+            <h3 className="text-base font-bold mb-2">
+              <Link to="/clinics" className="hover:text-emerald-400">
+                Our Clinics
+              </Link>
+            </h3>
             <ul className="space-y-1 text-sm">
               {clinics?.map(clinic => (
                 <li key={clinic.id}>

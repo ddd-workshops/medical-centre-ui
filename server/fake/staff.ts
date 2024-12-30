@@ -3,11 +3,12 @@ import { randomFromArray } from "./utils";
 
 import { DoctorBrief, DoctorProfile, DoctorPersonalContact } from "../contract/types";
 import { createRandomUniqueIntegerIDGenerator, repeat } from "./utils";
-import { generateFakeSpecialist, generateFakeSpecialties, DentalSpecialty, StaffType } from "./specialties";
+import { generateFakeSpecialist, generateFakeSpecialties } from "./specialties";
 import { generateFakeAddress } from './address';
 import { generateFakeStaffI18nInfo } from './staffI18n';
 import { fakeClinicBriefs } from './clinics';
 import { generateFakeDoctorBioAndAdditionalInformation } from './staffBio';
+import { StaffType } from './staffType';
 
 const generateID = createRandomUniqueIntegerIDGenerator({ from: 1000, to: 10000 });
 
@@ -23,11 +24,11 @@ export const generateFakeDoctor = (): DoctorCanonicalModel => {
   // Generate medical specialist info (for role and title)
   const specialist = generateFakeSpecialist(StaffType.MEDICAL);
 
-  // Generate specialties
+  // Generate specialties - we need to pass code for base specialty
   const specialties = generateFakeSpecialties({ 
     min: 1, 
     max: 3, 
-    baseSpecialty: DentalSpecialty.GENERAL_DENTIST 
+    baseSpecialty: 'GENERAL_DENTIST'
   });
 
   // Combine title and name for fullName
@@ -54,7 +55,7 @@ export const generateFakeDoctor = (): DoctorCanonicalModel => {
     // Professional information
     // role: specialist.name,
     title: specialist.title ?? '',
-    specialties: specialties.map(s => s.toString()),
+    specialties,  // Now directly using DoctorSpecialty[] instead of converting to strings
     locations,
     languagesSpoken: staffI18n.spokenLanguages,
 
@@ -76,7 +77,11 @@ export const generateFakeDoctor = (): DoctorCanonicalModel => {
 
 export const generateFakeDoctorBrief = (doctor: DoctorCanonicalModel = generateFakeDoctor()): DoctorBrief => {
   const { id, fullName, specialties } = doctor;
-  return { id, fullName, specialties };
+  return { 
+    id, 
+    fullName, 
+    specialties // No need to convert specialties as they're already in the correct format
+  };
 };
 
 export const generateFakeDoctorProfile = (doctor: DoctorCanonicalModel = generateFakeDoctor()): DoctorProfile => {
@@ -98,3 +103,13 @@ const PRIVATE_doctors = repeat(generateFakeDoctor, {
 export const fakeDoctorBriefs = PRIVATE_doctors.map(generateFakeDoctorBrief);
 export const fakeDoctorProfiles = PRIVATE_doctors.map(generateFakeDoctorProfile)
 
+export const generateFakeDoctorBriefFromDoctorProfile = (doctor: DoctorProfile): DoctorBrief => {
+  const { id, firstName, lastName, specialties, locations } = doctor;
+  const fullName = `${firstName} ${lastName}`;
+  return { 
+    id, 
+    fullName, 
+    specialties, // Already in correct format
+    locations 
+  };
+}

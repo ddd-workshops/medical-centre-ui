@@ -35,6 +35,8 @@ For each entity in the contract (added, modified etc.) the `./server/controllers
 
 Within `server` directory, when importing types from contract, don't use the `contract/contract.ts` file, use the `contract/types.ts` file instead.
 
+In the controller files, the types of express request and response should reflect whatever is available in the contract (under imported `paths` type from `contract/types`). Remember that there's no need to start paths from `api/`. If request is empty, don't provide the Request type parameter (just leave Request). For clarity, make req and res be displayed in separate lines. If the response sends any error codes (4xx or 5xx) then please include the `ErrorResponse` type in the express Response: `Response<... | ErrorResponse>`.
+
 ## faker utilities
 
 When providing fake data using faker (`@faker-js/faker`), please relate to version 9.3.0 used in server package.
@@ -47,7 +49,7 @@ When importing types on the client side, don't use the `./src/contract/contract.
 
 The client code components should do neither `fetch` nor `axios` calls directly. They should always use an appropriate fetching service from the services directory.
 
-For each entity in the contract (added, modified etc.), there should be a service defined in `./src/http`. Import `apiClient` from client file which has the base API URL defined already. Use existing services for reference.
+For each entity in the contract (added, modified etc.), there should be a service defined in `./src/http`. Import `apiClient` from client file which has the base API URL defined already. Use existing services for reference. The apiClient requests should explicitly determine the response type according to whatever is defined in the contract (available under `paths` type, imported from contract/types). Also, don't add the explicit function return type (promise) as it's unnecessary over what the returned value is.
 
 When reusing existing react components, import them from `./src/components/generic` or `./src/components/forms`.
 

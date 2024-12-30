@@ -1,15 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Entry } from './Entry';
-import { BrowserRouter } from 'react-router-dom';
 
 const meta: Meta<typeof Entry> = {
   title: 'UI/Molecules/Entry',
   component: Entry,
-  decorators: [(Story) => (
-    <BrowserRouter>
-      <Story />
-    </BrowserRouter>
-  )],
   tags: ['autodocs'],
 };
 

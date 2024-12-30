@@ -1,4 +1,4 @@
-import type { PatientProfile, PrescribedTreatment } from '../contract/types';
+import type { paths } from '../contract/types';
 import { apiClient } from './client';
 
 const endpoints = {
@@ -7,13 +7,13 @@ const endpoints = {
 };
 
 export const patientService = {
-  getProfile: async (): Promise<PatientProfile> => {
-    const { data } = await apiClient.get<PatientProfile>(endpoints.profile);
+  getProfile: async () => {
+    const { data } = await apiClient.get<paths['/patient/profile']['get']['responses']['200']['content']['application/json']>(endpoints.profile);
     return data;
   },
 
-  getPrescribedTreatments: async (): Promise<PrescribedTreatment[]> => {
-    const { data } = await apiClient.get<PrescribedTreatment[]>(endpoints.treatments);
+  getPrescribedTreatments: async () => {
+    const { data } = await apiClient.get<paths['/patient/treatments']['get']['responses']['200']['content']['application/json']>(endpoints.treatments);
     return data;
   },
 };

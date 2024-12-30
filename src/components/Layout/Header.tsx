@@ -58,7 +58,7 @@ export const Header = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <Tooth className="h-8 w-8 text-emerald-600" />
-            <span className="text-xl font-bold text-gray-800">Bright Smiles Architects™️</span>
+            <span className="text-xl font-bold text-gray-800">Bright Smiles Architects ™️</span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">

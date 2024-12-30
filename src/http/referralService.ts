@@ -1,11 +1,11 @@
 import { apiClient } from './client';
-import type { Referral, ReferralCreateRequest, ReferralUpdateRequest } from '../contract/types';
+import type { paths, Referral, ReferralCreateRequest, ReferralUpdateRequest } from '../contract/types';
 
 const endpoints = {
   create: '/referrals',
-  getById: (id: string) => `/referrals/${id}`,
-  update: (id: string) => `/referrals/${id}`,
-  delete: (id: string) => `/referrals/${id}`,
+  getById: (id: Referral['id']) => `/referrals/${id}`,
+  update: (id: Referral['id']) => `/referrals/${id}`,
+  delete: (id: Referral['id']) => `/referrals/${id}`,
   getAll: '/referrals'
 };
 

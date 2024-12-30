@@ -6,15 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 const meta: Meta<typeof NotificationBrief> = {
   title: 'BSA/Notifications/NotificationBrief',
   component: NotificationBrief,
-  decorators: [
-    (Story) => (
-      <BrowserRouter>
-        <div className="max-w-md">
-          <Story />
-        </div>
-      </BrowserRouter>
-    ),
-  ],
   tags: ['autodocs'],
 };
 

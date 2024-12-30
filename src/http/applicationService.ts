@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { AppStatus } from '../contract/types';
+import type { paths } from '../contract/types';
 
 const endpoints = {
   status: '/app/status'
@@ -7,7 +7,7 @@ const endpoints = {
 
 export const applicationService = {
   getAppStatus: async () => {
-    const { data } = await apiClient.get<AppStatus>(endpoints.status);
+    const { data } = await apiClient.get<paths['/app/status']['get']['responses']['200']['content']['application/json']>(endpoints.status);
     return data;
   },
 };

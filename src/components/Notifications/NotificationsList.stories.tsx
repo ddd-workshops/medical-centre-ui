@@ -1,13 +1,13 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { NotificationsList } from './NotificationsList';
-import { BrowserRouter } from 'react-router-dom';
 import { http } from 'msw';
+
+import { NotificationsList } from './NotificationsList';
+
 
 const meta: Meta<typeof NotificationsList> = {
   title: 'BSA/Notifications/NotificationsList',
   component: NotificationsList,
-  decorators: [(Story) => <BrowserRouter><Story /></BrowserRouter>],
   parameters: {
     msw: {
       handlers: [

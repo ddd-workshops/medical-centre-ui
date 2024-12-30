@@ -21,7 +21,7 @@ import { CMSContent } from './components/CMS/CMSContent';
 import { PrescribedTreatmentsList } from './components/Treatments/PrescribedTreatmentsList';
 import { ClinicsList } from './components/Clinics/ClinicsList';
 import { RoutedClinicDetails } from './components/Clinics/RoutedClinicDetails';
-import { RoutedDoctorsList } from './components/Doctors/RoutedDoctorsList';
+import { DoctorSearch } from './components/Doctors/DoctorSearch';
 import { RoutedDoctorProfile } from './components/Doctors/RoutedDoctorProfile';
 
 import { AppointmentDetailedDescription } from './components/Appointments/AppointmentDetailedDescription';
@@ -57,7 +57,7 @@ export function App() {
             <Route path="/notifications/:id" element={<NotificationDetails />} />
             <Route path="/clinics" element={<ClinicsList />} />
             <Route path="/clinics/:slug" element={<RoutedClinicDetails />} />
-            <Route path="/staff" element={<RoutedDoctorsList />} />
+            <Route path="/staff" element={<DoctorSearch />} />
             <Route path="/staff/:slug" element={<RoutedDoctorProfile />} />
 
             <Route path="/api" element={<SwaggerDocs />} />

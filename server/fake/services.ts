@@ -164,8 +164,10 @@ export const generateFakeServiceOffers = (): ServiceOffer[] => [
   }
 ];
 
-export const generateFakeServiceTypes = (): ServiceType[] => {
+const generateFakeServiceTypes = (): ServiceType[] => {
   const serviceOffers = generateFakeServiceOffers();
   const serviceTypes = serviceOffers.map(({ id, serviceType }) => ({ id, name: serviceType }));
   return serviceTypes
 }
+
+export const fakeServiceTypes = generateFakeServiceTypes();

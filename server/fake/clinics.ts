@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker';
 import { createRandomUniqueIntegerIDGenerator, randomFromArray, shuffleArray } from './utils';
 import type { ClinicDetails, ClinicBrief } from '../contract/types';
+import { generateOpeningHours } from './clinicOpeningHours';
+import { getSpecialtiesByCodes, specialties } from './specialties';
 
 const clinicImageURLs = [
   'https://images.unsplash.com/photo-1629909613654-28e377c37b09',
@@ -10,32 +12,6 @@ const clinicImageURLs = [
   'https://images.unsplash.com/photo-1598256989800-fe5f95da9787',
   'https://images.unsplash.com/photo-1598256989800-fe5f95da9787'
 ]
-
-const generateOpeningHours = () => {
-  const weekdayOpenings = [
-    '08:00-18:00',
-    '08:30-18:30',
-    '09:00-19:00',
-    '09:00-20:00',
-    '08:00-19:00',
-  ];
-  const weekendOpenings = [
-    '09:00-17:00',
-    '10:00-16:00',
-    '09:00-14:00',
-    'CLOSED',
-  ];
-
-  return {
-    MONDAY: randomFromArray(weekdayOpenings),
-    TUESDAY: randomFromArray(weekdayOpenings),
-    WEDNESDAY: randomFromArray(weekdayOpenings),
-    THURSDAY: randomFromArray(weekdayOpenings),
-    FRIDAY: randomFromArray(weekdayOpenings),
-    SATURDAY: randomFromArray(weekendOpenings),
-    SUNDAY: randomFromArray(['CLOSED', ...weekendOpenings.filter(h => h !== 'CLOSED')]),
-  };
-};
 
 const facilityOptions = [
   { name: 'Parking', availability: true, description: 'Underground parking available' },
@@ -81,7 +57,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7123 4567',
     email: 'central@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'ORTHODONTIST', 'PERIODONTIST', 'ENDODONTIST']),
     description: 'Our flagship clinic in the heart of London, offering comprehensive dental care with state-of-the-art equipment.',
     coordinates: { latitude: 51.5157, longitude: -0.1378 },
     openingHours: generateOpeningHours(),
@@ -101,7 +77,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7234 5678',
     email: 'canarywharf@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'ORTHODONTIST', 'ORAL_SURGEON', 'PROSTHODONTIST']),
     description: 'Located in the bustling Canary Wharf, our clinic offers a wide range of dental services for busy professionals.',
     coordinates: { latitude: 51.5049, longitude: -0.0197 },
     openingHours: generateOpeningHours(),
@@ -121,7 +97,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7345 6789',
     email: 'kensington@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'PERIODONTIST', 'PEDIATRIC_DENTIST', 'ORTHODONTIST']),
     description: 'Our Kensington clinic provides top-notch dental care in a luxurious setting.',
     coordinates: { latitude: 51.5007, longitude: -0.1925 },
     openingHours: generateOpeningHours(),
@@ -141,7 +117,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7456 7890',
     email: 'chelsea@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'ENDODONTIST', 'ORTHODONTIST', 'ORAL_SURGEON']),
     description: 'Our Chelsea clinic offers personalized dental care in a stylish and comfortable environment.',
     coordinates: { latitude: 51.4875, longitude: -0.1687 },
     openingHours: generateOpeningHours(),
@@ -161,7 +137,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7567 8901',
     email: 'mayfair@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'PROSTHODONTIST', 'PERIODONTIST', 'ORTHODONTIST']),
     description: 'Our Mayfair clinic provides high-quality dental services in an exclusive location.',
     coordinates: { latitude: 51.5141, longitude: -0.1463 },
     openingHours: generateOpeningHours(),
@@ -181,7 +157,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7678 9012',
     email: 'camden@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'PEDIATRIC_DENTIST', 'ORTHODONTIST', 'ENDODONTIST']),
     description: 'Our Camden clinic offers a relaxed and friendly atmosphere for all your dental needs.',
     coordinates: { latitude: 51.5290, longitude: -0.1425 },
     openingHours: generateOpeningHours(),
@@ -201,7 +177,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7789 0123',
     email: 'islington@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'ORAL_SURGEON', 'PROSTHODONTIST', 'PERIODONTIST']),
     description: 'Our Islington clinic provides comprehensive dental care in a modern and welcoming environment.',
     coordinates: { latitude: 51.5362, longitude: -0.1033 },
     openingHours: generateOpeningHours(),
@@ -221,7 +197,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7890 1234',
     email: 'greenwich@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'ENDODONTIST', 'PEDIATRIC_DENTIST', 'ORTHODONTIST']),
     description: 'Our Greenwich clinic offers high-quality dental care in a historic and vibrant area.',
     coordinates: { latitude: 51.4810, longitude: -0.0090 },
     openingHours: generateOpeningHours(),
@@ -241,7 +217,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7901 2345',
     email: 'hampstead@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'PERIODONTIST', 'ORAL_SURGEON', 'PROSTHODONTIST']),
     description: 'Our Hampstead clinic offers a serene and professional environment for all your dental needs.',
     coordinates: { latitude: 51.5559, longitude: -0.1780 },
     openingHours: generateOpeningHours(),
@@ -261,7 +237,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7012 3456',
     email: 'richmond@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'ORTHODONTIST', 'ENDODONTIST', 'PEDIATRIC_DENTIST']),
     description: 'Our Richmond clinic offers top-quality dental care in a picturesque setting.',
     coordinates: { latitude: 51.4613, longitude: -0.3037 },
     openingHours: generateOpeningHours(),
@@ -281,7 +257,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7123 4567',
     email: 'wimbledon@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'PROSTHODONTIST', 'PERIODONTIST', 'ORAL_SURGEON']),
     description: 'Our Wimbledon clinic offers comprehensive dental care in a friendly and welcoming environment.',
     coordinates: { latitude: 51.4214, longitude: -0.2067 },
     openingHours: generateOpeningHours(),
@@ -301,7 +277,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7234 5678',
     email: 'nottinghill@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'PEDIATRIC_DENTIST', 'ORTHODONTIST', 'PROSTHODONTIST']),
     description: 'Our Notting Hill clinic offers high-quality dental care in a vibrant and trendy area.',
     coordinates: { latitude: 51.5173, longitude: -0.2067 },
     openingHours: generateOpeningHours(),
@@ -321,7 +297,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7345 6789',
     email: 'shoreditch@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'ORAL_SURGEON', 'ENDODONTIST', 'PERIODONTIST']),
     description: 'Our Shoreditch clinic offers modern dental care in a trendy and artistic neighborhood.',
     coordinates: { latitude: 51.5245, longitude: -0.0789 },
     openingHours: generateOpeningHours(),
@@ -341,7 +317,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7456 7890',
     email: 'clapham@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'ORTHODONTIST', 'PROSTHODONTIST', 'PEDIATRIC_DENTIST']),
     description: 'Our Clapham clinic offers a wide range of dental services in a friendly and relaxed environment.',
     coordinates: { latitude: 51.4620, longitude: -0.1380 },
     openingHours: generateOpeningHours(),
@@ -361,7 +337,7 @@ export const fakeClinicDetails: ClinicDetails[] = [
     phone: '+44 20 7567 8901',
     email: 'bakerst@brightsmiles.com',
     clinicPhotoURL: randomFromArray(clinicImageURLs),
-    availableSpecialties: ['General Dentistry', 'Orthodontics', 'Periodontics'],
+    availableSpecialties: getSpecialtiesByCodes(['GENERAL_DENTIST', 'PERIODONTIST', 'ORAL_SURGEON', 'ENDODONTIST']),
     description: 'Our Baker Street clinic offers high-quality dental care in a historic and well-known location.',
     coordinates: { latitude: 51.5237, longitude: -0.1583 },
     openingHours: generateOpeningHours(),

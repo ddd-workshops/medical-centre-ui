@@ -1,12 +1,19 @@
 import { Router } from 'express';
 import type { Request, Response } from 'express';
 
+import { AppointmentDetails, AppointmentUpdateRequest, ErrorResponse, paths } from '../contract/types';
 import { fakeAppointmentDetails, generateFakeAppointmentsBrief } from '../fake/appointments';
-import { AppointmentDetails } from '../contract/types';
+import { fakePatientBriefs } from '../fake/patient';
+import { fakeDoctorBriefs } from '../fake/staff';
+import { fakeClinicBriefs } from '../fake/clinics';
+import { fakeServiceTypes } from '../fake/services';
 
 export const appointmentsRouter = Router();
 
-appointmentsRouter.get('/', (req: Request, res: Response) => {
+appointmentsRouter.get('/', (
+  req: Request<paths['/appointments']['get']['parameters']['query']>,
+  res: Response<paths['/appointments']['get']['responses']['200']['content']['application/json'] | ErrorResponse>
+) => {
   let filtered = [...fakeAppointmentDetails];
 
   // Filter by search query
@@ -46,39 +53,76 @@ appointmentsRouter.get('/', (req: Request, res: Response) => {
   res.json(result);
 });
 
-appointmentsRouter.get('/:id', (req: Request, res: Response) => {
-  const appointment = fakeAppointmentDetails.find(a => a.id === req.params.id);
+appointmentsRouter.get('/:appointmentId', (
+  req: Request<paths['/appointments/{appointmentId}']['get']['parameters']['path']>,
+  res: Response<paths['/appointments/{appointmentId}']['get']['responses']['200']['content']['application/json'] | ErrorResponse>
+) => {
+  const appointment = fakeAppointmentDetails.find(a => a.id === req.params.appointmentId);
   if (!appointment) {
     return res.status(404).json({ message: 'Appointment not found' });
   }
   res.json(appointment);
 });
 
-appointmentsRouter.post('/', (req: Request, res: Response) => {
+appointmentsRouter.post('/', (
+  req: Request<object, object, paths['/appointments']['post']['requestBody']['content']['application/json']>,
+  res: Response<paths['/appointments']['post']['responses']['201']['content']['application/json'] | ErrorResponse>
+) => {
+  const { patientId, doctorId, serviceTypeId, locationId, datetime } = req.body;
+
+  // Find patient
+  const patient = fakePatientBriefs.find(p => p.id === patientId);
+  if (!patient) {
+    return res.status(404).json({ message: 'Patient not found' });
+  }
+
+  // Find doctor
+  const doctor = fakeDoctorBriefs.find(d => d.id.toString() === doctorId);
+  if (!doctor) {
+    return res.status(404).json({ message: 'Doctor not found' });
+  }
+
+  // Get doctor's primary location or first available
+  const location = fakeClinicBriefs.find(c => c.id.toString() === locationId);
+  if (!location) {
+    return res.status(400).json({ message: 'Location not found' });
+  }
+
+  // Find service type
+  const serviceType = fakeServiceTypes.find(s => s.id === serviceTypeId);
+  if (!serviceType) {
+    return res.status(404).json({ message: 'Service type not found' });
+  }
+
+  // Create appointment with all required data
   const appointment: AppointmentDetails = {
     id: Date.now().toString(),
-    ...req.body,
-    status: 'scheduled'
+    patient,
+    doctor,
+    serviceType,
+    location,
+    datetime,
+    status: 'SCHEDULED',
+    prescriptions: [],
+    billing: {
+      amount: 0,
+      status: 'PENDING'
+    }
   };
+
   fakeAppointmentDetails.push(appointment);
   res.status(201).json(appointment);
 });
 
-appointmentsRouter.put('/:id', (req: Request, res: Response) => {
-  const index = fakeAppointmentDetails.findIndex(a => a.id === req.params.id);
+appointmentsRouter.put('/:appointmentId', (
+  req: Request<paths['/appointments/{appointmentId}']['put']['parameters']['path'], object, AppointmentUpdateRequest>,
+  res: Response<paths['/appointments/{appointmentId}']['put']['responses']['200']['content']['application/json'] | ErrorResponse>
+) => {
+  const index = fakeAppointmentDetails.findIndex(a => a.id === req.params.appointmentId);
   if (index === -1) {
     return res.status(404).json({ message: 'Appointment not found' });
   }
   const newAppointment = { ...fakeAppointmentDetails[index], ...req.body };
   fakeAppointmentDetails[index] = newAppointment;
   res.json(newAppointment);
-});
-
-appointmentsRouter.delete('/:id', (req: Request, res: Response) => {
-  const index = fakeAppointmentDetails.findIndex(a => a.id === req.params.id);
-  if (index === -1) {
-    return res.status(404).json({ message: 'Appointment not found' });
-  }
-  fakeAppointmentDetails.splice(index, 1);
-  res.status(204).send();
 });

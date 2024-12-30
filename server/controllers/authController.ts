@@ -1,14 +1,18 @@
 import { Router } from 'express';
+import type { Request, Response } from 'express';
 
-import type { LoginRequest } from '../contract/types';
+import type { ErrorResponse, paths } from '../contract/types';
 import { session } from '../fake/session';
 import { randomFromArray } from '../fake/utils';
 import { fakePatientProfiles } from '../fake/patient';
 
 export const authRouter = Router();
 
-authRouter.post('/login', (req, res) => {
-  const body = req.body as LoginRequest;
+authRouter.post('/login', (
+  req: Request<object, object, paths['/auth/login']['post']['requestBody']['content']['application/json']>,
+  res: Response<paths['/auth/login']['post']['responses']['200']['content']['application/json'] | ErrorResponse>
+) => {
+  const body = req.body;
 
   if (session.loggedIn){
     return res.status(400).json({ message: 'Already logged in' }).send();
@@ -23,7 +27,10 @@ authRouter.post('/login', (req, res) => {
   }
 });
 
-authRouter.post('/logout', (_req, res) => {
+authRouter.post('/logout', (
+  req: Request,
+  res: Response<paths['/auth/logout']['post']['responses']['204']['content'] | ErrorResponse>
+) => {
   if (!session.loggedIn){
     return res.status(400).json({ message: 'Not logged in' }).send();
   }

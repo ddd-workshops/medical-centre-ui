@@ -1,0 +1,7 @@
+export enum StaffType {
+  MEDICAL = "MEDICAL",
+  OFFICE = "OFFICE",
+  FINANCE = "FINANCE",
+  MANAGER = "MANAGER",
+  TECHNICIAN = "TECHNICIAN"
+}

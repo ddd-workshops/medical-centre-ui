@@ -1,6 +1,7 @@
 import { useReactTable, createColumnHelper, getCoreRowModel, flexRender } from '@tanstack/react-table';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
+import { H2 } from '../../ui-library/Typography/Headings';
 
 type MedicalDocument = {
   id: string;
@@ -125,9 +126,9 @@ export const MedicalHistory = () => {
 
   return (
     <div className="p-8 bg-white rounded-xl shadow-lg max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold text-green-800 mb-8 border-b border-green-100 pb-4">
+      <H2>
         Medical History
-      </h2>
+      </H2>
       <div className="overflow-x-auto rounded-lg shadow-sm border border-green-100">
         <table className="w-full border-collapse bg-white">
           <thead>

@@ -53,9 +53,10 @@ export function DoctorProfile({ doctor }: DoctorProfileProps) {
                   <A 
                     href={clinicLink(location)}
                     size="SMALL"
+                    className="text-base"
                   >
                     {location.name}
-                    <div>({location.address})</div>
+                    <div className='text-sm'>({location.address})</div>
                   </A>
                 )}
               />

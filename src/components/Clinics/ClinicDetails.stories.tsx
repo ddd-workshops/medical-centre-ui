@@ -5,13 +5,6 @@ import { ClinicDetails } from './ClinicDetails';
 const meta: Meta<typeof ClinicDetails> = {
   title: 'BSA/Clinics/ClinicDetails',
   component: ClinicDetails,
-  decorators: [
-    (Story) => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
-    ),
-  ],
   tags: ['autodocs'],
 };
 

@@ -79,7 +79,9 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": Record<string, never>;
+                    };
                 };
                 /** @description Invalid registration data */
                 400: {
@@ -127,7 +129,9 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": Record<string, never>;
+                    };
                 };
             };
         };
@@ -261,7 +265,9 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["AppointmentDetails"];
+                    };
                 };
             };
         };
@@ -471,7 +477,9 @@ export interface paths {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": Record<string, never>;
+                    };
                 };
             };
         };
@@ -810,7 +818,16 @@ export interface paths {
          */
         get: {
             parameters: {
-                query?: never;
+                query?: {
+                    /** @description Search by doctor's name */
+                    name?: string;
+                    /** @description Filter by one or more specialties */
+                    specialties?: string[];
+                    /** @description Filter by one or more clinic locations */
+                    locations?: string[];
+                    /** @description Filter by languages spoken */
+                    languages?: string[];
+                };
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -881,10 +898,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/staff/searchbar": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get data for doctor search filters
+         * @description Returns all data needed to populate doctor search bar filters
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Search filter data */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            languages: components["schemas"]["Language"][];
+                            specialties: components["schemas"]["DoctorSpecialty"][];
+                            locations: components["schemas"]["ClinicBrief"][];
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        ErrorResponse: {
+            code?: string;
+            message: string;
+        };
         /** @enum {string} */
         BillingStatus: "PENDING" | "PAID" | "CANCELLED";
         /** @enum {string} */
@@ -930,6 +994,8 @@ export interface components {
             doctorId: string;
             /** Format: uuid */
             serviceTypeId: string;
+            /** Format: uuid */
+            locationId: string;
             /** Format: date-time */
             datetime: string;
         };
@@ -986,8 +1052,8 @@ export interface components {
             id: number;
             /** @description Full name of the doctor including titles (e.g. "Dr. John Smith") */
             fullName: string;
-            /** @description List of doctor's areas of specialization (e.g. ["Orthodontics", "Dental Surgery"]) */
-            specialties: string[];
+            /** @description List of doctor's specialties */
+            specialties: components["schemas"]["DoctorSpecialty"][];
             locations?: components["schemas"]["ClinicBrief"][];
         };
         DoctorProfile: {
@@ -997,10 +1063,10 @@ export interface components {
             lastName: string;
             /** @description Professional title of the doctor ("Doctor", "Professor", "Assistant Professor", "Associate Professor", "Senior Consultant") */
             title: string;
-            /** @description List of doctor's areas of specialization (e.g. ["Orthodontics", "Dental Surgery"]) */
-            specialties: string[];
+            /** @description List of doctor's areas of specialization (e.g. Orthodontics, Dental Surgery) */
+            specialties: components["schemas"]["DoctorSpecialty"][];
             locations: components["schemas"]["ClinicBrief"][];
-            /** @description List of languages the doctor can speak (e.g. ["English", "Spanish"]) */
+            /** @description List of languages the doctor can speak (e.g. English, Spanish) */
             languagesSpoken: string[];
             /** @description A brief biography of the doctor */
             bio?: string;
@@ -1036,7 +1102,7 @@ export interface components {
             patientId?: string;
             /** Format: uuid */
             issuingDoctorId?: string;
-            targetSpecialty?: string;
+            targetSpecialty?: components["schemas"]["DoctorSpecialty"];
             diagnosis: string;
             recommendations: string;
             issueDate: string;
@@ -1045,7 +1111,7 @@ export interface components {
         ReferralCreateRequest: {
             /** Format: uuid */
             patientId: string;
-            targetSpecialty: string;
+            targetSpecialty: components["schemas"]["DoctorSpecialty"];
             diagnosis: string;
             recommendations: string;
             /** Format: date */
@@ -1122,7 +1188,7 @@ export interface components {
             /** @description URL to the clinic's photo */
             clinicPhotoURL: string;
             /** @description List of specialties available at the clinic */
-            availableSpecialties?: string[];
+            availableSpecialties?: components["schemas"]["DoctorSpecialty"][];
             description: string;
             coordinates?: components["schemas"]["Coordinates"];
             openingHours: components["schemas"]["OpeningHours"];
@@ -1219,6 +1285,35 @@ export interface components {
             FRIDAY: string;
             SATURDAY: string;
             SUNDAY: string;
+        };
+        Language: {
+            /**
+             * @description ISO language code
+             * @example pl
+             */
+            code: string;
+            /**
+             * @description Language name in English
+             * @example Polish
+             */
+            englishName: string;
+            /**
+             * @description Language name in its native form
+             * @example polski
+             */
+            nativeName: string;
+        };
+        DoctorSpecialty: {
+            /**
+             * @description Specialty code in screaming case
+             * @example ORTHODONTICS
+             */
+            code: string;
+            /**
+             * @description English name of the specialty
+             * @example Orthodontics
+             */
+            name: string;
         };
     };
     responses: never;

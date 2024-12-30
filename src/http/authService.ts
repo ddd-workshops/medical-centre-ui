@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { LoginRequest, PatientProfile, RegisterRequest } from '../contract/types';
+import type { paths, LoginRequest, RegisterRequest } from '../contract/types';
 
 const endpoints = {
   login: '/auth/login',
@@ -8,17 +8,22 @@ const endpoints = {
 };
 
 export const authService = {
-  login: async (credentials: LoginRequest): Promise<PatientProfile> => {
-    const { data } = await apiClient.post<PatientProfile>(endpoints.login, credentials);
+  login: async (credentials: LoginRequest) => {
+    const { data } = await apiClient.post<paths['/auth/login']['post']['responses']['200']['content']['application/json']>(
+      endpoints.login, 
+      credentials
+    );
     return data;
   },
 
-  logout: async (): Promise<void> => {
-    await apiClient.post(endpoints.logout);
+  logout: async () => {
+    await apiClient.post<paths['/auth/logout']['post']['responses']['204']['content']['application/json']>(endpoints.logout);
   },
 
-  register: async (data: RegisterRequest): Promise<PatientProfile> => {
-    const { data: profile } = await apiClient.post<PatientProfile>(endpoints.register, data);
-    return profile;
+  register: async (data: RegisterRequest) => {
+    await apiClient.post<paths['/auth/register']['post']['responses']['201']['content']['application/json']>(
+      endpoints.register, 
+      data
+    );
   },
 };

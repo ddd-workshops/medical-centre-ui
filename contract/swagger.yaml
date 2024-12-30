@@ -44,6 +44,10 @@ paths:
       responses:
         '201':
           description: Registration successful
+          content:
+            application/json:
+              schema:
+                type: object
         '400':
           description: Invalid registration data
         '409':
@@ -57,6 +61,10 @@ paths:
       responses:
         '204':
           description: Logout successful
+          content:
+            application/json:
+              schema:
+                type: object
 
   /appointments:
     get:
@@ -154,6 +162,10 @@ paths:
       responses:
         '200':
           description: Appointment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentDetails'
 
   /referrals:
     get:
@@ -257,6 +269,10 @@ paths:
       responses:
         '204':
           description: Notification marked as read successfully
+          content:
+            application/json:
+              schema:
+                type: object
 
   /cms/pages:
     get:
@@ -396,6 +412,38 @@ paths:
         - Staff
       summary: Get all doctors
       description: Retrieve a list of all doctors (brief information)
+      parameters:
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Search by doctor's name
+        - name: specialties
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          description: Filter by one or more specialties
+        - name: locations
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              format: uuid
+          description: Filter by one or more clinic locations
+        - name: languages
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          description: Filter by languages spoken
       responses:
         '200':
           description: List of doctors
@@ -428,8 +476,49 @@ paths:
         '404':
           description: Doctor not found
 
+  /staff/searchbar:
+    get:
+      tags:
+        - Staff
+      summary: Get data for doctor search filters
+      description: Returns all data needed to populate doctor search bar filters
+      responses:
+        '200':
+          description: Search filter data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  languages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Language'
+                  specialties:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DoctorSpecialty'
+                  locations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ClinicBrief'
+                required:
+                  - languages
+                  - specialties
+                  - locations
+
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - message
+
     BillingStatus:
       type: string
       enum: [PENDING, PAID, CANCELLED]
@@ -536,6 +625,9 @@ components:
         serviceTypeId:
           type: string
           format: uuid
+        locationId:
+          type: string
+          format: uuid
         datetime:
           type: string
           format: date-time
@@ -543,6 +635,7 @@ components:
         - patientId
         - doctorId
         - serviceTypeId
+        - locationId
         - datetime
 
     AppointmentUpdateRequest:
@@ -655,9 +748,9 @@ components:
           description: Full name of the doctor including titles (e.g. "Dr. John Smith")
         specialties:
           type: array
-          description: List of doctor's areas of specialization (e.g. ["Orthodontics", "Dental Surgery"])
+          description: List of doctor's specialties
           items:
-            type: string
+            $ref: '#/components/schemas/DoctorSpecialty'
         locations:
           type: array
           items:
@@ -682,16 +775,16 @@ components:
           description: Professional title of the doctor ("Doctor", "Professor", "Assistant Professor", "Associate Professor", "Senior Consultant")
         specialties:
           type: array
-          description: List of doctor's areas of specialization (e.g. ["Orthodontics", "Dental Surgery"])
+          description: List of doctor's areas of specialization (e.g. Orthodontics, Dental Surgery)
           items:
-            type: string
+            $ref: '#/components/schemas/DoctorSpecialty'
         locations:
           type: array
           items:
             $ref: '#/components/schemas/ClinicBrief'
         languagesSpoken:
           type: array
-          description: List of languages the doctor can speak (e.g. ["English", "Spanish"])
+          description: List of languages the doctor can speak (e.g. English, Spanish)
           items:
             type: string
         bio:
@@ -761,7 +854,7 @@ components:
           type: string
           format: uuid
         targetSpecialty:
-          type: string
+          $ref: '#/components/schemas/DoctorSpecialty'
         diagnosis:
           type: string
         recommendations:
@@ -784,7 +877,7 @@ components:
           type: string
           format: uuid
         targetSpecialty:
-          type: string
+          $ref: '#/components/schemas/DoctorSpecialty'
         diagnosis:
           type: string
         recommendations:
@@ -948,7 +1041,7 @@ components:
           type: array
           description: List of specialties available at the clinic
           items:
-            type: string
+            $ref: '#/components/schemas/DoctorSpecialty'
         description:
           type: string
         coordinates:
@@ -1163,3 +1256,38 @@ components:
         - FRIDAY
         - SATURDAY
         - SUNDAY
+
+    Language:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ISO language code
+          example: "pl"
+        englishName:
+          type: string
+          description: Language name in English
+          example: "Polish"
+        nativeName:
+          type: string
+          description: Language name in its native form
+          example: "polski"
+      required:
+        - code
+        - englishName
+        - nativeName
+
+    DoctorSpecialty:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Specialty code in screaming case
+          example: "ORTHODONTICS"
+        name:
+          type: string
+          description: English name of the specialty
+          example: "Orthodontics"
+      required:
+        - code
+        - name

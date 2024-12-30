@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { MemoryRouter } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { AppointmentCard } from './AppointmentCard';
 import type { AppointmentBrief, AppointmentDetails } from '../../contract/types';
@@ -8,59 +8,48 @@ import type { AppointmentBrief, AppointmentDetails } from '../../contract/types'
 // Mock data
 const mockAppointment: AppointmentBrief = {
   id: '1',
-  datetime: '2024-02-20T14:30:00Z',
-  status: 'SCHEDULED',
-  serviceType: 'Dental Cleaning',
-  location: 'Main Clinic',
+  doctorId: 123,
   doctorName: 'Dr. Sarah Johnson',
-  patientName: 'John Smith'
+  patientName: 'John Smith',
+  serviceType: 'DENTAL_CLEANING',
+  location: 'Main Clinic',
+  datetime: '2024-02-20T14:30:00Z',
+  status: 'SCHEDULED'
 };
 
 const mockDetails: AppointmentDetails = {
-  "id": "e3fe2c39-0266-4505-bc8b-8c9b4bb9bfeb",
-  "patient": {
-    "id": "e360a2ef-48b8-46ba-b5ef-e951b93e509d",
-    "fullName": "Olive McCullough"
+  id: "e3fe2c39-0266-4505-bc8b-8c9b4bb9bfeb",
+  patient: {
+    id: "e360a2ef-48b8-46ba-b5ef-e951b93e509d",
+    fullName: "Olive McCullough"
   },
-  "doctor": {
-    "id": "f7d170c3-5eb0-4068-84ea-11640f6f23e3",
-    "fullName": "Brakus",
-    "specialties": [
-      "General Dentist"
+  doctor: {
+    id: 123,
+    fullName: "Dr. Brakus",
+    specialties: [
+      "Dental Implant Specialist"
     ]
   },
-  "location": {
-    "id": "10",
-    "name": "Bright Smiles Richmond",
-    "address": "28 The Quadrant, London, TW9 1DN, United Kingdom"
+  serviceType: {
+    id: "service-10",
+    name: "DENTAL_IMPLANT"
   },
-  "serviceType": {
-    "id": "service-10",
-    "name": "DENTAL_IMPLANT"
+  location: {
+    id: 10,
+    name: "Bright Smiles Richmond",
+    address: '123 Dental Street, Medical District, London'
   },
-  "datetime": "2025-04-09T20:56:14.529Z",
-  "status": "COMPLETED",
-  "prescriptions": [
+  datetime: "2025-04-09T20:56:14.529Z",
+  status: "COMPLETED",
+  prescriptions: [
     "Rustic Steel Fish",
     "Licensed Metal Towels"
   ],
-  "billing": {
-    "amount": 474.75,
-    "status": "PENDING"
+  billing: {
+    amount: 474.75,
+    status: "PENDING"
   }
 };
-
-// QueryClient setup
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
-// Prepare mock response
-queryClient.setQueryData(['appointment', '1'], mockDetails);
 
 const meta = {
   title: 'BSA/Appointments/AppointmentCard',
@@ -68,15 +57,6 @@ const meta = {
   parameters: {
     layout: 'padded',
   },
-  decorators: [
-    (Story) => (
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-          <Story />
-        </MemoryRouter>
-      </QueryClientProvider>
-    ),
-  ],
   tags: ['autodocs'],
 } satisfies Meta<typeof AppointmentCard>;
 
@@ -111,21 +91,7 @@ export const WithOverdueBilling: Story = {
   args: {
     appointment: {
       ...mockAppointment,
-      status: 'COMPLETED',
+      status: 'COMPLETED'
     },
   },
-  decorators: [
-    (Story) => {
-      const overdueDetails = {
-        ...mockDetails,
-        status: 'COMPLETED',
-        billing: {
-          amount: 150,
-          status: 'OVERDUE'
-        }
-      };
-      queryClient.setQueryData(['appointment', '1'], overdueDetails);
-      return <Story />;
-    },
-  ],
 };

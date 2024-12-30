@@ -1,17 +1,181 @@
 import { faker } from "@faker-js/faker";
-
+import type { DoctorSpecialty } from '../contract/types';
 import { randomFromArray } from "./utils";
+import { StaffType } from "./staffType";
 
-export enum DentalSpecialty {
-  GENERAL_DENTIST = 'GENERAL_DENTIST',
-  ORAL_SURGEON = 'ORAL_SURGEON',
-  PERIODONTIST = 'PERIODONTIST',
-  PROSTHODONTIST = 'PROSTHODONTIST',
-  ENDODONTIST = 'ENDODONTIST',
-  ORTHODONTIST = 'ORTHODONTIST',
-  DENTAL_HYGIENIST = 'DENTAL_HYGIENIST',
-  DENTAL_ASSISTANT = 'DENTAL_ASSISTANT'
+export const specialties: DoctorSpecialty[] = [
+  { code: 'GENERAL_DENTIST', name: 'General Dentist' },
+  { code: 'ORAL_SURGEON', name: 'Oral Surgeon' },
+  { code: 'PERIODONTIST', name: 'Periodontist' },
+  { code: 'PROSTHODONTIST', name: 'Prosthodontist' },
+  { code: 'ENDODONTIST', name: 'Endodontist' },
+  { code: 'ORTHODONTIST', name: 'Orthodontist' },
+  { code: 'DENTAL_HYGIENIST', name: 'Dental Hygienist' },
+  { code: 'DENTAL_ASSISTANT', name: 'Dental Assistant' },
+  { code: 'IMPLANTOLOGY', name: 'Implantology' },
+  { code: 'PEDIATRIC_DENTISTRY', name: 'Pediatric Dentistry' },
+  { code: 'ORAL_MEDICINE', name: 'Oral Medicine' },
+];
+
+export const getSpecialtiesByCodes = (codes: string[]) => 
+  specialties.filter(specialty => codes.includes(specialty.code));
+
+interface SpecialtyRule {
+  weight: number;
+  requires: string[];
+  conflicts: string[];
+  commonPairs: string[];
 }
+
+const SPECIALTY_RULES: Record<string, SpecialtyRule> = {
+  GENERAL_DENTIST: {
+    weight: 100,
+    requires: [],
+    conflicts: ['DENTAL_ASSISTANT', 'DENTAL_HYGIENIST'],
+    commonPairs: ['ORTHODONTIST']
+  },
+  ORAL_SURGEON: {
+    weight: 30,
+    requires: ['GENERAL_DENTIST'],
+    conflicts: ['DENTAL_ASSISTANT', 'DENTAL_HYGIENIST'],
+    commonPairs: ['PERIODONTIST']
+  },
+  PERIODONTIST: {
+    weight: 40,
+    requires: ['GENERAL_DENTIST'],
+    conflicts: ['DENTAL_ASSISTANT', 'DENTAL_HYGIENIST'],
+    commonPairs: ['ORAL_SURGEON']
+  },
+  PROSTHODONTIST: {
+    weight: 35,
+    requires: ['GENERAL_DENTIST'],
+    conflicts: ['DENTAL_ASSISTANT', 'DENTAL_HYGIENIST'],
+    commonPairs: []
+  },
+  ENDODONTIST: {
+    weight: 25,
+    requires: ['GENERAL_DENTIST'],
+    conflicts: ['DENTAL_ASSISTANT', 'DENTAL_HYGIENIST'],
+    commonPairs: []
+  },
+  ORTHODONTIST: {
+    weight: 45,
+    requires: ['GENERAL_DENTIST'],
+    conflicts: ['DENTAL_ASSISTANT', 'DENTAL_HYGIENIST'],
+    commonPairs: []
+  },
+  DENTAL_HYGIENIST: {
+    weight: 80,
+    requires: [],
+    conflicts: [
+      'GENERAL_DENTIST',
+      'ORAL_SURGEON',
+      'PERIODONTIST',
+      'PROSTHODONTIST',
+      'ENDODONTIST',
+      'ORTHODONTIST'
+    ],
+    commonPairs: ['DENTAL_ASSISTANT']
+  },
+  DENTAL_ASSISTANT: {
+    weight: 90,
+    requires: [],
+    conflicts: [
+      'GENERAL_DENTIST',
+      'ORAL_SURGEON',
+      'PERIODONTIST',
+      'PROSTHODONTIST',
+      'ENDODONTIST',
+      'ORTHODONTIST'
+    ],
+    commonPairs: ['DENTAL_HYGIENIST']
+  },
+  IMPLANTOLOGY: {
+    weight: 35,
+    requires: ['GENERAL_DENTIST'],
+    conflicts: ['DENTAL_ASSISTANT', 'DENTAL_HYGIENIST'],
+    commonPairs: ['ORAL_SURGEON']
+  },
+  PEDIATRIC_DENTISTRY: {
+    weight: 40,
+    requires: ['GENERAL_DENTIST'],
+    conflicts: ['DENTAL_ASSISTANT', 'DENTAL_HYGIENIST'],
+    commonPairs: ['ORTHODONTIST']
+  },
+  ORAL_MEDICINE: {
+    weight: 30,
+    requires: ['GENERAL_DENTIST'],
+    conflicts: ['DENTAL_ASSISTANT', 'DENTAL_HYGIENIST'],
+    commonPairs: ['PERIODONTIST']
+  }
+};
+
+const getAvailableSpecialties = (
+  existing: string[] = []
+): [string, number][] => {
+  return Object.entries(SPECIALTY_RULES)
+    .filter(([specialty]) => !existing.includes(specialty))
+    .filter(([specialty, rules]) => {
+      const { requires, conflicts } = rules;
+      
+      const hasRequirements = requires.every(req => existing.includes(req));
+      const hasNoConflicts = !conflicts.some(conf => existing.includes(conf));
+      
+      return hasRequirements && hasNoConflicts;
+    })
+    .map(([specialty, rules]) => [
+      specialty,
+      rules.weight * (
+        existing.some(ex => SPECIALTY_RULES[ex].commonPairs.includes(specialty))
+          ? 1.5
+          : 1
+      )
+    ]);
+};
+
+interface SpecialtyGenerationOptions {
+  min?: number;
+  max?: number;
+  exact?: number;
+  baseSpecialty?: string;
+}
+
+export const generateFakeSpecialties = (
+  options: SpecialtyGenerationOptions = {}
+): DoctorSpecialty[] => {
+  const { min = 1, max = 3, exact, baseSpecialty } = options;
+  const count = exact ?? faker.number.int({ min, max });
+  
+  const selectedCodes: string[] = [];
+  
+  if (baseSpecialty) {
+    selectedCodes.push(baseSpecialty);
+  }
+  
+  while (selectedCodes.length < count) {
+    const available = getAvailableSpecialties(selectedCodes);
+    if (!available.length) break;
+    
+    const totalWeight = available.reduce((sum, [_, weight]) => sum + weight, 0);
+    let random = faker.number.float({ min: 0, max: totalWeight });
+    
+    for (const [specialty, weight] of available) {
+      random -= weight;
+      if (random <= 0) {
+        selectedCodes.push(specialty);
+        break;
+      }
+    }
+  }
+  
+  return selectedCodes.map(code => 
+    specialties.find(s => s.code === code)!
+  );
+};
+
+export const generateFakeSpecialty = (): DoctorSpecialty => {
+  return generateFakeSpecialties({ exact: 1 })[0];
+};
 
 export enum StaffTitle {
   DOCTOR = "Dr.",
@@ -23,14 +187,6 @@ export enum StaffTitle {
   BDS = "BDS",
   MD = "MD",
   PHD = "PhD"
-}
-
-export enum StaffType {
-  MEDICAL = "MEDICAL",
-  OFFICE = "OFFICE",
-  FINANCE = "FINANCE",
-  MANAGER = "MANAGER",
-  TECHNICIAN = "TECHNICIAN"
 }
 
 export interface StaffRoleInfo {
@@ -114,6 +270,21 @@ export const STAFF_ROLES: Record<string, StaffRoleInfo> = {
     name: "Radiology Technician",
     type: StaffType.TECHNICIAN,
     possibleTitles: []
+  },
+  IMPLANTOLOGY: {
+    name: "Implantologist",
+    type: StaffType.MEDICAL,
+    possibleTitles: [StaffTitle.DOCTOR, StaffTitle.DDS, StaffTitle.DMD]
+  },
+  PEDIATRIC_DENTISTRY: {
+    name: "Pediatric Dentist",
+    type: StaffType.MEDICAL,
+    possibleTitles: [StaffTitle.DOCTOR, StaffTitle.DDS, StaffTitle.DMD]
+  },
+  ORAL_MEDICINE: {
+    name: "Oral Medicine Specialist",
+    type: StaffType.MEDICAL,
+    possibleTitles: [StaffTitle.DOCTOR, StaffTitle.DDS, StaffTitle.MD]
   }
 };
 
@@ -139,149 +310,4 @@ export const generateFakeSpecialist = (type?: StaffType): Specialist => {
     type: roleInfo.type,
     title
   };
-};
-
-interface SpecialtyGenerationOptions {
-  min?: number;
-  max?: number;
-  exact?: number;
-  baseSpecialty?: DentalSpecialty;
-}
-
-// Define specialty paths and their requirements
-interface SpecialtyRule {
-  weight: number;
-  requires: DentalSpecialty[];
-  conflicts: DentalSpecialty[];
-  commonPairs: DentalSpecialty[];
-}
-
-const SPECIALTY_RULES: Record<DentalSpecialty, SpecialtyRule> = {
-  [DentalSpecialty.GENERAL_DENTIST]: {
-    weight: 100, // Most common
-    requires: [],
-    conflicts: [DentalSpecialty.DENTAL_ASSISTANT, DentalSpecialty.DENTAL_HYGIENIST],
-    commonPairs: [DentalSpecialty.ORTHODONTIST] // Often general dentists get orthodontics training
-  },
-  [DentalSpecialty.ORAL_SURGEON]: {
-    weight: 30,
-    requires: [DentalSpecialty.GENERAL_DENTIST], // Must be a general dentist first
-    conflicts: [DentalSpecialty.DENTAL_ASSISTANT, DentalSpecialty.DENTAL_HYGIENIST],
-    commonPairs: [DentalSpecialty.PERIODONTIST] // Surgical specialties often overlap
-  },
-  [DentalSpecialty.PERIODONTIST]: {
-    weight: 40,
-    requires: [DentalSpecialty.GENERAL_DENTIST],
-    conflicts: [DentalSpecialty.DENTAL_ASSISTANT, DentalSpecialty.DENTAL_HYGIENIST],
-    commonPairs: [DentalSpecialty.ORAL_SURGEON]
-  },
-  [DentalSpecialty.PROSTHODONTIST]: {
-    weight: 35,
-    requires: [DentalSpecialty.GENERAL_DENTIST],
-    conflicts: [DentalSpecialty.DENTAL_ASSISTANT, DentalSpecialty.DENTAL_HYGIENIST],
-    commonPairs: []
-  },
-  [DentalSpecialty.ENDODONTIST]: {
-    weight: 25,
-    requires: [DentalSpecialty.GENERAL_DENTIST],
-    conflicts: [DentalSpecialty.DENTAL_ASSISTANT, DentalSpecialty.DENTAL_HYGIENIST],
-    commonPairs: []
-  },
-  [DentalSpecialty.ORTHODONTIST]: {
-    weight: 45,
-    requires: [DentalSpecialty.GENERAL_DENTIST],
-    conflicts: [DentalSpecialty.DENTAL_ASSISTANT, DentalSpecialty.DENTAL_HYGIENIST],
-    commonPairs: []
-  },
-  [DentalSpecialty.DENTAL_HYGIENIST]: {
-    weight: 80, // Third most common
-    requires: [],
-    conflicts: [
-      DentalSpecialty.GENERAL_DENTIST,
-      DentalSpecialty.ORAL_SURGEON,
-      DentalSpecialty.PERIODONTIST,
-      DentalSpecialty.PROSTHODONTIST,
-      DentalSpecialty.ENDODONTIST,
-      DentalSpecialty.ORTHODONTIST
-    ],
-    commonPairs: [DentalSpecialty.DENTAL_ASSISTANT]
-  },
-  [DentalSpecialty.DENTAL_ASSISTANT]: {
-    weight: 90, // Second most common
-    requires: [],
-    conflicts: [
-      DentalSpecialty.GENERAL_DENTIST,
-      DentalSpecialty.ORAL_SURGEON,
-      DentalSpecialty.PERIODONTIST,
-      DentalSpecialty.PROSTHODONTIST,
-      DentalSpecialty.ENDODONTIST,
-      DentalSpecialty.ORTHODONTIST
-    ],
-    commonPairs: [DentalSpecialty.DENTAL_HYGIENIST]
-  }
-};
-
-const getAvailableSpecialties = (
-  existing: DentalSpecialty[] = []
-): [DentalSpecialty, number][] => {
-  return Object.entries(SPECIALTY_RULES)
-    .filter(([specialty]) => !existing.includes(specialty as DentalSpecialty))
-    .filter(([specialty, rules]) => {
-      const spec = specialty as DentalSpecialty;
-      const { requires, conflicts } = rules;
-      
-      // Check if all required specialties are present
-      const hasRequirements = requires.every(req => existing.includes(req));
-      // Check if there are no conflicts with existing specialties
-      const hasNoConflicts = !conflicts.some(conf => existing.includes(conf));
-      
-      return hasRequirements && hasNoConflicts;
-    })
-    .map(([specialty, rules]) => [
-      specialty as DentalSpecialty,
-      rules.weight * (
-        // Boost weight if it's commonly paired with existing specialties
-        existing.some(ex => SPECIALTY_RULES[ex].commonPairs.includes(specialty as DentalSpecialty))
-          ? 1.5
-          : 1
-      )
-    ]);
-};
-
-export const generateFakeSpecialties = (
-  options: SpecialtyGenerationOptions = {}
-): DentalSpecialty[] => {
-  const { min = 1, max = 3, exact, baseSpecialty } = options;
-  const count = exact ?? faker.number.int({ min, max });
-  
-  const specialties: DentalSpecialty[] = [];
-  
-  // If base specialty is provided, start with it
-  if (baseSpecialty) {
-    specialties.push(baseSpecialty);
-  }
-  
-  while (specialties.length < count) {
-    const available = getAvailableSpecialties(specialties);
-    if (!available.length) break;
-    
-    // Use weights for random selection
-    const totalWeight = available.reduce((sum, [_, weight]) => sum + weight, 0);
-    let random = faker.number.float({ min: 0, max: totalWeight });
-    
-    for (const [specialty, weight] of available) {
-      random -= weight;
-      if (random <= 0) {
-        specialties.push(specialty);
-        break;
-      }
-    }
-  }
-  
-  return specialties;
-};
-
-// Update existing functions to use the new generator
-export const generateFakeSpecialty = (): DentalSpecialty => {
-  return generateFakeSpecialties({ exact: 1 })[0];
 };

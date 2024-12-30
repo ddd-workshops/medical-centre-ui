@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { ClinicBrief, ClinicDetails } from '../contract/types';
+import type { paths } from '../contract/types';
 
 const endpoints = {
   getClinics: '/clinics',
@@ -7,13 +7,17 @@ const endpoints = {
 } as const;
 
 export const clinicService = {
-  getClinics: async (): Promise<ClinicBrief[]> => {
-    const { data } = await apiClient.get<ClinicBrief[]>(endpoints.getClinics);
+  getClinics: async () => {
+    const { data } = await apiClient.get<
+      paths['/clinics']['get']['responses']['200']['content']['application/json']
+    >(endpoints.getClinics);
     return data;
   },
 
-  getClinicDetails: async (id: string): Promise<ClinicDetails> => {
-    const { data } = await apiClient.get<ClinicDetails>(endpoints.getClinicDetails(id));
+  getClinicDetails: async (id: string) => {
+    const { data } = await apiClient.get<
+      paths['/clinics/{clinicId}']['get']['responses']['200']['content']['application/json']
+    >(endpoints.getClinicDetails(id));
     return data;
   }
 };

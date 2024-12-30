@@ -2,8 +2,19 @@ import '../src/index.css';
 import "react-day-picker/src/style.css";
 
 import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { Preview } from "@storybook/react";
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
+
+// QueryClient setup
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 const preview: Preview = {
   parameters: {
@@ -25,9 +36,13 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <TooltipProvider delayDuration={0}>
-        {Story()}
-      </TooltipProvider>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <TooltipProvider delayDuration={0}>
+            {Story()}
+          </TooltipProvider>
+        </MemoryRouter>
+      </QueryClientProvider>
     ),
   ],
 };

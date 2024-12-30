@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
+
 import { Timeline } from './Timeline';
-import type { AppointmentBrief, ClinicBrief } from '../contract/types';
+import type { AppointmentBrief } from '../contract/types';
 
 const meta: Meta<typeof Timeline> = {
   title: 'BSA/Appointments/Timeline',
@@ -10,13 +11,6 @@ const meta: Meta<typeof Timeline> = {
   parameters: {
     layout: 'padded',
   },
-  decorators: [
-    (Story) => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
-    ),
-  ],
 };
 
 export default meta;

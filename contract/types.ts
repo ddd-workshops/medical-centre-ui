@@ -1,4 +1,5 @@
 import type { components, paths } from "./contract";
+export type { paths } from "./contract";
 
 // Entity types
 export type Address = components['schemas']['Address']
@@ -17,7 +18,10 @@ export type Document = components['schemas']['Document']
 export type DoctorBrief = components['schemas']['DoctorBrief']
 export type DoctorProfile = components['schemas']['DoctorProfile']
 export type DoctorPersonalContact = components['schemas']['DoctorPersonalContact']
+export type DoctorSpecialty = components['schemas']['DoctorSpecialty']
+export type ErrorResponse = components['schemas']['ErrorResponse']
 export type LoginRequest = components['schemas']['LoginRequest']
+export type Language = components['schemas']['Language']
 export type MedicalTreatment = components['schemas']['MedicalTreatment']
 export type Notification = components['schemas']['Notification']
 export type NotificationListItem = components['schemas']['NotificationListItem']
@@ -30,16 +34,7 @@ export type Referral = components['schemas']['Referral']
 export type ReferralStatus = components['schemas']['ReferralStatus']
 export type ReferralCreateRequest = components['schemas']['ReferralCreateRequest']
 export type ReferralUpdateRequest = components['schemas']['ReferralUpdateRequest']
+export type RegisterRequest = components['schemas']['RegisterRequest']
 export type ServiceType = components['schemas']['ServiceType']
 export type ServiceOffer = components['schemas']['ServiceOffer']
 export type Coordinates = components['schemas']['Coordinates']
-
-// Path response types
-export type GetAppointmentsResponse = paths['/appointments']['get']['responses']['200']['content']['application/json']
-export type CreateAppointmentResponse = paths['/appointments']['post']['responses']['201']['content']['application/json']
-export type GetAppointmentByIdResponse = paths['/appointments/{appointmentId}']['get']['responses']['200']['content']['application/json']
-export type LoginResponse = paths['/auth/login']['post']['responses']['200']['content']['application/json']
-export type RegisterRequest = components['schemas']['RegisterRequest']
-export type GetProfileResponse = paths['/patient/profile']['get']['responses']['200']['content']['application/json']
-export type GetMedicalTreatmentsResponse = paths['/treatments']['get']['responses']['200']['content']['application/json']
-export type GetPrescribedTreatmentsResponse = paths['/patient/treatments']['get']['responses']['200']['content']['application/json']

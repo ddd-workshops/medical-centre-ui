@@ -1,4 +1,4 @@
-import express from 'express';
+import { Response } from 'express';
 import chalk from "chalk";
 import morgan from 'morgan';
 
@@ -18,7 +18,7 @@ export const logger = {
 }
 
 // Configure morgan with chalk colors
-morgan.token('statusColor', (req, res: express.Response) => {
+morgan.token('statusColor', (req, res: Response) => {
   const status = res.statusCode;
   if (status >= 500) return chalk.red(status);
   if (status >= 400) return chalk.yellow(status);

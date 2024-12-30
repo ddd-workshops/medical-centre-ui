@@ -1,12 +1,9 @@
 import { apiClient } from './client';
-import type { 
-  AppointmentDetails, 
-  AppointmentBrief,
+import type {
+  paths,
+  AppointmentDetails,
   AppointmentCreateRequest, 
   AppointmentUpdateRequest,
-  GetAppointmentsResponse,
-  CreateAppointmentResponse,
-  GetAppointmentByIdResponse,
 } from '../contract/types';
 
 export type AppointmentSearchParams = {
@@ -18,49 +15,44 @@ export type AppointmentSearchParams = {
 
 const endpoints = {
   create: '/appointments',
-  getById: (id: string) => `/appointments/${id}`,
-  update: (id: string) => `/appointments/${id}`,
-  delete: (id: string) => `/appointments/${id}`,
+  getById: (id: AppointmentDetails['id']) => `/appointments/${id}`,
+  update: (id: AppointmentDetails['id']) => `/appointments/${id}`,
+  delete: (id: AppointmentDetails['id']) => `/appointments/${id}`,
   getAll: '/appointments',
   search: '/appointments'
 };
 
 export const appointmentService = {
-  getAllAppointments: async (): Promise<AppointmentBrief[]> => {
-    const { data } = await apiClient.get<GetAppointmentsResponse>(endpoints.getAll);
+  getAllAppointments: async () => {
+    const { data } = await apiClient.get<paths['/appointments']['get']['responses']['200']['content']['application/json']>(endpoints.getAll);
     return data;
   },
 
-  createAppointment: async (appointment: AppointmentCreateRequest): Promise<AppointmentDetails> => {
-    const { data } = await apiClient.post<CreateAppointmentResponse>(
+  createAppointment: async (appointment: AppointmentCreateRequest) => {
+    const { data } = await apiClient.post<paths['/appointments']['post']['responses']['201']['content']['application/json']>(
       endpoints.create,
       appointment
     );
     return data;
   },
 
-  updateAppointment: async (update: AppointmentUpdateRequest): Promise<void> => {
-    await apiClient.put(
+  updateAppointment: async (update: AppointmentUpdateRequest) => {
+    const { data } = await apiClient.put<paths['/appointments/{appointmentId}']['put']['responses']['200']['content']['application/json']>(
       endpoints.update(update.appointmentId),
       update
     );
+    return data;
   },
 
-  deleteAppointment: async (appointmentId: string): Promise<void> => {
-    await apiClient.delete(
-      endpoints.delete(appointmentId)
-    );
-  },
-
-  getAppointmentDetails: async (appointmentId: string): Promise<AppointmentDetails> => {
-    const { data } = await apiClient.get<GetAppointmentByIdResponse>(
+  getAppointmentDetails: async (appointmentId: string) => {
+    const { data } = await apiClient.get<paths['/appointments/{appointmentId}']['get']['responses']['200']['content']['application/json']>(
       endpoints.getById(appointmentId)
     );
     return data;
   },
 
-  searchAppointments: async (params: AppointmentSearchParams): Promise<AppointmentBrief[]> => {
-    const { data } = await apiClient.get<GetAppointmentsResponse>(endpoints.search, { params });
+  searchAppointments: async (params: AppointmentSearchParams) => {
+    const { data } = await apiClient.get<paths['/appointments']['get']['responses']['200']['content']['application/json']>(endpoints.search, { params });
     return data;
   },
 };

@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 import { AppointmentDetails, AppointmentBrief } from '../contract/types';
 import { randomFromArray, repeat } from './utils';
 import { fakeClinicBriefs } from './clinics';
-import { generateFakeServiceTypes } from './services';
+import { fakeServiceTypes } from './services';
 import { generateFakeBilling } from './billings';
 import { generateFakePatientBrief } from './patient';
 import { fakeDoctorBriefs } from './staff';
@@ -16,7 +16,7 @@ export const generateFakeAppointmentDetails = (): AppointmentDetails => {
     patient: generateFakePatientBrief(),
     doctor: randomFromArray(fakeDoctorBriefs),
     location: randomFromArray(fakeClinicBriefs),
-    serviceType: randomFromArray(generateFakeServiceTypes()),
+    serviceType: randomFromArray(fakeServiceTypes),
     datetime: faker.date.future().toISOString(),
     status: randomFromArray(appointmentStatuses),
     notes: Math.random() > 0.5 ? faker.lorem.sentence() : undefined,

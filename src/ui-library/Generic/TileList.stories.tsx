@@ -1,17 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TileList } from './TileList';
-import { BrowserRouter } from 'react-router-dom';
 
 const meta = {
   title: 'UI/Molecules/TileList',
   component: TileList,
-  decorators: [(Story) => (
-    <BrowserRouter>
-      <div className="max-w-3xl">
-        <Story />
-      </div>
-    </BrowserRouter>
-  )],
   parameters: {
     layout: 'centered',
   },
