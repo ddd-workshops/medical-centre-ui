@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAuthStore } from '../Auth/AuthStore';
+import { useAuthStore } from '../auth/AuthStore';
 
 export const ProfileDropdown = () => {
       const { logout } = useAuthStore();

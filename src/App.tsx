@@ -12,9 +12,9 @@ import { AppointmentBooking } from './components/Appointments/AppointmentBooking
 import { MedicalHistory } from './components/MedicalHistory/MedicalHistory';
 import { MedicalHistoryDetails } from './components/MedicalHistory/MedicalHistoryDetails';
 import { SwaggerDocs } from './components/API/SwaggerUI';
-import { LoginForm } from './components/Auth/LoginForm';
-import { RegisterForm } from './components/Auth/RegisterForm';
-import { ResetForm } from './components/Auth/ResetForm';
+import { LoginForm } from './components/auth/LoginForm';
+import { RegisterForm } from './components/auth/RegisterForm';
+import { ResetForm } from './components/auth/ResetForm';
 import { NotificationsList } from './components/Notifications/NotificationsList';
 import { NotificationDetails } from './components/Notifications/NotificationDetails';
 import { CMSContent } from './components/CMS/CMSContent';
@@ -25,7 +25,7 @@ import { DoctorSearch } from './components/Doctors/DoctorSearch';
 import { RoutedDoctorProfile } from './components/Doctors/RoutedDoctorProfile';
 
 import { AppointmentDetailedDescription } from './components/Appointments/AppointmentDetailedDescription';
-import { useAuthStore } from './components/Auth/AuthStore';
+import { useAuthStore } from './components/auth/AuthStore';
 import { UpdateContactRequestForm } from './components/Profile/UpdateContactRequestForm';
 import { AppointmentSearch } from './components/Appointments/AppointmentSearch';
 

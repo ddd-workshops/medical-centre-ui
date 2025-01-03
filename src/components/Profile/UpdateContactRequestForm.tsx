@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useAuthStore } from '../Auth/AuthStore';
+
+import { useAuthStore } from '../auth/AuthStore';
 import { Button } from '../../ui-library/Generic/Button';
 import { Card } from '../../ui-library/Generic/Card';
 import { TextInput } from '../../ui-library/Forms/TextInput';

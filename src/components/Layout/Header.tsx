@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { applicationService } from '../../http/applicationService';
 
 import { NotificationBell } from '../../ui-library/Generic/NotificationBell';
-import { useAuthStore } from '../Auth/AuthStore';
+import { useAuthStore } from '../auth/AuthStore';
 import { Button } from '../../ui-library/Generic/Button';
 import { ProfileDropdown } from './ProfileDropdown';
 import { ProfileAvatar } from '../../ui-library/Generic/Avatar';
