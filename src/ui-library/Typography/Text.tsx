@@ -1,12 +1,11 @@
-import type { Size } from '../DesignEnums/Sizes';
-import { styles, type MessageType } from '../DesignEnums/MessageType';
+import { styles, type VariantType, type DesignSize } from '../DesignEnums';
 import { cn } from '../cn';
 
 interface TextProps {
   children: React.ReactNode;
   className?: string;
-  size?: Size;
-  messageType?: MessageType;
+  size?: DesignSize;
+  variant?: VariantType;
 }
 
 const sizeClasses = {
@@ -15,12 +14,12 @@ const sizeClasses = {
   LARGE: 'text-lg',
 };
 
-export const Text = ({ children, className = '', size = 'MEDIUM', messageType = 'DEFAULT' }: TextProps) => (
+export const Text = ({ children, className = '', size = 'MEDIUM', variant = 'DEFAULT' }: TextProps) => (
   <span 
     className={cn(
       'font-normal',
       sizeClasses[size],
-      styles[messageType].text,
+      styles[variant].text,
       className
     )}
   >

@@ -8,7 +8,7 @@ import { AppointmentCard } from './AppointmentCard';
 import { AppointmentSearchCriteria } from './AppointmentSearchCriteria';
 import { H2 } from '../../ui-library/Typography/Headings';
 import { Paragraph } from '../../ui-library/Typography/Paragraph';
-import { styles } from '../../ui-library/DesignEnums/MessageType';
+import { styles } from '../../ui-library/DesignEnums/ColorVariants';
 
 export const AppointmentSearch = () => {
   const [searchParams, setSearchParams] = useState<AppointmentSearchCriteria>({

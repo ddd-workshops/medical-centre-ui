@@ -20,19 +20,19 @@ export const TreatmentsList: Story = {
         title: 'Root Canal Treatment',
         description: 'Advanced procedure to treat severely damaged or infected tooth pulp',
         link: '/treatments/root-canal',
-        messageType: 'WARNING'
+        variant: 'WARNING'
       },
       {
         title: 'Dental Implants',
         description: 'Permanent solution for missing teeth with titanium posts',
         link: '/treatments/implants',
-        messageType: 'SUCCESS'
+        variant: 'SUCCESS'
       },
       {
         title: 'Teeth Whitening',
         description: 'Professional teeth whitening for a brighter, more confident smile',
         link: '/treatments/whitening',
-        messageType: 'DEFAULT'
+        variant: 'DEFAULT'
       }
     ]
   }
@@ -45,19 +45,19 @@ export const DoctorSpecialties: Story = {
         title: 'Orthodontics',
         description: 'Specialized treatment of teeth and jaw alignment irregularities',
         link: '/specialties/orthodontics',
-        messageType: 'DEFAULT'
+        variant: 'DEFAULT'
       },
       {
         title: 'Periodontics',
         description: 'Treatment of gum diseases and soft tissue management',
         link: '/specialties/periodontics',
-        messageType: 'DEFAULT'
+        variant: 'DEFAULT'
       },
       {
         title: 'Endodontics',
         description: 'Root canal treatments and procedures involving tooth pulp',
         link: '/specialties/endodontics',
-        messageType: 'DEFAULT'
+        variant: 'DEFAULT'
       }
     ]
   }
@@ -69,17 +69,17 @@ export const ServicesWithoutLinks: Story = {
       {
         title: 'Emergency Dental Care',
         description: 'Available 24/7 for urgent dental emergencies',
-        messageType: 'UPDATE'
+        variant: 'UPDATE'
       },
       {
         title: 'Dental Insurance',
         description: 'We accept most major dental insurance plans',
-        messageType: 'UPDATE'
+        variant: 'UPDATE'
       },
       {
         title: 'Family Dentistry',
         description: 'Comprehensive dental care for the whole family',
-        messageType: 'UPDATE'
+        variant: 'UPDATE'
       }
     ]
   }
@@ -91,12 +91,12 @@ export const Alerts: Story = {
       {
         title: 'Clinic Closure Notice',
         description: 'Our clinic will be closed for maintenance this weekend',
-        messageType: 'ALERT'
+        variant: 'ALERT'
       },
       {
         title: 'COVID-19 Protocols',
         description: 'Updated safety measures in place for all visits',
-        messageType: 'ALERT'
+        variant: 'ALERT'
       }
     ]
   }
@@ -108,17 +108,17 @@ export const MixedServices: Story = {
       {
         title: 'Clinic Closure Notice',
         description: 'Our clinic will be closed for maintenance this weekend',
-        messageType: 'ALERT'
+        variant: 'ALERT'
       },
       {
         title: 'New Treatment Available',
         description: 'Introducing advanced laser teeth whitening',
-        messageType: 'UPDATE'
+        variant: 'UPDATE'
       },
       {
         title: 'Holiday Schedule',
         description: 'Check our special holiday working hours',
-        messageType: 'DEFAULT'
+        variant: 'DEFAULT'
       }
     ]
   }
@@ -131,31 +131,31 @@ export const All: Story = {
         title: 'General Dental Check-up',
         description: 'Regular dental examination and cleaning service',
         link: '/services/checkup',
-        messageType: 'DEFAULT'
+        variant: 'DEFAULT'
       },
       {
         title: 'Treatment Completed',
         description: 'Your dental implant procedure has been successfully completed',
         link: '/treatments/completed',
-        messageType: 'SUCCESS'
+        variant: 'SUCCESS'
       },
       {
         title: 'Follow-up Required',
         description: 'Please schedule a follow-up visit for your root canal treatment',
         link: '/appointments/schedule',
-        messageType: 'WARNING'
+        variant: 'WARNING'
       },
       {
         title: 'Emergency Notice',
         description: 'Immediate attention needed for tooth infection cases',
         link: '/emergency',
-        messageType: 'ALERT'
+        variant: 'ALERT'
       },
       {
         title: 'New Service Available',
         description: 'Introducing advanced cosmetic dentistry procedures',
         link: '/services/cosmetic',
-        messageType: 'UPDATE'
+        variant: 'UPDATE'
       }
     ]
   }

@@ -3,7 +3,7 @@ import { Clock, MapPin, User, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { doctorLink } from '../Routing/routes';
-import { styles } from '../../ui-library/DesignEnums/MessageType';
+import { styles } from '../../ui-library/DesignEnums/ColorVariants';
 
 import type { AppointmentBrief } from '../../contract/types';
 import { appointmentService } from '../../http/appointmentService';

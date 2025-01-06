@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 import { DesignSize } from '../DesignEnums/designEnums';
-import { styles } from '../DesignEnums/MessageType';
+import { styles } from '../DesignEnums/ColorVariants';
 import { cn } from '../cn';
 
 interface DropdownProps {

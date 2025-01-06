@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { Button } from "./Button";
-import { MessageType } from "../DesignEnums/MessageType";
-import { DesignFill, DesignSize } from "../DesignEnums/designEnums";
+import { VariantType } from "../DesignEnums";
+import { DesignFill, DesignSize } from "../DesignEnums";
 import { Plus } from "lucide-react";
 
 const meta: Meta<typeof Button> = {
@@ -13,7 +13,7 @@ const meta: Meta<typeof Button> = {
     onClick: action("button-clicked"),
     children: "Schedule Appointment",
     fill: "SOLID",
-    messageType: "ACCENT",
+    variant: "ACCENT",
   },
 };
 
@@ -44,12 +44,12 @@ export const Sizes: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="flex gap-2 flex-wrap">
-      <Button messageType="DEFAULT">Default</Button>
-      <Button messageType="SUCCESS">Success</Button>
-      <Button messageType="WARNING">Warning</Button>
-      <Button messageType="ALERT">Alert</Button>
-      <Button messageType="UPDATE">Update</Button>
-      <Button messageType="ACCENT">Accent</Button>
+      <Button variant="DEFAULT">Default</Button>
+      <Button variant="SUCCESS">Success</Button>
+      <Button variant="WARNING">Warning</Button>
+      <Button variant="ALERT">Alert</Button>
+      <Button variant="UPDATE">Update</Button>
+      <Button variant="ACCENT">Accent</Button>
     </div>
   ),
 };
@@ -58,7 +58,7 @@ export const FullWidth: Story = {
   args: {
     children: "Create New Project",
     fill: "OUTLINED",
-    messageType: "DEFAULT",
+    variant: "DEFAULT",
     fullWidth: true,
   },
 };
@@ -67,7 +67,7 @@ export const DisabledButton: Story = {
   args: {
     children: "Deploy to Production",
     fill: "SOLID",
-    messageType: "ACCENT",
+    variant: "ACCENT",
     disabled: true,
   },
 };
@@ -83,7 +83,7 @@ export const ButtonWithIcon: Story = {
   )
 };
 
-const labels: { [key in MessageType]: string } = {
+const labels: { [key in VariantType]: string } = {
   DEFAULT: "Available",
   SUCCESS: "Treatment Complete",
   WARNING: "Follow-up Required",
@@ -101,14 +101,14 @@ export const AllCases: Story = {
         <div className="space-y-2">
           {sizes.map((size) => (
             <div className="flex gap-2">
-              {Object.keys(labels).map((messageType) => (
+              {Object.keys(labels).map((variant) => (
                 <Button
-                  key={`${fill}-${size}-${messageType}`}
+                  key={`${fill}-${size}-${variant}`}
                   fill={fill}
                   size={size}
-                  messageType={messageType as MessageType}
+                  variant={variant as VariantType}
                 >
-                  {labels[messageType as MessageType]}
+                  {labels[variant as VariantType]}
                 </Button>
               ))}
             </div>

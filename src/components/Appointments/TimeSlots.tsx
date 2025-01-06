@@ -36,7 +36,7 @@ export function TimeSlots({ slots, selectedTimeId, onTimeSelect }: TimeSlotsProp
             key={slot.id}
             onClick={() => handleTimeSelect(slot)}
             fill={internalSelectedId === slot.id ? 'SOLID' : 'OUTLINED'}
-            messageType={internalSelectedId === slot.id ? 'ACCENT' : 'DEFAULT'}
+            variant={internalSelectedId === slot.id ? 'ACCENT' : 'DEFAULT'}
             size="SMALL"
           >
             {slot.label}

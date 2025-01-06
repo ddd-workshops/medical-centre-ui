@@ -16,7 +16,7 @@ export function RoutedClinicDetails() {
   });
 
   if (isLoading) return <Spinner />;
-  if (error) return <Text messageType="ALERT" size='LARGE'>Failed to load clinic details</Text>;
+  if (error) return <Text variant="ALERT" size='LARGE'>Failed to load clinic details</Text>;
   if (!clinic) return null;
 
   return <ClinicDetails clinic={clinic} />;

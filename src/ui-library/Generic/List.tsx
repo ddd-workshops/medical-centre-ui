@@ -1,6 +1,6 @@
 import { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { styles } from '../DesignEnums/MessageType';
+import { styles } from '../DesignEnums/ColorVariants';
 
 type ListProps<T> = {
   items: T[];

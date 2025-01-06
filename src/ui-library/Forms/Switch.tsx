@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { styles } from '../DesignEnums/MessageType';
+import { styles } from '../DesignEnums/ColorVariants';
 
 type SwitchProps = {
   checked: boolean;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { User } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import { styles } from '../../ui-library/DesignEnums/MessageType';
+import { styles } from '../../ui-library/DesignEnums/ColorVariants';
 
 import { doctorLink } from '../Routing/routes';
 import type { DoctorBrief } from '../../contract/types';

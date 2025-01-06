@@ -29,8 +29,8 @@ export const Default: Story = {
 export const Fills: Story = {
   render: () => (
     <div className="flex gap-2">
-      <Chip fill="SOLID" messageType="DEFAULT">Dentist</Chip>
-      <Chip fill="OUTLINED" messageType="DEFAULT">Orthodontist</Chip>
+      <Chip fill="SOLID" variant="DEFAULT">Dentist</Chip>
+      <Chip fill="OUTLINED" variant="DEFAULT">Orthodontist</Chip>
     </div>
   )
 };
@@ -48,12 +48,12 @@ export const Sizes: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="flex gap-2 flex-wrap">
-      <Chip messageType="DEFAULT">Available</Chip>
-      <Chip messageType="SUCCESS">Treatment Complete</Chip>
-      <Chip messageType="WARNING">Follow-up Required</Chip>
-      <Chip messageType="ALERT">Emergency</Chip>
-      <Chip messageType="UPDATE">Rescheduled</Chip>
-      <Chip messageType="ACCENT">Priority Patient</Chip>
+      <Chip variant="DEFAULT">Available</Chip>
+      <Chip variant="SUCCESS">Treatment Complete</Chip>
+      <Chip variant="WARNING">Follow-up Required</Chip>
+      <Chip variant="ALERT">Emergency</Chip>
+      <Chip variant="UPDATE">Rescheduled</Chip>
+      <Chip variant="ACCENT">Priority Patient</Chip>
     </div>
   )
 };
@@ -110,56 +110,56 @@ export const AllCases: Story = {
     <div className="space-y-4">
       <div className="space-y-2">
         <div className="flex gap-2">
-          <Chip size="SMALL" fill="SOLID" messageType="DEFAULT">Consultation</Chip>
-          <Chip size="SMALL" fill="SOLID" messageType="SUCCESS">Treatment Done</Chip>
-          <Chip size="SMALL" fill="SOLID" messageType="WARNING">Pain Reported</Chip>
-          <Chip size="SMALL" fill="SOLID" messageType="ALERT">Urgent Care</Chip>
-          <Chip size="SMALL" fill="SOLID" messageType="UPDATE">Next Visit</Chip>
-          <Chip size="SMALL" fill="SOLID" messageType="ACCENT">VIP Patient</Chip>
+          <Chip size="SMALL" fill="SOLID" variant="DEFAULT">Consultation</Chip>
+          <Chip size="SMALL" fill="SOLID" variant="SUCCESS">Treatment Done</Chip>
+          <Chip size="SMALL" fill="SOLID" variant="WARNING">Pain Reported</Chip>
+          <Chip size="SMALL" fill="SOLID" variant="ALERT">Urgent Care</Chip>
+          <Chip size="SMALL" fill="SOLID" variant="UPDATE">Next Visit</Chip>
+          <Chip size="SMALL" fill="SOLID" variant="ACCENT">VIP Patient</Chip>
         </div>
         <div className="flex gap-2">
-          <Chip size="SMALL" fill="OUTLINED" messageType="DEFAULT">Check-up</Chip>
-          <Chip size="SMALL" fill="OUTLINED" messageType="SUCCESS">Healed</Chip>
-          <Chip size="SMALL" fill="OUTLINED" messageType="WARNING">Follow-up</Chip>
-          <Chip size="SMALL" fill="OUTLINED" messageType="ALERT">Emergency</Chip>
-          <Chip size="SMALL" fill="OUTLINED" messageType="UPDATE">Rescheduled</Chip>
-          <Chip size="SMALL" fill="OUTLINED" messageType="ACCENT">Priority</Chip>
-        </div>
-      </div>
-      <div className="space-y-2">
-        <div className="flex gap-2">
-          <Chip size="MEDIUM" fill="SOLID" messageType="DEFAULT">Cleaning</Chip>
-          <Chip size="MEDIUM" fill="SOLID" messageType="SUCCESS">Cavity Filled</Chip>
-          <Chip size="MEDIUM" fill="SOLID" messageType="WARNING">X-Ray Needed</Chip>
-          <Chip size="MEDIUM" fill="SOLID" messageType="ALERT">Severe Pain</Chip>
-          <Chip size="MEDIUM" fill="SOLID" messageType="UPDATE">Treatment Plan</Chip>
-          <Chip size="MEDIUM" fill="SOLID" messageType="ACCENT">Special Care</Chip>
-        </div>
-        <div className="flex gap-2">
-          <Chip size="MEDIUM" fill="OUTLINED" messageType="DEFAULT">Whitening</Chip>
-          <Chip size="MEDIUM" fill="OUTLINED" messageType="SUCCESS">Crown Fitted</Chip>
-          <Chip size="MEDIUM" fill="OUTLINED" messageType="WARNING">Sensitivity</Chip>
-          <Chip size="MEDIUM" fill="OUTLINED" messageType="ALERT">Infection</Chip>
-          <Chip size="MEDIUM" fill="OUTLINED" messageType="UPDATE">Follow-up</Chip>
-          <Chip size="MEDIUM" fill="OUTLINED" messageType="ACCENT">Complex Case</Chip>
+          <Chip size="SMALL" fill="OUTLINED" variant="DEFAULT">Check-up</Chip>
+          <Chip size="SMALL" fill="OUTLINED" variant="SUCCESS">Healed</Chip>
+          <Chip size="SMALL" fill="OUTLINED" variant="WARNING">Follow-up</Chip>
+          <Chip size="SMALL" fill="OUTLINED" variant="ALERT">Emergency</Chip>
+          <Chip size="SMALL" fill="OUTLINED" variant="UPDATE">Rescheduled</Chip>
+          <Chip size="SMALL" fill="OUTLINED" variant="ACCENT">Priority</Chip>
         </div>
       </div>
       <div className="space-y-2">
         <div className="flex gap-2">
-          <Chip size="LARGE" fill="SOLID" messageType="DEFAULT">Root Canal</Chip>
-          <Chip size="LARGE" fill="SOLID" messageType="SUCCESS">Implant Done</Chip>
-          <Chip size="LARGE" fill="SOLID" messageType="WARNING">Gum Disease</Chip>
-          <Chip size="LARGE" fill="SOLID" messageType="ALERT">Tooth Loss</Chip>
-          <Chip size="LARGE" fill="SOLID" messageType="UPDATE">Major Surgery</Chip>
-          <Chip size="LARGE" fill="SOLID" messageType="ACCENT">Specialist Care</Chip>
+          <Chip size="MEDIUM" fill="SOLID" variant="DEFAULT">Cleaning</Chip>
+          <Chip size="MEDIUM" fill="SOLID" variant="SUCCESS">Cavity Filled</Chip>
+          <Chip size="MEDIUM" fill="SOLID" variant="WARNING">X-Ray Needed</Chip>
+          <Chip size="MEDIUM" fill="SOLID" variant="ALERT">Severe Pain</Chip>
+          <Chip size="MEDIUM" fill="SOLID" variant="UPDATE">Treatment Plan</Chip>
+          <Chip size="MEDIUM" fill="SOLID" variant="ACCENT">Special Care</Chip>
         </div>
         <div className="flex gap-2">
-          <Chip size="LARGE" fill="OUTLINED" messageType="DEFAULT">Orthodontics</Chip>
-          <Chip size="LARGE" fill="OUTLINED" messageType="SUCCESS">Braces Off</Chip>
-          <Chip size="LARGE" fill="OUTLINED" messageType="WARNING">Regular Check</Chip>
-          <Chip size="LARGE" fill="OUTLINED" messageType="ALERT">Tooth Decay</Chip>
-          <Chip size="LARGE" fill="OUTLINED" messageType="UPDATE">Treatment Plan</Chip>
-          <Chip size="LARGE" fill="OUTLINED" messageType="ACCENT">Dental Surgery</Chip>
+          <Chip size="MEDIUM" fill="OUTLINED" variant="DEFAULT">Whitening</Chip>
+          <Chip size="MEDIUM" fill="OUTLINED" variant="SUCCESS">Crown Fitted</Chip>
+          <Chip size="MEDIUM" fill="OUTLINED" variant="WARNING">Sensitivity</Chip>
+          <Chip size="MEDIUM" fill="OUTLINED" variant="ALERT">Infection</Chip>
+          <Chip size="MEDIUM" fill="OUTLINED" variant="UPDATE">Follow-up</Chip>
+          <Chip size="MEDIUM" fill="OUTLINED" variant="ACCENT">Complex Case</Chip>
+        </div>
+      </div>
+      <div className="space-y-2">
+        <div className="flex gap-2">
+          <Chip size="LARGE" fill="SOLID" variant="DEFAULT">Root Canal</Chip>
+          <Chip size="LARGE" fill="SOLID" variant="SUCCESS">Implant Done</Chip>
+          <Chip size="LARGE" fill="SOLID" variant="WARNING">Gum Disease</Chip>
+          <Chip size="LARGE" fill="SOLID" variant="ALERT">Tooth Loss</Chip>
+          <Chip size="LARGE" fill="SOLID" variant="UPDATE">Major Surgery</Chip>
+          <Chip size="LARGE" fill="SOLID" variant="ACCENT">Specialist Care</Chip>
+        </div>
+        <div className="flex gap-2">
+          <Chip size="LARGE" fill="OUTLINED" variant="DEFAULT">Orthodontics</Chip>
+          <Chip size="LARGE" fill="OUTLINED" variant="SUCCESS">Braces Off</Chip>
+          <Chip size="LARGE" fill="OUTLINED" variant="WARNING">Regular Check</Chip>
+          <Chip size="LARGE" fill="OUTLINED" variant="ALERT">Tooth Decay</Chip>
+          <Chip size="LARGE" fill="OUTLINED" variant="UPDATE">Treatment Plan</Chip>
+          <Chip size="LARGE" fill="OUTLINED" variant="ACCENT">Dental Surgery</Chip>
         </div>
       </div>
     </div>

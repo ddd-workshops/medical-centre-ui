@@ -1,5 +1,5 @@
 import { ArrowLeft, MapPin } from 'lucide-react';
-import { styles } from '../../ui-library/DesignEnums/MessageType';
+import { styles } from '../../ui-library/DesignEnums/ColorVariants';
 
 import type { DoctorProfile } from '../../contract/types';
 import { ChipList } from '../../ui-library/Generic/ChipList';

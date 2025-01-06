@@ -2,7 +2,7 @@ import { useReactTable, createColumnHelper, getCoreRowModel, flexRender } from '
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import { H2 } from '../../ui-library/Typography/Headings';
-import { styles } from '../../ui-library/DesignEnums/MessageType';
+import { styles } from '../../ui-library/DesignEnums/ColorVariants';
 
 type MedicalDocument = {
   id: string;

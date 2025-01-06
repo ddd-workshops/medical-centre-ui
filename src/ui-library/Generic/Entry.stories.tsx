@@ -12,7 +12,7 @@ type Story = StoryObj<typeof Entry>;
 
 export const Info: Story = {
   args: {
-    messageType: 'DEFAULT',
+    variant: 'DEFAULT',
     label: 'Information',
     children: 'This is an informational message',
   },
@@ -20,7 +20,7 @@ export const Info: Story = {
 
 export const Success: Story = {
   args: {
-    messageType: 'SUCCESS',
+    variant: 'SUCCESS',
     label: 'Success',
     children: 'Operation completed successfully',
   },
@@ -28,7 +28,7 @@ export const Success: Story = {
 
 export const Warning: Story = {
   args: {
-    messageType: 'WARNING',
+    variant: 'WARNING',
     label: 'Warning',
     children: 'Please review this important notice',
   },
@@ -36,7 +36,7 @@ export const Warning: Story = {
 
 export const Alert: Story = {
   args: {
-    messageType: 'ALERT',
+    variant: 'ALERT',
     label: 'Alert',
     children: 'Immediate attention required',
   },
@@ -44,7 +44,7 @@ export const Alert: Story = {
 
 export const Update: Story = {
   args: {
-    messageType: 'UPDATE',
+    variant: 'UPDATE',
     label: 'Update',
     children: 'System has been updated',
   },
@@ -52,7 +52,7 @@ export const Update: Story = {
 
 export const WithLink: Story = {
   args: {
-    messageType: 'SUCCESS',
+    variant: 'SUCCESS',
     label: 'Clickable Entry',
     children: 'Click me to navigate',
     to: '/some-path',

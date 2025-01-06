@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Autocomplete } from './Autocomplete';
 import { TextInput } from './TextInput';
-import { styles } from '../DesignEnums/MessageType';
+import { styles } from '../DesignEnums/ColorVariants';
 
 const meta: Meta<typeof Autocomplete> = {
   title: 'UI/Forms/Autocomplete',

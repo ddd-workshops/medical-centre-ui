@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 import type { CountryDialCodeFormat } from './dialCodes';
 import { countriesDialCodes } from './dialCodes';
-import { styles } from '../DesignEnums/MessageType';
+import { styles } from '../DesignEnums/ColorVariants';
 
 type PhoneInputProps = {
   value: string;

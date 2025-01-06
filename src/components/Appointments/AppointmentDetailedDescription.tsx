@@ -23,7 +23,7 @@ import { Chip } from '../../ui-library/Generic/Chip';
 import { clinicLink, doctorLink } from '../Routing/routes';
 import { List } from '../../ui-library/Generic/List';
 import { Text } from '../../ui-library/Typography/Text';
-import { styles } from '../../ui-library/DesignEnums/MessageType';
+import { styles } from '../../ui-library/DesignEnums/ColorVariants';
 
 export const AppointmentDetailedDescription = () => {
   const { id } = useParams<{ id: string }>();
@@ -163,7 +163,7 @@ export const AppointmentDetailedDescription = () => {
                   Amount: {formatCurrency(appointment.billing?.amount || 0)}
                 </Paragraph>
                 <Chip
-                  messageType={appointment.billing?.status === 'PAID' ? 'DEFAULT' : 'WARNING'}
+                  variant={appointment.billing?.status === 'PAID' ? 'DEFAULT' : 'WARNING'}
                 >
                   {appointment.billing?.status || 'PENDING'}
                 </Chip>

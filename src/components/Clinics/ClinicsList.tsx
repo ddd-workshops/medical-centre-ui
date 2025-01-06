@@ -16,7 +16,7 @@ export const ClinicsList = () => {
   });
 
   if (isLoading) return <Spinner />;
-  if (error) return <Text messageType="ALERT" size='LARGE'>Failed to load clinics</Text>;
+  if (error) return <Text variant="ALERT" size='LARGE'>Failed to load clinics</Text>;
 
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">

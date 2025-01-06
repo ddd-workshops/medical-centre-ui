@@ -5,7 +5,7 @@ import { PasswordInput } from '../../ui-library/Forms/PasswordInput';
 import { Button } from '../../ui-library/Generic/Button';
 import { TextInput } from '../../ui-library/Forms/TextInput';
 import { H2 } from '../../ui-library/Typography/Headings';
-import { styles } from '../../ui-library/DesignEnums/MessageType';
+import { styles } from '../../ui-library/DesignEnums/ColorVariants';
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState({

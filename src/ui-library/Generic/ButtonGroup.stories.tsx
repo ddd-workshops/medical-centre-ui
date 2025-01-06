@@ -29,7 +29,7 @@ export const ActionButtons: Story = {
         { id: '1', label: 'Confirm Treatment', onClick: action('confirm-clicked') },
         { id: '2', label: 'Reschedule', onClick: action('reschedule-clicked'), disabled: true },
         { id: '3', label: 'Add Notes', onClick: action('notes-clicked'), fill: 'OUTLINED' },
-        { id: '4', label: 'Cancel', onClick: action('cancel-clicked'), messageType: 'ALERT' }
+        { id: '4', label: 'Cancel', onClick: action('cancel-clicked'), variant: 'ALERT' }
       ]}
     />
   )

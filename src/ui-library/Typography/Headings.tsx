@@ -1,5 +1,5 @@
 import { cn } from '../cn';
-import { styles } from '../DesignEnums/MessageType';
+import { styles } from '../DesignEnums/ColorVariants';
 
 interface HeadingProps {
   children: React.ReactNode;

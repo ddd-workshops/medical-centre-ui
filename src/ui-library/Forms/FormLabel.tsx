@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Paragraph } from '../Typography/Paragraph';
-import { styles } from '../DesignEnums/MessageType';
+import { styles } from '../DesignEnums/ColorVariants';
 
 interface FormLabelProps {
   label: ReactNode;

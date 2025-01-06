@@ -24,7 +24,7 @@ export const Dashboard: React.FC = () => {
 
   if (error) {
     return <div>
-      <Text messageType="ALERT" size='LARGE'>Error loading appointments</Text>
+      <Text variant="ALERT" size='LARGE'>Error loading appointments</Text>
     </div>;
   }
 

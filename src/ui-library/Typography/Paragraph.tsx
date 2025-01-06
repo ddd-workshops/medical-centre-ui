@@ -1,5 +1,5 @@
 import { cn } from '../cn';
-import { styles } from '../DesignEnums/MessageType';
+import { styles } from '../DesignEnums/ColorVariants';
 import { Size } from '../DesignEnums/Sizes';
 
 interface ParagraphProps {
