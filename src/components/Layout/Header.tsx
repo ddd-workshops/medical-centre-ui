@@ -41,10 +41,10 @@ export const Header = () => {
         ) : (
           <>
             <Link to="/login" className="inline-block">
-              <Button variant="SECONDARY">Login</Button>
+              <Button>Login</Button>
             </Link>
             <Link to="/register" className="inline-block">
-              <Button variant="PRIMARY">Register</Button>
+              <Button fill='OUTLINED'>Register</Button>
             </Link>
           </>
         )}

@@ -2,29 +2,42 @@ import { ReactNode } from 'react';
 
 import { Button } from './Button';
 import { cn } from '../cn';
-import { Variant } from '../DesignEnums/Variants';
+import { DesignFill, DesignSize } from '../DesignEnums/designEnums';
+import { MessageType } from '../DesignEnums/MessageType';
 
 type ButtonGroupItem = {
   id: string;
   label: ReactNode;
   onClick: () => void;
   disabled?: boolean;
+  fill?: DesignFill;
+  messageType?: MessageType;
 };
 
 type ButtonGroupProps = {
   items: ButtonGroupItem[];
-  variant?: Variant;
+  fill?: DesignFill;
+  size?: DesignSize;
+  messageType?: MessageType;
   className?: string;
 };
 
-export const ButtonGroup = ({ items, variant = 'PRIMARY', className = '' }: ButtonGroupProps) => {
+export const ButtonGroup = ({
+  items,
+  fill = 'SOLID',
+  size = 'MEDIUM',
+  messageType = 'ACCENT',
+  className = ''
+}: ButtonGroupProps) => {
   return (
     <div className={`inline-flex flex-row ${className}`}>
       {items.map((item, index) => (
         <Button
           key={item.id}
           onClick={item.onClick}
-          variant={variant}
+          size={size}
+          fill={item.fill || fill}
+          messageType={item.messageType || messageType}
           disabled={item.disabled}
           className={cn(
             'rounded-none',

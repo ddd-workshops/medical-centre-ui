@@ -163,7 +163,7 @@ export const AppointmentDetailedDescription = () => {
                   Amount: {formatCurrency(appointment.billing?.amount || 0)}
                 </Paragraph>
                 <Chip
-                  variant={appointment.billing?.status === 'PAID' ? 'SECONDARY' : 'WARNING'}
+                  messageType={appointment.billing?.status === 'PAID' ? 'DEFAULT' : 'WARNING'}
                 >
                   {appointment.billing?.status || 'PENDING'}
                 </Chip>

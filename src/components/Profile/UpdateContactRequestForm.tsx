@@ -81,17 +81,10 @@ export const UpdateContactRequestForm: React.FC<{
         </div>
 
         <div className="flex justify-end space-x-4 mt-6">
-          <Button
-            variant="PRIMARY"
-            onClick={onClose}
-            type="button"
-          >
+          <Button type="button" onClick={onClose}>
             Confirm Data is Correct
           </Button>
-          <Button
-            type="submit"
-            variant="PRIMARY"
-          >
+          <Button type="submit">
             Update Information
           </Button>
         </div>

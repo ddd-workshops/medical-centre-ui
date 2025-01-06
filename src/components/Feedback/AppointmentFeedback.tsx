@@ -71,8 +71,6 @@ export const AppointmentFeedback = ({ appointment, onSubmit }: AppointmentFeedba
 
       <Button
         size="LARGE"
-        variant="PRIMARY"
-
         onClick={handleSubmit}
         disabled={!serviceRating || !doctorRating || !clinicRating}
         className="mt-8 w-full"

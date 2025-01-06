@@ -10,20 +10,20 @@ export const QuickActions = () => {
       <div className="space-y-3">
         <Button 
           onClick={() => navigate('/book-appointment')}
-          variant="PRIMARY"
+          fill='SOLID'
           className="w-full"
         >
           Book New Appointment
         </Button>
         <Button 
           onClick={() => navigate('/medical-history')}
-          variant="SECONDARY"
+          fill='OUTLINED'
           className="w-full"
         >
           View Medical History
         </Button>
         <Button 
-          variant="SECONDARY"
+          fill='OUTLINED'
           className="w-full"
         >
           Contact Your Dentist

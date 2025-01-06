@@ -8,11 +8,11 @@ import { patientService } from '../../http/patientService';
 import { Loader2 } from 'lucide-react';
 import { styles } from '../../ui-library/DesignEnums/MessageType';
 
-const STATUS_VARIANT_MAP: { [ key in PrescribedTreatment['status'] ]: 'OUTLINED' | 'FILLED' } = {
-  COMPLETED: 'FILLED',
-  IN_PROGRESS: 'FILLED',
+const STATUS_VARIANT_MAP: { [ key in PrescribedTreatment['status'] ]: 'SOLID' | 'OUTLINED' } = {
+  COMPLETED: 'SOLID',
+  IN_PROGRESS: 'SOLID',
   CANCELLED: 'OUTLINED',
-  SCHEDULED: 'FILLED',
+  SCHEDULED: 'SOLID',
 }
 
 export function PrescribedTreatmentsList() {
@@ -53,7 +53,7 @@ export function PrescribedTreatmentsList() {
 
   if (prescribedTreatments.length === 0) {
     return (
-      <div className={`p-4 border ${styles.ACCENT.border} rounded-lg ${styles.ACCENT.backgroundLight}`}>
+      <div className={`p-4 border rounded-lg ${styles.ACCENT.border} ${styles.ACCENT.background}`}>
         <Paragraph>No prescribed treatments found.</Paragraph>
       </div>
     );
@@ -65,7 +65,9 @@ export function PrescribedTreatmentsList() {
         <div key={id} className={`border ${styles.ACCENT.border} rounded-lg p-4 hover:shadow-md transition-shadow bg-white`}>
           <div className="flex justify-between items-start mb-2">
             <H3>{treatment.name}</H3>
-            <Chip variant={STATUS_VARIANT_MAP[status]} label={status} />
+            <Chip fill={STATUS_VARIANT_MAP[status]}>
+              {status}
+            </Chip>
           </div>
           <Paragraph size="MEDIUM" className="mb-2">
             {treatment.shortDescription}
