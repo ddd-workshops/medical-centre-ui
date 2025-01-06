@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { styles } from '../DesignEnums/ColorVariants';
+import { styles } from '../DesignEnums';
 
 export type CardInputLayout = 'SEPARATE' | 'STACKED'
 

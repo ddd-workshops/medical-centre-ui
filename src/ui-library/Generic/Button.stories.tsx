@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { Button } from "./Button";
-import { VariantType } from "../DesignEnums";
-import { DesignFill, DesignSize } from "../DesignEnums";
 import { Plus } from "lucide-react";
+
+import { Button } from "./Button";
+import { VariantType, DesignFill, DesignSize } from "../DesignEnums";
 
 const meta: Meta<typeof Button> = {
   title: "UI/Atoms/Button",

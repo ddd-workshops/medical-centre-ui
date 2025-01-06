@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '../auth/AuthStore';
-import { styles } from '../../ui-library/DesignEnums/ColorVariants';
+import { styles } from '../../ui-library/DesignEnums';
 
 export const ProfileDropdown = () => {
       const { logout } = useAuthStore();

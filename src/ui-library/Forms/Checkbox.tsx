@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import { styles } from '../DesignEnums/ColorVariants';
+import { styles } from '../DesignEnums';
 
 type CheckboxProps = {
   id: string;

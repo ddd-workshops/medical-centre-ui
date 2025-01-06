@@ -23,7 +23,7 @@ import { Chip } from '../../ui-library/Generic/Chip';
 import { clinicLink, doctorLink } from '../Routing/routes';
 import { List } from '../../ui-library/Generic/List';
 import { Text } from '../../ui-library/Typography/Text';
-import { styles } from '../../ui-library/DesignEnums/ColorVariants';
+import { styles } from '../../ui-library/DesignEnums';
 
 export const AppointmentDetailedDescription = () => {
   const { id } = useParams<{ id: string }>();

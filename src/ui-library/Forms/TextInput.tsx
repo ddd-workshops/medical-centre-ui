@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from 'react';
-import { styles } from '../DesignEnums/ColorVariants';
+import { styles } from '../DesignEnums';
 
 interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label: string;

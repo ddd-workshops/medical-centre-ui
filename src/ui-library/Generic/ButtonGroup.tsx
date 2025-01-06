@@ -2,8 +2,7 @@ import { ReactNode } from 'react';
 
 import { Button } from './Button';
 import { cn } from '../cn';
-import { DesignFill, DesignSize } from '../DesignEnums/designEnums';
-import { VariantType } from '../DesignEnums';
+import { DesignFill, DesignSize, VariantType } from '../DesignEnums';
 
 type ButtonGroupItem = {
   id: string;

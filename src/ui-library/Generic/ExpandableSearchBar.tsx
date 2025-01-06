@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 
-import { styles } from '../DesignEnums/ColorVariants';
+import { styles } from '../DesignEnums';
 
 type SearchBarMode = 'COLLAPSED' | 'EXPANDED';
 

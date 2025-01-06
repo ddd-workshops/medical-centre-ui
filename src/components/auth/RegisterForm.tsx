@@ -7,7 +7,7 @@ import { Button } from '../../ui-library/Generic/Button';
 import { TextInput } from '../../ui-library/Forms/TextInput';
 import { H2 } from '../../ui-library/Typography/Headings';
 import { authService } from '../../http/authService';
-import { styles } from '../../ui-library/DesignEnums/ColorVariants';
+import { styles } from '../../ui-library/DesignEnums';
 
 export const RegisterForm = () => {
   const [formData, setFormData] = useState({

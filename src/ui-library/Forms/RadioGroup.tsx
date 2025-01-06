@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { Radio } from './Radio';
-import { styles } from '../DesignEnums/ColorVariants';
+import { styles } from '../DesignEnums';
 
 export type Layout = 'VERTICAL' | 'HORIZONTAL' | 'PANEL' | 'TABLE';
 

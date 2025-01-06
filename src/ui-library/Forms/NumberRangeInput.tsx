@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { styles } from '../DesignEnums/ColorVariants';
+import { styles } from '../DesignEnums';
 
 export interface NumberRangeStrOrNumber {
   from?: number | string;

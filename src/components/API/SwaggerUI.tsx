@@ -1,7 +1,7 @@
 import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
 import { useState, useEffect } from 'react';
-import { styles } from '../../ui-library/DesignEnums/ColorVariants';
+import { styles } from '../../ui-library/DesignEnums';
 
 export const SwaggerDocs = () => {
   const [error, setError] = useState<string | null>(null);

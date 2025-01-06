@@ -6,7 +6,7 @@ import { H3 } from '../../ui-library/Typography/Headings';
 import { Paragraph } from '../../ui-library/Typography/Paragraph';
 import { patientService } from '../../http/patientService';
 import { Loader2 } from 'lucide-react';
-import { styles } from '../../ui-library/DesignEnums/ColorVariants';
+import { styles } from '../../ui-library/DesignEnums';
 
 const STATUS_VARIANT_MAP: { [ key in PrescribedTreatment['status'] ]: 'SOLID' | 'OUTLINED' } = {
   COMPLETED: 'SOLID',

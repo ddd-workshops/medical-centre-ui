@@ -1,6 +1,7 @@
 import { ChevronRight } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
-import { styles } from '../DesignEnums/ColorVariants';
+
+import { styles } from '../DesignEnums';
 
 export interface TreeNode {
   id: string;
@@ -40,7 +41,7 @@ const TreeNodeComponent = ({ node, level }: TreeNodeProps) => {
         </span>
         <span className="text-gray-700">{node.label}</span>
       </div>
-      {isExpanded && hasChildren && (
+      {isExpanded && hasChildren && node.children && (
         <Tree data={node.children} level={level + 1} />
       )}
     </div>

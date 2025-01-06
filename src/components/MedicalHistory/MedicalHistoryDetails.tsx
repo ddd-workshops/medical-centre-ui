@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { H2, H3, H4 } from '../../ui-library/Typography/Headings';
 import { Paragraph } from '../../ui-library/Typography/Paragraph';
-import { styles } from '../../ui-library/DesignEnums/ColorVariants';
+import { styles } from '../../ui-library/DesignEnums';
 
 interface MedicalHistoryEntry {
   id: string;

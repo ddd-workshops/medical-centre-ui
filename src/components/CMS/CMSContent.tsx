@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { CMSPageContent } from '../../http/cmsService';
 import { cmsService } from '../../http/cmsService';
-import { styles } from '../../ui-library/DesignEnums/ColorVariants';
+import { styles } from '../../ui-library/DesignEnums';
 
 interface CMSContentProps {
   slug: string;

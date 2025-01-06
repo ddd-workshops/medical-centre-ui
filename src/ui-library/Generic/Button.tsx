@@ -1,8 +1,7 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '../cn';
-import { DesignSize, DesignFill } from '../DesignEnums';
-import { VariantType, styles } from '../DesignEnums';
+import { DesignSize, DesignFill, VariantType, styles } from '../DesignEnums';
 
 interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   fill?: DesignFill;

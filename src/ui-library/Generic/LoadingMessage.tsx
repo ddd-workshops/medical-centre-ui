@@ -1,6 +1,6 @@
 import { Loader2 } from 'lucide-react';
 import { Paragraph } from '../Typography/Paragraph';
-import { styles } from '../DesignEnums/ColorVariants';
+import { styles } from '../DesignEnums';
 
 interface LoadingMessageProps {
   message?: string;

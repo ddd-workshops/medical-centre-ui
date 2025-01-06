@@ -9,7 +9,7 @@ import { Paragraph } from '../../ui-library/Typography/Paragraph';
 import { OpeningHours } from '../../ui-library/Generic/OpeningHours';
 import { Divider } from '../../ui-library/Generic/Divider';
 import { ChipList } from '../../ui-library/Generic/ChipList';
-import { styles } from '../../ui-library/DesignEnums/ColorVariants';
+import { styles } from '../../ui-library/DesignEnums';
 
 type ClinicDetailsProps = {
   clinic: ClinicDetails;
