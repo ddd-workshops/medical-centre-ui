@@ -5,6 +5,7 @@ import { PasswordInput } from '../../ui-library/Forms/PasswordInput';
 import { Button } from '../../ui-library/Generic/Button';
 import { TextInput } from '../../ui-library/Forms/TextInput';
 import { H2 } from '../../ui-library/Typography/Headings';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -26,9 +27,9 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-50">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-100">
-        <H2 className="text-green-800 text-center">Welcome Back</H2>
+    <div className={`min-h-screen flex items-center justify-center ${styles.ACCENT.background}`}>
+      <div className={`bg-white p-8 rounded-xl shadow-lg w-96 border ${styles.ACCENT.border}`}>
+        <H2 className={`${styles.ACCENT.textDark} text-center`}>Welcome Back</H2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <TextInput
             label="Email"
@@ -43,7 +44,7 @@ export const LoginForm = () => {
             onChange={(value) => setFormData({ ...formData, password: value })}
           />
           <div className="flex justify-between items-center text-sm">
-            <Link to="/reset" className="text-green-600 hover:text-green-800 hover:underline">
+            <Link to="/reset" className={`${styles.ACCENT.text} ${styles.ACCENT.textHover} hover:underline`}>
               Can't log in?
             </Link>
           </div>
@@ -51,9 +52,9 @@ export const LoginForm = () => {
             Sign In
           </Button>
         </form>
-        <p className="mt-4 text-center text-sm text-green-600">
+        <p className={`mt-4 text-center text-sm ${styles.ACCENT.text}`}>
           Don't have an account?{' '}
-          <Link to="/register" className="font-medium hover:text-green-800 underline">
+          <Link to="/register" className={`font-medium ${styles.ACCENT.textHover} underline`}>
             Register here
           </Link>
         </p>

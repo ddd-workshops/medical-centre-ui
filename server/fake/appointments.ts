@@ -2,30 +2,58 @@ import { faker } from '@faker-js/faker';
 
 import { AppointmentDetails, AppointmentBrief } from '../contract/types';
 import { randomFromArray, repeat } from './utils';
-import { fakeClinicBriefs } from './clinics';
+
+import { fakeClinicDetails } from './clinics';
 import { fakeServiceTypes } from './services';
 import { generateFakeBilling } from './billings';
 import { generateFakePatientBrief } from './patient';
-import { fakeDoctorBriefs } from './staff';
+import { generateFakePrescriptions } from './appointmentPrescriptions';
+import { generateFakeAppointmentNotes } from './appointmentNotes';
+import { clinicDetailsToBrief } from '../controllers/clinicModel';
+import { fakeCanonicalModelDoctors } from './staff';
+import { doctorCanonicalModelToBrief } from '../controllers/staffModel';
 
 const appointmentStatuses: AppointmentDetails['status'][] = ['SCHEDULED', 'COMPLETED', 'CANCELLED'];
 
+const notesThresholds = [
+  { prescriptions: 1, probability: 0.1 },
+  { prescriptions: 2, probability: 0.5 },
+  { prescriptions: 3, probability: 0.9 }
+];
+
 export const generateFakeAppointmentDetails = (): AppointmentDetails => {
-  return{
+  // Generate prescriptions first
+  const prescriptions = generateFakePrescriptions() || [];
+  
+  // Generate notes based on prescription count
+  const notesProbability = 
+    notesThresholds.find(t => prescriptions.length === t.prescriptions)?.probability ?? 0;
+
+  const notes = Math.random() < notesProbability ? generateFakeAppointmentNotes() : undefined;
+
+  const status = randomFromArray(appointmentStatuses);
+  
+  // Generate billing with consistent status
+  const billing = generateFakeBilling(
+    status === 'CANCELLED' 
+      ? 'CANCELLED'
+      : randomFromArray(['PENDING', 'PAID'] as const)
+  );
+
+  const doctor = doctorCanonicalModelToBrief(randomFromArray(fakeCanonicalModelDoctors));
+
+  return {
     id: faker.string.uuid(),
     patient: generateFakePatientBrief(),
-    doctor: randomFromArray(fakeDoctorBriefs),
-    location: randomFromArray(fakeClinicBriefs),
+    doctor,
+    location: clinicDetailsToBrief(randomFromArray(fakeClinicDetails)),
     serviceType: randomFromArray(fakeServiceTypes),
     datetime: faker.date.future().toISOString(),
-    status: randomFromArray(appointmentStatuses),
-    notes: Math.random() > 0.5 ? faker.lorem.sentence() : undefined,
-    prescriptions: Math.random() > 0.5 ? Array.from(
-      { length: faker.number.int({ min: 1, max: 3 }) },
-      () => faker.commerce.productName()
-    ) : undefined,
-    billing: generateFakeBilling()
-  }
+    status,
+    prescriptions,
+    notes,
+    billing,
+  };
 };
 
 export const generateFakeAppointmentsBrief = (appointment: AppointmentDetails): AppointmentBrief => {

@@ -8,6 +8,7 @@ import { AppointmentCard } from './AppointmentCard';
 import { AppointmentSearchCriteria } from './AppointmentSearchCriteria';
 import { H2 } from '../../ui-library/Typography/Headings';
 import { Paragraph } from '../../ui-library/Typography/Paragraph';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 export const AppointmentSearch = () => {
   const [searchParams, setSearchParams] = useState<AppointmentSearchCriteria>({
@@ -24,13 +25,13 @@ export const AppointmentSearch = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <H2 className="text-green-800 mb-6">Appointments</H2>
+      <H2 className={`${styles.ACCENT.textDark} mb-6`}>Appointments</H2>
       <AppointmentSearchBar onSearch={setSearchParams} />
       
       <div className="mt-6">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-12">
-            <Loader2 className="w-8 h-8 text-green-600 animate-spin mb-4" />
+            <Loader2 className={`w-8 h-8 ${styles.ACCENT.text} animate-spin mb-4`} />
             <Paragraph className="text-gray-600">Loading appointments...</Paragraph>
           </div>
         ) : appointments?.length === 0 ? (

@@ -1,4 +1,5 @@
 import { FC, useState, useEffect } from 'react';
+import { styles } from '../DesignEnums/MessageType';
 
 type RadioProps = {
   id: string;
@@ -39,9 +40,9 @@ export const Radio: FC<RadioProps> = ({
         value={value}
         checked={localChecked}
         onChange={handleChange}
-        className="accent-emerald-600 h-4 w-4 border-gray-300 text-green-500 focus:ring-green-500 checked:bg-green-500 checked:hover:bg-green-600"
+        className={`accent-emerald-600 h-4 w-4 border-gray-300 ${styles.ACCENT.text} focus:ring-2 ${styles.ACCENT.focusRing} checked:${styles.ACCENT.background} ${styles.ACCENT.backgroundHover}`}
       />
-      <label htmlFor={id} className="text-sm text-green-700">
+      <label htmlFor={id} className={`text-sm ${styles.ACCENT.text}`}>
         {label}
       </label>
     </div>

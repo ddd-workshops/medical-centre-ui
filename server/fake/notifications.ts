@@ -68,3 +68,5 @@ export const generateFakeNotifications = (): Notification[] => {
     new Date(b.receivedDate).getTime() - new Date(a.receivedDate).getTime()
   );
 };
+
+export const fakeNotifications = generateFakeNotifications();

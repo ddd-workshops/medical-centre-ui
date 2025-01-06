@@ -2,14 +2,18 @@ import { faker } from '@faker-js/faker';
 
 import type { PrescribedTreatment } from '../contract/types';
 import { randomFromArray, repeat } from './utils';
-import { fakeDoctorBriefs } from './staff';
+import { inMemoryDB } from '../in-memory/db';
+import { doctorCanonicalModelToBrief } from '../controllers/staffModel';
+
 import { fakePatientBriefs } from './patient';
 import { generateFakeMedicalTreatment } from './medical-treatments';
 import { generateFakeAppointmentDetails, generateFakeAppointmentsBrief } from './appointments';
 
 export const generateFakePrescribedTreatment = (): PrescribedTreatment => {
+  
+
+  const doctor = doctorCanonicalModelToBrief(randomFromArray(inMemoryDB.doctors))
   const treatment = generateFakeMedicalTreatment();
-  const doctor = randomFromArray(fakeDoctorBriefs);
   const patient = randomFromArray(fakePatientBriefs);
 
   return {
@@ -25,3 +29,7 @@ export const generateFakePrescribedTreatment = (): PrescribedTreatment => {
     status: randomFromArray(['SCHEDULED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED'] as const),
   };
 };
+
+export const fakePrescribedTreatments = repeat(generateFakePrescribedTreatment, {
+  count: { min: 2, max: 5 }
+});

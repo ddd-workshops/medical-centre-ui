@@ -1,8 +1,9 @@
 import { faker } from '@faker-js/faker';
+
 import { createRandomUniqueIntegerIDGenerator, randomFromArray, shuffleArray } from './utils';
-import type { ClinicDetails, ClinicBrief } from '../contract/types';
+import type { ClinicDetails } from '../contract/types';
 import { generateOpeningHours } from './clinicOpeningHours';
-import { getSpecialtiesByCodes, specialties } from './specialties';
+import { getSpecialtiesByCodes } from './specialties';
 
 const clinicImageURLs = [
   'https://images.unsplash.com/photo-1629909613654-28e377c37b09',
@@ -344,14 +345,3 @@ export const fakeClinicDetails: ClinicDetails[] = [
     facilities: generateFacilities()
   }
 ];
-
-export const generateFakeClinicBrief = (clinic: ClinicDetails = randomFromArray(fakeClinicDetails)): ClinicBrief => {
-  const { id, name, address: { street, city, postalCode, country } } = clinic
-  return {
-    id, 
-    name, 
-    address: `${street}, ${city}, ${postalCode}, ${country}`
-  };
-}
-
-export const fakeClinicBriefs = fakeClinicDetails.map(generateFakeClinicBrief);

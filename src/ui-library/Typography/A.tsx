@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react';
-import { cn } from '../../utils/cn';
+import { cn } from '../cn';
 import { Size } from '../DesignEnums/Sizes';
+import { styles } from '../DesignEnums/MessageType';
 
 const sizeClasses: Record<Size, string> = {
   SMALL: 'text-sm',
@@ -17,7 +18,9 @@ export function A({ size = 'MEDIUM', className, ...props }: AProps) {
     <a
       {...props}
       className={cn(
-        'text-green-600 hover:text-green-500 underline transition-colors',
+        `underline transition-colors`,
+        styles.ACCENT.text,
+        styles.ACCENT.textHover,
         sizeClasses[size],
         className
       )}

@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { H2, H3, H4 } from '../../ui-library/Typography/Headings';
 import { Paragraph } from '../../ui-library/Typography/Paragraph';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 interface MedicalHistoryEntry {
   id: string;
@@ -58,24 +59,24 @@ export const MedicalHistoryDetails = () => {
     <div className="max-w-4xl mx-auto p-6">
       <button
         onClick={() => navigate('/medical-history')}
-        className="mb-4 px-4 py-2 text-green-700 hover:text-green-800 flex items-center gap-2"
+        className={`mb-4 px-4 py-2 ${styles.ACCENT.text} ${styles.ACCENT.textHover} flex items-center gap-2`}
       >
         <Paragraph>← Back to Medical History</Paragraph>
       </button>
       
-      <div className="bg-green-50 rounded-lg shadow-lg p-6">
-        <H2 className="mb-6 text-green-800">Medical Record Details</H2>
+      <div className={`${styles.ACCENT.background} rounded-lg shadow-lg p-6`}>
+        <H2 className={`mb-6 ${styles.ACCENT.text}`}>Medical Record Details</H2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div className="bg-white p-4 rounded-md shadow">
-              <H3 className="text-green-700">Basic Information</H3>
+              <H3 className={styles.ACCENT.text}>Basic Information</H3>
               <Paragraph>Date: {entry.date}</Paragraph>
               <Paragraph>Diagnosis: {entry.diagnosis}</Paragraph>
             </div>
 
             <div className="bg-white p-4 rounded-md shadow">
-              <H3 className="text-green-700">Vital Signs</H3>
+              <H3 className={styles.ACCENT.text}>Vital Signs</H3>
               <Paragraph>Blood Pressure: {entry.vitalSigns.bloodPressure}</Paragraph>
               <Paragraph>Heart Rate: {entry.vitalSigns.heartRate} bpm</Paragraph>
               <Paragraph>Temperature: {entry.vitalSigns.temperature}°C</Paragraph>
@@ -84,10 +85,10 @@ export const MedicalHistoryDetails = () => {
 
           <div className="space-y-4">
             <div className="bg-white p-4 rounded-md shadow">
-              <H3 className="text-green-700">Treatment & Medications</H3>
+              <H3 className={styles.ACCENT.text}>Treatment & Medications</H3>
               <Paragraph>Treatment: {entry.treatment}</Paragraph>
               <div className="mt-2">
-                <H4 className="text-green-600">Prescribed Medications:</H4>
+                <H4 className={styles.ACCENT.text}>Prescribed Medications:</H4>
                 <ul className="list-disc list-inside">
                   {entry.medications.map((med, index) => (
                     <li key={index} className="text-gray-600">{med}</li>
@@ -97,7 +98,7 @@ export const MedicalHistoryDetails = () => {
             </div>
 
             <div className="bg-white p-4 rounded-md shadow">
-              <H3 className="text-green-700">Dental Procedures</H3>
+              <H3 className={styles.ACCENT.text}>Dental Procedures</H3>
               {entry.dentalProcedures.map((proc, index) => (
                 <div key={index} className="mb-2">
                   <Paragraph>Procedure: {proc.procedure}</Paragraph>
@@ -110,7 +111,7 @@ export const MedicalHistoryDetails = () => {
         </div>
 
         <div className="mt-6 bg-white p-4 rounded-md shadow">
-          <H3 className="text-green-700">Doctor's Notes</H3>
+          <H3 className={styles.ACCENT.text}>Doctor's Notes</H3>
           <Paragraph>{entry.doctorNotes}</Paragraph>
           {entry.followUpDate && (
             <Paragraph>Follow-up appointment: {entry.followUpDate}</Paragraph>

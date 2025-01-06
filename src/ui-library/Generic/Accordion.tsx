@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import { cn } from '../../utils/cn';
+import { cn } from '../cn';
+import { styles } from '../DesignEnums/MessageType';
 
 interface AccordionItem {
   title: React.ReactNode;
@@ -20,16 +21,16 @@ export const Accordion = ({ items, className }: AccordionProps) => {
       {items.map((item, index) => (
         <div
           key={index}
-          className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm"
+          className={`overflow-hidden rounded-lg border ${styles.DEFAULT.border} bg-white shadow-sm`}
         >
           <button
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            className="w-full px-4 py-3 flex justify-between items-center bg-white hover:bg-green-50 transition-colors duration-200"
+            className={`w-full px-4 py-3 flex justify-between items-center bg-white ${styles.ACCENT.backgroundHover} transition-colors duration-200`}
           >
-            <span className="font-medium text-gray-900">{item.title}</span>
+            <span className={`font-medium ${styles.DEFAULT.textDark}`}>{item.title}</span>
             <ChevronDown
               className={cn(
-                'h-5 w-5 text-green-600 transition-transform duration-200',
+                `h-5 w-5 ${styles.ACCENT.text} transition-transform duration-200`,
                 openIndex === index ? 'rotate-180' : ''
               )}
             />
@@ -40,7 +41,7 @@ export const Accordion = ({ items, className }: AccordionProps) => {
               openIndex === index ? 'max-h-[500px]' : 'max-h-0'
             )}
           >
-            <div className="px-4 py-3 text-gray-700 bg-white border-t border-gray-100">
+            <div className={`px-4 py-3 ${styles.DEFAULT.text} bg-white border-t ${styles.DEFAULT.border}`}>
               {item.content}
             </div>
           </div>

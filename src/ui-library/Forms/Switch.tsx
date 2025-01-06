@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { styles } from '../DesignEnums/MessageType';
 
 type SwitchProps = {
   checked: boolean;
@@ -31,7 +32,7 @@ export const Switch = ({ checked, onChange, disabled = false, className = '', la
         className={`
           relative inline-flex h-6 w-11 items-center rounded-full
           transition-colors duration-300 ease-in-out
-          ${localChecked ? 'bg-green-500' : 'bg-gray-200'}
+          ${localChecked ? styles.ACCENT.backgroundDark : 'bg-gray-300'}
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
           ${className}
         `}
@@ -45,7 +46,7 @@ export const Switch = ({ checked, onChange, disabled = false, className = '', la
         />
       </button>
       {label && (
-        <span className={`text-sm ${disabled ? 'text-gray-400' : 'text-gray-700'}`}>
+        <span className={`text-sm ${disabled ? 'text-gray-400' : styles.DEFAULT.textDark}`}>
           {label}
         </span>
       )}

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { borderStyle, backgroundStyle, backgroundHoverStyle } from './MessageType';
+import { borderStyle, backgroundStyle, backgroundHoverStyle, textHoverStyle, textStyle, MessageType } from './MessageType';
 
 const isColorDark = (hex: string): boolean => {
   // Remove the hash if it exists
@@ -14,53 +14,45 @@ const isColorDark = (hex: string): boolean => {
 };
 
 const ColorPalette = () => {
-  const colorGroups = [
-    {
-      title: 'Border Colors',
-      colors: Object.entries(borderStyle).map(([type, className]) => ({
-        name: type,
-        className,
-        hex: {
-          'border-green-600': '#16A34A',
-          'border-emerald-400': '#34D399',
-          'border-orange-400': '#FB923C',
-          'border-red-600': '#DC2626',
-          'border-purple-400': '#C084FC',
-        }[className],
-      })),
-    },
-    {
-      title: 'Background Colors',
-      colors: Object.entries(backgroundStyle).map(([type, className]) => ({
-        name: type,
-        className,
-        hex: {
-          'bg-green-50': '#F0FDF4',
-          'bg-emerald-50': '#ECFDF5',
-          'bg-orange-50': '#FFF7ED',
-          'bg-red-50': '#FEF2F2',
-          'bg-purple-50': '#FAF5FF',
-        }[className],
-      })),
-    },
-    {
-      title: 'Hover Background Colors',
-      colors: Object.entries(backgroundHoverStyle).map(([type, className]) => ({
-        name: type,
-        className,
-        hex: {
-          'hover:bg-green-50': '#F0FDF4',
-          'hover:bg-emerald-50': '#ECFDF5',
-          'hover:bg-orange-50': '#FFF7ED',
-          'hover:bg-red-50': '#FEF2F2',
-          'hover:bg-purple-50': '#FAF5FF',
-        }[className],
-      })),
-    },
-  ];
+  const styleGroups = {
+    'Text Colors': textStyle,
+    'Text Hover Colors': textHoverStyle,
+    'Border Colors': borderStyle,
+    'Background Colors': backgroundStyle,
+    'Hover Background Colors': backgroundHoverStyle,
+  } as const;
+
+  const colorGroups = Object.entries(styleGroups).map(([title, styles]) => ({
+    title,
+    colors: Object.entries(styles).map(([type, style]) => ({
+      name: type,
+      className: style.tailwindClass,
+      hex: style.hex,
+    })),
+  }));
 
   return (
     <div className="space-y-8">
+      {/* Combined styles section */}
+      <div className="space-y-2">
+        <h3 className="text-lg font-medium mb-3">All Together</h3>
+        <div className="flex">
+          {(Object.keys(textStyle) as MessageType[]).map((type) => (
+            <div
+              key={type}
+              className={`flex-1 p-4 ${borderStyle[type as MessageType].tailwindClass} border-2 
+                ${backgroundStyle[type as MessageType].tailwindClass} 
+                ${backgroundHoverStyle[type as MessageType].tailwindClass}`}
+            >
+              <div className={`${textStyle[type as MessageType].tailwindClass} 
+                ${textHoverStyle[type as MessageType].tailwindClass}`}>
+                {type}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {colorGroups.map((group) => (
         <div key={group.title} className="space-y-2">
           <h3 className="text-lg font-medium mb-3">{group.title}</h3>
@@ -71,22 +63,16 @@ const ColorPalette = () => {
                 className="flex-1"
                 style={{ backgroundColor: color.hex }}
               >
-                <div className={`p-2 text-xs ${
-                  isColorDark(color.hex) 
-                    ? 'bg-white/90 text-black' 
-                    : 'bg-black/90 text-white'
-                } backdrop-blur-sm flex flex-col gap-0.5`}>
-                  <div className="font-medium">{color.name}</div>
-                  <div className={`${
-                  isColorDark(color.hex) 
-                  ? 'bg-white/90 text-black' 
-                  : 'bg-black/90 text-white'
-                  } text-[10px]`}>{color.className}</div>
-                  <div className={`${
-                  isColorDark(color.hex) 
-                  ? 'bg-white/90 text-black' 
-                  : 'bg-black/90 text-white'
-                  } mt-1 font-mono`}>{color.hex}</div>
+                <div className="p-2 text-xs backdrop-blur-sm flex flex-col gap-0.5">
+                  <div className={`font-medium ${
+                    isColorDark(color.hex) ? 'text-black' : 'text-white'
+                  }`}>{color.name}</div>
+                  <div className={`text-[10px] ${
+                    isColorDark(color.hex) ? 'text-black' : 'text-white'
+                  }`}>{color.className}</div>
+                  <div className={`mt-1 font-mono ${
+                    isColorDark(color.hex) ? 'text-black' : 'text-white'
+                  }`}>{color.hex}</div>
                 </div>
               </div>
             ))}

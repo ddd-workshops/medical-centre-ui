@@ -29,7 +29,7 @@ export function DateRangePicker({
 
   const handleSelect = (range: DateRange | undefined) => {
     setPrivateSelected(range);
-    onSelect(range || { from: null, to: null });
+    onSelect(range || { from: undefined, to: undefined });
   };
 
   return (

@@ -1,5 +1,6 @@
 import { Activity, CalendarClock, FileText, MessageSquare, Stethoscope, User } from 'lucide-react';
 import { Paragraph } from '../ui-library/Typography/Paragraph';
+import { styles } from '../ui-library/DesignEnums/MessageType';
 
 export type FeedItemType = 'APPOINTMENT' | 'DIAGNOSIS' | 'PRESCRIPTION' | 'CHECKUP' | 'REGISTRATION' | 'COMMENT';
 
@@ -38,12 +39,12 @@ const SimpleTimeline = ({ items }: { items: FeedItem[] }) => (
           <li key={item.id}>
             <div className="relative pb-8">
               {idx !== items.length - 1 && (
-                <span className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-green-200" aria-hidden="true" />
+                <span className={`absolute left-4 top-4 -ml-px h-full w-0.5 ${styles.ACCENT.border}`} aria-hidden="true" />
               )}
               <div className="relative flex space-x-3">
                 <div>
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-green-100">
-                    <Icon className="h-5 w-5 text-green-600" aria-hidden="true" />
+                  <span className={`flex h-8 w-8 items-center justify-center rounded-full ${styles.ACCENT.background}`}>
+                    <Icon className={`h-5 w-5 ${styles.ACCENT.text}`} aria-hidden="true" />
                   </span>
                 </div>
                 <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
@@ -80,8 +81,8 @@ const WithComments = ({ items }: { items: FeedItem[] }) => (
                   </div>
                 ) : (
                   <div className="relative">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 ring-8 ring-white">
-                      <Icon className="h-6 w-6 text-green-600" aria-hidden="true" />
+                    <span className={`flex h-10 w-10 items-center justify-center rounded-full ${styles.ACCENT.background} ring-8 ring-white`}>
+                      <Icon className={`h-6 w-6 ${styles.ACCENT.text}`} aria-hidden="true" />
                     </span>
                   </div>
                 )}
@@ -124,8 +125,8 @@ const StackedFeed = ({ items }: { items: FeedItem[] }) => (
                 {item.imageUrl ? (
                   <img className="h-8 w-8 rounded-full" src={item.imageUrl} alt="" />
                 ) : (
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-green-100">
-                    <Icon className="h-5 w-5 text-green-600" />
+                  <span className={`flex h-8 w-8 items-center justify-center rounded-full ${styles.ACCENT.background}`}>
+                    <Icon className={`h-5 w-5 ${styles.ACCENT.text}`} />
                   </span>
                 )}
               </div>

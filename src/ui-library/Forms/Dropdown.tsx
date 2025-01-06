@@ -1,8 +1,9 @@
-import { cn } from '../../utils/cn';
+import { cn } from '../cn';
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { Variant } from '../DesignEnums/Variants';
 import { Size } from '../DesignEnums/Sizes';
+import { styles } from '../DesignEnums/MessageType';
 
 interface DropdownProps {
   label: string;
@@ -24,13 +25,13 @@ const sizeClasses: Record<Size, string> = {
 };
 
 const variantClasses: Record<Variant, string> = {
-  PRIMARY: 'bg-green-600 text-white border-green-600 hover:bg-green-700',
-  SECONDARY: 'bg-green-100 text-green-800 border-green-200 hover:bg-green-200',
-  OUTLINED: 'bg-white text-green-800 border-green-300 hover:border-green-400'
+  PRIMARY: `${styles.ACCENT.backgroundDark} ${styles.ACCENT.text} ${styles.ACCENT.borderDark} ${styles.ACCENT.backgroundDarkHover}`,
+  SECONDARY: `${styles.ACCENT.background} ${styles.ACCENT.textDark} ${styles.ACCENT.border} ${styles.ACCENT.backgroundHover}`,
+  OUTLINED: `bg-white ${styles.ACCENT.textDark} ${styles.ACCENT.border} ${styles.ACCENT.borderHover}`
 };
 
 export function Dropdown({
-  label,  // new prop
+  label,
   items,
   onChanged,
   placeholder = 'Select...',
@@ -51,7 +52,7 @@ export function Dropdown({
 
   return (
     <div className="relative">
-      <label htmlFor={selectId} className="block text-sm font-medium text-green-700 mb-1">
+      <label htmlFor={selectId} className={`block text-sm font-medium ${styles.ACCENT.text} mb-1`}>
         {label}
         <div className="relative mt-1">
           <select
@@ -61,11 +62,11 @@ export function Dropdown({
             disabled={disabled}
             className={cn(
               'w-full rounded-lg border px-3 pr-10 appearance-none cursor-pointer',
-              'focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent',
+              `focus:outline-none focus:ring-2 ${styles.ACCENT.focusRing} focus:border-transparent`,
               'disabled:opacity-50 disabled:cursor-not-allowed',
               sizeClasses[size],
               variantClasses[variant],
-              error && 'border-red-500',
+              error && styles.ALERT.border,
               className
             )}
           >
@@ -80,7 +81,7 @@ export function Dropdown({
         </div>
       </label>
       {error && (
-        <p className="mt-1 text-sm text-red-500">{error}</p>
+        <p className={`mt-1 text-sm ${styles.ALERT.text}`}>{error}</p>
       )}
     </div>
   );

@@ -3,10 +3,12 @@ import type { Request, Response } from 'express';
 
 import { AppointmentDetails, AppointmentUpdateRequest, ErrorResponse, paths } from '../contract/types';
 import { fakeAppointmentDetails, generateFakeAppointmentsBrief } from '../fake/appointments';
+import { inMemoryDB } from '../in-memory/db';
+import { clinicDetailsToBrief } from './clinicModel';
+
 import { fakePatientBriefs } from '../fake/patient';
-import { fakeDoctorBriefs } from '../fake/staff';
-import { fakeClinicBriefs } from '../fake/clinics';
 import { fakeServiceTypes } from '../fake/services';
+import { doctorCanonicalModelToBrief } from './staffModel';
 
 export const appointmentsRouter = Router();
 
@@ -77,14 +79,15 @@ appointmentsRouter.post('/', (
   }
 
   // Find doctor
-  const doctor = fakeDoctorBriefs.find(d => d.id.toString() === doctorId);
+  const doctor = inMemoryDB.doctors.find(d => d.id.toString() === doctorId);
   if (!doctor) {
     return res.status(404).json({ message: 'Doctor not found' });
   }
+  const doctorBrief = doctorCanonicalModelToBrief(doctor);
 
   // Get doctor's primary location or first available
-  const location = fakeClinicBriefs.find(c => c.id.toString() === locationId);
-  if (!location) {
+  const clinicDetails = inMemoryDB.clinics.find(c => c.id.toString() === locationId);
+  if (!clinicDetails) {
     return res.status(400).json({ message: 'Location not found' });
   }
 
@@ -98,9 +101,9 @@ appointmentsRouter.post('/', (
   const appointment: AppointmentDetails = {
     id: Date.now().toString(),
     patient,
-    doctor,
+    doctor: doctorBrief,
     serviceType,
-    location,
+    location: clinicDetailsToBrief(clinicDetails),
     datetime,
     status: 'SCHEDULED',
     prescriptions: [],

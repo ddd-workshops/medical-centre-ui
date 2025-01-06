@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { Checkbox } from './Checkbox';
+import { styles } from '../DesignEnums/MessageType';
 
 export type Layout = 'VERTICAL' | 'HORIZONTAL' | 'PANEL' | 'TABLE';
 
@@ -36,8 +37,8 @@ const PanelCheckbox = ({ options, localValues, handleChange, name }: {
           optionIdx === options.length - 1 ? 'rounded-bl-md rounded-br-md' : ''
         } ${
           localValues.includes(option.value)
-            ? 'bg-green-50 border-green-200 z-10' 
-            : 'border-gray-200 hover:bg-green-50/50'
+            ? `${styles.ACCENT.background} z-10` 
+            : `border-gray-200 ${styles.ACCENT.backgroundHover}`
         }`}
       >
         <div className="flex items-center h-5">
@@ -51,13 +52,13 @@ const PanelCheckbox = ({ options, localValues, handleChange, name }: {
         </div>
         <div className="ml-3 flex flex-col">
           <span className={`block text-sm font-medium ${
-            localValues.includes(option.value) ? 'text-green-900' : 'text-gray-900'
+            localValues.includes(option.value) ? styles.ACCENT.textDark : 'text-gray-900'
           }`}>
             {option.label}
           </span>
           {option.description && (
             <div className={`mt-1 text-sm ${
-              localValues.includes(option.value) ? 'text-green-700' : 'text-gray-500'
+              localValues.includes(option.value) ? styles.ACCENT.text : 'text-gray-500'
             }`}>
               {option.description}
             </div>
@@ -88,7 +89,7 @@ const TableCheckbox = ({ options, localValues, handleChange, name }: {
           <div 
             key={option.id}
             className={`relative flex items-center p-4 ${
-              localValues.includes(option.value) ? 'bg-green-50 z-10' : 'hover:bg-green-50/50'
+              localValues.includes(option.value) ? `${styles.ACCENT.background} z-10` : styles.ACCENT.backgroundHover
             }`}
           >
             <div 
@@ -157,7 +158,7 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
   if (layout === 'PANEL') {
     return (
       <div className={className}>
-        {header && <div className="text-sm font-medium text-green-800 mb-4">{header}</div>}
+        {header && <div className={`text-sm font-medium ${styles.ACCENT.textDark} mb-4`}>{header}</div>}
         <PanelCheckbox 
           options={options} 
           localValues={localValues} 
@@ -171,7 +172,7 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
   if (layout === 'TABLE') {
     return (
       <div className={className}>
-        {header && <div className="text-sm font-medium text-green-800 mb-4">{header}</div>}
+        {header && <div className={`text-sm font-medium ${styles.ACCENT.textDark} mb-4`}>{header}</div>}
         <TableCheckbox 
           options={options} 
           localValues={localValues} 
@@ -184,7 +185,7 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
 
   return (
     <div className={`${containerClasses} ${className}`}>
-      {header && <div className="text-sm font-medium text-green-800 mb-2 w-full">{header}</div>}
+      {header && <div className={`text-sm font-medium ${styles.ACCENT.textDark} mb-2 w-full`}>{header}</div>}
       {options.map((option) => (
         <div key={option.id} className="flex flex-col">
           <Checkbox

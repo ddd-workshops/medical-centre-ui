@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { Radio } from './Radio';
+import { styles } from '../DesignEnums/MessageType';
 
 export type Layout = 'VERTICAL' | 'HORIZONTAL' | 'PANEL' | 'TABLE';
 
@@ -38,8 +39,8 @@ const PanelRadio = ({ options, localValue, handleChange, name }: {
           optionIdx === options.length - 1 ? 'rounded-bl-md rounded-br-md' : ''
         } ${
           localValue === option.value 
-            ? 'bg-green-50 border-green-200 z-10' 
-            : 'border-gray-200 hover:bg-green-50/50'
+            ? `${styles.ACCENT.background} z-10` 
+            : `border-gray-200 ${styles.ACCENT.backgroundHover}`
         }`}
       >
         <div className="flex items-center h-5">
@@ -57,7 +58,7 @@ const PanelRadio = ({ options, localValue, handleChange, name }: {
           <span 
             id={`${name}-${option.value}-label`}
             className={`block text-sm font-medium ${
-              localValue === option.value ? 'text-green-900' : 'text-gray-900'
+              localValue === option.value ? `${styles.ACCENT.textDark}` : 'text-gray-900'
             }`}
           >
             {option.label}
@@ -66,7 +67,7 @@ const PanelRadio = ({ options, localValue, handleChange, name }: {
             <div 
               id={`${name}-${option.value}-description`}
               className={`mt-1 text-sm ${
-                localValue === option.value ? 'text-green-700' : 'text-gray-500'
+                localValue === option.value ? `${styles.ACCENT.textDark}` : 'text-gray-500'
               }`}
             >
               {option.description}
@@ -100,7 +101,7 @@ const TableRadio = ({ options, localValue, handleChange, name }: {
           <div 
             key={option.id}
             className={`relative flex items-center p-4 ${
-              localValue === option.value ? 'bg-green-50 z-10' : 'hover:bg-green-50/50'
+              localValue === option.value ? `${styles.ACCENT.background} z-10` : styles.ACCENT.backgroundHover
             }`}
           >
             <div 
@@ -167,7 +168,7 @@ export const RadioGroup = ({
   if (layout === 'PANEL') {
     return (
       <div className={className}>
-        {header && <div className="text-sm font-medium text-green-800 mb-4">{header}</div>}
+        {header && <div className={`text-sm font-medium ${styles.ACCENT.textDark} mb-4`}>{header}</div>}
         <PanelRadio 
           options={options} 
           localValue={localValue} 
@@ -181,7 +182,7 @@ export const RadioGroup = ({
   if (layout === 'TABLE') {
     return (
       <div className={className}>
-        {header && <div className="text-sm font-medium text-green-800 mb-4">{header}</div>}
+        {header && <div className={`text-sm font-medium ${styles.ACCENT.textDark} mb-4`}>{header}</div>}
         <TableRadio 
           options={options} 
           localValue={localValue} 
@@ -194,7 +195,7 @@ export const RadioGroup = ({
 
   return (
     <div className={`${containerClasses} ${className}`}>
-      {header && <div className="text-sm font-medium text-green-800 mb-2 w-full">{header}</div>}
+      {header && <div className={`text-sm font-medium ${styles.ACCENT.textDark} mb-2 w-full`}>{header}</div>}
       {options.map((option) => (
         <div key={option.id} className="flex flex-col">
           <Radio

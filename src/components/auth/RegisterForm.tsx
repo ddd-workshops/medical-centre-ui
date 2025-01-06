@@ -7,6 +7,7 @@ import { Button } from '../../ui-library/Generic/Button';
 import { TextInput } from '../../ui-library/Forms/TextInput';
 import { H2 } from '../../ui-library/Typography/Headings';
 import { authService } from '../../http/authService';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 export const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -55,9 +56,9 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-50">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-100">
-        <H2 className="text-green-800 text-center">Create Account</H2>
+    <div className={`min-h-screen flex items-center justify-center ${styles.ACCENT.background}`}>
+      <div className={`bg-white p-8 rounded-xl shadow-lg w-96 border ${styles.ACCENT.border}`}>
+        <H2 className={`${styles.ACCENT.text} text-center`}>Create Account</H2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <TextInput
             label="First Name"
@@ -91,7 +92,7 @@ export const RegisterForm = () => {
             required
           />
           {errors.phone && (
-            <p className="text-red-500 text-sm">{errors.phone}</p>
+            <p className={`text-sm ${styles.ALERT.text}`}>{errors.phone}</p>
           )}
           <PasswordInput
             label="Password"
@@ -112,7 +113,7 @@ export const RegisterForm = () => {
             required
           />
           {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password}</p>
+            <p className={`text-sm ${styles.ALERT.text}`}>{errors.password}</p>
           )}
           <Button 
             type="submit" 
@@ -122,9 +123,9 @@ export const RegisterForm = () => {
             Create Account
           </Button>
         </form>
-        <p className="mt-4 text-center text-sm text-green-600">
+        <p className={`mt-4 text-center text-sm ${styles.ACCENT.text}`}>
           Already have an account?{' '}
-          <Link to="/login" className="font-medium hover:text-green-800 underline">
+          <Link to="/login" className={`font-medium ${styles.ACCENT.textHover} underline`}>
             Sign in here
           </Link>
         </p>

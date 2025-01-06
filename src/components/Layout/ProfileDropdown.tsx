@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '../auth/AuthStore';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 export const ProfileDropdown = () => {
       const { logout } = useAuthStore();
@@ -13,7 +14,7 @@ export const ProfileDropdown = () => {
 
   return (
     <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
-      <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-green-100">
+      <button onClick={handleLogout} className={`block w-full text-left px-4 py-2 ${styles.ACCENT.backgroundHover}`}>
         Log Out
       </button>
     </div>

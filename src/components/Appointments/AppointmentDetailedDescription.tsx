@@ -21,6 +21,9 @@ import { Paragraph } from '../../ui-library/Typography/Paragraph';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { Chip } from '../../ui-library/Generic/Chip';
 import { clinicLink, doctorLink } from '../Routing/routes';
+import { List } from '../../ui-library/Generic/List';
+import { Text } from '../../ui-library/Typography/Text';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 export const AppointmentDetailedDescription = () => {
   const { id } = useParams<{ id: string }>();
@@ -47,7 +50,7 @@ export const AppointmentDetailedDescription = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center p-12">
-        <Loader className="w-8 h-8 text-green-600 animate-spin" />
+        <Loader className={`w-8 h-8 ${styles.ACCENT.text} animate-spin`} />
       </div>
     );
   }
@@ -55,29 +58,29 @@ export const AppointmentDetailedDescription = () => {
   if (error || !appointment) {
     return (
       <div className="text-center p-8 bg-red-50 rounded-lg">
-        <Paragraph className="text-red-600 font-medium">{error || 'Appointment not found'}</Paragraph>
+        <Paragraph className={styles.ALERT.text}>{error || 'Appointment not found'}</Paragraph>
       </div>
     );
   }
 
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white rounded-xl shadow-lg">
-      <div className="border-b border-green-100 pb-6 mb-8">
-        <H2 className="text-green-800 flex items-center gap-3">
-          <Calendar className="w-8 h-8 text-green-600" />
+      <div className={`border-b ${styles.ACCENT.border} pb-6 mb-8`}>
+        <H2 className={`${styles.ACCENT.text} flex items-center gap-3`}>
+          <Calendar className={`w-8 h-8 ${styles.ACCENT.text}`} />
           Appointment Details
         </H2>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-green-50/50 p-6 rounded-xl border border-green-100">
-          <H3 className="text-green-700 mb-4 flex items-center gap-2">
+        <div className={`${styles.ACCENT.background} p-6 rounded-xl border ${styles.ACCENT.border}`}>
+          <H3 className={`${styles.ACCENT.text} mb-4 flex items-center gap-2`}>
             <User className="w-5 h-5" />
             Basic Information
           </H3>
           <div className="space-y-3">
             <div className="flex gap-3 text-gray-700">
-              <Calendar className="w-4 h-4 text-green-600 flex-shrink-0 mt-1" />
+              <Calendar className={`w-4 h-4 ${styles.ACCENT.text} flex-shrink-0 mt-1`} />
               <Paragraph>
                 {new Date(appointment.datetime).toLocaleDateString()} at{' '}
                 {new Date(appointment.datetime).toLocaleTimeString([], { 
@@ -87,10 +90,10 @@ export const AppointmentDetailedDescription = () => {
               </Paragraph>
             </div>
             <div className="flex gap-3 text-gray-700">
-              <MapPin className="w-4 h-4 text-green-600 flex-shrink-0 mt-1" />
+              <MapPin className={`w-4 h-4 ${styles.ACCENT.text} flex-shrink-0 mt-1`} />
               <Link 
                 to={clinicLink(appointment.location)} 
-                className="hover:text-green-700 transition-colors"
+                className={`${styles.ACCENT.textHover} transition-colors`}
               >
                 <Paragraph>
                   {appointment.location.name}<br />
@@ -101,61 +104,60 @@ export const AppointmentDetailedDescription = () => {
               </Link>
             </div>
             <div className="flex gap-3 text-gray-700">
-              <User className="w-4 h-4 text-green-600 flex-shrink-0 mt-1" />
+              <User className={`w-4 h-4 ${styles.ACCENT.text} flex-shrink-0 mt-1`} />
               <Link 
                 to={doctorLink({ doctorId: appointment.doctor.id, doctorName: appointment.doctor.fullName })} 
-                className="hover:text-green-700 transition-colors"
+                className={`${styles.ACCENT.textHover} transition-colors`}
               >
                 <Paragraph>{appointment.doctor.fullName}</Paragraph>
               </Link>
             </div>
             <div className="flex gap-3 text-gray-700">
-              <Stethoscope className="w-4 h-4 text-green-600 flex-shrink-0 mt-1" />
-              <Paragraph>{appointment.doctor.specialties.join(', ')}</Paragraph>
+              <Stethoscope className={`w-4 h-4 ${styles.ACCENT.text} flex-shrink-0 mt-1`} />
+              <Paragraph>{appointment.doctor.specialties.map(s => s.name).join(', ')}</Paragraph>
             </div>
           </div>
         </div>
 
-        <div className="bg-green-50/50 p-6 rounded-xl border border-green-100">
-          <H3 className="text-green-700 mb-4 flex items-center gap-2">
+        <div className={`${styles.ACCENT.background} p-6 rounded-xl border ${styles.ACCENT.border}`}>
+          <H3 className={`${styles.ACCENT.text} mb-4 flex items-center gap-2`}>
             <FileText className="w-5 h-5" />
             Medical Notes
           </H3>
           <div className="flex gap-3">
-            <FileText className="w-4 h-4 text-green-600 flex-shrink-0 mt-1" />
+            <FileText className={`w-4 h-4 ${styles.ACCENT.text} flex-shrink-0 mt-1`} />
             <Paragraph className="text-gray-700 whitespace-pre-line">
               {appointment.notes || 'No notes available'}
             </Paragraph>
           </div>
         </div>
 
-        <div className="bg-green-50/50 p-6 rounded-xl border border-green-100">
-          <H3 className="text-green-700 mb-4 flex items-center gap-2">
+        <div className={`${styles.ACCENT.background} p-6 rounded-xl border ${styles.ACCENT.border}`}>
+          <H3 className={`${styles.ACCENT.text} mb-4 flex items-center gap-2`}>
             <Pill className="w-5 h-5" />
             Prescriptions
           </H3>
           {appointment.prescriptions && appointment.prescriptions.length > 0 ? (
-            <ul className="space-y-2">
-              {appointment.prescriptions.map((prescription, index) => (
-                <li key={index} className="flex gap-3 text-gray-700">
-                  <Pill className="w-4 h-4 text-green-600 flex-shrink-0 mt-1" />
-                  <Paragraph>{prescription}</Paragraph>
-                </li>
-              ))}
-            </ul>
+            <List
+              items={appointment.prescriptions}
+              bulletIcon={Pill}
+              renderItem={(prescription) => (
+                <Text>{prescription}</Text>
+              )}
+            />
           ) : (
             <Paragraph className="text-gray-700">No prescriptions issued</Paragraph>
           )}
         </div>
 
-        <div className="bg-green-50/50 p-6 rounded-xl border border-green-100">
-          <H3 className="text-green-700 mb-4 flex items-center gap-2">
+        <div className={`${styles.ACCENT.background} p-6 rounded-xl border ${styles.ACCENT.border}`}>
+          <H3 className={`${styles.ACCENT.text} mb-4 flex items-center gap-2`}>
             <CreditCard className="w-5 h-5" />
             Billing Information
           </H3>
           <div className="space-y-3">
             <div className="flex gap-3 text-gray-700">
-              <CreditCard className="w-4 h-4 text-green-600 flex-shrink-0 mt-1" />
+              <CreditCard className={`w-4 h-4 ${styles.ACCENT.text} flex-shrink-0 mt-1`} />
               <div className="flex items-baseline gap-3">
                 <Paragraph className="font-medium">
                   Amount: {formatCurrency(appointment.billing?.amount || 0)}
@@ -171,11 +173,11 @@ export const AppointmentDetailedDescription = () => {
         </div>
       </div>
 
-      <div className="mt-8 flex justify-end border-t border-green-100 pt-6">
+      <div className={`mt-8 flex justify-end border-t ${styles.ACCENT.border} pt-6`}>
         <PDFDownloadLink
           document={<AppointmentPDF appointment={appointment} />}
           fileName={`appointment-${appointment.id}.pdf`}
-          className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium"
+          className={`inline-flex items-center gap-2 ${styles.ACCENT.background} text-white px-6 py-3 rounded-lg ${styles.ACCENT.backgroundHover} transition-colors font-medium`}
         >
           <Download className="w-5 h-5" />
           Download PDF

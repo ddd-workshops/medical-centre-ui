@@ -2,7 +2,7 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 
 import type { ErrorResponse, paths } from '../contract/types';
-import { session } from '../fake/session';
+import { session } from '../in-memory/session';
 import { randomFromArray } from '../fake/utils';
 import { fakePatientProfiles } from '../fake/patient';
 

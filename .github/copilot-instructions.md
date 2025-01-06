@@ -72,12 +72,13 @@ If icons are needed, use `lucide-react`, it's already there.
 
 Use existing typography, when possible: `./src/components/Typography`. If an important element of typography is missing, suggest adding it!
 
-Remember that there's no `<Text>` component. Use `<Paragraph>` instead.
-
 ## storybook
 
 Each non-global component (i.e. displaying entity list, entity details, a styled atom such as buttons, checkboxes, card etc) should have storybook stories defined:
-- use the `BSA/<ENTITY>/<VIEW>` or `BSA/<Atoms | Molecules | Forms> | Organisms/<VIEW>`
+- use onre of the following paths:
+  - `BSA/<ENTITY>/<VIEW>`
+  - `BSA/<Atoms | Molecules | Forms>`
+  - `Organisms/<VIEW>`
 
 Each component story, when requires callbacks, should either receive a meaningful callback from the parent, or provide the `action` from `@storybook/addon-actions`. You can use `PasswordInput.stories.tsx` as example of using actions addon, but you can also provide different APIs. Don't use console.log for this reason.
 

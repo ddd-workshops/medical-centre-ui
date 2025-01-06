@@ -1,7 +1,9 @@
 import type { ComponentPropsWithoutRef } from 'react';
-import { cn } from '../../utils/cn';
+
+import { cn } from '../cn';
 import { Size } from '../DesignEnums/Sizes';
 import { Variant } from '../DesignEnums/Variants';
+import { styles } from '../DesignEnums/MessageType';
 
 interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   variant?: Variant;
@@ -16,9 +18,9 @@ const sizeStyles: Record<Size, string> = {
 };
 
 const variantStyles: { [key in Variant]: string } = {
-  PRIMARY: 'bg-green-600 text-white hover:bg-green-700',
-  SECONDARY: 'bg-gray-50 border border-gray-200 text-gray-700 hover:bg-gray-100',
-  OUTLINED: 'border border-green-600 text-green-600 hover:bg-green-50'
+  PRIMARY: `text-white ${styles.ACCENT.backgroundGradientDark} ${styles.ACCENT.backgroundDarkHover}`,
+  SECONDARY: `border ${styles.DEFAULT.backgroundGradient} ${styles.DEFAULT.border} ${styles.DEFAULT.text} ${styles.DEFAULT.backgroundHover}`,
+  OUTLINED: `border ${styles.ACCENT.borderDark} ${styles.ACCENT.text} ${styles.ACCENT.backgroundGradient} ${styles.ACCENT.backgroundHover}`
 };
 
 export const Button = ({

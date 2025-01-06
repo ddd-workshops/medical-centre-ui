@@ -50,7 +50,7 @@ export const Timeline: React.FC<TimelineProps> = ({ appointments }) => {
                       >
                         <div 
                           className="bg-gradient-to-r from-emerald-50 to-white
-                                   border border-emerald-100 rounded-lg p-4"
+                                   border border-emerald-100 rounded-lg p-2"
                         >
                           <div className="flex justify-between items-start">
                             <div>

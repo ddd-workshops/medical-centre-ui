@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { styles } from '../DesignEnums/MessageType';
 
 export type CardInputLayout = 'SEPARATE' | 'STACKED'
 
@@ -55,23 +56,23 @@ export const CardInput = ({
     onChange({ cardNumber: localCardNumber, expiryDate: localExpiryDate, cvv: formatted });
   };
 
-  const inputClassName = "w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent";
-  const labelClassName = "block text-sm font-medium text-gray-700 mb-1";
+  const inputClassName = `w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${styles.ACCENT.focusRing} focus:border-transparent`;
+  const labelClassName = `${styles.ACCENT.text} block text-sm font-medium mb-1`;
 
   const getInputClassName = (position?: 'first' | 'middle' | 'last') => {
     if (layout === 'SEPARATE') {
       return inputClassName;
     }
 
-    const baseStackedClass = "w-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent border border-gray-300";
+    const baseStackedClass = `w-full px-3 py-2 focus:outline-none focus:ring-2 ${styles.ACCENT.focusRing} focus:border-transparent border border-gray-300`;
     
     switch (position) {
       case 'first':
         return `${baseStackedClass} rounded-t-md border-b-0`;
       case 'middle':
-        return `${baseStackedClass} rounded-bl-md border-r-0`; // Added rounded-bl-md for left bottom corner
+        return `${baseStackedClass} rounded-bl-md border-r-0`;
       case 'last':
-        return `${baseStackedClass} rounded-br-md`; // Changed to only round bottom-right corner
+        return `${baseStackedClass} rounded-br-md`;
       default:
         return inputClassName;
     }

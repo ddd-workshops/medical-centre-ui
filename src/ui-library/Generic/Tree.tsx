@@ -1,5 +1,6 @@
 import { ChevronRight } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
+import { styles } from '../DesignEnums/MessageType';
 
 export interface TreeNode {
   id: string;
@@ -24,14 +25,14 @@ const TreeNodeComponent = ({ node, level }: TreeNodeProps) => {
   return (
     <div className="select-none">
       <div 
-        className={`flex items-center gap-1 py-1 px-2 hover:bg-green-50 rounded-md ${hasChildren ? 'cursor-pointer' : 'cursor-default'}`}
+        className={`flex items-center gap-1 py-1 px-2 ${styles.ACCENT.backgroundHover} rounded-md ${hasChildren ? 'cursor-pointer' : 'cursor-default'}`}
         style={{ paddingLeft: `${level * 16}px` }}
         onClick={() => hasChildren && setIsExpanded(!isExpanded)}
       >
         <span className="w-4 h-4 flex-shrink-0">
           {hasChildren && (
             <ChevronRight 
-              className={`w-4 h-4 transition-transform duration-200 text-green-600 stroke-[2.5] ${
+              className={`w-4 h-4 transition-transform duration-200 ${styles.ACCENT.text} stroke-[2.5] ${
                 isExpanded ? 'transform rotate-90' : ''
               }`}
             />

@@ -30,6 +30,13 @@ export const Secondary: Story = {
   }
 };
 
+export const Outlined: Story = {
+  args: {
+    ...Primary.args,
+    variant: 'OUTLINED'
+  }
+};
+
 export const IconOnly: Story = {
   args: {
     variant: 'SECONDARY',

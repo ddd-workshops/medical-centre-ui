@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { CMSPageContent } from '../../http/cmsService';
 import { cmsService } from '../../http/cmsService';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 interface CMSContentProps {
   slug: string;
@@ -33,14 +34,14 @@ export const CMSContent = ({ slug }: CMSContentProps) => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-700"></div>
+        <div className={`animate-spin rounded-full h-12 w-12 border-b-2 ${styles.ACCENT.border}`}></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="text-red-600 p-4 rounded-lg bg-red-50 border border-red-200">
+      <div className={`${styles.ALERT.text} p-4 rounded-lg bg-red-50 border border-red-200`}>
         {error}
       </div>
     );

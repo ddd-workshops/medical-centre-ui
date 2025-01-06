@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Accordion } from './Accordion';
+import { styles } from '../DesignEnums/MessageType';
 
 const meta = {
   title: 'UI/Atoms/Accordion',
@@ -59,9 +60,9 @@ export const WithCustomStyling: Story = {
     items: [
       {
         title: (
-          <div className="flex items-center gap-2 text-green-700">
+          <div className={`flex items-center gap-2 ${styles.ACCENT.textDark}`}>
             <span className="font-semibold">Opening Hours</span>
-            <span className="px-2 py-0.5 text-xs bg-green-100 rounded-full">New</span>
+            <span className={`px-2 py-0.5 text-xs ${styles.ACCENT.background} rounded-full`}>New</span>
           </div>
         ),
         content: (
@@ -80,15 +81,15 @@ export const WithCustomStyling: Story = {
       },
       {
         title: (
-          <div className="flex items-center gap-2 text-green-700">
+          <div className={`flex items-center gap-2 ${styles.ACCENT.textDark}`}>
             <span className="font-semibold">Emergency Contact</span>
-            <span className="text-red-500">24/7</span>
+            <span className={styles.ALERT.text}>24/7</span>
           </div>
         ),
         content: (
           <div className="bg-red-50 -m-3 p-3 rounded-b-lg border-t border-red-100">
-            <p className="text-red-700 font-medium mb-2">For dental emergencies:</p>
-            <p className="text-red-600">Call: +1 (555) 123-4567</p>
+            <p className={`font-medium mb-2 ${styles.ALERT.text}`}>For dental emergencies:</p>
+            <p className={styles.ALERT.text}>Call: +1 (555) 123-4567</p>
           </div>
         ),
       },

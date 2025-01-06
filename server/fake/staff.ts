@@ -6,13 +6,14 @@ import { createRandomUniqueIntegerIDGenerator, repeat } from "./utils";
 import { generateFakeSpecialist, generateFakeSpecialties } from "./specialties";
 import { generateFakeAddress } from './address';
 import { generateFakeStaffI18nInfo } from './staffI18n';
-import { fakeClinicBriefs } from './clinics';
+import { fakeClinicDetails } from './clinics';
 import { generateFakeDoctorBioAndAdditionalInformation } from './staffBio';
 import { StaffType } from './staffType';
+import { clinicDetailsToBrief } from '../controllers/clinicModel';
+import { doctorCanonicalModelToBrief, doctorCanonicalModelToProfile } from '../controllers/staffModel';
+import { DoctorCanonicalModel } from '../fake-db/db-types';
 
 const generateID = createRandomUniqueIntegerIDGenerator({ from: 1000, to: 10000 });
-
-type DoctorCanonicalModel = DoctorProfile & DoctorBrief & DoctorPersonalContact;
 
 export const generateFakeDoctor = (): DoctorCanonicalModel => {
   // Generate base ID to be used for both id and doctorId
@@ -36,9 +37,9 @@ export const generateFakeDoctor = (): DoctorCanonicalModel => {
     ? `${specialist.title} ${staffI18n.firstName} ${staffI18n.lastName}`
     : `${staffI18n.firstName} ${staffI18n.lastName}`;
 
-  const locations = randomFromArray(fakeClinicBriefs, {
+  const locations = randomFromArray(fakeClinicDetails, {
     count: { min: 1, max: 3 },
-  });
+  }).map(clinicDetailsToBrief);
 
   const { bio, additionalInformation } = generateFakeDoctorBioAndAdditionalInformation()
 
@@ -75,41 +76,6 @@ export const generateFakeDoctor = (): DoctorCanonicalModel => {
   };
 };
 
-export const generateFakeDoctorBrief = (doctor: DoctorCanonicalModel = generateFakeDoctor()): DoctorBrief => {
-  const { id, fullName, specialties } = doctor;
-  return { 
-    id, 
-    fullName, 
-    specialties // No need to convert specialties as they're already in the correct format
-  };
-};
-
-export const generateFakeDoctorProfile = (doctor: DoctorCanonicalModel = generateFakeDoctor()): DoctorProfile => {
-  const { doctorId, fullName, email, phoneNumber, address, ...doctorProfile } = doctor;
-  return doctorProfile
-};
-
-export const generateFakeDoctorPersonalContact = (doctor: DoctorCanonicalModel = generateFakeDoctor()): DoctorPersonalContact => {
-  const { doctorId, email, phoneNumber, address } = doctor;
-  return { doctorId, email, phoneNumber, address };
-};
-
-////////////////////////////////////////////////
-
-const PRIVATE_doctors = repeat(generateFakeDoctor, {
+export const fakeCanonicalModelDoctors = repeat(generateFakeDoctor, {
   count: { min: 50, max: 80 },
 });
-
-export const fakeDoctorBriefs = PRIVATE_doctors.map(generateFakeDoctorBrief);
-export const fakeDoctorProfiles = PRIVATE_doctors.map(generateFakeDoctorProfile)
-
-export const generateFakeDoctorBriefFromDoctorProfile = (doctor: DoctorProfile): DoctorBrief => {
-  const { id, firstName, lastName, specialties, locations } = doctor;
-  const fullName = `${firstName} ${lastName}`;
-  return { 
-    id, 
-    fullName, 
-    specialties, // Already in correct format
-    locations 
-  };
-}

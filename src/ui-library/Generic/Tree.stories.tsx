@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Tree, type TreeNode } from './Tree';
+import { styles } from '../DesignEnums/MessageType';
 
 const meta: Meta<typeof Tree> = {
-  title: 'UI/Atoms/Tree',
+  title: 'UI/Molecules/Tree',
   component: Tree,
   parameters: {
     layout: 'centered',
@@ -116,7 +117,7 @@ const complexLabelData: TreeNode[] = [
     label: (
       <div className="flex items-center gap-2">
         <span className="font-bold">Brighton Dental Centre</span>
-        <span className="text-xs bg-green-100 px-2 py-0.5 rounded-full">Main Branch</span>
+        <span className={`text-xs ${styles.ACCENT.background} px-2 py-0.5 rounded-full`}>Main Branch</span>
       </div>
     ),
     children: [

@@ -3,6 +3,7 @@ import { Clock, MapPin, User, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { doctorLink } from '../Routing/routes';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 import type { AppointmentBrief } from '../../contract/types';
 import { appointmentService } from '../../http/appointmentService';
@@ -24,19 +25,19 @@ export const AppointmentCard = ({ appointment }: Props) => {
 
   const statusConfig = {
     SCHEDULED: {
-      border: 'border-blue-500',
-      bg: 'bg-blue-50',
-      text: 'text-blue-700'
+      border: styles.UPDATE.border,
+      bg: styles.UPDATE.background,
+      text: styles.UPDATE.text
     },
     COMPLETED: {
-      border: 'border-green-500',
-      bg: 'bg-green-50',
-      text: 'text-green-700'
+      border: styles.ACCENT.border,
+      bg: styles.ACCENT.background,
+      text: styles.ACCENT.text
     },
     CANCELLED: {
-      border: 'border-gray-500',
-      bg: 'bg-gray-50',
-      text: 'text-gray-700'
+      border: styles.DEFAULT.border,
+      bg: styles.DEFAULT.background,
+      text: styles.DEFAULT.text
     },
   }[appointment.status];
 
@@ -73,7 +74,7 @@ export const AppointmentCard = ({ appointment }: Props) => {
                     doctorId: appointment.doctorId, 
                     doctorName: appointment.doctorName 
                   })}
-                  className="text-green-600 hover:text-green-700 hover:underline"
+                  className={`${styles.ACCENT.text} ${styles.ACCENT.textHover} hover:underline`}
                   onClick={(e) => e.stopPropagation()}
                 >
                   Dr. {appointment.doctorName}

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { TextInput } from './TextInput';
+import { styles } from '../DesignEnums/MessageType';
 
 type Option = {
   id: string;
@@ -16,11 +17,12 @@ type AutocompleteProps = {
   onSelect: (option: Option) => void;
   maxItems?: number;
   label?: string;
+  placeholder?: string;
 };
 
 export const Autocomplete = ({
-  options, onSelect, maxItems = 5, label = 'Search',
-  renderInput = ({ value, onChange }) => ( <TextInput value={value} onChange={onChange} placeholder="Search..." label={label} /> ),
+  options, onSelect, maxItems = 5, label = 'Search', placeholder = 'Search...',
+  renderInput = ({ value, onChange }) => ( <TextInput value={value} onChange={onChange} placeholder={placeholder} label={label} /> ),
 }: AutocompleteProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -72,7 +74,7 @@ export const Autocomplete = ({
           {filteredOptions.map((option) => (
             <li
               key={option.id}
-              className="px-4 py-2 cursor-pointer hover:bg-green-50"
+              className={`px-4 py-2 cursor-pointer ${styles.ACCENT.backgroundHover}`}
               onClick={() => {
                 onSelect(option);
                 setInputValue(option.label);

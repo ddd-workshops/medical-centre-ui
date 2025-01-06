@@ -1,4 +1,5 @@
-import { cn } from '../../utils/cn';
+import { cn } from '../cn';
+import { styles } from '../DesignEnums/MessageType';
 import { Size } from '../DesignEnums/Sizes';
 
 interface ParagraphProps {
@@ -16,7 +17,8 @@ const sizeClasses: Record<Size, string> = {
 export function Paragraph({ children, size = 'MEDIUM', className }: ParagraphProps) {
   return (
     <p className={cn(
-      'text-gray-700 leading-relaxed mb-4',
+      'leading-relaxed mb-4',
+      styles.DEFAULT.text,
       sizeClasses[size],
       className
     )}>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ChevronDown, X } from 'lucide-react';
+import { styles } from '../DesignEnums/MessageType';
 
 interface MultiSelectProps {
   options: Array<{ label: string; value: string }>;
@@ -36,7 +37,7 @@ export const MultiSelect = ({
 
   return (
     <div className="w-full">
-      <label className="block text-sm font-medium text-green-700 mb-1">
+      <label className={`block text-sm font-medium ${styles.ACCENT.text} mb-1`}>
         {label}
       </label>
       <div className="relative">
@@ -46,11 +47,11 @@ export const MultiSelect = ({
         >
           {selectedLabels.length > 0 ? (
             selectedLabels.map(label => (
-              <span key={label} className="text-sm bg-green-100 px-2 rounded-md flex items-center gap-1">
+              <span key={label} className={`text-sm ${styles.ACCENT.background} px-2 rounded-md flex items-center gap-1`}>
                 {label}
                 <X
                   size={14}
-                  className="cursor-pointer hover:text-red-500"
+                  className={`cursor-pointer ${styles.ALERT.textHover}`}
                   onClick={(e) => {
                     e.stopPropagation();
                     const newValue = internalValue.filter(v => 
@@ -68,12 +69,12 @@ export const MultiSelect = ({
         </div>
 
         {isOpen && (
-          <div className="absolute z-10 w-full mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-auto">
+          <div className="absolute z-[100] w-full mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-auto">
             {options.map(option => (
               <div
                 key={option.value}
-                className={`p-2 cursor-pointer hover:bg-green-50 ${
-                  internalValue.includes(option.value) ? 'bg-green-100' : ''
+                className={`p-2 cursor-pointer ${styles.ACCENT.backgroundHover} ${
+                  internalValue.includes(option.value) ? styles.ACCENT.background : ''
                 }`}
                 onClick={() => {
                   const newValue = internalValue.includes(option.value)

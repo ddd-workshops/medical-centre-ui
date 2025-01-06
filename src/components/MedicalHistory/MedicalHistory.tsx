@@ -2,6 +2,7 @@ import { useReactTable, createColumnHelper, getCoreRowModel, flexRender } from '
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import { H2 } from '../../ui-library/Typography/Headings';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 type MedicalDocument = {
   id: string;
@@ -129,15 +130,15 @@ export const MedicalHistory = () => {
       <H2>
         Medical History
       </H2>
-      <div className="overflow-x-auto rounded-lg shadow-sm border border-green-100">
+      <div className={`overflow-x-auto rounded-lg shadow-sm border ${styles.ACCENT.border}`}>
         <table className="w-full border-collapse bg-white">
           <thead>
             {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id} className="bg-green-50">
+              <tr key={headerGroup.id} className={styles.ACCENT.background}>
                 {headerGroup.headers.map(header => (
                   <th 
                     key={header.id} 
-                    className="px-6 py-4 text-left text-sm font-semibold text-green-900 border-b-2 border-green-200 uppercase tracking-wider"
+                    className={`px-6 py-4 text-left text-sm font-semibold ${styles.ACCENT.textDark} border-b-2 ${styles.ACCENT.border} uppercase tracking-wider`}
                   >
                     {flexRender(header.column.columnDef.header, header.getContext())}
                   </th>
@@ -145,11 +146,11 @@ export const MedicalHistory = () => {
               </tr>
             ))}
           </thead>
-          <tbody className="divide-y divide-green-100">
+          <tbody className={`divide-y ${styles.ACCENT.border}`}>
             {table.getRowModel().rows.map(row => (
               <tr 
                 key={row.id} 
-                className="transition-colors hover:bg-green-50 cursor-pointer"
+                className={`transition-colors ${styles.ACCENT.backgroundHover} cursor-pointer`}
                 onClick={() => navigate(`/medical-history/${row.original.id}`)}
               >
                 {row.getVisibleCells().map(cell => (

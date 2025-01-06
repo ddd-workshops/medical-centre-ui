@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { TextInput } from '../../ui-library/Forms/TextInput';
 import { RadioGroup } from '../../ui-library/Forms/RadioGroup';
 import { H2 } from '../../ui-library/Typography/Headings';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 type ResetOption = 'remind-login' | 'reset-password';
 
@@ -17,9 +18,9 @@ export const ResetForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-50">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-96 border border-green-100">
-        <H2 className="text-green-800 text-center">Account Recovery</H2>
+    <div className={`min-h-screen flex items-center justify-center ${styles.ACCENT.background}`}>
+      <div className={`bg-white p-8 rounded-xl shadow-lg w-96 border ${styles.ACCENT.border}`}>
+        <H2 className={`${styles.ACCENT.textDark} text-center`}>Account Recovery</H2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <RadioGroup
             header="Choose recovery option"
@@ -41,14 +42,14 @@ export const ResetForm = () => {
 
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-200 font-medium"
+            className={`w-full ${styles.ACCENT.background} text-white py-2 rounded-lg ${styles.ACCENT.backgroundHover} transition duration-200 font-medium`}
           >
             {resetOption === 'remind-login' ? 'Send Login Details' : 'Reset Password'}
           </button>
         </form>
-        <p className="mt-4 text-center text-sm text-green-600">
+        <p className={`mt-4 text-center text-sm ${styles.ACCENT.text}`}>
           Remember your credentials?{' '}
-          <Link to="/login" className="font-medium hover:text-green-800 underline">
+          <Link to="/login" className={`font-medium ${styles.ACCENT.textHover} underline`}>
             Sign in here
           </Link>
         </p>

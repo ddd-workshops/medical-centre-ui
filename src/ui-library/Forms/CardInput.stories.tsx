@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { CardInput } from './CardInput';
+import { styles } from '../DesignEnums/MessageType';
+import { Button } from '../Generic/Button';
+import { H3 } from '../Typography/Headings';
 
 const meta: Meta<typeof CardInput> = {
   title: 'UI/Forms/CardInput',
@@ -35,16 +38,16 @@ export const FilledPayment: Story = {
 export const WithinPaymentForm: Story = {
   render: () => (
     <div className="w-96 p-6 border rounded-lg shadow-sm">
-      <h3 className="text-lg font-semibold mb-4">Payment for Dental Check-up</h3>
+      <H3>Payment for Dental Check-up</H3>
       <CardInput
         cardNumber=""
         expiryDate=""
         cvv=""
         onChange={action('onChange')}
       />
-      <button className="mt-4 w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700">
-        Pay $75.00
-      </button>
+      <Button className={`mt-4 w-full text-white py-2 rounded-md`}>
+        Pay $299.00
+      </Button>
     </div>
   ),
 };

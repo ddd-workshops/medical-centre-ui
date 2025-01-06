@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Card } from './Card';
+import { styles } from '../DesignEnums/MessageType';
 
 const meta = {
   title: 'UI/Atoms/Card',
@@ -20,11 +21,11 @@ export const Default: Story = {
 export const WithCustomClass: Story = {
   args: {
     title: 'Featured Service',
-    className: 'bg-gradient-to-br from-green-50 to-emerald-100 border-green-200',
+    className: `bg-gradient-to-br from-green-50 to-emerald-100 ${styles.ACCENT.border}`,
     children: (
       <div className="space-y-2">
-        <p className="text-green-800">Professional teeth whitening service now available!</p>
-        <p className="text-green-600 text-sm">Schedule your appointment today.</p>
+        <p className={styles.ACCENT.textDark}>Professional teeth whitening service now available!</p>
+        <p className={`${styles.ACCENT.text} text-sm`}>Schedule your appointment today.</p>
       </div>
     ),
   },

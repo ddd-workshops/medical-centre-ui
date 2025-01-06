@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { User } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 import { doctorLink } from '../Routing/routes';
 import type { DoctorBrief } from '../../contract/types';
@@ -43,7 +44,7 @@ export const DoctorsList = ({ doctors, specialties, languages }: DoctorsListProp
                 doctorId: doctor.id, 
                 doctorName: doctor.fullName 
               })}
-              className="text-base text-green-700 hover:text-green-800"
+              className={`text-base ${styles.ACCENT.text} ${styles.ACCENT.textHover}`}
             >
               {doctor.fullName}
             </Link>

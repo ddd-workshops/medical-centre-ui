@@ -1,7 +1,8 @@
-import type { ButtonVariant } from './Button';
-import { Button } from './Button';
-import { cn } from '../../utils/cn';
 import { ReactNode } from 'react';
+
+import { Button } from './Button';
+import { cn } from '../cn';
+import { Variant } from '../DesignEnums/Variants';
 
 type ButtonGroupItem = {
   id: string;
@@ -12,7 +13,7 @@ type ButtonGroupItem = {
 
 type ButtonGroupProps = {
   items: ButtonGroupItem[];
-  variant?: ButtonVariant;
+  variant?: Variant;
   className?: string;
 };
 

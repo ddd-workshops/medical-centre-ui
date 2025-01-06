@@ -1,4 +1,4 @@
-import { cn } from '../../utils/cn';
+import { cn } from '../cn';
 import { Size } from '../DesignEnums/Sizes';
 
 export type ProgressMeterFill = 'SOLID' | 'GRADIENT';
@@ -20,14 +20,14 @@ const sizeClasses: Record<Size, string> = {
 
 const getProgressColor = (value: number, fill: ProgressMeterFill) => {
   if (fill === 'SOLID') {
-    if (value <= 33) return 'bg-green-300';
+    if (value <= 33) return 'bg-green-200';
     if (value <= 66) return 'bg-green-500';
-    return 'bg-green-600';
+    return 'bg-green-700';
   }
   
   if (value <= 33) return 'bg-gradient-to-r from-green-200 to-green-300';
-  if (value <= 66) return 'bg-gradient-to-r from-green-400 to-green-500';
-  return 'bg-gradient-to-r from-green-500 to-green-600';
+  if (value <= 66) return 'bg-gradient-to-r from-green-200 to-green-500';
+  return 'bg-gradient-to-r from-green-200 to-green-700';
 };
 
 export function ProgressMeter({ 

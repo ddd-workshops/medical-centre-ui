@@ -2,11 +2,13 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 import type { ErrorResponse, paths } from '../contract/types';
 
-import { fakeDoctorProfiles, generateFakeDoctorBriefFromDoctorProfile } from '../fake/staff';
-import { fakeLanguages } from '../fake/languages';
-import { fakeClinicBriefs } from '../fake/clinics';
 import { logger } from '../logger';
+import { inMemoryDB } from '../in-memory/db';
+import { clinicDetailsToBrief } from './clinicModel';
+
+import { fakeLanguages } from '../fake/languages';
 import { specialties } from '../fake/specialties';
+import { doctorCanonicalModelToBrief, doctorCanonicalModelToProfile } from './staffModel';
 
 export const staffRouter = Router();
 
@@ -18,7 +20,8 @@ staffRouter.get('/', (
   res: Response<StaffListResponse | ErrorResponse>
 ) => {
   if (!req.query || Object.keys(req.query).length === 0) {
-    const result = fakeDoctorProfiles.map(generateFakeDoctorBriefFromDoctorProfile);
+    const result = inMemoryDB.doctors
+      .map(doctorCanonicalModelToBrief);
     return res.json(result);
   }
 
@@ -29,7 +32,7 @@ staffRouter.get('/', (
     return res.status(400).send({ message: 'Invalid query parameters' });
   }
 
-  let filteredDoctors = fakeDoctorProfiles;
+  let filteredDoctors = inMemoryDB.doctors;
 
   if (name) {
     const searchTerm = name.toLowerCase();
@@ -63,8 +66,8 @@ staffRouter.get('/', (
   //     )
   //   );
   // }
-
-  const result = filteredDoctors.map(generateFakeDoctorBriefFromDoctorProfile);
+  
+  const result = filteredDoctors.map(doctorCanonicalModelToBrief);
   res.json(result);
 });
 
@@ -75,7 +78,9 @@ staffRouter.get('/:doctorId', (
   req: Request<StaffItemParams, StaffItemResponse, never>,
   res: Response<StaffItemResponse | ErrorResponse>
 ) => {  
-  const staff = fakeDoctorProfiles.find(d => d.id === Number(req.params.doctorId));
+  const staff = inMemoryDB.doctors
+    .map(doctorCanonicalModelToProfile)
+    .find(d => d.id === Number(req.params.doctorId));
   if (staff) {
     res.json(staff);
   } else {
@@ -92,7 +97,7 @@ staffRouter.get('/searchbar', (
   res.json({
     languages: fakeLanguages,
     specialties,
-    locations: fakeClinicBriefs,
+    locations: inMemoryDB.clinics.map(clinicDetailsToBrief),
   });
 });
 

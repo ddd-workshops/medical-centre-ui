@@ -1,4 +1,5 @@
 import { ArrowLeft, MapPin } from 'lucide-react';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 import type { DoctorProfile } from '../../contract/types';
 import { ChipList } from '../../ui-library/Generic/ChipList';
@@ -64,8 +65,8 @@ export function DoctorProfile({ doctor }: DoctorProfileProps) {
           )}
 
           <div className="flex items-start gap-2">
-            <ArrowLeft className="w-5 h-5 text-green-600 mt-1" />
-            <Link to="/staff" className="text-green-600 hover:text-green-700 font-medium">
+            <ArrowLeft className={`w-5 h-5 ${styles.ACCENT.text} mt-1`} />
+            <Link to="/staff" className={`${styles.ACCENT.text} ${styles.ACCENT.textHover} font-medium`}>
               Show all doctors
             </Link>
           </div>

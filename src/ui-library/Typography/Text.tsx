@@ -1,5 +1,6 @@
 import type { Size } from '../DesignEnums/Sizes';
-import { textStyle, type MessageType } from '../DesignEnums/MessageType';
+import { styles, type MessageType } from '../DesignEnums/MessageType';
+import { cn } from '../cn';
 
 interface TextProps {
   children: React.ReactNode;
@@ -15,7 +16,14 @@ const sizeClasses = {
 };
 
 export const Text = ({ children, className = '', size = 'MEDIUM', messageType = 'DEFAULT' }: TextProps) => (
-  <span className={`font-normal ${sizeClasses[size]} ${textStyle[messageType]} ${className}`}>
-    {children}
+  <span 
+    className={cn(
+      'font-normal',
+      sizeClasses[size],
+      styles[messageType].text,
+      className
+    )}
+  >
+    {children},
   </span>
 );

@@ -9,6 +9,7 @@ import { Paragraph } from '../../ui-library/Typography/Paragraph';
 import { OpeningHours } from '../../ui-library/Generic/OpeningHours';
 import { Divider } from '../../ui-library/Generic/Divider';
 import { ChipList } from '../../ui-library/Generic/ChipList';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 type ClinicDetailsProps = {
   clinic: ClinicDetails;
@@ -26,7 +27,7 @@ export function ClinicDetails({ clinic }: ClinicDetailsProps) {
             {/* Contact Information */}
             <div className="space-y-3 mb-6">
               <div className="flex items-start gap-2">
-                <MapPin className="w-5 h-5 text-green-600 mt-1" />
+                <MapPin className={`w-5 h-5 ${styles.ACCENT.text} mt-1`} />
                 <div>
                   <Paragraph size="MEDIUM">
                     {clinic.address.street}, {clinic.address.city}
@@ -47,7 +48,7 @@ export function ClinicDetails({ clinic }: ClinicDetailsProps) {
                 </div>
               </div>
               <div className="flex items-start gap-2">
-                <Phone className="w-5 h-5 text-green-600 mt-1" />
+                <Phone className={`w-5 h-5 ${styles.ACCENT.text} mt-1`} />
                 <A
                   href={`tel:${clinic.phone}`}
                   size="MEDIUM"
@@ -56,7 +57,7 @@ export function ClinicDetails({ clinic }: ClinicDetailsProps) {
                 </A>
               </div>
               <div className="flex items-start gap-2">
-                <Mail className="w-5 h-5 text-green-600 mt-1" />
+                <Mail className={`w-5 h-5 ${styles.ACCENT.text} mt-1`} />
                 <A
                   href={`mailto:${clinic.email}`}
                   size="MEDIUM"
@@ -65,8 +66,8 @@ export function ClinicDetails({ clinic }: ClinicDetailsProps) {
                 </A>
               </div>
               <div className="flex items-start gap-2">
-                <ArrowLeft className="w-5 h-5 text-green-600 mt-1" />
-                <Link to="/clinics" className="text-green-600 hover:text-green-700 font-medium">
+                <ArrowLeft className={`w-5 h-5 ${styles.ACCENT.text} mt-1`} />
+                <Link to="/clinics" className={`${styles.ACCENT.text} ${styles.ACCENT.textHover} font-medium`}>
                   Show all offices
                 </Link>
               </div>
@@ -103,7 +104,7 @@ export function ClinicDetails({ clinic }: ClinicDetailsProps) {
                   {clinic.facilities.map((facility, index) => (
                     <div key={index} className="flex items-start gap-2">
                       {facility.availability ? (
-                        <CheckCircle2 className="w-5 h-5 text-green-600 mt-1" />
+                        <CheckCircle2 className={`w-5 h-5 ${styles.ACCENT.text} mt-1`} />
                       ) : (
                         <XCircle className="w-5 h-5 text-gray-400 mt-1" />
                       )}

@@ -3,6 +3,7 @@ import { Rating } from '../../ui-library/Forms/Rating';
 import { useState } from 'react';
 import { H2 } from '../../ui-library/Typography/Headings';
 import { UserRound, Building2, Calendar } from 'lucide-react';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 type AppointmentDetails = {
   doctorName: string;
@@ -38,15 +39,15 @@ export const AppointmentFeedback = ({ appointment, onSubmit }: AppointmentFeedba
       <div className="mb-6 text-gray-600">
         <H2>How was your appointment?</H2>
         <p className="mb-2 flex items-center gap-2">
-          <UserRound className="w-5 h-5 text-green-500" />
+          <UserRound className={`w-5 h-5 ${styles.ACCENT.text}`} />
           Doctor: {appointment.doctorName}
         </p>
         <p className="mb-2 flex items-center gap-2">
-          <Building2 className="w-5 h-5 text-green-500" />
+          <Building2 className={`w-5 h-5 ${styles.ACCENT.text}`} />
           Clinic: {appointment.clinicName}
         </p>
         <p className="flex items-center gap-2">
-          <Calendar className="w-5 h-5 text-green-500" />
+          <Calendar className={`w-5 h-5 ${styles.ACCENT.text}`} />
           Date: {appointment.date} at {appointment.time}
         </p>
       </div>

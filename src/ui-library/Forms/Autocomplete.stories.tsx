@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Autocomplete } from './Autocomplete';
 import { TextInput } from './TextInput';
+import { styles } from '../DesignEnums/MessageType';
 
 const meta: Meta<typeof Autocomplete> = {
   title: 'UI/Forms/Autocomplete',
@@ -39,14 +40,8 @@ const treatments = [
 export const DoctorSearch: Story = {
   args: {
     options: doctors,
-    renderInput: ({ value, onChange }) => (
-      <TextInput
-        label="Doctor"
-        value={value}
-        onChange={onChange}
-        placeholder="Search for a doctor..."
-      />
-    ),
+    label: "Doctor",
+    placeholder: "Search for a doctor...",
     onSelect: action('Doctor selected'),
     maxItems: 5
   }
@@ -55,43 +50,40 @@ export const DoctorSearch: Story = {
 export const TreatmentSearch: Story = {
   args: {
     options: treatments,
-    renderInput: ({ value, onChange }) => (
-      <TextInput
-        label="Treatment"
-        value={value}
-        onChange={onChange}
-        placeholder="Search for a treatment..."
-      />
-    ),
+    label: "Treatment",
+    placeholder: "Search for a treatment...",
     onSelect: action('Treatment selected'),
     maxItems: 3
-  }
-};
-
-export const CustomRendering: Story = {
-  args: {
-    options: doctors,
-    renderInput: ({ value, onChange }) => (
-      <div className="flex flex-col gap-1">
-        <label className="text-sm font-medium text-gray-700">Find Specialist</label>
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="p-2 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-          placeholder="Type specialist name..."
-        />
-      </div>
-    ),
-    onSelect: action('Specialist selected'),
-    maxItems: 5
   }
 };
 
 export const NoMaxLimit: Story = {
   args: {
     options: doctors,
+    label: "Doctor",
+    placeholder: "Search for any doctor...",
     onSelect: action('Doctor selected'),
     maxItems: undefined
+  }
+};
+
+export const CustomRendering: Story = {
+  args: {
+    options: doctors,
+    placeholder: "Type specialist name...",
+    renderInput: ({ value, onChange }) => (
+      <div className="flex flex-col gap-1">
+        <label className={`text-lg font-medium ${styles.WARNING.text}`}>Find Specialist</label>
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className={`p-4 border ${styles.WARNING.border} rounded-lg focus:outline-none focus:ring-2 ${styles.WARNING.focusRing}`}
+          placeholder="Type specialist name..."
+        />
+      </div>
+    ),
+    onSelect: action('Specialist selected'),
+    maxItems: 5
   }
 };

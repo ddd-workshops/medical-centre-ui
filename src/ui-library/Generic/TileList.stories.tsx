@@ -124,7 +124,7 @@ export const MixedServices: Story = {
   }
 };
 
-export const AllVariants: Story = {
+export const All: Story = {
   args: {
     items: [
       {

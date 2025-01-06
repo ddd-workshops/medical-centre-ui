@@ -6,6 +6,7 @@ import { H3 } from '../../ui-library/Typography/Headings';
 import { Paragraph } from '../../ui-library/Typography/Paragraph';
 import { patientService } from '../../http/patientService';
 import { Loader2 } from 'lucide-react';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 const STATUS_VARIANT_MAP: { [ key in PrescribedTreatment['status'] ]: 'OUTLINED' | 'FILLED' } = {
   COMPLETED: 'FILLED',
@@ -37,7 +38,7 @@ export function PrescribedTreatmentsList() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center p-8">
-        <Loader2 className="animate-spin text-green-600" size={32} />
+        <Loader2 className={`animate-spin ${styles.ACCENT.text}`} size={32} />
       </div>
     );
   }
@@ -45,14 +46,14 @@ export function PrescribedTreatmentsList() {
   if (error) {
     return (
       <div className="p-4 border border-red-200 rounded-lg bg-red-50">
-        <Paragraph className="text-red-600">{error}</Paragraph>
+        <Paragraph className={styles.ALERT.text}>{error}</Paragraph>
       </div>
     );
   }
 
   if (prescribedTreatments.length === 0) {
     return (
-      <div className="p-4 border border-green-100 rounded-lg bg-green-50">
+      <div className={`p-4 border ${styles.ACCENT.border} rounded-lg ${styles.ACCENT.backgroundLight}`}>
         <Paragraph>No prescribed treatments found.</Paragraph>
       </div>
     );
@@ -61,7 +62,7 @@ export function PrescribedTreatmentsList() {
   return (
     <div className="grid gap-4">
       {prescribedTreatments.map(({ id, treatment, prescribedDate, status }) => (
-        <div key={id} className="border border-green-100 rounded-lg p-4 hover:shadow-md transition-shadow bg-white">
+        <div key={id} className={`border ${styles.ACCENT.border} rounded-lg p-4 hover:shadow-md transition-shadow bg-white`}>
           <div className="flex justify-between items-start mb-2">
             <H3>{treatment.name}</H3>
             <Chip variant={STATUS_VARIANT_MAP[status]} label={status} />
@@ -69,10 +70,10 @@ export function PrescribedTreatmentsList() {
           <Paragraph size="MEDIUM" className="mb-2">
             {treatment.shortDescription}
           </Paragraph>
-          <Paragraph size="SMALL" className="text-green-600">
+          <Paragraph size="SMALL" className={styles.ACCENT.text}>
             Prescribed: {new Date(prescribedDate).toLocaleDateString()}
           </Paragraph>
-          <Paragraph size="SMALL" className="text-green-600">
+          <Paragraph size="SMALL" className={styles.ACCENT.text}>
             Duration: {treatment.expectedDuration.min}-{treatment.expectedDuration.max} minutes | 
             Price: {formatCurrency(treatment.priceRange.min)} - {formatCurrency(treatment.priceRange.max)}
           </Paragraph>

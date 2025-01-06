@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { formatCurrency } from '../../utils/formatCurrency';
+import { styles } from '../../ui-library/DesignEnums/MessageType';
 
 export interface BaseStatItem {
   name: string;
@@ -86,7 +87,7 @@ export const StatsWithChange = ({ items }: StatsWithChangeProps) => {
               </span>
               <p
                 className={`ml-2 flex items-baseline text-xs font-semibold ${
-                  item.trend === 'increase' ? 'text-emerald-600' : 'text-red-600'
+                  item.trend === 'increase' ? styles.ACCENT.text : styles.ALERT.text
                 }`}
               >
                 {item.trend === 'increase' ? (
@@ -126,7 +127,7 @@ export const StatsWithActions = ({ items }: StatsWithActionsProps) => {
                 </span>
                 <p
                   className={`ml-2 flex items-baseline text-sm font-semibold ${
-                    item.trend === 'increase' ? 'text-emerald-600' : 'text-red-600'
+                    item.trend === 'increase' ? styles.ACCENT.text : styles.ALERT.text
                   }`}
                 >
                   {item.trend === 'increase' ? (
@@ -147,7 +148,7 @@ export const StatsWithActions = ({ items }: StatsWithActionsProps) => {
                       <button
                         key={action.label}
                         onClick={action.onClick}
-                        className={`font-medium text-emerald-600 hover:text-emerald-500 ${
+                        className={`font-medium ${styles.ACCENT.text} ${styles.ACCENT.textHover} ${
                           idx > 0 ? 'ml-6' : ''
                         }`}
                       >

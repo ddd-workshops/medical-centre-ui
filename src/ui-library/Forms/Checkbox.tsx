@@ -1,4 +1,5 @@
 import { FC, useState, useEffect } from 'react';
+import { styles } from '../DesignEnums/MessageType';
 
 type CheckboxProps = {
   id: string;
@@ -34,9 +35,9 @@ export const Checkbox: FC<CheckboxProps> = ({
         id={id}
         checked={localChecked}
         onChange={handleChange}
-        className="accent-emerald-600 text-green-600 focus:ring-green-500 h-4 w-4 rounded"
+        className={`${styles.ACCENT.accent} ${styles.ACCENT.text} ${styles.ACCENT.focusRing} h-4 w-4 rounded`}
       />
-      <label htmlFor={id} className="text-sm text-green-700">
+      <label htmlFor={id} className={`text-sm ${styles.ACCENT.text}`}>
         {label}
       </label>
     </div>

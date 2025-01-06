@@ -30,6 +30,14 @@ export const Secondary: Story = {
   },
 };
 
+export const Outlined: Story = {
+  args: {
+    children: 'Secondary Button',
+    variant: 'OUTLINED',
+    size: 'MEDIUM',
+  },
+};
+
 export const Small: Story = {
   args: {
     children: 'Small Button',

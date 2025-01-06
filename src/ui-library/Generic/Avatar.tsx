@@ -1,6 +1,7 @@
 import React from 'react';
 import type { PatientProfile } from '../../contract/types';
 import { Size } from '../DesignEnums/Sizes';
+import { styles } from '../DesignEnums/MessageType';
 
 type AvatarProps =
   | { src: string }
@@ -24,7 +25,7 @@ export const Avatar: React.FC<AvatarProps> = ({ size = 'MEDIUM', ...props }) => 
   }
 
   return (
-    <div className={`inline-flex items-center justify-center rounded-full bg-green-500 text-white ${sizeClasses[size]}`}>
+    <div className={`inline-flex items-center justify-center rounded-full ${styles.ACCENT.background} text-white ${sizeClasses[size]}`}>
       {element}
     </div>
   );
