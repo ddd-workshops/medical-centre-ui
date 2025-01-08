@@ -20,7 +20,7 @@ Where applicable, use `import type` instead of `import`.
 
 Whenever speaking about the contract, modify only the entities that are explicitly mentioned.
 
-Whenever speaking about the contract, it's always about modifying the `./contract/swagger.yaml` file. Usually the data in the listings include less information than the full details entity.
+Whenever speaking about the contract, it's always about modifying the `./contract/openapi.yml` file. Usually the data in the listings include less information than the full details entity.
 
 Creating a new contract entry or modifying existing one requires the following:
 - updating the server-side routes

@@ -10,13 +10,13 @@
     "preview": "vite preview",
     "generate:fake:test": "cd server && npx ts-node fake/test.ts",
     "generate:fake:database": "cd server && npx ts-node scripts/generate-db.ts",
-    "generate:types": "openapi-typescript contract/swagger.yaml --output contract/contract.ts",
-    "watch:swagger": "nodemon --watch contract/swagger.yaml --ext yaml,yml --exec 'npm run generate:types'",
+    "generate:types": "openapi-typescript contract/openapi.yml --output contract/contract.ts",
+    "watch:contract": "nodemon --watch contract/openapi.yml --ext yaml,yml --exec 'npm run generate:types'",
     "contract:validate": "redocly lint contract/openapi.yml",
     "contract:generate-docs": "redocly build-docs contract/openapi.yml && mkdir -p docs && mv redoc-static.html docs/index.html && touch docs/.nojekyll",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build -o dist-storybook",
-    "dev:client": "concurrently \"npm run watch:swagger\" \"npm run vite\" \"npm run storybook\"",
+    "dev:client": "concurrently \"npm run watch:contract\" \"npm run vite\" \"npm run storybook\"",
     "dev:server": "cd server && npm run dev"
   },
   "dependencies": {

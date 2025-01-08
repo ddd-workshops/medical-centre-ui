@@ -7,7 +7,7 @@ export const SwaggerDocs = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/swagger.yaml')
+    fetch('/openapi.yml')
       .catch(() => setError('Failed to load API documentation'));
   }, []);
 
@@ -18,7 +18,7 @@ export const SwaggerDocs = () => {
         {error ? (
           <div className={styles.ALERT.text}>{error}</div>
         ) : (
-          <SwaggerUI url="/swagger.yaml" />
+          <SwaggerUI url="/openapi.yml" />
         )}
       </div>
     </div>
