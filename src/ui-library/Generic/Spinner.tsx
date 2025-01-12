@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Size } from '../DesignEnums/Sizes';
+import { Size } from '../DesignLanguage/Sizes';
 
 interface SpinnerProps {
   size?: Size;

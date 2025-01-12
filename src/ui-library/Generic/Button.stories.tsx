@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { Plus } from "lucide-react";
+import { Coffee, Plus } from "lucide-react";
 
 import { Button } from "./Button";
-import { VariantType, DesignFill, DesignSize } from "../DesignEnums";
+import { VariantType, DesignFill, DesignSize } from "../DesignLanguage";
 
 const meta: Meta<typeof Button> = {
   title: "UI/Atoms/Button",
@@ -22,6 +22,13 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {};
 
+export const WithIcon: Story = {
+  args: {
+    children: "Take a Break",
+    icon: Coffee,
+  },
+};
+
 export const Fills: Story = {
   render: () => (
     <div className="flex gap-2">
@@ -34,9 +41,9 @@ export const Fills: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex items-center gap-2">
-      <Button size="SMALL">Small Button</Button>
-      <Button size="MEDIUM">Medium Button</Button>
-      <Button size="LARGE">Large Button</Button>
+      <Button icon={Plus} size="SMALL">Small Button</Button>
+      <Button icon={Plus} size="MEDIUM">Medium Button</Button>
+      <Button icon={Plus} size="LARGE">Large Button</Button>
     </div>
   ),
 };

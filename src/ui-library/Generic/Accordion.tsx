@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 import { cn } from '../cn';
-import { styles } from '../DesignEnums';
+import { styles } from '../DesignLanguage';
 
 interface AccordionItem {
   title: React.ReactNode;

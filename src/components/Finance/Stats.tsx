@@ -1,7 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { formatCurrency } from '../../utils/formatCurrency';
-import { styles } from '../../ui-library/DesignEnums';
+import { styles } from '../../ui-library/DesignLanguage';
 
 export interface BaseStatItem {
   name: string;

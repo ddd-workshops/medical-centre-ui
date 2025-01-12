@@ -1,5 +1,5 @@
 import { cn } from '../cn';
-import { styles } from '../DesignEnums';
+import { styles } from '../DesignLanguage';
 
 interface DividerProps {
   className?: string;

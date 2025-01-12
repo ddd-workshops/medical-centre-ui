@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import type { LucideIcon } from 'lucide-react';
 
 import { cn } from '../cn';
-import { DesignSize, DesignFill, styles, VariantType } from '../DesignEnums';
+import { DesignSize, DesignFill, styles, VariantType } from '../DesignLanguage';
 
 interface ChipProps {
   children: ReactNode;

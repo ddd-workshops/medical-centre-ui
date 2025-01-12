@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { TextInput } from '../../ui-library/Forms/TextInput';
 import { RadioGroup } from '../../ui-library/Forms/RadioGroup';
 import { H2 } from '../../ui-library/Typography/Headings';
-import { styles } from '../../ui-library/DesignEnums';
+import { styles } from '../../ui-library/DesignLanguage';
 
 type ResetOption = 'remind-login' | 'reset-password';
 

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 
-import { styles } from '../DesignEnums';
+import { styles } from '../DesignLanguage';
 
 type SearchBarMode = 'COLLAPSED' | 'EXPANDED';
 
@@ -32,11 +32,12 @@ export function ExpandableSearchBar({ children }: ExpandableSearchBarProps) {
 
 interface BaseRowProps {
   children: React.ReactNode;
+  className?: string;
 }
 
-function BaseRow({ children }: BaseRowProps) {
+function BaseRow({ children, className = '' }: BaseRowProps) {
   return (
-    <div className="flex items-start space-x-4">
+    <div className={`flex gap-4 mt-4 ${className}`}>
       {children}
     </div>
   );
@@ -49,7 +50,7 @@ function ToggleButton() {
   return (
     <button
       onClick={context.toggleMode}
-      className={`mt-6 p-2 rounded-full transition-transform ${
+      className={`w-12 h-12 mt-5 p-2 rounded-full transition-transform ${
         context.mode === 'EXPANDED' ? 'rotate-90' : ''
       } ${styles.ACCENT.textHover}`}
     >

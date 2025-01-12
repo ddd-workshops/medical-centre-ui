@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { VariantType, borderStyle, typeIcons } from '../DesignEnums';
+import { VariantType, borderStyle, typeIcons } from '../DesignLanguage';
 
 export interface EntryProps {
   variant: VariantType;

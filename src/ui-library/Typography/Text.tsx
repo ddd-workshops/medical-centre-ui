@@ -1,4 +1,4 @@
-import { styles, type VariantType, type DesignSize } from '../DesignEnums';
+import { styles, type DesignSize, type VariantType } from '../DesignLanguage';
 import { cn } from '../cn';
 
 interface TextProps {
@@ -23,6 +23,6 @@ export const Text = ({ children, className = '', size = 'MEDIUM', variant = 'DEF
       className
     )}
   >
-    {children},
+    {children}
   </span>
 );

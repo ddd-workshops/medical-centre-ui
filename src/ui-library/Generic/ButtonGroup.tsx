@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 
 import { Button } from './Button';
 import { cn } from '../cn';
-import { DesignFill, DesignSize, VariantType } from '../DesignEnums';
+import { DesignFill, DesignSize, VariantType } from '../DesignLanguage';
+import { LucideIcon } from 'lucide-react';
 
 type ButtonGroupItem = {
   id: string;
@@ -11,6 +12,7 @@ type ButtonGroupItem = {
   disabled?: boolean;
   fill?: DesignFill;
   variant?: VariantType;
+  icon?: LucideIcon
 };
 
 type ButtonGroupProps = {
@@ -38,6 +40,7 @@ export const ButtonGroup = ({
           fill={item.fill || fill}
           variant={item.variant || variant}
           disabled={item.disabled}
+          {...(item.icon && { icon: item.icon })}
           className={cn(
             'rounded-none',
             index === 0 && 'rounded-l-lg',

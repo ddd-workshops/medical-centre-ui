@@ -3,7 +3,7 @@ import { Rating } from '../../ui-library/Forms/Rating';
 import { useState } from 'react';
 import { H2 } from '../../ui-library/Typography/Headings';
 import { UserRound, Building2, Calendar } from 'lucide-react';
-import { styles } from '../../ui-library/DesignEnums';
+import { styles } from '../../ui-library/DesignLanguage';
 
 type AppointmentDetails = {
   doctorName: string;

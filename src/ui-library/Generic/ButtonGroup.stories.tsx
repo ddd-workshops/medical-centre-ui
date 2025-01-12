@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { ButtonGroup } from './ButtonGroup';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar, CheckCircle, CircleSlashed, NotebookTabs } from 'lucide-react';
 
 const meta = {
   title: 'UI/Atoms/ButtonGroup',
@@ -26,10 +26,10 @@ export const ActionButtons: Story = {
   render: () => (
     <ButtonGroup 
       items={[
-        { id: '1', label: 'Confirm Treatment', onClick: action('confirm-clicked') },
-        { id: '2', label: 'Reschedule', onClick: action('reschedule-clicked'), disabled: true },
-        { id: '3', label: 'Add Notes', onClick: action('notes-clicked'), fill: 'OUTLINED' },
-        { id: '4', label: 'Cancel', onClick: action('cancel-clicked'), variant: 'ALERT' }
+        { id: '1', label: 'Confirm Treatment', icon: CheckCircle, onClick: action('confirm-clicked') },
+        { id: '2', label: 'Reschedule', icon: Calendar, onClick: action('reschedule-clicked'), disabled: true },
+        { id: '3', label: 'Add Notes', icon: NotebookTabs , onClick: action('notes-clicked'), fill: 'OUTLINED' },
+        { id: '4', label: 'Cancel', icon: CircleSlashed, onClick: action('cancel-clicked'), variant: 'ALERT' }
       ]}
     />
   )

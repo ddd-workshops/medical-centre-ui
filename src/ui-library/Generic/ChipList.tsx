@@ -2,7 +2,7 @@ import type { LucideIcon } from 'lucide-react';
 
 import { Chip } from './Chip';
 import { cn } from '../cn';
-import { DesignFill, DesignSize, VariantType } from '../DesignEnums';
+import { DesignFill, DesignSize, VariantType } from '../DesignLanguage';
 
 interface ChipListProps {
   items: string[];

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { H3 } from '../Typography/Headings';
 import { Paragraph } from '../Typography/Paragraph';
-import { borderStyle, backgroundHoverStyle, type VariantType } from '../DesignEnums';
+import { borderStyle, backgroundHoverStyle, type VariantType } from '../DesignLanguage';
 
 interface TileItem {
   title: string;

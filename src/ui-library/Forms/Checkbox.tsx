@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from 'react';
-import { styles } from '../DesignEnums';
+
+import { styles } from '../DesignLanguage';
 
 type CheckboxProps = {
   id: string;
